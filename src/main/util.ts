@@ -1,4 +1,3 @@
-/* eslint import/prefer-default-export: off, import/no-mutable-exports: off */
 import path from "path";
 import { URL } from "url";
 
