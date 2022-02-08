@@ -1,44 +1,20 @@
-import { Button, NextUIProvider } from "@nextui-org/react";
+import { NextUIProvider } from "@nextui-org/react";
+import { Outlet, Router, useRouter } from "react-location";
+import { location, routes } from "./utils/routes";
 
-const Hello = () => {
-  return (
-    <div>
-      <h1>electron-react-boilerplate</h1>
-      <Button>Click me</Button>
-      <div className="Hello">
-        <a
-          href="https://electron-react-boilerplate.js.org/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <button type="button">
-            <span role="img" aria-label="books">
-              📚
-            </span>
-            Read our docs
-          </button>
-        </a>
-        <a
-          href="https://github.com/sponsors/electron-react-boilerplate"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <button type="button">
-            <span role="img" aria-label="books">
-              🙏
-            </span>
-            Donate
-          </button>
-        </a>
-      </div>
-    </div>
-  );
+const Debug = () => {
+  const router = useRouter();
+  console.log(router);
+  return <pre>{JSON.stringify(router.state.location, null, 2)}</pre>;
 };
 
 export default function App() {
   return (
     <NextUIProvider>
-      <Hello />
+      <Router location={location} routes={routes}>
+        <Debug />
+        <Outlet />
+      </Router>
     </NextUIProvider>
   );
 }
