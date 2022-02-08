@@ -1,11 +1,12 @@
 import { Button } from "@nextui-org/react";
 import { ReactElement } from "react";
 import { Link } from "react-location";
+import { IntroLayout } from "renderer/components/IntroLayout/IntroLayout";
 import { routePaths } from "../../utils/routes";
 
 export const Home = (): ReactElement => {
   return (
-    <div>
+    <IntroLayout>
       <h1>electron-react-boilerplate</h1>
       <Button>Click me</Button>
       <div>
@@ -43,6 +44,6 @@ export const Home = (): ReactElement => {
           </button>
         </a>
       </div>
-    </div>
+    </IntroLayout>
   );
 };

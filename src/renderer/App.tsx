@@ -1,20 +1,18 @@
 import { NextUIProvider } from "@nextui-org/react";
-import { Outlet, Router, useRouter } from "react-location";
+import { ReactElement } from "react";
+import { Outlet, Router } from "react-location";
+import { Page } from "./components/Page/Page";
+import { darkTheme } from "./styles/config";
 import { location, routes } from "./utils/routes";
 
-const Debug = () => {
-  const router = useRouter();
-  console.log(router);
-  return <pre>{JSON.stringify(router.state.location, null, 2)}</pre>;
-};
-
-export default function App() {
+export const App = (): ReactElement => {
   return (
-    <NextUIProvider>
+    <NextUIProvider theme={darkTheme}>
       <Router location={location} routes={routes}>
-        <Debug />
-        <Outlet />
+        <Page>
+          <Outlet />
+        </Page>
       </Router>
     </NextUIProvider>
   );
-}
+};
