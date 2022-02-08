@@ -1,13 +1,10 @@
-import icon from "../../assets/icon.svg";
-import "./App.css";
+import { Button, NextUIProvider } from "@nextui-org/react";
 
 const Hello = () => {
   return (
     <div>
-      <div className="Hello">
-        <img width="200px" alt="icon" src={icon} />
-      </div>
       <h1>electron-react-boilerplate</h1>
+      <Button>Click me</Button>
       <div className="Hello">
         <a
           href="https://electron-react-boilerplate.js.org/"
@@ -39,5 +36,9 @@ const Hello = () => {
 };
 
 export default function App() {
-  return <Hello />;
+  return (
+    <NextUIProvider>
+      <Hello />
+    </NextUIProvider>
+  );
 }
