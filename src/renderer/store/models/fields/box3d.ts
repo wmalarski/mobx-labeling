@@ -7,9 +7,9 @@ export const Box3dValue = types.model("Box3dValue", {
   sideType: types.maybeNull(types.enumeration(["Left", "Right"])),
 });
 
-export const Box3dDescription = types
+export const Box3dDefinition = types
   .compose(
-    "Box3dDescription",
+    "Box3dDefinition",
     FieldDescriptionBase,
     types.model({
       kind: types.literal("Box3d"),
@@ -28,7 +28,7 @@ export const Box3dField = types
     FieldBase,
     types.model({
       kind: types.literal("Box3d"),
-      description: Box3dDescription,
+      description: Box3dDefinition,
       values: types.map(Box3dValue),
     })
   )
