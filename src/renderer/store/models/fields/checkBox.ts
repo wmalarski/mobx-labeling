@@ -1,37 +1,41 @@
 import { types } from "mobx-state-tree";
 import { FieldBase, FieldDescriptionBase } from "../base";
 
-const kind = types.literal("Box3d");
+const kind = types.literal("CheckBox");
 
-export const Box3dValue = types.model("Box3dValue", {
-  front: types.array(types.number),
-  side: types.maybeNull(types.array(types.number)),
-  sideType: types.maybeNull(types.enumeration(["Left", "Right"])),
-});
-
-export const Box3dDefinition = types
-  .compose(
-    "Box3dDefinition",
-    FieldDescriptionBase,
-    types.model({
-      kind,
-      color: types.string,
-    })
-  )
+export const CheckBoxValue = types
+  .model("CheckBoxValue", {
+    value: types.boolean,
+  })
   .actions((self) => ({
-    setColor(color: string) {
-      self.color = color;
+    setValue(value: boolean) {
+      self.value = value;
     },
   }));
 
-export const Box3dField = types
+export const CheckBoxDefinition = types
   .compose(
-    "Box3dField",
+    "CheckBoxDefinition",
+    FieldDescriptionBase,
+    types.model({
+      kind,
+      default: types.boolean,
+    })
+  )
+  .actions((self) => ({
+    setDefault(defaultValue: boolean) {
+      self.default = defaultValue;
+    },
+  }));
+
+export const CheckBoxField = types
+  .compose(
+    "CheckBoxField",
     FieldBase,
     types.model({
       kind,
-      description: Box3dDefinition,
-      values: types.map(Box3dValue),
+      description: CheckBoxDefinition,
+      values: types.map(CheckBoxValue),
     })
   )
   .views((self) => ({

@@ -1,17 +1,18 @@
 import { types } from "mobx-state-tree";
 import { FieldBase, FieldDescriptionBase } from "../base";
 
-const kind = types.literal("Box3d");
+const kind = types.literal("Graph");
 
-export const Box3dValue = types.model("Box3dValue", {
-  front: types.array(types.number),
-  side: types.maybeNull(types.array(types.number)),
-  sideType: types.maybeNull(types.enumeration(["Left", "Right"])),
+export const GraphValue = types.model("GraphValue", {
+  points: types.array(
+    types.model({ x: types.number, y: types.number, n: types.number })
+  ),
+  edges: types.array(types.model({ from: types.number, to: types.number })),
 });
 
-export const Box3dDefinition = types
+export const GraphDefinition = types
   .compose(
-    "Box3dDefinition",
+    "GraphDefinition",
     FieldDescriptionBase,
     types.model({
       kind,
@@ -24,14 +25,14 @@ export const Box3dDefinition = types
     },
   }));
 
-export const Box3dField = types
+export const GraphField = types
   .compose(
-    "Box3dField",
+    "GraphField",
     FieldBase,
     types.model({
       kind,
-      description: Box3dDefinition,
-      values: types.map(Box3dValue),
+      description: GraphDefinition,
+      values: types.map(GraphValue),
     })
   )
   .views((self) => ({

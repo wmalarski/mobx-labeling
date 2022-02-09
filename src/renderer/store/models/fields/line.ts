@@ -1,17 +1,15 @@
 import { types } from "mobx-state-tree";
 import { FieldBase, FieldDescriptionBase } from "../base";
 
-const kind = types.literal("Box3d");
+const kind = types.literal("Line");
 
-export const Box3dValue = types.model("Box3dValue", {
-  front: types.array(types.number),
-  side: types.maybeNull(types.array(types.number)),
-  sideType: types.maybeNull(types.enumeration(["Left", "Right"])),
+export const LineValue = types.model({
+  values: types.array(types.number),
 });
 
-export const Box3dDefinition = types
+export const LineDefinition = types
   .compose(
-    "Box3dDefinition",
+    "LineDefinition",
     FieldDescriptionBase,
     types.model({
       kind,
@@ -24,14 +22,14 @@ export const Box3dDefinition = types
     },
   }));
 
-export const Box3dField = types
+export const LineField = types
   .compose(
-    "Box3dField",
+    "LineField",
     FieldBase,
     types.model({
       kind,
-      description: Box3dDefinition,
-      values: types.map(Box3dValue),
+      description: LineDefinition,
+      values: types.map(LineValue),
     })
   )
   .views((self) => ({

@@ -1,12 +1,5 @@
 import { types } from "mobx-state-tree";
 import {
-  CheckBoxDefinition,
-  ComboBoxDefinition,
-  EyeDefinition,
-  GraphDefinition,
-  LineDefinition,
-  MultiSelectDefinition,
-  NumberDefinition,
   PointDefinition,
   PolygonDefinition,
   RectangleDefinition,
@@ -14,6 +7,13 @@ import {
   TextDefinition,
 } from "./fields";
 import { Box3dDefinition } from "./fields/box3d";
+import { CheckBoxDefinition } from "./fields/checkBox";
+import { ComboBoxDefinition } from "./fields/comboBox";
+import { EyeDefinition } from "./fields/eye";
+import { GraphDefinition } from "./fields/graph";
+import { LineDefinition } from "./fields/line";
+import { MultiSelectDefinition } from "./fields/multiSelect";
+import { NumberDefinition } from "./fields/number";
 
 const FieldDefinition1 = types.union(
   Box3dDefinition,
