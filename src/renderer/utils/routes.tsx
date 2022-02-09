@@ -4,6 +4,7 @@ import {
   ReactLocation,
   Route,
 } from "react-location";
+import { NewDefinition } from "renderer/modules/NewDefinition/NewDefinition";
 import { Definition } from "../modules/Definition/Definition";
 import { Definitions } from "../modules/Definitions/Definitions";
 import { Home } from "../modules/Home/Home";
@@ -13,6 +14,7 @@ import { Workspace } from "../modules/Workspace/Workspace";
 export const routePaths = {
   home: "/",
   newProject: "/new-project",
+  newDefinition: "/new-definition",
   definitions: "/definitions",
   definition: (definitionId: string): string => `/definition/${definitionId}`,
   workspace: "/workspace",
@@ -41,6 +43,10 @@ export const routes: Route<LocationGenerics>[] = [
   {
     path: "new-project",
     element: <NewProject />,
+  },
+  {
+    path: "new-definition",
+    element: <NewDefinition />,
   },
   {
     path: "definitions",
