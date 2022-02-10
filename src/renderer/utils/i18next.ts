@@ -1,7 +1,7 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
-const ns = ["common", "home"];
+const ns = ["common", "home", "definition"];
 const supportedLngs = ["en"];
 
 const load = (lang: string, n: string) => {

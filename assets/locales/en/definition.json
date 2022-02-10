@@ -1,3 +1,9 @@
 {
-  "definitionHeader": "Definition"
+  "definitionHeader": "Definition",
+  "defaultDefinitionName": "New definition",
+  "newDefinitionHeader": "New definition",
+  "definitionObjects": "Objects",
+  "defaultObjectName": "New object",
+  "namePlaceholder": "Name",
+  "descriptionPlaceholder": "Description"
 }

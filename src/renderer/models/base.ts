@@ -12,7 +12,7 @@ export const FieldDescriptionBase = types
     id: types.optional(types.identifier, nanoid),
     name: types.string,
     description: types.maybeNull(types.string),
-    change: FieldDefinitionChange,
+    change: types.optional(FieldDefinitionChange, "EveryFrame"),
   })
   .actions((self) => ({
     setName(name: string) {
