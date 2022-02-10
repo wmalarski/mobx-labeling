@@ -10,15 +10,15 @@ export const FieldDescriptionBase = types
   .model("FieldDescriptionBase", {
     id: types.string,
     name: types.string,
-    info: types.maybeNull(types.string),
+    description: types.maybeNull(types.string),
     change: FieldDefinitionChange,
   })
   .actions((self) => ({
     setName(name: string) {
       self.name = name;
     },
-    setInfo(info: string) {
-      self.info = info;
+    setDescription(description: string) {
+      self.description = description;
     },
     setChange(change: SnapshotIn<typeof FieldDefinitionChange>) {
       self.change = change;

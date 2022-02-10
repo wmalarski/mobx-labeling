@@ -34,13 +34,13 @@ export const CheckBoxField = types
     FieldBase,
     types.model({
       kind,
-      description: CheckBoxDefinition,
+      definition: CheckBoxDefinition,
       values: types.map(CheckBoxValue),
     })
   )
   .views((self) => ({
     get current() {
-      switch (self.description.change) {
+      switch (self.definition.change) {
         case "EveryFrame":
         case "FrameChanges":
           return self.values.get(self.currentFrame);

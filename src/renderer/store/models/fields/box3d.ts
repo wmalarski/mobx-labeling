@@ -30,13 +30,13 @@ export const Box3dField = types
     FieldBase,
     types.model({
       kind,
-      description: Box3dDefinition,
+      definition: Box3dDefinition,
       values: types.map(Box3dValue),
     })
   )
   .views((self) => ({
     get current() {
-      switch (self.description.change) {
+      switch (self.definition.change) {
         case "EveryFrame":
         case "FrameChanges":
           return self.values.get(self.currentFrame);

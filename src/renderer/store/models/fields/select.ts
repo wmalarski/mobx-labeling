@@ -1,35 +1,41 @@
 import { types } from "mobx-state-tree";
 import { FieldBase, FieldDescriptionBase } from "../base";
 
-const kind = types.literal("Line");
+const kind = types.literal("Select");
 
-export const LineValue = types.model({
-  values: types.array(types.number),
+export const SelectValue = types.model("SelectValue", {
+  value: types.string,
 });
 
-export const LineDefinition = types
+export const SelectDefinition = types
   .compose(
-    "LineDefinition",
+    "SelectDefinition",
     FieldDescriptionBase,
     types.model({
       kind,
-      color: types.string,
+      default: types.string,
+      options: types.array(
+        types.model({
+          text: types.string,
+          size: types.number,
+        })
+      ),
     })
   )
   .actions((self) => ({
-    setColor(color: string) {
-      self.color = color;
+    setDefault(defaultValue: string) {
+      self.default = defaultValue;
     },
   }));
 
-export const LineField = types
+export const SelectField = types
   .compose(
-    "LineField",
+    "SelectField",
     FieldBase,
     types.model({
       kind,
-      definition: LineDefinition,
-      values: types.map(LineValue),
+      definition: SelectDefinition,
+      values: types.map(SelectValue),
     })
   )
   .views((self) => ({

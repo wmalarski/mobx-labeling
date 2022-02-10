@@ -1,35 +1,35 @@
 import { types } from "mobx-state-tree";
 import { FieldBase, FieldDescriptionBase } from "../base";
 
-const kind = types.literal("Line");
+const kind = types.literal("Text");
 
-export const LineValue = types.model({
-  values: types.array(types.number),
+export const TextValue = types.model("TextValue", {
+  value: types.string,
 });
 
-export const LineDefinition = types
+export const TextDefinition = types
   .compose(
-    "LineDefinition",
+    "TextDefinition",
     FieldDescriptionBase,
     types.model({
       kind,
-      color: types.string,
+      default: types.string,
     })
   )
   .actions((self) => ({
-    setColor(color: string) {
-      self.color = color;
+    setDefault(defaultValue: string) {
+      self.default = defaultValue;
     },
   }));
 
-export const LineField = types
+export const TextField = types
   .compose(
-    "LineField",
+    "TextField",
     FieldBase,
     types.model({
       kind,
-      definition: LineDefinition,
-      values: types.map(LineValue),
+      definition: TextDefinition,
+      values: types.map(TextValue),
     })
   )
   .views((self) => ({

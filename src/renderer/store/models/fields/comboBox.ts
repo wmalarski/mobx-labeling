@@ -41,13 +41,13 @@ export const ComboBoxField = types
     FieldBase,
     types.model({
       kind,
-      description: ComboBoxDefinition,
+      definition: ComboBoxDefinition,
       values: types.map(ComboBoxValue),
     })
   )
   .views((self) => ({
     get current() {
-      switch (self.description.change) {
+      switch (self.definition.change) {
         case "EveryFrame":
         case "FrameChanges":
           return self.values.get(self.currentFrame);

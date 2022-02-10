@@ -28,13 +28,13 @@ export const MultiSelectField = types
     FieldBase,
     types.model({
       kind,
-      description: MultiSelectDefinition,
+      definition: MultiSelectDefinition,
       values: types.map(MultiSelectValue),
     })
   )
   .views((self) => ({
     get current() {
-      switch (self.description.change) {
+      switch (self.definition.change) {
         case "EveryFrame":
         case "FrameChanges":
           return self.values.get(self.currentFrame);

@@ -1,15 +1,15 @@
 import { types } from "mobx-state-tree";
 import { FieldBase, FieldDescriptionBase } from "../base";
 
-const kind = types.literal("Line");
+const kind = types.literal("Point");
 
-export const LineValue = types.model({
-  values: types.array(types.number),
+export const PointValue = types.model("PointValue", {
+  value: types.array(types.number),
 });
 
-export const LineDefinition = types
+export const PointDefinition = types
   .compose(
-    "LineDefinition",
+    "PointDefinition",
     FieldDescriptionBase,
     types.model({
       kind,
@@ -22,14 +22,14 @@ export const LineDefinition = types
     },
   }));
 
-export const LineField = types
+export const PointField = types
   .compose(
-    "LineField",
+    "PointField",
     FieldBase,
     types.model({
       kind,
-      definition: LineDefinition,
-      values: types.map(LineValue),
+      definition: PointDefinition,
+      values: types.map(PointValue),
     })
   )
   .views((self) => ({

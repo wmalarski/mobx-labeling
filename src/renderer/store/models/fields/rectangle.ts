@@ -1,18 +1,19 @@
 import { types } from "mobx-state-tree";
 import { FieldBase, FieldDescriptionBase } from "../base";
 
-const kind = types.literal("Line");
+const kind = types.literal("Rectangle");
 
-export const LineValue = types.model({
-  values: types.array(types.number),
+export const RectangleValue = types.model("RectangleValue", {
+  value: types.array(types.number),
 });
 
-export const LineDefinition = types
+export const RectangleDefinition = types
   .compose(
-    "LineDefinition",
+    "RectangleDefinition",
     FieldDescriptionBase,
     types.model({
       kind,
+      default: RectangleValue,
       color: types.string,
     })
   )
@@ -22,14 +23,14 @@ export const LineDefinition = types
     },
   }));
 
-export const LineField = types
+export const RectangleField = types
   .compose(
-    "LineField",
+    "RectangleField",
     FieldBase,
     types.model({
       kind,
-      definition: LineDefinition,
-      values: types.map(LineValue),
+      definition: RectangleDefinition,
+      values: types.map(RectangleValue),
     })
   )
   .views((self) => ({
