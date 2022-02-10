@@ -1,7 +1,8 @@
+import { theme } from "@nextui-org/react";
 import { types } from "mobx-state-tree";
 import { FieldBase, FieldDescriptionBase } from "../base";
 
-const kind = types.literal("Box3d");
+const kind = types.optional(types.literal("Box3d"), "Box3d");
 
 export const Box3dValue = types.model("Box3dValue", {
   front: types.array(types.number),
@@ -15,7 +16,7 @@ export const Box3dDefinition = types
     FieldDescriptionBase,
     types.model({
       kind,
-      color: types.string,
+      color: types.optional(types.string, theme.colors.primary.value),
     })
   )
   .actions((self) => ({
@@ -31,7 +32,7 @@ export const Box3dField = types
     types.model({
       kind,
       definition: Box3dDefinition,
-      values: types.map(Box3dValue),
+      values: types.optional(types.map(Box3dValue), {}),
     })
   )
   .views((self) => ({

@@ -1,7 +1,7 @@
 import { types } from "mobx-state-tree";
 import { FieldBase, FieldDescriptionBase } from "../base";
 
-const kind = types.literal("Text");
+const kind = types.optional(types.literal("Text"), "Text");
 
 export const TextValue = types.model("TextValue", {
   value: types.string,
@@ -13,7 +13,7 @@ export const TextDefinition = types
     FieldDescriptionBase,
     types.model({
       kind,
-      default: types.string,
+      default: types.optional(types.string, ""),
     })
   )
   .actions((self) => ({
@@ -29,7 +29,7 @@ export const TextField = types
     types.model({
       kind,
       definition: TextDefinition,
-      values: types.map(TextValue),
+      values: types.optional(types.map(TextValue), {}),
     })
   )
   .views((self) => ({

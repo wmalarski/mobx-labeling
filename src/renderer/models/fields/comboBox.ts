@@ -1,7 +1,10 @@
 import { types } from "mobx-state-tree";
 import { FieldBase, FieldDescriptionBase } from "../base";
 
-const kind = types.literal("ComboBox");
+const defaultValue = "Car";
+const defaultOptions = ["Car", "Pedestrian", "Motor", "Bicycle"];
+
+const kind = types.optional(types.literal("ComboBox"), "ComboBox");
 
 export const ComboBoxValue = types
   .model("ComboBoxValue", {
@@ -19,8 +22,8 @@ export const ComboBoxDefinition = types
     FieldDescriptionBase,
     types.model({
       kind,
-      default: types.string,
-      options: types.array(types.string),
+      default: types.optional(types.string, defaultValue),
+      options: types.optional(types.array(types.string), defaultOptions),
     })
   )
   .actions((self) => ({
@@ -42,7 +45,7 @@ export const ComboBoxField = types
     types.model({
       kind,
       definition: ComboBoxDefinition,
-      values: types.map(ComboBoxValue),
+      values: types.optional(types.map(ComboBoxValue), {}),
     })
   )
   .views((self) => ({

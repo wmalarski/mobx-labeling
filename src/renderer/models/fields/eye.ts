@@ -1,7 +1,8 @@
+import { theme } from "@nextui-org/react";
 import { types } from "mobx-state-tree";
 import { FieldBase, FieldDescriptionBase } from "../base";
 
-const kind = types.literal("Eye");
+const kind = types.optional(types.literal("Eye"), "Eye");
 
 export const EyeValue = types.model("EyeValue", {
   values: types.array(types.number),
@@ -13,7 +14,7 @@ export const EyeDefinition = types
     FieldDescriptionBase,
     types.model({
       kind,
-      color: types.string,
+      color: types.optional(types.string, theme.colors.primary.value),
     })
   )
   .actions((self) => ({
@@ -29,7 +30,7 @@ export const EyeField = types
     types.model({
       kind,
       definition: EyeDefinition,
-      values: types.map(EyeValue),
+      values: types.optional(types.map(EyeValue), {}),
     })
   )
   .views((self) => ({

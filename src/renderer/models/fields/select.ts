@@ -1,7 +1,15 @@
 import { types } from "mobx-state-tree";
 import { FieldBase, FieldDescriptionBase } from "../base";
 
-const kind = types.literal("Select");
+const defaultValue = "Sunny";
+const defaultOptions = [
+  { text: "Sunny", size: 3 },
+  { text: "Rain", size: 3 },
+  { text: "Clouds", size: 3 },
+  { text: "Snow", size: 3 },
+];
+
+const kind = types.optional(types.literal("Select"), "Select");
 
 export const SelectValue = types.model("SelectValue", {
   value: types.string,
@@ -13,12 +21,15 @@ export const SelectDefinition = types
     FieldDescriptionBase,
     types.model({
       kind,
-      default: types.string,
-      options: types.array(
-        types.model({
-          text: types.string,
-          size: types.number,
-        })
+      default: types.optional(types.string, defaultValue),
+      options: types.optional(
+        types.array(
+          types.model({
+            text: types.string,
+            size: types.number,
+          })
+        ),
+        defaultOptions
       ),
     })
   )
@@ -35,7 +46,7 @@ export const SelectField = types
     types.model({
       kind,
       definition: SelectDefinition,
-      values: types.map(SelectValue),
+      values: types.optional(types.map(SelectValue), {}),
     })
   )
   .views((self) => ({

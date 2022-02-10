@@ -1,7 +1,8 @@
+import { theme } from "@nextui-org/react";
 import { types } from "mobx-state-tree";
 import { FieldBase, FieldDescriptionBase } from "../base";
 
-const kind = types.literal("Graph");
+const kind = types.optional(types.literal("Graph"), "Graph");
 
 export const GraphValue = types.model("GraphValue", {
   points: types.array(
@@ -16,7 +17,7 @@ export const GraphDefinition = types
     FieldDescriptionBase,
     types.model({
       kind,
-      color: types.string,
+      color: types.optional(types.string, theme.colors.primary.value),
     })
   )
   .actions((self) => ({
@@ -32,7 +33,7 @@ export const GraphField = types
     types.model({
       kind,
       definition: GraphDefinition,
-      values: types.map(GraphValue),
+      values: types.optional(types.map(GraphValue), {}),
     })
   )
   .views((self) => ({

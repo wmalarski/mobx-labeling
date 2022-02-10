@@ -1,4 +1,5 @@
 import { SnapshotIn, types } from "mobx-state-tree";
+import { nanoid } from "nanoid";
 
 export const FieldDefinitionChange = types.enumeration([
   "EveryFrame",
@@ -8,7 +9,7 @@ export const FieldDefinitionChange = types.enumeration([
 
 export const FieldDescriptionBase = types
   .model("FieldDescriptionBase", {
-    id: types.string,
+    id: types.optional(types.identifier, nanoid),
     name: types.string,
     description: types.maybeNull(types.string),
     change: FieldDefinitionChange,
@@ -27,7 +28,7 @@ export const FieldDescriptionBase = types
 
 export const FieldBase = types
   .model("FieldBase", {
-    id: types.string,
+    id: types.optional(types.identifier, nanoid),
     currentFrame: types.string,
   })
   .actions((self) => ({

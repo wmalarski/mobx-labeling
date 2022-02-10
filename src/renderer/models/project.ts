@@ -1,5 +1,6 @@
 import { types } from "mobx-state-tree";
-import { ObjectDefinition, ProjectDefinition } from "./definitions";
+import { nanoid } from "nanoid";
+import { ObjectDefinition, ProjectDefinition } from "./definition";
 import { Box3dField } from "./fields/box3d";
 import { CheckBoxField } from "./fields/checkBox";
 import { ComboBoxField } from "./fields/comboBox";
@@ -36,20 +37,22 @@ const Field2 = types.union(
 export const Field = types.union(Field1, Field2);
 
 export const Object = types.model("Object", {
-  id: types.string,
+  id: types.optional(types.identifier, nanoid),
   name: types.string,
   definition: ObjectDefinition,
 });
 
-export const Resource = types.model("Project", {
-  id: types.string,
+export const Resource = types.model("Resource", {
+  id: types.optional(types.identifier, nanoid),
   path: types.string,
   fps: types.string,
 });
 
 export const Project = types.model("Project", {
-  id: types.string,
+  id: types.optional(types.identifier, nanoid),
   name: types.string,
   definition: ProjectDefinition,
   resources: types.array(Resource),
+  createdAt: types.optional(types.Date, () => new Date()),
+  updatedAt: types.optional(types.Date, () => new Date()),
 });

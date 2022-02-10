@@ -1,7 +1,8 @@
+import { theme } from "@nextui-org/react";
 import { types } from "mobx-state-tree";
 import { FieldBase, FieldDescriptionBase } from "../base";
 
-const kind = types.literal("Polygon");
+const kind = types.optional(types.literal("Polygon"), "Polygon");
 
 export const PolygonValue = types.model("PolygonValue", {
   values: types.array(types.number),
@@ -13,7 +14,7 @@ export const PolygonDefinition = types
     FieldDescriptionBase,
     types.model({
       kind,
-      color: types.string,
+      color: types.optional(types.string, theme.colors.primary.value),
     })
   )
   .actions((self) => ({
@@ -29,7 +30,7 @@ export const PolygonField = types
     types.model({
       kind,
       definition: PolygonDefinition,
-      values: types.map(PolygonValue),
+      values: types.optional(types.map(PolygonValue), {}),
     })
   )
   .views((self) => ({

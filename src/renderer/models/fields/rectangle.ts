@@ -1,7 +1,8 @@
+import { theme } from "@nextui-org/react";
 import { types } from "mobx-state-tree";
 import { FieldBase, FieldDescriptionBase } from "../base";
 
-const kind = types.literal("Rectangle");
+const kind = types.optional(types.literal("Rectangle"), "Rectangle");
 
 export const RectangleValue = types.model("RectangleValue", {
   value: types.array(types.number),
@@ -13,8 +14,7 @@ export const RectangleDefinition = types
     FieldDescriptionBase,
     types.model({
       kind,
-      default: RectangleValue,
-      color: types.string,
+      color: types.optional(types.string, theme.colors.primary.value),
     })
   )
   .actions((self) => ({
@@ -30,7 +30,7 @@ export const RectangleField = types
     types.model({
       kind,
       definition: RectangleDefinition,
-      values: types.map(RectangleValue),
+      values: types.optional(types.map(RectangleValue), {}),
     })
   )
   .views((self) => ({

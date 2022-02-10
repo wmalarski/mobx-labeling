@@ -1,7 +1,8 @@
+import { theme } from "@nextui-org/react";
 import { types } from "mobx-state-tree";
 import { FieldBase, FieldDescriptionBase } from "../base";
 
-const kind = types.literal("Line");
+const kind = types.optional(types.literal("Line"), "Line");
 
 export const LineValue = types.model({
   values: types.array(types.number),
@@ -13,7 +14,7 @@ export const LineDefinition = types
     FieldDescriptionBase,
     types.model({
       kind,
-      color: types.string,
+      color: types.optional(types.string, theme.colors.primary.value),
     })
   )
   .actions((self) => ({
@@ -29,7 +30,7 @@ export const LineField = types
     types.model({
       kind,
       definition: LineDefinition,
-      values: types.map(LineValue),
+      values: types.optional(types.map(LineValue), {}),
     })
   )
   .views((self) => ({

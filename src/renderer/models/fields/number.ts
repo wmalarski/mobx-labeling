@@ -1,7 +1,7 @@
 import { types } from "mobx-state-tree";
 import { FieldBase, FieldDescriptionBase } from "../base";
 
-const kind = types.literal("Number");
+const kind = types.optional(types.literal("Number"), "Number");
 
 export const NumberValue = types.model("NumberValue", {
   value: types.number,
@@ -13,10 +13,10 @@ export const NumberDefinition = types
     FieldDescriptionBase,
     types.model({
       kind,
-      min: types.number,
-      max: types.number,
-      step: types.number,
-      default: types.number,
+      min: types.optional(types.number, 0),
+      max: types.optional(types.number, 100),
+      step: types.optional(types.number, 1),
+      default: types.optional(types.number, 5),
     })
   )
   .actions((self) => ({
@@ -41,7 +41,7 @@ export const NumberField = types
     types.model({
       kind,
       definition: NumberDefinition,
-      values: types.map(NumberValue),
+      values: types.optional(types.map(NumberValue), {}),
     })
   )
   .views((self) => ({

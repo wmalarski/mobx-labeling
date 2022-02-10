@@ -1,7 +1,8 @@
+import { theme } from "@nextui-org/react";
 import { types } from "mobx-state-tree";
 import { FieldBase, FieldDescriptionBase } from "../base";
 
-const kind = types.literal("Point");
+const kind = types.optional(types.literal("Point"), "Point");
 
 export const PointValue = types.model("PointValue", {
   value: types.array(types.number),
@@ -13,7 +14,7 @@ export const PointDefinition = types
     FieldDescriptionBase,
     types.model({
       kind,
-      color: types.string,
+      color: types.optional(types.string, theme.colors.primary.value),
     })
   )
   .actions((self) => ({
@@ -29,7 +30,7 @@ export const PointField = types
     types.model({
       kind,
       definition: PointDefinition,
-      values: types.map(PointValue),
+      values: types.optional(types.map(PointValue), {}),
     })
   )
   .views((self) => ({

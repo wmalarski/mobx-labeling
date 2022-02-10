@@ -1,7 +1,7 @@
 import { types } from "mobx-state-tree";
 import { FieldBase, FieldDescriptionBase } from "../base";
 
-const kind = types.literal("CheckBox");
+const kind = types.optional(types.literal("CheckBox"), "CheckBox");
 
 export const CheckBoxValue = types
   .model("CheckBoxValue", {
@@ -19,7 +19,7 @@ export const CheckBoxDefinition = types
     FieldDescriptionBase,
     types.model({
       kind,
-      default: types.boolean,
+      default: types.optional(types.boolean, false),
     })
   )
   .actions((self) => ({
@@ -35,7 +35,7 @@ export const CheckBoxField = types
     types.model({
       kind,
       definition: CheckBoxDefinition,
-      values: types.map(CheckBoxValue),
+      values: types.optional(types.map(CheckBoxValue), {}),
     })
   )
   .views((self) => ({

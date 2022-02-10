@@ -1,7 +1,15 @@
 import { types } from "mobx-state-tree";
 import { FieldBase, FieldDescriptionBase } from "../base";
 
-const kind = types.literal("MultiSelect");
+const defaultValues = ["Left Lane", "Right Lane"];
+const defaultOptions = [
+  { text: "Left Border", size: 3 },
+  { text: "Left Lane", size: 3 },
+  { text: "Right Lane", size: 3 },
+  { text: "Right Border", size: 3 },
+];
+
+const kind = types.optional(types.literal("MultiSelect"), "MultiSelect");
 
 export const MultiSelectValue = types.model("MultiSelectValue", {
   values: types.array(types.string),
@@ -12,12 +20,15 @@ export const MultiSelectDefinition = types.compose(
   FieldDescriptionBase,
   types.model({
     kind,
-    default: types.array(types.string),
-    options: types.array(
-      types.model({
-        text: types.string,
-        size: types.number,
-      })
+    default: types.optional(types.array(types.string), defaultValues),
+    options: types.optional(
+      types.array(
+        types.model({
+          text: types.string,
+          size: types.number,
+        })
+      ),
+      defaultOptions
     ),
   })
 );
@@ -29,7 +40,7 @@ export const MultiSelectField = types
     types.model({
       kind,
       definition: MultiSelectDefinition,
-      values: types.map(MultiSelectValue),
+      values: types.optional(types.map(MultiSelectValue), {}),
     })
   )
   .views((self) => ({
