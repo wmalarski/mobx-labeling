@@ -26,6 +26,8 @@ export type LocationGenerics = MakeGenerics<{
   };
   Search: {
     project: string;
+    objectId: string;
+    fieldId: string;
   };
 }>;
 

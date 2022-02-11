@@ -7,32 +7,34 @@ import { ProjectDefinition } from "renderer/models/definition";
 import { ObjectsListItem } from "./ObjectsListItem/ObjectsListItem";
 
 type Props = {
-  definition: Instance<typeof ProjectDefinition>;
+  projectDefinition: Instance<typeof ProjectDefinition>;
 };
 
-export const ObjectsList = observer(({ definition }: Props): ReactElement => {
-  const { t } = useTranslation("definition");
+export const ObjectsList = observer(
+  ({ projectDefinition }: Props): ReactElement => {
+    const { t } = useTranslation("definition");
 
-  const handlePlusClick = () => {
-    definition.addNewObject(t("defaultObjectName"));
-  };
+    const handlePlusClick = () => {
+      projectDefinition.addNewObject(t("defaultObjectName"));
+    };
 
-  return (
-    <Col>
-      <Row>
-        <Text h2>{t("definitionObjects")}</Text>
-        <Button auto onClick={handlePlusClick}>
-          Plus
-        </Button>
-      </Row>
+    return (
       <Col>
-        {definition.objects.map((objectDefinition) => (
-          <ObjectsListItem
-            key={objectDefinition.id}
-            objectDefinition={objectDefinition}
-          />
-        ))}
+        <Row>
+          <Text h2>{t("definitionObjects")}</Text>
+          <Button auto onClick={handlePlusClick}>
+            {t("addNewObject")}
+          </Button>
+        </Row>
+        <Col>
+          {projectDefinition.objects.map((objectDefinition) => (
+            <ObjectsListItem
+              key={objectDefinition.id}
+              objectDefinition={objectDefinition}
+            />
+          ))}
+        </Col>
       </Col>
-    </Col>
-  );
-});
+    );
+  }
+);

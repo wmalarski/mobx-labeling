@@ -6,32 +6,32 @@ import { useTranslation } from "react-i18next";
 import { ProjectDefinition } from "renderer/models/definition";
 
 type Props = {
-  definition: Instance<typeof ProjectDefinition>;
+  projectDefinition: Instance<typeof ProjectDefinition>;
 };
 
 export const DefinitionForm = observer(
-  ({ definition }: Props): ReactElement => {
+  ({ projectDefinition }: Props): ReactElement => {
     const { t } = useTranslation("definition");
 
     const handleNameChange = (event: ChangeEvent<FormElement>) => {
-      definition.setName(event.target.value);
+      projectDefinition.setName(event.target.value);
     };
 
     const handleDescriptionChange = (event: ChangeEvent<FormElement>) => {
-      definition.setDescription(event.target.value);
+      projectDefinition.setDescription(event.target.value);
     };
 
     return (
       <Col>
         <Input
-          value={definition.name}
+          value={projectDefinition.name}
           onChange={handleNameChange}
-          placeholder={t("namePlaceholder")}
+          labelPlaceholder={t("namePlaceholder")}
         />
         <Input
-          value={definition.description}
+          value={projectDefinition.description}
           onChange={handleDescriptionChange}
-          placeholder={t("descriptionPlaceholder")}
+          labelPlaceholder={t("descriptionPlaceholder")}
         />
       </Col>
     );

@@ -5,5 +5,11 @@
   "definitionObjects": "Objects",
   "defaultObjectName": "New object",
   "namePlaceholder": "Name",
-  "descriptionPlaceholder": "Description"
+  "descriptionPlaceholder": "Description",
+  "definitionsList": "Go back to definitions",
+  "defaultFieldName": "New field",
+  "definitionFields": "Fields",
+  "addNewField": "Add field",
+  "addNewObject": "Add object",
+  "removeObject": "Remove object"
 }
