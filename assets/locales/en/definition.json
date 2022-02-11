@@ -20,5 +20,8 @@
   "frameChangesKey": "Frame changes",
   "frameChangesDescription": "Value changes are saved",
   "singletonKey": "Single value",
-  "singletonDescription": "One value saved for object"
+  "singletonDescription": "One value saved for object",
+  "copyObject": "Copy object",
+  "copyName": "{{name}} - copy",
+  "copyField": "Copy field"
 }

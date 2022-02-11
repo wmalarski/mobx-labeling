@@ -35,11 +35,21 @@ export const FieldCard = observer(
       objectDefinition.removeField(fieldDefinition);
     };
 
+    const handleCopyClick = () => {
+      objectDefinition.copyField(
+        fieldDefinition,
+        t("copyName", { name: fieldDefinition.name })
+      );
+    };
+
     return (
       <Col>
         <FieldForm fieldDefinition={fieldDefinition} />
         <Button auto onClick={handleRemoveClick}>
           {t("removeField")}
+        </Button>
+        <Button auto onClick={handleCopyClick}>
+          {t("copyField")}
         </Button>
         <FieldEditor fieldDefinition={fieldDefinition} />
       </Col>

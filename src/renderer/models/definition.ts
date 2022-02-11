@@ -50,6 +50,13 @@ export const ObjectDefinition = types
     removeField(field: Instance<typeof FieldDefinition>) {
       self.fields.remove(field);
     },
+    copyField(field: Instance<typeof FieldDefinition>, fieldName: string) {
+      self.fields.push({
+        ...getSnapshot(field),
+        name: fieldName,
+        id: undefined,
+      });
+    },
     setName(name: string) {
       self.name = name;
     },
@@ -74,6 +81,13 @@ export const ProjectDefinition = types
     },
     removeObject(object: Instance<typeof ObjectDefinition>) {
       self.objects.remove(object);
+    },
+    copyObject(object: Instance<typeof ObjectDefinition>, objectName: string) {
+      self.objects.push({
+        ...getSnapshot(object),
+        name: objectName,
+        id: undefined,
+      });
     },
     setName(name: string) {
       self.name = name;

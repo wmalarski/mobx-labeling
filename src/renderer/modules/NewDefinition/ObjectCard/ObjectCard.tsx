@@ -34,11 +34,21 @@ export const ObjectCard = ({ projectDefinition }: Props): ReactElement => {
     projectDefinition.removeObject(objectDefinition);
   };
 
+  const handleCopyClick = () => {
+    projectDefinition.copyObject(
+      objectDefinition,
+      t("copyName", { name: objectDefinition.name })
+    );
+  };
+
   return (
     <Col>
       <ObjectForm objectDefinition={objectDefinition} />
       <Button auto onClick={handleRemoveClick}>
         {t("removeObject")}
+      </Button>
+      <Button auto onClick={handleCopyClick}>
+        {t("copyObject")}
       </Button>
       <FieldsList objectDefinition={objectDefinition} />
       <FieldCard objectDefinition={objectDefinition} />
