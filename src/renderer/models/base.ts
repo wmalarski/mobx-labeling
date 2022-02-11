@@ -11,7 +11,7 @@ export const FieldDescriptionBase = types
   .model("FieldDescriptionBase", {
     id: types.optional(types.identifier, nanoid),
     name: types.string,
-    description: types.maybeNull(types.string),
+    description: types.optional(types.string, ""),
     change: types.optional(FieldDefinitionChange, "EveryFrame"),
   })
   .actions((self) => ({
