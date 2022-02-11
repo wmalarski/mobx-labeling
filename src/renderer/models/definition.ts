@@ -14,26 +14,26 @@ import { RectangleDefinition } from "./fields/rectangle";
 import { SelectDefinition } from "./fields/select";
 import { TextDefinition } from "./fields/text";
 
-const FieldDefinition1 = types.union(
-  Box3dDefinition,
+export const FormDefinition = types.union(
   CheckBoxDefinition,
   ComboBoxDefinition,
-  EyeDefinition,
-  GraphDefinition,
-  LineDefinition,
   MultiSelectDefinition,
   NumberDefinition,
-  PointDefinition
-);
-
-const FieldDefinition2 = types.union(
-  PolygonDefinition,
-  RectangleDefinition,
   SelectDefinition,
   TextDefinition
 );
 
-export const FieldDefinition = types.union(FieldDefinition1, FieldDefinition2);
+export const ShapeDefinition = types.union(
+  Box3dDefinition,
+  EyeDefinition,
+  GraphDefinition,
+  LineDefinition,
+  PointDefinition,
+  PolygonDefinition,
+  RectangleDefinition
+);
+
+export const FieldDefinition = types.union(FormDefinition, ShapeDefinition);
 
 export const ObjectDefinition = types
   .model("ObjectDefinition", {
