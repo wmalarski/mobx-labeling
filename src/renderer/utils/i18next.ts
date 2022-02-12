@@ -13,8 +13,6 @@ const languages = supportedLngs.map((lang) => {
   return [lang, Object.fromEntries(scopes)];
 });
 
-console.log({ languages });
-
 i18n.use(initReactI18next).init({
   resources: Object.fromEntries(languages),
   lng: "en",
