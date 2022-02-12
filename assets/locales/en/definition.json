@@ -23,5 +23,8 @@
   "singletonDescription": "One value saved for object",
   "copyObject": "Copy object",
   "copyName": "{{name}} - copy",
-  "copyField": "Copy field"
+  "copyField": "Copy field",
+  "checkboxDefaultTrue": "Checked by default",
+  "checkboxDefaultFalse": "Unchecked by default",
+  "checkboxHeader": "Checkbox properties"
 }
