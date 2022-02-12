@@ -32,5 +32,10 @@
   "comboBoxHeader": "ComboBox properties",
   "comboBoxRemoveOption": "Remove",
   "comboBoxOptionPlaceholder": "New option",
-  "comboBoAddOption": "Add"
+  "comboBoAddOption": "Add",
+  "multiSelectHeader": "Multi-select properties",
+  "multiSelectSize": "Size",
+  "multiSelectRemoveOption": "Remove",
+  "multiSelectInput": "New option",
+  "multiSelectAddOption": "Add"
 }
