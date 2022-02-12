@@ -1,5 +1,5 @@
 import { types } from "mobx-state-tree";
-import { FieldBase, FieldDescriptionBase } from "../base";
+import { FieldBase, FieldDefinitionBase } from "../base";
 
 const defaultValue = "Sunny";
 const defaultOptions = [
@@ -18,7 +18,7 @@ export const SelectValue = types.model("SelectValue", {
 export const SelectDefinition = types
   .compose(
     "SelectDefinition",
-    FieldDescriptionBase,
+    FieldDefinitionBase,
     types.model({
       kind,
       default: types.optional(types.string, defaultValue),

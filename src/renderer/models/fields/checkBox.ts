@@ -1,5 +1,5 @@
 import { types } from "mobx-state-tree";
-import { FieldBase, FieldDescriptionBase } from "../base";
+import { FieldBase, FieldDefinitionBase } from "../base";
 
 const kind = types.optional(types.literal("CheckBox"), "CheckBox");
 
@@ -16,7 +16,7 @@ export const CheckBoxValue = types
 export const CheckBoxDefinition = types
   .compose(
     "CheckBoxDefinition",
-    FieldDescriptionBase,
+    FieldDefinitionBase,
     types.model({
       kind,
       default: types.optional(types.boolean, false),

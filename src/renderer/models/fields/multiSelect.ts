@@ -1,5 +1,5 @@
 import { types } from "mobx-state-tree";
-import { FieldBase, FieldDescriptionBase } from "../base";
+import { FieldBase, FieldDefinitionBase } from "../base";
 
 const defaultValues = ["Left Lane", "Right Lane"];
 const defaultOptions = [
@@ -17,7 +17,7 @@ export const MultiSelectValue = types.model("MultiSelectValue", {
 
 export const MultiSelectDefinition = types.compose(
   "MultiSelectDefinition",
-  FieldDescriptionBase,
+  FieldDefinitionBase,
   types.model({
     kind,
     default: types.optional(types.array(types.string), defaultValues),

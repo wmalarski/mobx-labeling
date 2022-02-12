@@ -7,8 +7,8 @@ export const FieldDefinitionChange = types.enumeration([
   "Singleton",
 ]);
 
-export const FieldDescriptionBase = types
-  .model("FieldDescriptionBase", {
+export const FieldDefinitionBase = types
+  .model("FieldDefinitionBase", {
     id: types.optional(types.identifier, nanoid),
     name: types.string,
     description: types.optional(types.string, ""),
@@ -23,6 +23,20 @@ export const FieldDescriptionBase = types
     },
     setChange(change: SnapshotIn<typeof FieldDefinitionChange>) {
       self.change = change;
+    },
+  }));
+
+export const ShapeDefinitionBase = types
+  .compose(
+    "ShapeDefinitionBase",
+    FieldDefinitionBase,
+    types.model({
+      color: types.optional(types.string, "hsl(0, 100%, 50%)"),
+    })
+  )
+  .actions((self) => ({
+    setColor(color: string) {
+      self.color = color;
     },
   }));
 

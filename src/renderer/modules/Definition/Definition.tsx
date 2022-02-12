@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import { Link, useMatch } from "react-location";
-import { IntroLayout } from "renderer/components/IntroLayout/IntroLayout";
+import { IntroLayout } from "renderer/components";
 import { LocationGenerics, routePaths } from "renderer/utils/routes";
 
 export const Definition = (): ReactElement => {

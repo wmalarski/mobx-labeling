@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-location";
-import { IntroLayout } from "renderer/components/IntroLayout/IntroLayout";
+import { IntroLayout } from "renderer/components";
 import { routePaths } from "renderer/utils/routes";
 
 export const Definitions = (): ReactElement => {

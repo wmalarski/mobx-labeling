@@ -2,7 +2,7 @@ import { Col, Row, Text } from "@nextui-org/react";
 import { ReactElement, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-location";
-import { IntroLayout } from "renderer/components/IntroLayout/IntroLayout";
+import { IntroLayout } from "renderer/components";
 import { ProjectDefinition } from "renderer/models/definition";
 import { routePaths } from "renderer/utils/routes";
 import { DefinitionForm } from "./DefinitionForm/DefinitionForm";

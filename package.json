@@ -191,6 +191,11 @@
   },
   "dependencies": {
     "@nextui-org/react": "^1.0.2-beta.4",
+    "@react-aria/color": "^3.0.0-beta.6",
+    "@react-aria/focus": "^3.5.0",
+    "@react-aria/i18n": "^3.3.4",
+    "@react-aria/visually-hidden": "^3.2.3",
+    "@react-stately/color": "^3.0.0-beta.5",
     "electron-debug": "^3.2.0",
     "electron-log": "^4.4.6",
     "electron-updater": "^4.6.5",

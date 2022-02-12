@@ -1,5 +1,5 @@
 import { types } from "mobx-state-tree";
-import { FieldBase, FieldDescriptionBase } from "../base";
+import { FieldBase, FieldDefinitionBase } from "../base";
 
 const kind = types.optional(types.literal("Number"), "Number");
 
@@ -10,7 +10,7 @@ export const NumberValue = types.model("NumberValue", {
 export const NumberDefinition = types
   .compose(
     "NumberDefinition",
-    FieldDescriptionBase,
+    FieldDefinitionBase,
     types.model({
       kind,
       min: types.optional(types.number, 0),

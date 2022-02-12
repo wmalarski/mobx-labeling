@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import { Link } from "react-location";
-import { IntroLayout } from "renderer/components/IntroLayout/IntroLayout";
+import { IntroLayout } from "renderer/components";
 import { routePaths } from "renderer/utils/routes";
 
 export const NewProject = (): ReactElement => {

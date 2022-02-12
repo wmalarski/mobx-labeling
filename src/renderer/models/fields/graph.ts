@@ -1,6 +1,5 @@
-import { theme } from "@nextui-org/react";
 import { types } from "mobx-state-tree";
-import { FieldBase, FieldDescriptionBase } from "../base";
+import { FieldBase, ShapeDefinitionBase } from "../base";
 
 const kind = types.optional(types.literal("Graph"), "Graph");
 
@@ -11,20 +10,13 @@ export const GraphValue = types.model("GraphValue", {
   edges: types.array(types.model({ from: types.number, to: types.number })),
 });
 
-export const GraphDefinition = types
-  .compose(
-    "GraphDefinition",
-    FieldDescriptionBase,
-    types.model({
-      kind,
-      color: types.optional(types.string, theme.colors.primary.value),
-    })
-  )
-  .actions((self) => ({
-    setColor(color: string) {
-      self.color = color;
-    },
-  }));
+export const GraphDefinition = types.compose(
+  "GraphDefinition",
+  ShapeDefinitionBase,
+  types.model({
+    kind,
+  })
+);
 
 export const GraphField = types
   .compose(

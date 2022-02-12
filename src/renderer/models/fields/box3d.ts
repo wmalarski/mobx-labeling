@@ -1,6 +1,5 @@
-import { theme } from "@nextui-org/react";
 import { types } from "mobx-state-tree";
-import { FieldBase, FieldDescriptionBase } from "../base";
+import { FieldBase, ShapeDefinitionBase } from "../base";
 
 const kind = types.optional(types.literal("Box3d"), "Box3d");
 
@@ -10,20 +9,13 @@ export const Box3dValue = types.model("Box3dValue", {
   sideType: types.maybeNull(types.enumeration(["Left", "Right"])),
 });
 
-export const Box3dDefinition = types
-  .compose(
-    "Box3dDefinition",
-    FieldDescriptionBase,
-    types.model({
-      kind,
-      color: types.optional(types.string, theme.colors.primary.value),
-    })
-  )
-  .actions((self) => ({
-    setColor(color: string) {
-      self.color = color;
-    },
-  }));
+export const Box3dDefinition = types.compose(
+  "Box3dDefinition",
+  ShapeDefinitionBase,
+  types.model({
+    kind,
+  })
+);
 
 export const Box3dField = types
   .compose(

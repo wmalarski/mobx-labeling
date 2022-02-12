@@ -1,5 +1,5 @@
 import { types } from "mobx-state-tree";
-import { FieldBase, FieldDescriptionBase } from "../base";
+import { FieldBase, FieldDefinitionBase } from "../base";
 
 const defaultValue = "Car";
 const defaultOptions = ["Car", "Pedestrian", "Motor", "Bicycle"];
@@ -19,7 +19,7 @@ export const ComboBoxValue = types
 export const ComboBoxDefinition = types
   .compose(
     "ComboBoxDefinition",
-    FieldDescriptionBase,
+    FieldDefinitionBase,
     types.model({
       kind,
       default: types.optional(types.string, defaultValue),
