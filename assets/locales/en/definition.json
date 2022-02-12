@@ -28,5 +28,9 @@
   "checkboxDefaultFalse": "Unchecked by default",
   "checkboxHeader": "Checkbox properties",
   "figureHeader": "Figure properties",
-  "colorSliderLabel": "Select default color"
+  "colorSliderLabel": "Select default color",
+  "comboBoxHeader": "ComboBox properties",
+  "comboBoxRemoveOption": "Remove",
+  "comboBoxOptionPlaceholder": "New option",
+  "comboBoAddOption": "Add"
 }

@@ -9,16 +9,16 @@ import { ColorEditor } from "./ColorEditor";
 
 type Props = ComponentProps<typeof ColorEditor>;
 
-const defaultProps: Props = {
-  fieldDefinition: LineDefinition.create({
-    name: "Name123",
-  }),
-};
-
 const renderComponent = ({
   wrapperProps,
   ...props
 }: PropsWithTestWrapper<Partial<Props>> = {}) => {
+  const defaultProps: Props = {
+    fieldDefinition: LineDefinition.create({
+      name: "Name123",
+    }),
+  };
+
   return render(
     <TestWrapper {...wrapperProps}>
       <ColorEditor {...defaultProps} {...props} />

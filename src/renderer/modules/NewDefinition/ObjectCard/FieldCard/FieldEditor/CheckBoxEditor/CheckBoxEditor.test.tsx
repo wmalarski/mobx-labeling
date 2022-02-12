@@ -10,16 +10,16 @@ import { CheckBoxEditor } from "./CheckBoxEditor";
 
 type Props = ComponentProps<typeof CheckBoxEditor>;
 
-const defaultProps: Props = {
-  fieldDefinition: CheckBoxDefinition.create({
-    name: "Name123",
-  }),
-};
-
 const renderComponent = ({
   wrapperProps,
   ...props
 }: PropsWithTestWrapper<Partial<Props>> = {}) => {
+  const defaultProps: Props = {
+    fieldDefinition: CheckBoxDefinition.create({
+      name: "Name123",
+    }),
+  };
+
   return render(
     <TestWrapper {...wrapperProps}>
       <CheckBoxEditor {...defaultProps} {...props} />

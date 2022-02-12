@@ -1,4 +1,11 @@
-import { Checkbox, CheckboxEvent, Col, Text } from "@nextui-org/react";
+import {
+  Checkbox,
+  CheckboxEvent,
+  Container,
+  Row,
+  Spacer,
+  Text,
+} from "@nextui-org/react";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
@@ -18,14 +25,19 @@ export const CheckBoxEditor = observer(
     };
 
     return (
-      <Col>
-        <Text h4>{t("checkboxHeader")}</Text>
-        <Checkbox checked={fieldDefinition.default} onChange={handleChange}>
-          {fieldDefinition.default
-            ? t("checkboxDefaultTrue")
-            : t("checkboxDefaultFalse")}
-        </Checkbox>
-      </Col>
+      <Container>
+        <Row>
+          <Text h4>{t("checkboxHeader")}</Text>
+        </Row>
+        <Spacer y={1} />
+        <Row>
+          <Checkbox checked={fieldDefinition.default} onChange={handleChange}>
+            {fieldDefinition.default
+              ? t("checkboxDefaultTrue")
+              : t("checkboxDefaultFalse")}
+          </Checkbox>
+        </Row>
+      </Container>
     );
   }
 );
