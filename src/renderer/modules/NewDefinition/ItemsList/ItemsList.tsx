@@ -16,7 +16,8 @@ export const ItemsList = observer(
     const { t } = useTranslation("definition");
 
     const handlePlusClick = () => {
-      projectDefinition.addNewItem(t("defaultItemName"));
+      const item = projectDefinition.addNewItem(t("defaultItemName"));
+      onItemClick(item.id);
     };
 
     const handleItemClick = (itemId: string) => () => {
@@ -28,7 +29,7 @@ export const ItemsList = observer(
         <Row>
           <Text h2>{t("definitionItems")}</Text>
           <Spacer y={0.5} />
-          <Button auto onClick={handlePlusClick}>
+          <Button auto rounded onClick={handlePlusClick}>
             {t("addNewItem")}
           </Button>
         </Row>

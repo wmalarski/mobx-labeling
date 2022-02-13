@@ -22,6 +22,7 @@ const renderComponent = ({
       name: "Item",
       fields: [fieldDefinition],
     }),
+    onSelectedFieldChange: () => void 0,
   };
 
   return render(

@@ -51,6 +51,7 @@ export const DefinitionEditor = observer(
                     <Row>
                       <Col>
                         <ItemForm
+                          onSelectedItemChange={setItemId}
                           itemDefinition={itemDefinition}
                           projectDefinition={projectDefinition}
                         />
@@ -69,6 +70,7 @@ export const DefinitionEditor = observer(
                                   <FieldForm
                                     fieldDefinition={fieldDefinition}
                                     itemDefinition={itemDefinition}
+                                    onSelectedFieldChange={setFieldId}
                                   />
                                   <Spacer y={1} />
                                   <FieldEditor

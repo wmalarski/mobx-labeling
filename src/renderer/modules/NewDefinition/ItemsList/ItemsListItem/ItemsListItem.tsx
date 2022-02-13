@@ -12,7 +12,7 @@ type Props = {
 export const ItemsListItem = observer(
   ({ itemDefinition, onItemClick }: Props): ReactElement => {
     return (
-      <Button onClick={onItemClick}>
+      <Button color="success" onClick={onItemClick}>
         <Container gap={0}>
           <Row>
             <Text>{itemDefinition.name}</Text>

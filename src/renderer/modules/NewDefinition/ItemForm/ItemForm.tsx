@@ -16,10 +16,15 @@ import { ItemDefinition, ProjectDefinition } from "renderer/models/definition";
 type Props = {
   itemDefinition: Instance<typeof ItemDefinition>;
   projectDefinition: Instance<typeof ProjectDefinition>;
+  onSelectedItemChange: (itemId: string | null) => void;
 };
 
 export const ItemForm = observer(
-  ({ itemDefinition, projectDefinition }: Props): ReactElement => {
+  ({
+    itemDefinition,
+    projectDefinition,
+    onSelectedItemChange,
+  }: Props): ReactElement => {
     const { t } = useTranslation("definition");
 
     const handleNameChange = (event: ChangeEvent<FormElement>) => {
@@ -32,11 +37,14 @@ export const ItemForm = observer(
 
     const handleRemoveClick = () => {
       projectDefinition.removeItem(itemDefinition);
+      const selected = projectDefinition.items.at(0)?.id ?? null;
+      onSelectedItemChange(selected);
     };
 
     const handleCopyClick = () => {
       const name = t("copyName", { name: itemDefinition.name });
-      projectDefinition.copyItem(itemDefinition, name);
+      const copy = projectDefinition.copyItem(itemDefinition, name);
+      onSelectedItemChange(copy.id);
     };
 
     return (
@@ -44,11 +52,11 @@ export const ItemForm = observer(
         <Row>
           <Text h2>{t("itemFormHeader")}</Text>
           <Spacer x={0.5} />
-          <Button auto onClick={handleCopyClick}>
+          <Button auto color="secondary" rounded onClick={handleCopyClick}>
             {t("copyItem")}
           </Button>
           <Spacer x={0.5} />
-          <Button auto onClick={handleRemoveClick} color="error">
+          <Button auto rounded onClick={handleRemoveClick} color="error">
             {t("removeItem")}
           </Button>
         </Row>

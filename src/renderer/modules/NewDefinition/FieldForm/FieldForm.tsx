@@ -25,19 +25,27 @@ import { definitionKinds } from "./FieldForm.utils";
 type Props = {
   itemDefinition: Instance<typeof ItemDefinition>;
   fieldDefinition: Instance<typeof FieldDefinition>;
+  onSelectedFieldChange: (fieldId: string | null) => void;
 };
 
 export const FieldForm = observer(
-  ({ itemDefinition, fieldDefinition }: Props): ReactElement => {
+  ({
+    itemDefinition,
+    fieldDefinition,
+    onSelectedFieldChange,
+  }: Props): ReactElement => {
     const { t } = useTranslation("definition");
 
     const handleRemoveClick = () => {
       itemDefinition.removeField(fieldDefinition);
+      const selected = itemDefinition.fields.at(0)?.id ?? null;
+      onSelectedFieldChange(selected);
     };
 
     const handleCopyClick = () => {
       const name = t("copyName", { name: fieldDefinition.name });
-      itemDefinition.copyField(fieldDefinition, name);
+      const copy = itemDefinition.copyField(fieldDefinition, name);
+      onSelectedFieldChange(copy.id);
     };
 
     const handleNameChange = (event: ChangeEvent<FormElement>) => {
@@ -62,11 +70,11 @@ export const FieldForm = observer(
         <Row>
           <Text h3>{t("fieldFormHeader")}</Text>
           <Spacer x={0.5} />
-          <Button auto onClick={handleCopyClick}>
+          <Button auto color="secondary" rounded onClick={handleCopyClick}>
             {t("copyField")}
           </Button>
           <Spacer x={0.5} />
-          <Button auto color="error" onClick={handleRemoveClick}>
+          <Button auto color="error" rounded onClick={handleRemoveClick}>
             {t("removeField")}
           </Button>
         </Row>

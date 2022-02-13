@@ -12,7 +12,7 @@ type Props = {
 export const FieldsListItem = observer(
   ({ fieldDefinition, onFieldClick }: Props): ReactElement => {
     return (
-      <Button onClick={onFieldClick}>
+      <Button color="success" onClick={onFieldClick}>
         <Container gap={0}>
           <Row>
             <Text>{fieldDefinition.name}</Text>

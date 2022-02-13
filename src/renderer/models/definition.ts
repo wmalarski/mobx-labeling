@@ -46,20 +46,21 @@ export const ItemDefinition = types
   })
   .actions((self) => ({
     addNewField(fieldName: string) {
-      const newField = ComboBoxDefinition.create({ name: fieldName });
-      self.fields.push(newField);
+      const field = ComboBoxDefinition.create({ name: fieldName });
+      self.fields.push(field);
+      return field;
     },
     removeField(field: Instance<typeof FieldDefinition>) {
       self.fields.remove(field);
     },
     copyField(field: Instance<typeof FieldDefinition>, fieldName: string) {
-      self.fields.push(
-        FieldDefinition.create({
-          ...getSnapshot(field),
-          name: fieldName,
-          id: undefined,
-        })
-      );
+      const copy = FieldDefinition.create({
+        ...getSnapshot(field),
+        name: fieldName,
+        id: undefined,
+      });
+      self.fields.push(copy);
+      return copy;
     },
     changeKind(field: Instance<typeof FieldDefinition>, kind: DefinitionKind) {
       const index = self.fields.indexOf(field);
@@ -93,12 +94,19 @@ export const ProjectDefinition = types
     addNewItem(name: string) {
       const item = ItemDefinition.create({ name });
       self.items.push(getSnapshot(item));
+      return item;
     },
     removeItem(item: Instance<typeof ItemDefinition>) {
       self.items.remove(item);
     },
     copyItem(item: Instance<typeof ItemDefinition>, name: string) {
-      self.items.push({ ...getSnapshot(item), name, id: undefined });
+      const copy = ItemDefinition.create({
+        ...getSnapshot(item),
+        name,
+        id: undefined,
+      });
+      self.items.push(copy);
+      return copy;
     },
     setName(name: string) {
       self.name = name;

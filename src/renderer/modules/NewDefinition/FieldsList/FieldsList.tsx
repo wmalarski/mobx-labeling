@@ -16,7 +16,8 @@ export const FieldsList = observer(
     const { t } = useTranslation("definition");
 
     const handlePlusClick = () => {
-      itemDefinition.addNewField(t("defaultFieldName"));
+      const field = itemDefinition.addNewField(t("defaultFieldName"));
+      onFieldClick(field.id);
     };
 
     const handleFieldClick = (fieldId: string) => () => {
@@ -28,7 +29,7 @@ export const FieldsList = observer(
         <Row>
           <Text h3>{t("definitionFields")}</Text>
           <Spacer y={0.5} />
-          <Button auto onClick={handlePlusClick}>
+          <Button auto rounded onClick={handlePlusClick}>
             {t("addNewField")}
           </Button>
         </Row>
