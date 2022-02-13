@@ -39,6 +39,7 @@ export const Field = types.union(Field1, Field2);
 export const Item = types.model("Item", {
   id: types.optional(types.identifier, nanoid),
   name: types.string,
+  fields: types.array(Field),
   definition: ItemDefinition,
 });
 

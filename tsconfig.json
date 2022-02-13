@@ -6,8 +6,8 @@
       "dom",
       "esnext"
     ],
-    "declaration": true,
-    "declarationMap": true,
+    "declaration": false,
+    "declarationMap": false,
     "jsx": "react-jsx",
     "strict": true,
     "pretty": true,

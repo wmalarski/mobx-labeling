@@ -7,8 +7,7 @@ import { FieldCard } from "./FieldCard";
 export default {
   title: "NewDefinition/ItemCard/FieldCard",
   component: FieldCard,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-} as ComponentMeta<typeof FieldCard> as any;
+} as ComponentMeta<typeof FieldCard>;
 
 type Props = ComponentProps<typeof FieldCard>;
 
