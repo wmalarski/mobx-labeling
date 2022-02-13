@@ -52,5 +52,6 @@
   "textSize": "Default",
   "kindLabel": "Field kind",
   "kindPlaceholder": "Select kind",
-  "fieldFormHeader": "Field definition"
+  "fieldFormHeader": "Field definition",
+  "itemFormHeader": "Item definition"
 }

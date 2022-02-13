@@ -1,4 +1,12 @@
-import { Button, Container, FormElement, Input, Row } from "@nextui-org/react";
+import {
+  Button,
+  Container,
+  FormElement,
+  Input,
+  Row,
+  Spacer,
+  Text,
+} from "@nextui-org/react";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ChangeEvent, ReactElement } from "react";
@@ -32,27 +40,38 @@ export const ItemForm = observer(
     };
 
     return (
-      <Container>
+      <Container gap={0}>
         <Row>
-          <Button auto onClick={handleRemoveClick}>
-            {t("removeItem")}
-          </Button>
+          <Text h2>{t("itemFormHeader")}</Text>
+          <Spacer x={0.5} />
           <Button auto onClick={handleCopyClick}>
             {t("copyItem")}
           </Button>
+          <Spacer x={0.5} />
+          <Button auto onClick={handleRemoveClick} color="error">
+            {t("removeItem")}
+          </Button>
         </Row>
+        <Spacer y={0.5} />
         <Row>
           <Input
+            fullWidth
             value={itemDefinition.name}
             onChange={handleNameChange}
-            labelPlaceholder={t("namePlaceholder")}
+            placeholder={t("namePlaceholder")}
+            labelLeft={t("namePlaceholder")}
+            aria-label={t("namePlaceholder")}
           />
         </Row>
+        <Spacer y={0.5} />
         <Row>
           <Input
+            fullWidth
             value={itemDefinition.description}
             onChange={handleDescriptionChange}
-            labelPlaceholder={t("descriptionPlaceholder")}
+            placeholder={t("descriptionPlaceholder")}
+            labelLeft={t("descriptionPlaceholder")}
+            aria-label={t("descriptionPlaceholder")}
           />
         </Row>
       </Container>

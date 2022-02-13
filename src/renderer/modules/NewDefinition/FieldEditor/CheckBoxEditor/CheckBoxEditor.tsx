@@ -25,7 +25,7 @@ export const CheckBoxEditor = observer(
     };
 
     return (
-      <Container>
+      <Container gap={0}>
         <Row>
           <Text h4>{t("checkboxHeader")}</Text>
         </Row>

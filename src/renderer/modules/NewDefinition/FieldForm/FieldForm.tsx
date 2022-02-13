@@ -58,19 +58,22 @@ export const FieldForm = observer(
     };
 
     return (
-      <Container>
+      <Container gap={0}>
         <Row>
           <Text h3>{t("fieldFormHeader")}</Text>
-          <Button auto onClick={handleRemoveClick}>
-            {t("removeField")}
-          </Button>
+          <Spacer x={0.5} />
           <Button auto onClick={handleCopyClick}>
             {t("copyField")}
           </Button>
+          <Spacer x={0.5} />
+          <Button auto color="error" onClick={handleRemoveClick}>
+            {t("removeField")}
+          </Button>
         </Row>
-        <Spacer y={1} />
+        <Spacer y={0.5} />
         <Row>
           <Input
+            fullWidth
             value={fieldDefinition.name}
             onChange={handleNameChange}
             labelLeft={t("namePlaceholder")}
@@ -81,6 +84,7 @@ export const FieldForm = observer(
         <Spacer y={0.5} />
         <Row>
           <Input
+            fullWidth
             value={fieldDefinition.description}
             onChange={handleDescriptionChange}
             labelLeft={t("descriptionPlaceholder")}

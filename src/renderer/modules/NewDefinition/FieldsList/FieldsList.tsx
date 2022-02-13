@@ -1,40 +1,49 @@
-import { Button, Col, Row, Text } from "@nextui-org/react";
+import { Button, Container, Row, Spacer, Text } from "@nextui-org/react";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
-import { ReactElement } from "react";
+import { Fragment, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { ItemDefinition } from "renderer/models/definition";
 import { FieldsListItem } from "./FieldsListItem/FieldsListItem";
 
 type Props = {
   itemDefinition: Instance<typeof ItemDefinition>;
+  onFieldClick: (fieldId: string | null) => void;
 };
 
 export const FieldsList = observer(
-  ({ itemDefinition }: Props): ReactElement => {
+  ({ itemDefinition, onFieldClick }: Props): ReactElement => {
     const { t } = useTranslation("definition");
 
     const handlePlusClick = () => {
       itemDefinition.addNewField(t("defaultFieldName"));
     };
 
+    const handleFieldClick = (fieldId: string) => () => {
+      onFieldClick(fieldId);
+    };
+
     return (
-      <Col>
+      <Container gap={0}>
         <Row>
           <Text h3>{t("definitionFields")}</Text>
+          <Spacer y={0.5} />
           <Button auto onClick={handlePlusClick}>
             {t("addNewField")}
           </Button>
         </Row>
-        <Col>
-          {itemDefinition.fields.map((fieldDefinition) => (
-            <FieldsListItem
-              key={fieldDefinition.id}
-              fieldDefinition={fieldDefinition}
-            />
-          ))}
-        </Col>
-      </Col>
+        {itemDefinition.fields.map((fieldDefinition) => (
+          <Fragment key={fieldDefinition.id}>
+            <Spacer y={0.5} />
+            <Row>
+              <FieldsListItem
+                fieldDefinition={fieldDefinition}
+                onFieldClick={handleFieldClick(fieldDefinition.id)}
+              />
+            </Row>
+          </Fragment>
+        ))}
+      </Container>
     );
   }
 );

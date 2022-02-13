@@ -1,4 +1,11 @@
-import { Col, FormElement, Input } from "@nextui-org/react";
+import {
+  Container,
+  FormElement,
+  Input,
+  Row,
+  Spacer,
+  Text,
+} from "@nextui-org/react";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ChangeEvent, ReactElement } from "react";
@@ -22,18 +29,33 @@ export const DefinitionForm = observer(
     };
 
     return (
-      <Col>
-        <Input
-          value={projectDefinition.name}
-          onChange={handleNameChange}
-          labelPlaceholder={t("namePlaceholder")}
-        />
-        <Input
-          value={projectDefinition.description}
-          onChange={handleDescriptionChange}
-          labelPlaceholder={t("descriptionPlaceholder")}
-        />
-      </Col>
+      <Container gap={0}>
+        <Row>
+          <Text h1>{t("newDefinitionHeader")}</Text>
+        </Row>
+        <Spacer y={0.5} />
+        <Row>
+          <Input
+            fullWidth
+            value={projectDefinition.name}
+            onChange={handleNameChange}
+            placeholder={t("namePlaceholder")}
+            labelLeft={t("namePlaceholder")}
+            aria-label={t("namePlaceholder")}
+          />
+        </Row>
+        <Spacer y={0.5} />
+        <Row>
+          <Input
+            fullWidth
+            value={projectDefinition.description}
+            onChange={handleDescriptionChange}
+            placeholder={t("descriptionPlaceholder")}
+            labelLeft={t("descriptionPlaceholder")}
+            aria-label={t("descriptionPlaceholder")}
+          />
+        </Row>
+      </Container>
     );
   }
 );

@@ -37,7 +37,7 @@ export const NumberEditor = observer(
     };
 
     return (
-      <Container>
+      <Container gap={0}>
         <Row>
           <Text h4>{t("numberHeader")}</Text>
         </Row>

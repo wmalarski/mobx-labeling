@@ -1,29 +1,29 @@
-import { Col, Text } from "@nextui-org/react";
+import { Button, Container, Row, Text } from "@nextui-org/react";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
-import { Link } from "react-location";
 import { ItemDefinition } from "renderer/models/definition";
-import { routePaths } from "renderer/utils/routes";
 
 type Props = {
   itemDefinition: Instance<typeof ItemDefinition>;
+  onItemClick: () => void;
 };
 
 export const ItemsListItem = observer(
-  ({ itemDefinition }: Props): ReactElement => {
+  ({ itemDefinition, onItemClick }: Props): ReactElement => {
     return (
-      <Link
-        to={routePaths.newDefinition}
-        search={{ itemId: itemDefinition.id }}
-      >
-        <Col>
-          <Text>{itemDefinition.name}</Text>
-          <Text small color="$accents7">
-            {itemDefinition.description}
-          </Text>
-        </Col>
-      </Link>
+      <Button onClick={onItemClick}>
+        <Container gap={0}>
+          <Row>
+            <Text>{itemDefinition.name}</Text>
+          </Row>
+          <Row>
+            <Text small color="$accents7">
+              {itemDefinition.description}
+            </Text>
+          </Row>
+        </Container>
+      </Button>
     );
   }
 );

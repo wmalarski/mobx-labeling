@@ -1,30 +1,30 @@
-import { Col, Text } from "@nextui-org/react";
+import { Button, Container, Row, Text } from "@nextui-org/react";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
-import { Link, useSearch } from "react-location";
 import { FieldDefinition } from "renderer/models/definition";
-import { LocationGenerics, routePaths } from "renderer/utils/routes";
 
 type Props = {
   fieldDefinition: Instance<typeof FieldDefinition>;
+  onFieldClick: () => void;
 };
 
 export const FieldsListItem = observer(
-  ({ fieldDefinition }: Props): ReactElement => {
-    const { itemId } = useSearch<LocationGenerics>();
-
+  ({ fieldDefinition, onFieldClick }: Props): ReactElement => {
     return (
-      <Link
-        to={routePaths.newDefinition}
-        search={{ itemId, fieldId: fieldDefinition.id }}
-      >
-        <Col>
-          <Text>{fieldDefinition.name}</Text>
-          <Text>{fieldDefinition.description}</Text>
-          <Text>{fieldDefinition.kind}</Text>
-        </Col>
-      </Link>
+      <Button onClick={onFieldClick}>
+        <Container gap={0}>
+          <Row>
+            <Text>{fieldDefinition.name}</Text>
+          </Row>
+          <Row>
+            <Text small>{fieldDefinition.description}</Text>
+          </Row>
+          <Row>
+            <Text small>{fieldDefinition.kind}</Text>
+          </Row>
+        </Container>
+      </Button>
     );
   }
 );

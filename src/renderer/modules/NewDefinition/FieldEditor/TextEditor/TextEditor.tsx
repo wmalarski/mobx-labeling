@@ -25,7 +25,7 @@ export const TextEditor = observer(
     };
 
     return (
-      <Container>
+      <Container gap={0}>
         <Row>
           <Text h4>{t("textHeader")}</Text>
         </Row>

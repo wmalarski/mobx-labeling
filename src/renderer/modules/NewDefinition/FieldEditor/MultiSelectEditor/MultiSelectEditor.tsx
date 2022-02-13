@@ -62,7 +62,7 @@ export const MultiSelectEditor = observer(
       };
 
     return (
-      <Container>
+      <Container gap={0}>
         <Row>
           <Text h4>{t("multiSelectHeader")}</Text>
         </Row>

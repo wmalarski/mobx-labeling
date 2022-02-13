@@ -3,6 +3,7 @@ import "@testing-library/jest-dom/extend-expect";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ComponentProps } from "react";
+import { ItemDefinition } from "renderer/models/definition";
 import { ComboBoxDefinition } from "renderer/models/fields/comboBox";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import i18n from "renderer/utils/i18next";
@@ -14,9 +15,13 @@ const renderComponent = ({
   wrapperProps,
   ...props
 }: PropsWithTestWrapper<Partial<Props>> = {}) => {
+  const fieldDefinition = ComboBoxDefinition.create({ name: "123" });
   const defaultProps: Props = {
-    fieldDefinition: ComboBoxDefinition.create({ name: "123" }),
-    onKindChange: () => void 0,
+    fieldDefinition,
+    itemDefinition: ItemDefinition.create({
+      name: "Item",
+      fields: [fieldDefinition],
+    }),
   };
 
   return render(
@@ -92,15 +97,18 @@ describe("<FieldForm />", () => {
   it("should fire kind change after select", async () => {
     expect.hasAssertions();
 
-    const onKindChange = jest.fn();
     const fieldDefinition = ComboBoxDefinition.create({ name: "123" });
+    const itemDefinition = ItemDefinition.create({
+      name: "Item",
+      fields: [fieldDefinition],
+    });
 
-    renderComponent({ fieldDefinition, onKindChange });
+    renderComponent({ fieldDefinition, itemDefinition });
 
     userEvent.click(await screen.findByText("ComboBox", { selector: "span" }));
 
     userEvent.click(await screen.findByText("CheckBox", { selector: "li" }));
 
-    expect(onKindChange).toHaveBeenLastCalledWith("CheckBox");
+    expect(itemDefinition.fields.at(0)?.kind).toBe("CheckBox");
   });
 });
