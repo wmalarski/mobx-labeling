@@ -3,19 +3,19 @@ import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
-import { ObjectDefinition } from "renderer/models/definition";
+import { ItemDefinition } from "renderer/models/definition";
 import { FieldsListItem } from "./FieldsListItem/FieldsListItem";
 
 type Props = {
-  objectDefinition: Instance<typeof ObjectDefinition>;
+  itemDefinition: Instance<typeof ItemDefinition>;
 };
 
 export const FieldsList = observer(
-  ({ objectDefinition }: Props): ReactElement => {
+  ({ itemDefinition }: Props): ReactElement => {
     const { t } = useTranslation("definition");
 
     const handlePlusClick = () => {
-      objectDefinition.addNewField(t("defaultFieldName"));
+      itemDefinition.addNewField(t("defaultFieldName"));
     };
 
     return (
@@ -27,7 +27,7 @@ export const FieldsList = observer(
           </Button>
         </Row>
         <Col>
-          {objectDefinition.fields.map((fieldDefinition) => (
+          {itemDefinition.fields.map((fieldDefinition) => (
             <FieldsListItem
               key={fieldDefinition.id}
               fieldDefinition={fieldDefinition}

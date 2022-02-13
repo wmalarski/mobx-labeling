@@ -6,8 +6,8 @@ import { IntroLayout } from "renderer/components";
 import { ProjectDefinition } from "renderer/models/definition";
 import { routePaths } from "renderer/utils/routes";
 import { DefinitionForm } from "./DefinitionForm/DefinitionForm";
-import { ObjectCard } from "./ObjectCard/ObjectCard";
-import { ObjectsList } from "./ObjectsList/ObjectsList";
+import { ItemCard } from "./ItemCard/ItemCard";
+import { ItemList } from "./ItemsList/ItemsList";
 
 export const NewDefinition = (): ReactElement => {
   const { t } = useTranslation("definition");
@@ -25,8 +25,8 @@ export const NewDefinition = (): ReactElement => {
       <Col>
         <DefinitionForm projectDefinition={projectDefinition} />
         <Row>
-          <ObjectsList projectDefinition={projectDefinition} />
-          <ObjectCard projectDefinition={projectDefinition} />
+          <ItemList projectDefinition={projectDefinition} />
+          <ItemCard projectDefinition={projectDefinition} />
         </Row>
       </Col>
     </IntroLayout>

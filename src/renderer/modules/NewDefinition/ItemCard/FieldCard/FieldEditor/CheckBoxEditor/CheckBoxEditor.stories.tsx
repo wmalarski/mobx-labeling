@@ -5,7 +5,7 @@ import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { CheckBoxEditor } from "./CheckBoxEditor";
 
 export default {
-  title: "NewDefinition/ObjectCard/FieldCard/FieldEditor/CheckBoxEditor",
+  title: "NewDefinition/ItemCard/FieldCard/FieldEditor/CheckBoxEditor",
   component: CheckBoxEditor,
 } as ComponentMeta<typeof CheckBoxEditor>;
 

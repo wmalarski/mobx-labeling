@@ -26,12 +26,13 @@ export type LocationGenerics = MakeGenerics<{
   };
   Search: {
     project: string;
-    objectId: string;
+    itemId: string;
     fieldId: string;
   };
 }>;
 
-const memoryHistory = createMemoryHistory("/");
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const memoryHistory = (createMemoryHistory as any)("/");
 
 export const location = new ReactLocation<LocationGenerics>({
   history: memoryHistory,

@@ -37,8 +37,8 @@ export const FieldDefinition = types.union(FormDefinition, ShapeDefinition);
 
 export type DefinitionKind = Instance<typeof FieldDefinition>["kind"];
 
-export const ObjectDefinition = types
-  .model("ObjectDefinition", {
+export const ItemDefinition = types
+  .model("ItemDefinition", {
     id: types.optional(types.identifier, nanoid),
     name: types.string,
     description: types.optional(types.string, ""),
@@ -85,24 +85,20 @@ export const ProjectDefinition = types
     id: types.optional(types.identifier, nanoid),
     name: types.string,
     description: types.optional(types.string, ""),
-    objects: types.array(ObjectDefinition),
+    items: types.array(ItemDefinition),
     createdAt: types.optional(types.Date, () => new Date()),
     updatedAt: types.optional(types.Date, () => new Date()),
   })
   .actions((self) => ({
-    addNewObject(objectName: string) {
-      const newObject = ObjectDefinition.create({ name: objectName });
-      self.objects.push(getSnapshot(newObject));
+    addNewItem(name: string) {
+      const item = ItemDefinition.create({ name });
+      self.items.push(getSnapshot(item));
     },
-    removeObject(object: Instance<typeof ObjectDefinition>) {
-      self.objects.remove(object);
+    removeItem(item: Instance<typeof ItemDefinition>) {
+      self.items.remove(item);
     },
-    copyObject(object: Instance<typeof ObjectDefinition>, objectName: string) {
-      self.objects.push({
-        ...getSnapshot(object),
-        name: objectName,
-        id: undefined,
-      });
+    copyItem(item: Instance<typeof ItemDefinition>, name: string) {
+      self.items.push({ ...getSnapshot(item), name, id: undefined });
     },
     setName(name: string) {
       self.name = name;

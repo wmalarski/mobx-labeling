@@ -4,33 +4,33 @@ import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { ProjectDefinition } from "renderer/models/definition";
-import { ObjectsListItem } from "./ObjectsListItem/ObjectsListItem";
+import { ItemsListItem } from "./ItemsListItem/ItemsListItem";
 
 type Props = {
   projectDefinition: Instance<typeof ProjectDefinition>;
 };
 
-export const ObjectsList = observer(
+export const ItemList = observer(
   ({ projectDefinition }: Props): ReactElement => {
     const { t } = useTranslation("definition");
 
     const handlePlusClick = () => {
-      projectDefinition.addNewObject(t("defaultObjectName"));
+      projectDefinition.addNewItem(t("defaultItemName"));
     };
 
     return (
       <Col>
         <Row>
-          <Text h2>{t("definitionObjects")}</Text>
+          <Text h2>{t("definitionItems")}</Text>
           <Button auto onClick={handlePlusClick}>
-            {t("addNewObject")}
+            {t("addNewItem")}
           </Button>
         </Row>
         <Col>
-          {projectDefinition.objects.map((objectDefinition) => (
-            <ObjectsListItem
-              key={objectDefinition.id}
-              objectDefinition={objectDefinition}
+          {projectDefinition.items.map((itemDefinition) => (
+            <ItemsListItem
+              key={itemDefinition.id}
+              itemDefinition={itemDefinition}
             />
           ))}
         </Col>

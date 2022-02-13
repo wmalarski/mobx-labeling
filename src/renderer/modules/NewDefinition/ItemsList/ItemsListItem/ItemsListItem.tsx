@@ -3,24 +3,24 @@ import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
 import { Link } from "react-location";
-import { ObjectDefinition } from "renderer/models/definition";
+import { ItemDefinition } from "renderer/models/definition";
 import { routePaths } from "renderer/utils/routes";
 
 type Props = {
-  objectDefinition: Instance<typeof ObjectDefinition>;
+  itemDefinition: Instance<typeof ItemDefinition>;
 };
 
-export const ObjectsListItem = observer(
-  ({ objectDefinition }: Props): ReactElement => {
+export const ItemsListItem = observer(
+  ({ itemDefinition }: Props): ReactElement => {
     return (
       <Link
         to={routePaths.newDefinition}
-        search={{ objectId: objectDefinition.id }}
+        search={{ itemId: itemDefinition.id }}
       >
         <Col>
-          <Text>{objectDefinition.name}</Text>
+          <Text>{itemDefinition.name}</Text>
           <Text small color="$accents7">
-            {objectDefinition.description}
+            {itemDefinition.description}
           </Text>
         </Col>
       </Link>

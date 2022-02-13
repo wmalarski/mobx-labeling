@@ -12,12 +12,12 @@ type Props = {
 
 export const FieldsListItem = observer(
   ({ fieldDefinition }: Props): ReactElement => {
-    const { objectId } = useSearch<LocationGenerics>();
+    const { itemId } = useSearch<LocationGenerics>();
 
     return (
       <Link
         to={routePaths.newDefinition}
-        search={{ objectId, fieldId: fieldDefinition.id }}
+        search={{ itemId, fieldId: fieldDefinition.id }}
       >
         <Col>
           <Text>{fieldDefinition.name}</Text>

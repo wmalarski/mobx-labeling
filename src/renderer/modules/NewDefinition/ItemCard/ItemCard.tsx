@@ -7,51 +7,51 @@ import { ProjectDefinition } from "renderer/models/definition";
 import { LocationGenerics } from "renderer/utils/routes";
 import { FieldCard } from "./FieldCard/FieldCard";
 import { FieldsList } from "./FieldsList/FieldsList";
-import { ObjectForm } from "./ObjectForm/ObjectForm";
+import { ItemForm } from "./ItemForm/ItemForm";
 
 type Props = {
   projectDefinition: Instance<typeof ProjectDefinition>;
 };
 
-export const ObjectCard = ({ projectDefinition }: Props): ReactElement => {
+export const ItemCard = ({ projectDefinition }: Props): ReactElement => {
   const { t } = useTranslation("definition");
 
-  const { objectId } = useSearch<LocationGenerics>();
+  const { itemId } = useSearch<LocationGenerics>();
 
-  const objectDefinition = projectDefinition.objects.find(
-    (object) => object.id === objectId
+  const itemDefinition = projectDefinition.items.find(
+    (item) => item.id === itemId
   );
 
-  if (!objectDefinition) {
+  if (!itemDefinition) {
     return (
       <Card>
-        <Text>{t("selectObjectDefinition")}</Text>
+        <Text>{t("selectItemDefinition")}</Text>
       </Card>
     );
   }
 
   const handleRemoveClick = () => {
-    projectDefinition.removeObject(objectDefinition);
+    projectDefinition.removeItem(itemDefinition);
   };
 
   const handleCopyClick = () => {
-    projectDefinition.copyObject(
-      objectDefinition,
-      t("copyName", { name: objectDefinition.name })
+    projectDefinition.copyItem(
+      itemDefinition,
+      t("copyName", { name: itemDefinition.name })
     );
   };
 
   return (
     <Col>
-      <ObjectForm objectDefinition={objectDefinition} />
+      <ItemForm itemDefinition={itemDefinition} />
       <Button auto onClick={handleRemoveClick}>
-        {t("removeObject")}
+        {t("removeItem")}
       </Button>
       <Button auto onClick={handleCopyClick}>
-        {t("copyObject")}
+        {t("copyItem")}
       </Button>
-      <FieldsList objectDefinition={objectDefinition} />
-      <FieldCard objectDefinition={objectDefinition} />
+      <FieldsList itemDefinition={itemDefinition} />
+      <FieldCard itemDefinition={itemDefinition} />
     </Col>
   );
 };
