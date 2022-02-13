@@ -2,37 +2,38 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps } from "react";
 import { CheckBoxDefinition } from "renderer/models/fields/checkBox";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
-import { FieldForm } from "./FieldForm";
+import { CheckBoxEditor } from "./CheckBoxEditor";
 
 export default {
-  title: "NewDefinition/ItemCard/FieldCard/FieldForm",
-  component: FieldForm,
-  argTypes: {
-    onKindChange: {
-      type: "function",
-    },
-  },
-} as ComponentMeta<typeof FieldForm>;
+  title: "NewDefinition/FieldEditor/CheckBoxEditor",
+  component: CheckBoxEditor,
+} as ComponentMeta<typeof CheckBoxEditor>;
 
-type Props = ComponentProps<typeof FieldForm>;
+type Props = ComponentProps<typeof CheckBoxEditor>;
 
-const FieldFormStory = ({
+const CheckBoxEditorStory = ({
   wrapperProps,
   ...props
 }: PropsWithTestWrapper<Props>) => {
   return (
     <TestWrapper {...wrapperProps}>
-      <FieldForm {...props} />
+      <CheckBoxEditor {...props} />
     </TestWrapper>
   );
 };
 
-const Template: ComponentStory<typeof FieldFormStory> = FieldFormStory;
+const Template: ComponentStory<typeof CheckBoxEditorStory> =
+  CheckBoxEditorStory;
 
 export const Playground = Template.bind({});
 Playground.args = {
   wrapperProps: {},
   fieldDefinition: CheckBoxDefinition.create({
-    name: "Name123",
+    name: "Checkbox",
+    change: "EveryFrame",
+    default: true,
+    description: "Very descriptive",
+    id: "elo123",
+    kind: "CheckBox",
   }),
 };

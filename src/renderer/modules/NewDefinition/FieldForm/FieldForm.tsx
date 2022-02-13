@@ -1,4 +1,5 @@
 import {
+  Button,
   Container,
   FormElement,
   Input,
@@ -14,17 +15,30 @@ import { ChangeEvent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { Select } from "renderer/components";
 import { FieldDefinitionChange } from "renderer/models/base";
-import { DefinitionKind, FieldDefinition } from "renderer/models/definition";
+import {
+  DefinitionKind,
+  FieldDefinition,
+  ItemDefinition,
+} from "renderer/models/definition";
 import { definitionKinds } from "./FieldForm.utils";
 
 type Props = {
+  itemDefinition: Instance<typeof ItemDefinition>;
   fieldDefinition: Instance<typeof FieldDefinition>;
-  onKindChange: (kind: DefinitionKind) => void;
 };
 
 export const FieldForm = observer(
-  ({ fieldDefinition, onKindChange }: Props): ReactElement => {
+  ({ itemDefinition, fieldDefinition }: Props): ReactElement => {
     const { t } = useTranslation("definition");
+
+    const handleRemoveClick = () => {
+      itemDefinition.removeField(fieldDefinition);
+    };
+
+    const handleCopyClick = () => {
+      const name = t("copyName", { name: fieldDefinition.name });
+      itemDefinition.copyField(fieldDefinition, name);
+    };
 
     const handleNameChange = (event: ChangeEvent<FormElement>) => {
       fieldDefinition.setName(event.target.value);
@@ -40,13 +54,19 @@ export const FieldForm = observer(
     };
 
     const handleKindChange = (key: string | number) => {
-      onKindChange(key as DefinitionKind);
+      itemDefinition.changeKind(fieldDefinition, key as DefinitionKind);
     };
 
     return (
       <Container>
         <Row>
           <Text h3>{t("fieldFormHeader")}</Text>
+          <Button auto onClick={handleRemoveClick}>
+            {t("removeField")}
+          </Button>
+          <Button auto onClick={handleCopyClick}>
+            {t("copyField")}
+          </Button>
         </Row>
         <Spacer y={1} />
         <Row>

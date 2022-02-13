@@ -5,7 +5,7 @@ import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { SelectEditor } from "./SelectEditor";
 
 export default {
-  title: "NewDefinition/ItemCard/FieldCard/FieldEditor/SelectEditor",
+  title: "NewDefinition/FieldEditor/SelectEditor",
   component: SelectEditor,
 } as ComponentMeta<typeof SelectEditor>;
 

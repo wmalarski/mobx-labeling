@@ -5,7 +5,7 @@ import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { NumberEditor } from "./NumberEditor";
 
 export default {
-  title: "NewDefinition/ItemCard/FieldCard/FieldEditor/NumberEditor",
+  title: "NewDefinition/FieldEditor/NumberEditor",
   component: NumberEditor,
 } as ComponentMeta<typeof NumberEditor>;
 

@@ -5,7 +5,7 @@ import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { ColorEditor } from "./ColorEditor";
 
 export default {
-  title: "NewDefinition/ItemCard/FieldCard/FieldEditor/ColorEditor",
+  title: "NewDefinition/FieldEditor/ColorEditor",
   component: ColorEditor,
 } as ComponentMeta<typeof ColorEditor>;
 
