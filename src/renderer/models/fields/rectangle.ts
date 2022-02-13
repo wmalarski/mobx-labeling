@@ -1,4 +1,3 @@
-import { theme } from "@nextui-org/react";
 import { types } from "mobx-state-tree";
 import { FieldBase, ShapeDefinitionBase } from "../base";
 import { currentValue } from "../utils";
@@ -14,7 +13,6 @@ export const RectangleDefinition = types.compose(
   ShapeDefinitionBase,
   types.model({
     kind,
-    color: types.optional(types.string, theme.colors.primary.value),
   })
 );
 
