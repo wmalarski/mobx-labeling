@@ -4,7 +4,7 @@ import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearch } from "react-location";
-import { ObjectDefinition } from "renderer/models/definition";
+import { DefinitionKind, ObjectDefinition } from "renderer/models/definition";
 import { LocationGenerics } from "renderer/utils/routes";
 import { FieldEditor } from "./FieldEditor/FieldEditor";
 import { FieldForm } from "./FieldForm/FieldForm";
@@ -42,9 +42,16 @@ export const FieldCard = observer(
       );
     };
 
+    const handleKindChange = (kind: DefinitionKind) => {
+      objectDefinition.changeKind(fieldDefinition, kind);
+    };
+
     return (
       <Col>
-        <FieldForm fieldDefinition={fieldDefinition} />
+        <FieldForm
+          fieldDefinition={fieldDefinition}
+          onKindChange={handleKindChange}
+        />
         <Button auto onClick={handleRemoveClick}>
           {t("removeField")}
         </Button>

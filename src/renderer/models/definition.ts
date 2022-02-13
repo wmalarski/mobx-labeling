@@ -35,6 +35,8 @@ export const ShapeDefinition = types.union(
 
 export const FieldDefinition = types.union(FormDefinition, ShapeDefinition);
 
+export type DefinitionKind = Instance<typeof FieldDefinition>["kind"];
+
 export const ObjectDefinition = types
   .model("ObjectDefinition", {
     id: types.optional(types.identifier, nanoid),
@@ -51,11 +53,24 @@ export const ObjectDefinition = types
       self.fields.remove(field);
     },
     copyField(field: Instance<typeof FieldDefinition>, fieldName: string) {
-      self.fields.push({
-        ...getSnapshot(field),
-        name: fieldName,
-        id: undefined,
+      self.fields.push(
+        FieldDefinition.create({
+          ...getSnapshot(field),
+          name: fieldName,
+          id: undefined,
+        })
+      );
+    },
+    changeKind(field: Instance<typeof FieldDefinition>, kind: DefinitionKind) {
+      const index = self.fields.indexOf(field);
+      const newField = FieldDefinition.create({
+        id: field.id,
+        name: field.name,
+        description: field.description,
+        change: field.change,
+        kind,
       });
+      self.fields.splice(index, 1, newField);
     },
     setName(name: string) {
       self.name = name;
