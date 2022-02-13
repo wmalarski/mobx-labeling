@@ -37,5 +37,10 @@
   "multiSelectSize": "Size",
   "multiSelectRemoveOption": "Remove",
   "multiSelectInput": "New option",
-  "multiSelectAddOption": "Add"
+  "multiSelectAddOption": "Add",
+  "numberHeader": "Number properties",
+  "numberMax": "Max",
+  "numberMin": "Min",
+  "numberStep": "Step",
+  "numberDefault": "Default"
 }
