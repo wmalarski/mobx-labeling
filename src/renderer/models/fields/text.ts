@@ -1,5 +1,6 @@
 import { types } from "mobx-state-tree";
 import { FieldBase, FieldDefinitionBase } from "../base";
+import { currentValue } from "../utils";
 
 const kind = types.optional(types.literal("Text"), "Text");
 
@@ -34,12 +35,6 @@ export const TextField = types
   )
   .views((self) => ({
     get current() {
-      switch (self.definition.change) {
-        case "EveryFrame":
-        case "FrameChanges":
-          return self.values.get(self.currentFrame);
-        case "Singleton":
-          return self.values.get("All");
-      }
+      return currentValue(self);
     },
   }));
