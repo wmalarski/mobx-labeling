@@ -47,5 +47,7 @@
   "selectSize": "Size",
   "selectRemoveOption": "Remove",
   "selectInput": "New option",
-  "selectAddOption": "Add"
+  "selectAddOption": "Add",
+  "textHeader": "Text properties",
+  "textSize": "Default"
 }
