@@ -5,7 +5,7 @@ import { Link } from "react-location";
 import { IntroLayout } from "renderer/components";
 import { ProjectDefinition } from "renderer/models/definition";
 import { routePaths } from "renderer/utils/routes";
-import { DefinitionEditor } from "./DefinitionEditor/DefinitionEditor";
+import { DefinitionEditor } from "../DefinitionEditor/DefinitionEditor";
 
 export const NewDefinition = observer((): ReactElement => {
   const { t } = useTranslation("definition");
