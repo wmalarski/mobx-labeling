@@ -1,4 +1,4 @@
-import { types } from "mobx-state-tree";
+import { Instance, SnapshotIn, types } from "mobx-state-tree";
 import { FieldBase, FieldDefinitionBase } from "../base";
 import { currentValue } from "../utils";
 
@@ -16,6 +16,17 @@ export const SelectValue = types.model("SelectValue", {
   value: types.string,
 });
 
+export const SelectDefinitionOption = types
+  .model("SelectDefinitionOption", {
+    text: types.string,
+    size: types.number,
+  })
+  .actions((self) => ({
+    setSize(size: number) {
+      self.size = size;
+    },
+  }));
+
 export const SelectDefinition = types
   .compose(
     "SelectDefinition",
@@ -24,12 +35,7 @@ export const SelectDefinition = types
       kind,
       default: types.optional(types.string, defaultValue),
       options: types.optional(
-        types.array(
-          types.model({
-            text: types.string,
-            size: types.number,
-          })
-        ),
+        types.array(SelectDefinitionOption),
         defaultOptions
       ),
     })
@@ -37,6 +43,12 @@ export const SelectDefinition = types
   .actions((self) => ({
     setDefault(defaultValue: string) {
       self.default = defaultValue;
+    },
+    pushOption(option: SnapshotIn<typeof SelectDefinitionOption>) {
+      self.options.push(SelectDefinitionOption.create(option));
+    },
+    removeOption(option: Instance<typeof SelectDefinitionOption>) {
+      self.options.remove(option);
     },
   }));
 

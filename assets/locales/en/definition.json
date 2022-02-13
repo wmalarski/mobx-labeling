@@ -42,5 +42,10 @@
   "numberMax": "Max",
   "numberMin": "Min",
   "numberStep": "Step",
-  "numberDefault": "Default"
+  "numberDefault": "Default",
+  "selectHeader": "Select properties",
+  "selectSize": "Size",
+  "selectRemoveOption": "Remove",
+  "selectInput": "New option",
+  "selectAddOption": "Add"
 }
