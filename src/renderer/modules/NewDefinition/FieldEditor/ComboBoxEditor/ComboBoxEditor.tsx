@@ -86,7 +86,9 @@ export const ComboBoxEditor = observer(
             value={newOption}
             onChange={handleInputChange}
             onKeyDown={handleInputKeyDown}
-            labelPlaceholder={t("comboBoxOptionPlaceholder")}
+            placeholder={t("comboBoxOptionPlaceholder")}
+            labelLeft={t("comboBoxOptionPlaceholder")}
+            aria-label={t("comboBoxOptionPlaceholder")}
           />
           <Spacer x={1} />
           <Button auto onClick={handleAddClick} disabled={!isValid}>

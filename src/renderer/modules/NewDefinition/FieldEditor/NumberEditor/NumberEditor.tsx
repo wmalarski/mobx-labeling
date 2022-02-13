@@ -48,6 +48,7 @@ export const NumberEditor = observer(
             type="number"
             aria-label={t("numberMin")}
             labelLeft={t("numberMin")}
+            placeholder={t("numberMin")}
             value={String(fieldDefinition.min)}
             onChange={handleMinChange}
           />
@@ -59,6 +60,7 @@ export const NumberEditor = observer(
             type="number"
             aria-label={t("numberMax")}
             labelLeft={t("numberMax")}
+            placeholder={t("numberMax")}
             value={String(fieldDefinition.max)}
             onChange={handleMaxChange}
           />
@@ -70,6 +72,7 @@ export const NumberEditor = observer(
             type="number"
             aria-label={t("numberStep")}
             labelLeft={t("numberStep")}
+            placeholder={t("numberStep")}
             value={String(fieldDefinition.step)}
             onChange={handleStepChange}
           />
@@ -81,6 +84,7 @@ export const NumberEditor = observer(
             type="number"
             aria-label={t("numberDefault")}
             labelLeft={t("numberDefault")}
+            placeholder={t("numberDefault")}
             value={String(fieldDefinition.default)}
             onChange={handleDefaultChange}
           />

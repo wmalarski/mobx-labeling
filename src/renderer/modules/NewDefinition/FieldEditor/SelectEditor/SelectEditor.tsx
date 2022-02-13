@@ -84,6 +84,7 @@ export const SelectEditor = observer(
                       min={1}
                       max={12}
                       step={1}
+                      placeholder={t("selectSize")}
                       aria-label={t("selectSize")}
                       labelLeft={t("selectSize")}
                       value={String(option.size)}
@@ -109,8 +110,9 @@ export const SelectEditor = observer(
             value={newOption}
             onChange={handleInputChange}
             onKeyDown={handleInputKeyDown}
+            placeholder={t("selectInput")}
+            labelLeft={t("selectInput")}
             aria-label={t("selectInput")}
-            labelPlaceholder={t("selectInput")}
           />
           <Spacer x={1} />
           <Button auto onClick={handleAddClick} disabled={!isValid}>

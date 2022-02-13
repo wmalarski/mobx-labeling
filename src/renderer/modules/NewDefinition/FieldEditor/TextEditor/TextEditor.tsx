@@ -33,8 +33,9 @@ export const TextEditor = observer(
         <Row>
           <Input
             fullWidth
-            aria-label={t("textSize")}
-            labelLeft={t("textSize")}
+            aria-label={t("textDefault")}
+            labelLeft={t("textDefault")}
+            placeholder={t("textDefault")}
             value={fieldDefinition.default}
             onChange={handleDefaultChange}
           />

@@ -49,7 +49,7 @@
   "selectInput": "New option",
   "selectAddOption": "Add",
   "textHeader": "Text properties",
-  "textSize": "Default",
+  "textDefault": "Default",
   "kindLabel": "Field kind",
   "kindPlaceholder": "Select kind",
   "fieldFormHeader": "Field definition",

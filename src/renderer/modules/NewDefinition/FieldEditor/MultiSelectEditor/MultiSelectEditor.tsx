@@ -84,6 +84,7 @@ export const MultiSelectEditor = observer(
                       min={1}
                       max={12}
                       step={1}
+                      placeholder={t("multiSelectSize")}
                       aria-label={t("multiSelectSize")}
                       labelLeft={t("multiSelectSize")}
                       value={String(option.size)}
@@ -109,8 +110,9 @@ export const MultiSelectEditor = observer(
             value={newOption}
             onChange={handleInputChange}
             onKeyDown={handleInputKeyDown}
+            placeholder={t("multiSelectInput")}
+            labelLeft={t("multiSelectInput")}
             aria-label={t("multiSelectInput")}
-            labelPlaceholder={t("multiSelectInput")}
           />
           <Spacer x={1} />
           <Button auto onClick={handleAddClick} disabled={!isValid}>

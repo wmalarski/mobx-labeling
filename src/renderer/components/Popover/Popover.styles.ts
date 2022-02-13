@@ -5,4 +5,5 @@ export const Container = styled("div", {
   width: "100%",
   background: "$accents1",
   marginTop: "$xs",
+  zIndex: 1000,
 });

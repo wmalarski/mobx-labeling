@@ -1,4 +1,4 @@
-import { Card, Col, Container, Row, Spacer, Text } from "@nextui-org/react";
+import { Card, Container, Grid, Spacer, Text } from "@nextui-org/react";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement, useState } from "react";
@@ -32,71 +32,56 @@ export const DefinitionEditor = observer(
 
     return (
       <Container gap={0}>
-        <Row>
-          <DefinitionForm projectDefinition={projectDefinition} />
-        </Row>
+        <DefinitionForm projectDefinition={projectDefinition} />
         <Spacer y={1} />
-        <Row>
-          <Container gap={0}>
-            <Row>
-              <Col span={3}>
-                <ItemsList
+        <Grid css={{ display: "flex", gap: "$xl" }} direction="row">
+          <Grid css={{ display: "flex", gap: "$xl" }} direction="column">
+            <ItemsList
+              projectDefinition={projectDefinition}
+              onItemClick={setItemId}
+            />
+            {itemDefinition && (
+              <FieldsList
+                itemDefinition={itemDefinition}
+                onFieldClick={setFieldId}
+              />
+            )}
+          </Grid>
+          <Grid
+            css={{ display: "flex", gap: "$lg", width: "100%" }}
+            direction="column"
+          >
+            {itemDefinition && (
+              <>
+                <ItemForm
+                  onSelectedItemChange={setItemId}
+                  itemDefinition={itemDefinition}
                   projectDefinition={projectDefinition}
-                  onItemClick={setItemId}
                 />
-              </Col>
-              <Col span={9}>
-                {itemDefinition ? (
-                  <Container gap={0}>
-                    <Row>
-                      <Col>
-                        <ItemForm
-                          onSelectedItemChange={setItemId}
-                          itemDefinition={itemDefinition}
-                          projectDefinition={projectDefinition}
-                        />
-                        <Spacer y={1} />
-                        <Container gap={0}>
-                          <Row>
-                            <Col span={3}>
-                              <FieldsList
-                                itemDefinition={itemDefinition}
-                                onFieldClick={setFieldId}
-                              />
-                            </Col>
-                            <Col span={9}>
-                              {fieldDefinition ? (
-                                <Container gap={0}>
-                                  <FieldForm
-                                    fieldDefinition={fieldDefinition}
-                                    itemDefinition={itemDefinition}
-                                    onSelectedFieldChange={setFieldId}
-                                  />
-                                  <Spacer y={1} />
-                                  <FieldEditor
-                                    fieldDefinition={fieldDefinition}
-                                  />
-                                </Container>
-                              ) : (
-                                <Card>
-                                  <Text>{t("selectFieldDefinition")}</Text>
-                                </Card>
-                              )}
-                            </Col>
-                          </Row>
-                        </Container>
-                      </Col>
-                    </Row>
-                  </Container>
-                ) : (
+                {fieldDefinition && (
+                  <>
+                    <FieldForm
+                      fieldDefinition={fieldDefinition}
+                      itemDefinition={itemDefinition}
+                      onSelectedFieldChange={setFieldId}
+                    />
+                    <FieldEditor fieldDefinition={fieldDefinition} />
+                  </>
+                )}
+                {!fieldDefinition && (
                   <Card>
-                    <Text>{t("selectItemDefinition")}</Text>
+                    <Text>{t("selectFieldDefinition")}</Text>
                   </Card>
                 )}
-              </Col>
-            </Row>
-          </Container>
-        </Row>
+              </>
+            )}
+            {!itemDefinition && (
+              <Card>
+                <Text>{t("selectItemDefinition")}</Text>
+              </Card>
+            )}
+          </Grid>
+        </Grid>
       </Container>
     );
   }

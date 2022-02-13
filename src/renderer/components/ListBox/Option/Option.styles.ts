@@ -8,14 +8,14 @@ export const Li = styled("li", {
   borderRadius: "$sm",
 
   variants: {
-    isSelected: {
-      true: {
-        backgroundColor: "$primary",
-      },
-    },
     isFocused: {
       true: {
         backgroundColor: "$accents2",
+      },
+    },
+    isSelected: {
+      true: {
+        backgroundColor: "$primary",
       },
     },
     isDisabled: {
