@@ -8,20 +8,20 @@ import { ItemsListItem } from "./ItemsListItem/ItemsListItem";
 
 type Props = {
   projectDefinition: Instance<typeof ProjectDefinition>;
-  onItemClick: (itemId: string | null) => void;
+  onSelectedItemChange: (itemId: string | null) => void;
 };
 
 export const ItemsList = observer(
-  ({ projectDefinition, onItemClick }: Props): ReactElement => {
+  ({ projectDefinition, onSelectedItemChange }: Props): ReactElement => {
     const { t } = useTranslation("definition");
 
     const handlePlusClick = () => {
       const item = projectDefinition.addNewItem(t("defaultItemName"));
-      onItemClick(item.id);
+      onSelectedItemChange(item.id);
     };
 
     const handleItemClick = (itemId: string) => () => {
-      onItemClick(itemId);
+      onSelectedItemChange(itemId);
     };
 
     return (

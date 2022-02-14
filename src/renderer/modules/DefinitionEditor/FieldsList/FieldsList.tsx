@@ -8,20 +8,20 @@ import { FieldsListItem } from "./FieldsListItem/FieldsListItem";
 
 type Props = {
   itemDefinition: Instance<typeof ItemDefinition>;
-  onFieldClick: (fieldId: string | null) => void;
+  onSelectedFieldChange: (fieldId: string | null) => void;
 };
 
 export const FieldsList = observer(
-  ({ itemDefinition, onFieldClick }: Props): ReactElement => {
+  ({ itemDefinition, onSelectedFieldChange }: Props): ReactElement => {
     const { t } = useTranslation("definition");
 
     const handlePlusClick = () => {
       const field = itemDefinition.addNewField(t("defaultFieldName"));
-      onFieldClick(field.id);
+      onSelectedFieldChange(field.id);
     };
 
     const handleFieldClick = (fieldId: string) => () => {
-      onFieldClick(fieldId);
+      onSelectedFieldChange(fieldId);
     };
 
     return (

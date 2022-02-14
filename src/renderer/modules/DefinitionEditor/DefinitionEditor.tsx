@@ -1,14 +1,15 @@
-import { Card, Container, Grid, Spacer, Text } from "@nextui-org/react";
+import { Container, Grid, Spacer } from "@nextui-org/react";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement, useState } from "react";
-import { useTranslation } from "react-i18next";
 import { ProjectDefinition } from "renderer/models/definition";
 import { DefinitionForm } from "./DefinitionForm/DefinitionForm";
 import { FieldEditor } from "./FieldEditor/FieldEditor";
 import { FieldForm } from "./FieldForm/FieldForm";
+import { FieldPlaceholder } from "./FieldPlaceholder/FieldPlaceholder";
 import { FieldsList } from "./FieldsList/FieldsList";
 import { ItemForm } from "./ItemForm/ItemForm";
+import { ItemPlaceholder } from "./ItemPlaceholder/ItemPlaceholder";
 import { ItemsList } from "./ItemsList/ItemsList";
 
 type Props = {
@@ -17,8 +18,6 @@ type Props = {
 
 export const DefinitionEditor = observer(
   ({ projectDefinition }: Props): ReactElement => {
-    const { t } = useTranslation("definition");
-
     const [itemId, setItemId] = useState<string | null>(null);
     const [fieldId, setFieldId] = useState<string | null>(null);
 
@@ -38,12 +37,12 @@ export const DefinitionEditor = observer(
           <Grid css={{ display: "flex", gap: "$xl" }} direction="column">
             <ItemsList
               projectDefinition={projectDefinition}
-              onItemClick={setItemId}
+              onSelectedItemChange={setItemId}
             />
             {itemDefinition && (
               <FieldsList
                 itemDefinition={itemDefinition}
-                onFieldClick={setFieldId}
+                onSelectedFieldChange={setFieldId}
               />
             )}
           </Grid>
@@ -69,16 +68,18 @@ export const DefinitionEditor = observer(
                   </>
                 )}
                 {!fieldDefinition && (
-                  <Card>
-                    <Text>{t("selectFieldDefinition")}</Text>
-                  </Card>
+                  <FieldPlaceholder
+                    itemDefinition={itemDefinition}
+                    onSelectedFieldChange={setFieldId}
+                  />
                 )}
               </>
             )}
             {!itemDefinition && (
-              <Card>
-                <Text>{t("selectItemDefinition")}</Text>
-              </Card>
+              <ItemPlaceholder
+                onSelectedItemChange={setItemId}
+                projectDefinition={projectDefinition}
+              />
             )}
           </Grid>
         </Grid>
