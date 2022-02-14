@@ -112,4 +112,48 @@ describe("<FieldForm />", () => {
 
     expect(itemDefinition.fields.at(0)?.kind).toBe("CheckBox");
   });
+
+  it("should handle removing field", async () => {
+    expect.hasAssertions();
+
+    const onSelectedFieldChange = jest.fn();
+
+    const fieldDefinition = ComboBoxDefinition.create({ name: "123" });
+    const itemDefinition = ItemDefinition.create({
+      name: "Item",
+      fields: [fieldDefinition],
+    });
+
+    renderComponent({ fieldDefinition, itemDefinition, onSelectedFieldChange });
+
+    const removeText = i18n.t<string>("removeField", { ns: "definition" });
+    userEvent.click(await screen.findByText(removeText));
+
+    expect(itemDefinition.fields).toHaveLength(0);
+    expect(onSelectedFieldChange).toHaveBeenCalledTimes(1);
+    expect(onSelectedFieldChange).toHaveBeenLastCalledWith(null);
+  });
+
+  it("should handle copying field", async () => {
+    expect.hasAssertions();
+
+    const onSelectedFieldChange = jest.fn();
+
+    const fieldDefinition = ComboBoxDefinition.create({ name: "123" });
+    const itemDefinition = ItemDefinition.create({
+      name: "Item",
+      fields: [fieldDefinition],
+    });
+
+    renderComponent({ fieldDefinition, itemDefinition, onSelectedFieldChange });
+
+    const copyText = i18n.t<string>("copyField", { ns: "definition" });
+    userEvent.click(await screen.findByText(copyText));
+
+    expect(itemDefinition.fields).toHaveLength(2);
+
+    const newId = itemDefinition.fields.at(1)?.id;
+    expect(onSelectedFieldChange).toHaveBeenCalledTimes(1);
+    expect(onSelectedFieldChange).toHaveBeenLastCalledWith(newId);
+  });
 });

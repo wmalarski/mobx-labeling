@@ -43,7 +43,7 @@ describe("<TextEditor />", () => {
 
     renderComponent({ fieldDefinition });
 
-    const label = i18n.t<string>("textSize", { ns: "definition" });
+    const label = i18n.t<string>("textDefault", { ns: "definition" });
     const field = await screen.findByLabelText(label);
 
     userEvent.clear(field);
