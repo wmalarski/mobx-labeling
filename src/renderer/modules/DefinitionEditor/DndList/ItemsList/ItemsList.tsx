@@ -8,10 +8,16 @@ import { ItemsListItem } from "./ItemsListItem/ItemsListItem";
 
 type Props = {
   projectDefinition: Instance<typeof ProjectDefinition>;
+  onItemClick: (itemId: string) => void;
+  onFieldClick: (fieldId: string) => void;
 };
 
 export const ItemList = observer(
-  ({ projectDefinition }: Props): ReactElement => {
+  ({ projectDefinition, onItemClick, onFieldClick }: Props): ReactElement => {
+    const handleItemClick = (itemId: string) => () => {
+      onItemClick(itemId);
+    };
+
     return (
       <Droppable droppableId={projectDefinition.id} type="ITEM">
         {(provided) => (
@@ -32,7 +38,11 @@ export const ItemList = observer(
                     {...dragProvided.dragHandleProps}
                     style={dragProvided.draggableProps.style}
                   >
-                    <ItemsListItem itemDefinition={itemDefinition} />
+                    <ItemsListItem
+                      itemDefinition={itemDefinition}
+                      onFieldClick={onFieldClick}
+                      onItemClick={handleItemClick(itemDefinition.id)}
+                    />
                   </Styles.ItemWrapper>
                 )}
               </Draggable>

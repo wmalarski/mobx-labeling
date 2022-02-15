@@ -4,13 +4,12 @@ import { Instance } from "mobx-state-tree";
 import { ReactElement, useState } from "react";
 import { ProjectDefinition } from "renderer/models/definition";
 import { DefinitionForm } from "./DefinitionForm/DefinitionForm";
+import { DndList } from "./DndList/DndList";
 import { FieldEditor } from "./FieldEditor/FieldEditor";
 import { FieldForm } from "./FieldForm/FieldForm";
 import { FieldPlaceholder } from "./FieldPlaceholder/FieldPlaceholder";
-import { FieldsList } from "./FieldsList/FieldsList";
 import { ItemForm } from "./ItemForm/ItemForm";
 import { ItemPlaceholder } from "./ItemPlaceholder/ItemPlaceholder";
-import { ItemsList } from "./ItemsList/ItemsList";
 
 type Props = {
   projectDefinition: Instance<typeof ProjectDefinition>;
@@ -35,16 +34,11 @@ export const DefinitionEditor = observer(
         <Spacer y={1} />
         <Grid css={{ display: "flex", gap: "$xl" }} direction="row">
           <Grid css={{ display: "flex", gap: "$xl" }} direction="column">
-            <ItemsList
+            <DndList
               projectDefinition={projectDefinition}
               onSelectedItemChange={setItemId}
+              onSelectedFieldChange={setFieldId}
             />
-            {itemDefinition && (
-              <FieldsList
-                itemDefinition={itemDefinition}
-                onSelectedFieldChange={setFieldId}
-              />
-            )}
           </Grid>
           <Grid
             css={{ display: "flex", gap: "$lg", width: "100%" }}

@@ -5,8 +5,16 @@ import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { DndList } from "./DndList";
 
 export default {
-  title: "modules/DefinitionEditor/DndList",
+  title: "DefinitionEditor/DndList",
   component: DndList,
+  argTypes: {
+    onSelectedFieldChange: {
+      type: "function",
+    },
+    onSelectedItemChange: {
+      type: "function",
+    },
+  },
 } as ComponentMeta<typeof DndList>;
 
 type Props = ComponentProps<typeof DndList>;

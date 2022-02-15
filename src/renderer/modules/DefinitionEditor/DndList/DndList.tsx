@@ -1,15 +1,25 @@
+import { Button, Container, Row, Spacer, Text } from "@nextui-org/react";
 import { Instance } from "mobx-state-tree";
-import { ReactElement } from "react";
+import { ReactElement, useCallback } from "react";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
+import { useTranslation } from "react-i18next";
 import { ProjectDefinition } from "renderer/models/definition";
 import { ItemList } from "./ItemsList/ItemsList";
 
 type Props = {
   projectDefinition: Instance<typeof ProjectDefinition>;
+  onSelectedItemChange: (itemId: string) => void;
+  onSelectedFieldChange: (fieldId: string) => void;
 };
 
-export const DndList = ({ projectDefinition }: Props): ReactElement => {
-  const onDragEnd = (result: DropResult) => {
+export const DndList = ({
+  projectDefinition,
+  onSelectedFieldChange,
+  onSelectedItemChange,
+}: Props): ReactElement => {
+  const { t } = useTranslation("definition");
+
+  const onDragEnd = useCallback((result: DropResult) => {
     console.log(result);
     // if (result.combine) {
     //   if (result.type === "COLUMN") {
@@ -70,11 +80,29 @@ export const DndList = ({ projectDefinition }: Props): ReactElement => {
     // this.setState({
     //   columns: data.quoteMap,
     // });
+  }, []);
+
+  const handlePlusClick = () => {
+    const item = projectDefinition.addNewItem(t("defaultItemName"));
+    onSelectedItemChange(item.id);
   };
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <ItemList projectDefinition={projectDefinition} />
-    </DragDropContext>
+    <Container gap={0}>
+      <Row>
+        <Text h2>{t("definitionItems")}</Text>
+        <Spacer y={0.5} />
+        <Button auto rounded onClick={handlePlusClick}>
+          {t("addNewItem")}
+        </Button>
+      </Row>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <ItemList
+          projectDefinition={projectDefinition}
+          onFieldClick={onSelectedFieldChange}
+          onItemClick={onSelectedItemChange}
+        />
+      </DragDropContext>
+    </Container>
   );
 };
