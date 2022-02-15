@@ -3,8 +3,8 @@ import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { ProjectDefinition } from "renderer/models/definition";
-import { FieldList } from "./FieldList/FieldList";
 import * as Styles from "./ItemList.styles";
+import { ItemsListItem } from "./ItemsListItem/ItemsListItem";
 
 type Props = {
   projectDefinition: Instance<typeof ProjectDefinition>;
@@ -13,7 +13,7 @@ type Props = {
 export const ItemList = observer(
   ({ projectDefinition }: Props): ReactElement => {
     return (
-      <Droppable droppableId="board" type="COLUMN" direction="horizontal">
+      <Droppable droppableId={projectDefinition.id} type="ITEM">
         {(provided) => (
           <Styles.ListWrapper
             ref={provided.innerRef}
@@ -32,11 +32,7 @@ export const ItemList = observer(
                     {...dragProvided.dragHandleProps}
                     style={dragProvided.draggableProps.style}
                   >
-                    <FieldList
-                      listId={itemDefinition.id}
-                      listType="QUOTE"
-                      itemDefinition={itemDefinition}
-                    />
+                    <ItemsListItem itemDefinition={itemDefinition} />
                   </Styles.ItemWrapper>
                 )}
               </Draggable>

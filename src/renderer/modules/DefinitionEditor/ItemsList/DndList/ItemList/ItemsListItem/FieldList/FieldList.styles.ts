@@ -1,10 +1,8 @@
 import { styled } from "@nextui-org/react";
 
 export const ListWrapper = styled("div", {
-  display: "inline-flex",
+  display: "flex",
   flexDirection: "column",
-});
-
-export const ItemWrapper = styled("div", {
-  margin: "$2",
+  userSelect: "none",
+  width: "250px",
 });
