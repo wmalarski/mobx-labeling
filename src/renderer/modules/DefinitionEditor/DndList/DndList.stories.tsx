@@ -5,7 +5,7 @@ import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { DndList } from "./DndList";
 
 export default {
-  title: "modules/DefinitionEditor/ItemsList/DndList",
+  title: "modules/DefinitionEditor/DndList",
   component: DndList,
 } as ComponentMeta<typeof DndList>;
 
