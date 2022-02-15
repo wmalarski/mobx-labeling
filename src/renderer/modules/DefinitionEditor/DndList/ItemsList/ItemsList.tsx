@@ -3,7 +3,7 @@ import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { ProjectDefinition } from "renderer/models/definition";
-import * as Styles from "./ItemList.styles";
+import * as Styles from "./ItemsList.styles";
 import { ItemsListItem } from "./ItemsListItem/ItemsListItem";
 
 type Props = {

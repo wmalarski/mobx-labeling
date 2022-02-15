@@ -2,7 +2,7 @@ import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { ProjectDefinition } from "renderer/models/definition";
-import { ItemList } from "./ItemList/ItemList";
+import { ItemList } from "./ItemsList/ItemsList";
 
 type Props = {
   projectDefinition: Instance<typeof ProjectDefinition>;
