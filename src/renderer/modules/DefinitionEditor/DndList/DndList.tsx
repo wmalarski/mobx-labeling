@@ -3,8 +3,9 @@ import { Instance } from "mobx-state-tree";
 import { ReactElement, useCallback } from "react";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { useTranslation } from "react-i18next";
+import { DndDraggable, DndDroppable } from "renderer/components";
 import { ProjectDefinition } from "renderer/models/definition";
-import { ItemList } from "./ItemsList/ItemsList";
+import { ItemsListItem } from "./ItemsListItem/ItemsListItem";
 
 type Props = {
   projectDefinition: Instance<typeof ProjectDefinition>;
@@ -87,6 +88,10 @@ export const DndList = ({
     onSelectedItemChange(item.id);
   };
 
+  const handleItemClick = (itemId: string) => () => {
+    onSelectedItemChange(itemId);
+  };
+
   return (
     <Container gap={0}>
       <Row>
@@ -97,11 +102,21 @@ export const DndList = ({
         </Button>
       </Row>
       <DragDropContext onDragEnd={onDragEnd}>
-        <ItemList
-          projectDefinition={projectDefinition}
-          onFieldClick={onSelectedFieldChange}
-          onItemClick={onSelectedItemChange}
-        />
+        <DndDroppable droppableId={projectDefinition.id} type="ITEM">
+          {projectDefinition.items.map((itemDefinition, index) => (
+            <DndDraggable
+              key={itemDefinition.id}
+              draggableId={itemDefinition.id}
+              index={index}
+            >
+              <ItemsListItem
+                itemDefinition={itemDefinition}
+                onFieldClick={onSelectedFieldChange}
+                onItemClick={handleItemClick(itemDefinition.id)}
+              />
+            </DndDraggable>
+          ))}
+        </DndDroppable>
       </DragDropContext>
     </Container>
   );
