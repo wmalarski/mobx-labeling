@@ -6,6 +6,7 @@ import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { useTranslation } from "react-i18next";
 import { DndDraggable, DndDroppable } from "renderer/components";
 import { ProjectDefinition } from "renderer/models/definition";
+import { DefinitionNodeKind } from "renderer/models/utils";
 import { ItemsListItem } from "./ItemsListItem/ItemsListItem";
 
 type Props = {
@@ -23,21 +24,8 @@ export const DndList = observer(
     const { t } = useTranslation("definition");
 
     const onDragEnd = useCallback(
-      ({ source, destination, type }: DropResult) => {
-        if (
-          !destination ||
-          (source.droppableId === destination.droppableId &&
-            source.index === destination.index)
-        ) {
-          return;
-        }
-
-        if (type === "ITEM") {
-          projectDefinition.reorderItems(source, destination);
-          return;
-        }
-
-        projectDefinition.reorderFields(source, destination);
+      (result: DropResult) => {
+        projectDefinition.reorder(result);
       },
       [projectDefinition]
     );
@@ -61,7 +49,10 @@ export const DndList = observer(
           </Button>
         </Row>
         <DragDropContext onDragEnd={onDragEnd}>
-          <DndDroppable droppableId={projectDefinition.id} type="ITEM">
+          <DndDroppable
+            droppableId={projectDefinition.id}
+            type={DefinitionNodeKind.Item}
+          >
             {projectDefinition.items.map((itemDefinition, index) => (
               <DndDraggable
                 key={itemDefinition.id}

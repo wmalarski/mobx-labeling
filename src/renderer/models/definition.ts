@@ -1,6 +1,6 @@
 import { getSnapshot, Instance, types } from "mobx-state-tree";
 import { nanoid } from "nanoid";
-import { DraggableLocation } from "react-beautiful-dnd";
+import { DraggableLocation, DropResult } from "react-beautiful-dnd";
 import { Box3dDefinition } from "./fields/box3d";
 import { CheckBoxDefinition } from "./fields/checkBox";
 import { ComboBoxDefinition } from "./fields/comboBox";
@@ -14,6 +14,7 @@ import { PolygonDefinition } from "./fields/polygon";
 import { RectangleDefinition } from "./fields/rectangle";
 import { SelectDefinition } from "./fields/select";
 import { TextDefinition } from "./fields/text";
+import { DefinitionNodeKind } from "./utils";
 
 export const FormDefinition = types.union(
   CheckBoxDefinition,
@@ -122,12 +123,22 @@ export const ProjectDefinition = types
       self.items.push(copy);
       return copy;
     },
-    reorderItems(source: DraggableLocation, destination: DraggableLocation) {
-      const [removed] = self.items.splice(source.index, 1);
-      const item = ItemDefinition.create(getSnapshot(removed));
-      self.items.splice(destination.index, 0, item);
-    },
-    reorderFields(source: DraggableLocation, destination: DraggableLocation) {
+    reorder({ source, destination, type }: DropResult) {
+      if (
+        !destination ||
+        (source.droppableId === destination.droppableId &&
+          source.index === destination.index)
+      ) {
+        return;
+      }
+
+      if (type === DefinitionNodeKind.Item) {
+        const [removed] = self.items.splice(source.index, 1);
+        const item = ItemDefinition.create(getSnapshot(removed));
+        self.items.splice(destination.index, 0, item);
+        return;
+      }
+
       const srcItem = self.items.find((item) => item.id === source.droppableId);
       const destItem = self.items.find((i) => i.id === destination.droppableId);
 

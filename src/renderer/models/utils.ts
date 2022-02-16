@@ -1,6 +1,11 @@
 import { Instance } from "mobx-state-tree";
 import { FieldDefinitionBase } from "./base";
 
+export enum DefinitionNodeKind {
+  Item = "Item",
+  Field = "Field",
+}
+
 type FieldModel<V> = {
   currentFrame: string;
   definition: Instance<typeof FieldDefinitionBase>;

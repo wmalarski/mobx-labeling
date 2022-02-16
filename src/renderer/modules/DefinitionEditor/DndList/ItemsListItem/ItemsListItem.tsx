@@ -5,6 +5,7 @@ import { MouseEvent as ReactMouseEvent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { DndDraggable, DndDroppable } from "renderer/components";
 import { ItemDefinition } from "renderer/models/definition";
+import { DefinitionNodeKind } from "renderer/models/utils";
 import { FieldListItem } from "./FieldListItem/FieldListItem";
 
 type Props = {
@@ -48,7 +49,10 @@ export const ItemsListItem = observer(
             </Button>
           </Row>
         </Container>
-        <DndDroppable droppableId={itemDefinition.id} type="FIELD">
+        <DndDroppable
+          droppableId={itemDefinition.id}
+          type={DefinitionNodeKind.Field}
+        >
           {itemDefinition.fields.map((fieldDefinition, index) => (
             <DndDraggable
               key={fieldDefinition.id}
