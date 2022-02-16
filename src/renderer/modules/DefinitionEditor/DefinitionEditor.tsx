@@ -20,13 +20,8 @@ export const DefinitionEditor = observer(
     const [itemId, setItemId] = useState<string | null>(null);
     const [fieldId, setFieldId] = useState<string | null>(null);
 
-    const itemDefinition = projectDefinition.items.find(
-      (item) => item.id === itemId
-    );
-
-    const fieldDefinition = itemDefinition?.fields.find(
-      (field) => field.id === fieldId
-    );
+    const itemDefinition = itemId ? projectDefinition.item(itemId) : null;
+    const fieldDefinition = fieldId ? itemDefinition?.field(fieldId) : null;
 
     return (
       <Container gap={0}>
