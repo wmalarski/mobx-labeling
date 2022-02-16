@@ -29,6 +29,7 @@ export const FieldListItem = observer(
           clickable
           css={{ backgroundColor: "black" }}
           onClick={handleClick}
+          data-testid="field-item"
         >
           <Card.Body>
             <Text>{fieldDefinition.name}</Text>
