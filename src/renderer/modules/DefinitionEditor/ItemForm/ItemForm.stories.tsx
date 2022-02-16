@@ -1,7 +1,10 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps } from "react";
-import { ItemDefinition, ProjectDefinition } from "renderer/models/definition";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
+import {
+  mockItemDefinition,
+  mockProjectDefinition,
+} from "renderer/utils/mocks";
 import { ItemForm } from "./ItemForm";
 
 export default {
@@ -27,6 +30,6 @@ const Template: ComponentStory<typeof ItemFormStory> = ItemFormStory;
 export const Playground = Template.bind({});
 Playground.args = {
   wrapperProps: {},
-  itemDefinition: ItemDefinition.create({ name: "123" }),
-  projectDefinition: ProjectDefinition.create({ name: "456" }),
+  itemDefinition: mockItemDefinition({ update: { name: "123" } }),
+  projectDefinition: mockProjectDefinition(),
 };

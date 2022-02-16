@@ -17,10 +17,10 @@ import { Select } from "renderer/components";
 import { FieldDefinitionChange } from "renderer/models/base";
 import {
   DefinitionKind,
+  definitionKinds,
   FieldDefinition,
   ItemDefinition,
 } from "renderer/models/definition";
-import { definitionKinds } from "./FieldForm.utils";
 
 type Props = {
   itemDefinition: Instance<typeof ItemDefinition>;

@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps } from "react";
-import { ItemDefinition } from "renderer/models/definition";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
+import { mockItemDefinition } from "renderer/utils/mocks";
 import { FieldPlaceholder } from "./FieldPlaceholder";
 
 export default {
@@ -33,5 +33,5 @@ const Template: ComponentStory<typeof FieldPlaceholderStory> =
 export const Playground = Template.bind({});
 Playground.args = {
   wrapperProps: {},
-  itemDefinition: ItemDefinition.create({ name: "123" }),
+  itemDefinition: mockItemDefinition({ update: { name: "123" } }),
 };

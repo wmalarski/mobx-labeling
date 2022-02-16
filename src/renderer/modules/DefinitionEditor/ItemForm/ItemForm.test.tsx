@@ -3,9 +3,12 @@ import "@testing-library/jest-dom/extend-expect";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ComponentProps } from "react";
-import { ItemDefinition, ProjectDefinition } from "renderer/models/definition";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import i18n from "renderer/utils/i18next";
+import {
+  mockItemDefinition,
+  mockProjectDefinition,
+} from "renderer/utils/mocks";
 import { ItemForm } from "./ItemForm";
 
 type Props = ComponentProps<typeof ItemForm>;
@@ -15,9 +18,9 @@ const renderComponent = ({
   ...props
 }: PropsWithTestWrapper<Partial<Props>> = {}) => {
   const defaultProps: Props = {
-    itemDefinition: ItemDefinition.create({ name: "1" }),
+    itemDefinition: mockItemDefinition({ update: { name: "1" } }),
     onSelectedItemChange: () => void 0,
-    projectDefinition: ProjectDefinition.create({ name: "2" }),
+    projectDefinition: mockProjectDefinition(),
   };
 
   return render(
@@ -41,7 +44,7 @@ describe("<ItemForm />", () => {
   it("should change name", async () => {
     expect.hasAssertions();
 
-    const itemDefinition = ItemDefinition.create({ name: "123" });
+    const itemDefinition = mockItemDefinition({ update: { name: "123" } });
 
     renderComponent({ itemDefinition });
 
@@ -57,7 +60,7 @@ describe("<ItemForm />", () => {
   it("should change description", async () => {
     expect.hasAssertions();
 
-    const itemDefinition = ItemDefinition.create({ name: "123" });
+    const itemDefinition = mockItemDefinition({ update: { name: "123" } });
 
     renderComponent({ itemDefinition });
 
@@ -77,10 +80,12 @@ describe("<ItemForm />", () => {
 
     const onSelectedItemChange = jest.fn();
 
-    const itemDefinition = ItemDefinition.create({ name: "123" });
-    const projectDefinition = ProjectDefinition.create({
-      name: "Item",
-      items: [itemDefinition],
+    const itemDefinition = mockItemDefinition({ update: { name: "123" } });
+    const projectDefinition = mockProjectDefinition({
+      update: {
+        name: "Project",
+        items: [itemDefinition],
+      },
     });
 
     renderComponent({
@@ -102,10 +107,12 @@ describe("<ItemForm />", () => {
 
     const onSelectedItemChange = jest.fn();
 
-    const itemDefinition = ItemDefinition.create({ name: "123" });
-    const projectDefinition = ProjectDefinition.create({
-      name: "Item",
-      items: [itemDefinition],
+    const itemDefinition = mockItemDefinition({ update: { name: "123" } });
+    const projectDefinition = mockProjectDefinition({
+      update: {
+        name: "Project",
+        items: [itemDefinition],
+      },
     });
 
     renderComponent({

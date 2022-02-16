@@ -3,10 +3,10 @@ import "@testing-library/jest-dom/extend-expect";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ComponentProps } from "react";
-import { ItemDefinition } from "renderer/models/definition";
 import { ComboBoxDefinition } from "renderer/models/fields/comboBox";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import i18n from "renderer/utils/i18next";
+import { mockItemDefinition } from "renderer/utils/mocks";
 import { FieldForm } from "./FieldForm";
 
 type Props = ComponentProps<typeof FieldForm>;
@@ -18,9 +18,11 @@ const renderComponent = ({
   const fieldDefinition = ComboBoxDefinition.create({ name: "123" });
   const defaultProps: Props = {
     fieldDefinition,
-    itemDefinition: ItemDefinition.create({
-      name: "Item",
-      fields: [fieldDefinition],
+    itemDefinition: mockItemDefinition({
+      update: {
+        name: "Item",
+        fields: [fieldDefinition],
+      },
     }),
     onSelectedFieldChange: () => void 0,
   };
@@ -99,9 +101,11 @@ describe("<FieldForm />", () => {
     expect.hasAssertions();
 
     const fieldDefinition = ComboBoxDefinition.create({ name: "123" });
-    const itemDefinition = ItemDefinition.create({
-      name: "Item",
-      fields: [fieldDefinition],
+    const itemDefinition = mockItemDefinition({
+      update: {
+        name: "Item",
+        fields: [fieldDefinition],
+      },
     });
 
     renderComponent({ fieldDefinition, itemDefinition });
@@ -119,9 +123,11 @@ describe("<FieldForm />", () => {
     const onSelectedFieldChange = jest.fn();
 
     const fieldDefinition = ComboBoxDefinition.create({ name: "123" });
-    const itemDefinition = ItemDefinition.create({
-      name: "Item",
-      fields: [fieldDefinition],
+    const itemDefinition = mockItemDefinition({
+      update: {
+        name: "Item",
+        fields: [fieldDefinition],
+      },
     });
 
     renderComponent({ fieldDefinition, itemDefinition, onSelectedFieldChange });
@@ -140,9 +146,11 @@ describe("<FieldForm />", () => {
     const onSelectedFieldChange = jest.fn();
 
     const fieldDefinition = ComboBoxDefinition.create({ name: "123" });
-    const itemDefinition = ItemDefinition.create({
-      name: "Item",
-      fields: [fieldDefinition],
+    const itemDefinition = mockItemDefinition({
+      update: {
+        name: "Item",
+        fields: [fieldDefinition],
+      },
     });
 
     renderComponent({ fieldDefinition, itemDefinition, onSelectedFieldChange });

@@ -3,9 +3,9 @@ import "@testing-library/jest-dom/extend-expect";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ComponentProps } from "react";
-import { ProjectDefinition } from "renderer/models/definition";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import i18n from "renderer/utils/i18next";
+import { mockProjectDefinition } from "renderer/utils/mocks";
 import { ItemPlaceholder } from "./ItemPlaceholder";
 
 type Props = ComponentProps<typeof ItemPlaceholder>;
@@ -16,7 +16,7 @@ const renderComponent = ({
 }: PropsWithTestWrapper<Partial<Props>> = {}) => {
   const defaultProps: Props = {
     onSelectedItemChange: () => void 0,
-    projectDefinition: ProjectDefinition.create({ name: "1" }),
+    projectDefinition: mockProjectDefinition({ update: { name: "1" } }),
   };
 
   return render(
@@ -31,7 +31,9 @@ describe("<ItemPlaceholder />", () => {
     expect.hasAssertions();
 
     const onSelectedItemChange = jest.fn();
-    const projectDefinition = ProjectDefinition.create({ name: "1" });
+    const projectDefinition = mockProjectDefinition({
+      update: { name: "1", items: [] },
+    });
 
     renderComponent({ projectDefinition, onSelectedItemChange });
 

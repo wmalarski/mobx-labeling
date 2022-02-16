@@ -3,9 +3,9 @@ import "@testing-library/jest-dom/extend-expect";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ComponentProps } from "react";
-import { ProjectDefinition } from "renderer/models/definition";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import i18n from "renderer/utils/i18next";
+import { mockProjectDefinition } from "renderer/utils/mocks";
 import { DefinitionForm } from "./DefinitionForm";
 
 type Props = ComponentProps<typeof DefinitionForm>;
@@ -15,9 +15,7 @@ const renderComponent = ({
   ...props
 }: PropsWithTestWrapper<Partial<Props>> = {}) => {
   const defaultProps: Props = {
-    projectDefinition: ProjectDefinition.create({
-      name: "Name123",
-    }),
+    projectDefinition: mockProjectDefinition(),
   };
 
   return render(
@@ -41,7 +39,7 @@ describe("<DefinitionForm />", () => {
   it("should change name", async () => {
     expect.hasAssertions();
 
-    const projectDefinition = ProjectDefinition.create({ name: "" });
+    const projectDefinition = mockProjectDefinition({ update: { name: "" } });
 
     renderComponent({ projectDefinition });
 
@@ -56,7 +54,7 @@ describe("<DefinitionForm />", () => {
   it("should change description", async () => {
     expect.hasAssertions();
 
-    const projectDefinition = ProjectDefinition.create({ name: "" });
+    const projectDefinition = mockProjectDefinition();
 
     renderComponent({ projectDefinition });
 

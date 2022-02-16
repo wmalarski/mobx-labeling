@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps } from "react";
-import { ProjectDefinition } from "renderer/models/definition";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
+import { mockProjectDefinition } from "renderer/utils/mocks";
 import { ItemPlaceholder } from "./ItemPlaceholder";
 
 export default {
@@ -33,5 +33,5 @@ const Template: ComponentStory<typeof ItemPlaceholderStory> =
 export const Playground = Template.bind({});
 Playground.args = {
   wrapperProps: {},
-  projectDefinition: ProjectDefinition.create({ name: "1" }),
+  projectDefinition: mockProjectDefinition({ update: { name: "1" } }),
 };
