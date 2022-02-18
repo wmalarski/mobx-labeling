@@ -46,6 +46,7 @@ export const DndDraggable = ({
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           style={provided.draggableProps.style}
+          data-test-id="draggable"
         >
           {children}
         </Styles.ItemWrapper>
