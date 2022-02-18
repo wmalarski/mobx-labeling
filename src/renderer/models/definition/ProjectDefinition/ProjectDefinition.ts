@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 import { DropResult } from "react-beautiful-dnd";
 import { DefinitionNodeKind } from "../../types";
 import { FieldDefinition } from "../FieldDefinition";
-import { ItemDefinition } from "../ItemDefinition";
+import { ItemDefinition } from "../ItemDefinition/ItemDefinition";
 
 export const ProjectDefinition = types
   .model("ProjectDefinition", {

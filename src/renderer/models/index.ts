@@ -1,6 +1,6 @@
 export { FieldDefinitionChange } from "./base/FieldDefinitionBase";
 export * from "./definition/FieldDefinition";
-export * from "./definition/ItemDefinition";
+export * from "./definition/ItemDefinition/ItemDefinition";
 export * from "./definition/ProjectDefinition/ProjectDefinition";
 export * from "./fields/Box3d";
 export * from "./fields/CheckBox";

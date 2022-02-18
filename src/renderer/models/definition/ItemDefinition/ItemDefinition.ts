@@ -1,8 +1,8 @@
 import { getSnapshot, Instance, types } from "mobx-state-tree";
 import { nanoid } from "nanoid";
 import { DraggableLocation } from "react-beautiful-dnd";
-import { ComboBoxDefinition } from "../fields/ComboBox";
-import { DefinitionKind, FieldDefinition } from "./FieldDefinition";
+import { ComboBoxDefinition } from "../../fields/ComboBox";
+import { DefinitionKind, FieldDefinition } from "../FieldDefinition";
 
 export const ItemDefinition = types
   .model("ItemDefinition", {
