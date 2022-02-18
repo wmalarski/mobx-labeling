@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps } from "react";
-import { SelectDefinition } from "renderer/models/fields/select";
+import { SelectDefinition } from "renderer/models";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { SelectEditor } from "./SelectEditor";
 

@@ -12,10 +12,7 @@ import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ChangeEvent, KeyboardEvent, ReactElement, useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  SelectDefinition,
-  SelectDefinitionOption,
-} from "renderer/models/fields/select";
+import { SelectDefinition, SelectDefinitionOption } from "renderer/models";
 
 type Props = {
   fieldDefinition: Instance<typeof SelectDefinition>;

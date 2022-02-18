@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { MouseEvent as ReactMouseEvent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
-import { FieldDefinition } from "renderer/models/definition";
+import { FieldDefinition } from "renderer/models";
 import * as Styles from "./FieldListItem.styles";
 
 type Props = {

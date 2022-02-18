@@ -2,7 +2,7 @@ import { Card, Text } from "@nextui-org/react";
 import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
-import { ProjectDefinition } from "renderer/models/definition";
+import { ProjectDefinition } from "renderer/models";
 
 type Props = {
   projectDefinition: Instance<typeof ProjectDefinition>;

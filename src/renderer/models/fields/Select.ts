@@ -1,6 +1,7 @@
 import { Instance, SnapshotIn, types } from "mobx-state-tree";
-import { FieldBase, FieldDefinitionBase } from "../base";
-import { currentValue } from "../utils";
+import { FieldBase } from "../base/FieldBase";
+import { FieldDefinitionBase } from "../base/FieldDefinitionBase";
+import { currentValue } from "./utils";
 
 const defaultValue = "Sunny";
 const defaultOptions = [

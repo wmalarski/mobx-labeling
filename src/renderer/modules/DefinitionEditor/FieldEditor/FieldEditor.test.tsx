@@ -2,19 +2,21 @@ import "@testing-library/jest-dom";
 import "@testing-library/jest-dom/extend-expect";
 import { render, screen } from "@testing-library/react";
 import { ComponentProps } from "react";
-import { Box3dDefinition } from "renderer/models/fields/box3d";
-import { CheckBoxDefinition } from "renderer/models/fields/checkBox";
-import { ComboBoxDefinition } from "renderer/models/fields/comboBox";
-import { EyeDefinition } from "renderer/models/fields/eye";
-import { GraphDefinition } from "renderer/models/fields/graph";
-import { LineDefinition } from "renderer/models/fields/line";
-import { MultiSelectDefinition } from "renderer/models/fields/multiSelect";
-import { NumberDefinition } from "renderer/models/fields/number";
-import { PointDefinition } from "renderer/models/fields/point";
-import { PolygonDefinition } from "renderer/models/fields/polygon";
-import { RectangleDefinition } from "renderer/models/fields/rectangle";
-import { SelectDefinition } from "renderer/models/fields/select";
-import { TextDefinition } from "renderer/models/fields/text";
+import {
+  Box3dDefinition,
+  CheckBoxDefinition,
+  ComboBoxDefinition,
+  EyeDefinition,
+  GraphDefinition,
+  LineDefinition,
+  MultiSelectDefinition,
+  NumberDefinition,
+  PointDefinition,
+  PolygonDefinition,
+  RectangleDefinition,
+  SelectDefinition,
+  TextDefinition,
+} from "renderer/models";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import i18n from "renderer/utils/i18next";
 import { FieldEditor } from "./FieldEditor";

@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps } from "react";
-import { NumberDefinition } from "renderer/models/fields/number";
+import { NumberDefinition } from "renderer/models";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { NumberEditor } from "./NumberEditor";
 

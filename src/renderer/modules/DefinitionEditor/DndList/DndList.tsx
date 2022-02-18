@@ -5,8 +5,7 @@ import { ReactElement, useCallback } from "react";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { useTranslation } from "react-i18next";
 import { DndDraggable, DndDroppable } from "renderer/components";
-import { ProjectDefinition } from "renderer/models/definition";
-import { DefinitionNodeKind } from "renderer/models/utils";
+import { DefinitionNodeKind, ProjectDefinition } from "renderer/models";
 import { ItemsListItem } from "./ItemsListItem/ItemsListItem";
 
 type Props = {

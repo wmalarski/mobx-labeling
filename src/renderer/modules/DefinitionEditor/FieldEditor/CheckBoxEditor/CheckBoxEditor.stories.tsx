@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps } from "react";
-import { CheckBoxDefinition } from "renderer/models/fields/checkBox";
+import { CheckBoxDefinition } from "renderer/models";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { CheckBoxEditor } from "./CheckBoxEditor";
 

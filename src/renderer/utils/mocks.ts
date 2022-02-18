@@ -4,7 +4,7 @@ import {
   FieldDefinition,
   ItemDefinition,
   ProjectDefinition,
-} from "renderer/models/definition";
+} from "renderer/models";
 
 export const mockFieldDefinition = ({
   index,

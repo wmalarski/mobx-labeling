@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps } from "react";
-import { LineDefinition } from "renderer/models/fields/line";
+import { LineDefinition } from "renderer/models";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { ColorEditor } from "./ColorEditor";
 

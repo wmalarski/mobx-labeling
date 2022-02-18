@@ -25,28 +25,3 @@ export const FieldDefinitionBase = types
       self.change = change;
     },
   }));
-
-export const ShapeDefinitionBase = types
-  .compose(
-    "ShapeDefinitionBase",
-    FieldDefinitionBase,
-    types.model({
-      color: types.optional(types.string, "hsl(0, 100%, 50%)"),
-    })
-  )
-  .actions((self) => ({
-    setColor(color: string) {
-      self.color = color;
-    },
-  }));
-
-export const FieldBase = types
-  .model("FieldBase", {
-    id: types.optional(types.identifier, nanoid),
-    currentFrame: types.string,
-  })
-  .actions((self) => ({
-    setCurrentFrame(currentFrame: string) {
-      self.currentFrame = currentFrame;
-    },
-  }));

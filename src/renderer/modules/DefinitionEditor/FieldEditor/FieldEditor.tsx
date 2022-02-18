@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
-import { FieldDefinition } from "renderer/models/definition";
+import { FieldDefinition } from "renderer/models";
 import { CheckBoxEditor } from "./CheckBoxEditor/CheckBoxEditor";
 import { ColorEditor } from "./ColorEditor/ColorEditor";
 import { ComboBoxEditor } from "./ComboBoxEditor/ComboBoxEditor";

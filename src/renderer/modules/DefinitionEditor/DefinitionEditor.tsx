@@ -2,7 +2,7 @@ import { Container, Grid, Spacer } from "@nextui-org/react";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement, useState } from "react";
-import { ProjectDefinition } from "renderer/models/definition";
+import { ProjectDefinition } from "renderer/models";
 import { DefinitionForm } from "./DefinitionForm/DefinitionForm";
 import { DndList } from "./DndList/DndList";
 import { FieldEditor } from "./FieldEditor/FieldEditor";

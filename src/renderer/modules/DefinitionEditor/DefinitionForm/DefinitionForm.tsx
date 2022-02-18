@@ -10,7 +10,7 @@ import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ChangeEvent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
-import { ProjectDefinition } from "renderer/models/definition";
+import { ProjectDefinition } from "renderer/models";
 
 type Props = {
   projectDefinition: Instance<typeof ProjectDefinition>;

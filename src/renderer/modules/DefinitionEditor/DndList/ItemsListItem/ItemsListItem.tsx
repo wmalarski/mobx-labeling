@@ -4,8 +4,7 @@ import { Instance } from "mobx-state-tree";
 import { MouseEvent as ReactMouseEvent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { DndDraggable, DndDroppable } from "renderer/components";
-import { ItemDefinition } from "renderer/models/definition";
-import { DefinitionNodeKind } from "renderer/models/utils";
+import { DefinitionNodeKind, ItemDefinition } from "renderer/models";
 import { FieldListItem } from "./FieldListItem/FieldListItem";
 
 type Props = {

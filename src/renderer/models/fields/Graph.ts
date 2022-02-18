@@ -1,6 +1,7 @@
 import { types } from "mobx-state-tree";
-import { FieldBase, ShapeDefinitionBase } from "../base";
-import { currentValue } from "../utils";
+import { FieldBase } from "../base/FieldBase";
+import { ShapeDefinitionBase } from "../base/ShapeDefinitionBase";
+import { currentValue } from "./utils";
 
 const kind = types.optional(types.literal("Graph"), "Graph");
 

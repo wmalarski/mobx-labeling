@@ -4,7 +4,7 @@ import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { ColorSlider } from "renderer/components";
-import { ShapeDefinition } from "renderer/models/definition";
+import { ShapeDefinition } from "renderer/models";
 
 type Props = {
   fieldDefinition: Instance<typeof ShapeDefinition>;

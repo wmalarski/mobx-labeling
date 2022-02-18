@@ -14,13 +14,13 @@ import { Instance } from "mobx-state-tree";
 import { ChangeEvent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { Select } from "renderer/components";
-import { FieldDefinitionChange } from "renderer/models/base";
 import {
   DefinitionKind,
   definitionKinds,
   FieldDefinition,
+  FieldDefinitionChange,
   ItemDefinition,
-} from "renderer/models/definition";
+} from "renderer/models";
 
 type Props = {
   itemDefinition: Instance<typeof ItemDefinition>;

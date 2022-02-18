@@ -15,7 +15,7 @@ import { useTranslation } from "react-i18next";
 import {
   MultiSelectDefinition,
   MultiSelectDefinitionOption,
-} from "renderer/models/fields/multiSelect";
+} from "renderer/models";
 
 type Props = {
   fieldDefinition: Instance<typeof MultiSelectDefinition>;

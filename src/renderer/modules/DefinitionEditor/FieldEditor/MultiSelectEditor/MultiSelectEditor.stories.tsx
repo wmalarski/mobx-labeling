@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps } from "react";
-import { MultiSelectDefinition } from "renderer/models/fields/multiSelect";
+import { MultiSelectDefinition } from "renderer/models";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { MultiSelectEditor } from "./MultiSelectEditor";
 

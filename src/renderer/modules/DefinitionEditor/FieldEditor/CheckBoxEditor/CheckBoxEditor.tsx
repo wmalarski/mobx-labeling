@@ -10,7 +10,7 @@ import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
-import { CheckBoxDefinition } from "renderer/models/fields/checkBox";
+import { CheckBoxDefinition } from "renderer/models";
 
 type Props = {
   fieldDefinition: Instance<typeof CheckBoxDefinition>;

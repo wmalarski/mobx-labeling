@@ -10,7 +10,7 @@ import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ChangeEvent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
-import { NumberDefinition } from "renderer/models/fields/number";
+import { NumberDefinition } from "renderer/models";
 
 type Props = {
   fieldDefinition: Instance<typeof NumberDefinition>;
