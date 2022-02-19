@@ -36,7 +36,7 @@ export const location = new ReactLocation<LocationGenerics>({
   history: memoryHistory,
 });
 
-export const routes: Route<LocationGenerics>[] = [
+export const routes = (): Route<LocationGenerics>[] => [
   {
     path: "/",
     element: <Home />,
