@@ -44,7 +44,12 @@ export const DndList = observer(
         <Row align="center" justify="space-between">
           <Text h2>{t("definitionItems")}</Text>
           <Spacer y={0.5} />
-          <Button auto onClick={handlePlusClick} icon={<PlusIcon />}>
+          <Button
+            auto
+            onClick={handlePlusClick}
+            color="secondary"
+            icon={<PlusIcon />}
+          >
             {t("addNewItem")}
           </Button>
         </Row>

@@ -35,7 +35,7 @@ export function Select<T extends object>(props: Props<T>): ReactElement {
         label={props.label}
         name={props.name}
       />
-      <Button {...buttonProps} ref={ref}>
+      <Button {...buttonProps} ref={ref} color="secondary">
         <span {...valueProps}>
           {state.selectedItem
             ? state.selectedItem.rendered

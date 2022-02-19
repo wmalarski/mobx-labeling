@@ -1,4 +1,5 @@
 import {
+  Button,
   Container,
   FormElement,
   Input,
@@ -6,6 +7,7 @@ import {
   Spacer,
   Text,
 } from "@nextui-org/react";
+import { Pencil1Icon } from "@radix-ui/react-icons";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ChangeEvent, ReactElement } from "react";
@@ -28,10 +30,22 @@ export const DefinitionForm = observer(
       projectDefinition.setDescription(event.target.value);
     };
 
+    const handleSaveClick = () => {
+      //
+    };
+
     return (
       <Container gap={0}>
-        <Row>
+        <Row align="center" justify="space-between">
           <Text h1>{t("newDefinitionHeader")}</Text>
+          <Button
+            auto
+            color="primary"
+            onClick={handleSaveClick}
+            icon={<Pencil1Icon />}
+          >
+            {t("saveDefinition")}
+          </Button>
         </Row>
         <Spacer y={0.5} />
         <Row>

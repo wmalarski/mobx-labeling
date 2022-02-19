@@ -1,7 +1,8 @@
-import { Container, Grid, Spacer } from "@nextui-org/react";
+import { Container, Spacer } from "@nextui-org/react";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement, useState } from "react";
+import { Flex } from "renderer/components";
 import { ProjectDefinition } from "renderer/models";
 import { DefinitionForm } from "./DefinitionForm/DefinitionForm";
 import { DndList } from "./DndList/DndList";
@@ -27,18 +28,15 @@ export const DefinitionEditor = observer(
       <Container gap={0}>
         <DefinitionForm projectDefinition={projectDefinition} />
         <Spacer y={1} />
-        <Grid css={{ display: "flex", gap: "$xl" }} direction="row">
-          <Grid css={{ display: "flex", gap: "$xl" }} direction="column">
+        <Flex gap="xl" direction="row">
+          <Flex gap="xl" direction="column">
             <DndList
               projectDefinition={projectDefinition}
               onSelectedItemChange={setItemId}
               onSelectedFieldChange={setFieldId}
             />
-          </Grid>
-          <Grid
-            css={{ display: "flex", gap: "$lg", width: "100%" }}
-            direction="column"
-          >
+          </Flex>
+          <Flex gap="lg" direction="column" css={{ width: "100%" }}>
             {itemDefinition && (
               <>
                 <ItemForm
@@ -71,8 +69,8 @@ export const DefinitionEditor = observer(
                 projectDefinition={projectDefinition}
               />
             )}
-          </Grid>
-        </Grid>
+          </Flex>
+        </Flex>
       </Container>
     );
   }

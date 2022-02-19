@@ -96,6 +96,7 @@ export const ComboBoxEditor = observer(
           <Button
             auto
             onClick={handleAddClick}
+            color="secondary"
             disabled={!isValid}
             icon={<PlusIcon />}
           >

@@ -64,7 +64,7 @@ export const ItemForm = observer(
             <Spacer x={0.5} />
             <Button
               auto
-              color="primary"
+              color="secondary"
               onClick={handlePlusClick}
               icon={<PlusIcon />}
             >

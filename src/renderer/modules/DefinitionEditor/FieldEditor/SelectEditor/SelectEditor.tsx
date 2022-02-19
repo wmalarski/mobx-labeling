@@ -116,6 +116,7 @@ export const SelectEditor = observer(
           <Spacer x={1} />
           <Button
             auto
+            color="secondary"
             onClick={handleAddClick}
             disabled={!isValid}
             icon={<PlusIcon />}
