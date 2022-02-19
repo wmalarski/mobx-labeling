@@ -13,7 +13,9 @@ export const Home = (): ReactElement => {
 
   const handleSaveClick = async () => {
     const snapshot = getSnapshot(mockProjectDefinition());
-    const result = await window.electron.ipcRenderer.saveDefinition(snapshot);
+    const result = await window.electron.ipcDefinitions.saveDefinition(
+      snapshot
+    );
     console.log("result", { result });
   };
 

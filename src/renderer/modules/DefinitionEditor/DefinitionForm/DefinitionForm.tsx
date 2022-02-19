@@ -32,7 +32,9 @@ export const DefinitionForm = observer(
 
     const handleSaveClick = async () => {
       const snapshot = getSnapshot(projectDefinition);
-      const result = await window.electron.ipcRenderer.saveDefinition(snapshot);
+      const result = await window.electron.ipcDefinitions.saveDefinition(
+        snapshot
+      );
       console.log("result", { result });
     };
 

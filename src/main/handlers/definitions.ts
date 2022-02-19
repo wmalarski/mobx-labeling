@@ -1,7 +1,12 @@
 import { app, ipcMain } from "electron";
-import { mkdir, readFile, writeFile } from "fs/promises";
+import { mkdir, readFile, rm, writeFile } from "fs/promises";
 import path from "path";
-import { IpcRendererChannel, ProjectDefinitionSnapshot } from "../types";
+import {
+  IpcRendererChannel,
+  IpcResult,
+  PaginationArgs,
+  ProjectDefinitionSnapshot,
+} from "../types";
 
 const appDataPath = path.join(app.getPath("userData"), "MobXLabeling");
 const definitionsListPath = path.join(appDataPath, "definitions.json");
@@ -9,55 +14,140 @@ const definitionsListPath = path.join(appDataPath, "definitions.json");
 const makeDefinitionsDir = async (): Promise<void> => {
   try {
     await mkdir(appDataPath);
+    const initial = JSON.stringify([]);
+    await writeFile(definitionsListPath, initial, { flag: "wx" });
   } catch (err) {
     // Ignore already exists error
   }
 };
 
 const readDefinitionsList = async (): Promise<ProjectDefinitionSnapshot[]> => {
-  try {
-    const data = await readFile(definitionsListPath);
-    return JSON.parse(data.toString());
-  } catch (err) {
-    // TODO: Send error message to renderer
-    return [];
-  }
+  const data = await readFile(definitionsListPath);
+  return JSON.parse(data.toString());
 };
 
 const writeDefinitionsList = async (
   data: ProjectDefinitionSnapshot[]
 ): Promise<void> => {
-  console.log("save", { data });
-  try {
-    const json = JSON.stringify(data);
-    await writeFile(definitionsListPath, json);
-  } catch (err) {
-    // TODO: Send error message to renderer
-    console.error(err);
-  }
+  const json = JSON.stringify(data);
+  await writeFile(definitionsListPath, json);
 };
 
-export const setupSaveDefinitionHandle = () => {
+const readDefinition = async (
+  projectDefinitionId: string
+): Promise<ProjectDefinitionSnapshot> => {
+  const definitionPath = path.join(appDataPath, projectDefinitionId);
+  const data = await readFile(definitionPath);
+  return JSON.parse(data.toString());
+};
+
+const writeDefinition = async (
+  data: ProjectDefinitionSnapshot
+): Promise<void> => {
+  const json = JSON.stringify(data);
+  const definitionPath = path.join(appDataPath, data.id);
+  await writeFile(definitionPath, json);
+};
+
+const removeDefinition = async (projectDefinitionId: string): Promise<void> => {
+  const definitionPath = path.join(appDataPath, projectDefinitionId);
+  await rm(definitionPath);
+};
+
+export const setupDefinitionsHandles = () => {
   ipcMain.handle(
-    IpcRendererChannel.SaveDefinition,
-    async (_event, arg: ProjectDefinitionSnapshot) => {
-      const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
+    IpcRendererChannel.WriteDefinition,
+    async (_event, snapshot: ProjectDefinitionSnapshot): Promise<IpcResult> => {
+      try {
+        await makeDefinitionsDir();
 
-      await makeDefinitionsDir();
+        const definitions = await readDefinitionsList();
 
-      const previousList = await readDefinitionsList();
+        const entry = {
+          description: snapshot.description,
+          id: snapshot.id,
+          name: snapshot.name,
+          updatedAt: snapshot.updatedAt,
+        };
 
-      await writeDefinitionsList([
-        ...previousList,
-        {
-          description: arg.description,
-          id: arg.id,
-          name: arg.name,
-          updatedAt: arg.updatedAt,
-        },
-      ]);
+        await Promise.all([
+          writeDefinition(snapshot),
+          writeDefinitionsList([...definitions, entry]),
+        ]);
+        return { state: "success" };
+      } catch (error) {
+        console.error(error);
+        return { state: "failure", error };
+      }
+    }
+  );
+  ipcMain.handle(
+    IpcRendererChannel.ReadDefinitions,
+    async (
+      _event,
+      { limit, start, query }: PaginationArgs
+    ): Promise<IpcResult<ProjectDefinitionSnapshot[]>> => {
+      try {
+        await makeDefinitionsDir();
 
-      console.log("SaveDefinition2", msgTemplate(arg.name), previousList);
+        const definitions = await readDefinitionsList();
+
+        const lower = query?.toLowerCase();
+
+        const queried = !lower
+          ? definitions
+          : definitions.filter(({ name }) =>
+              name.toLowerCase().includes(lower)
+            );
+
+        const data = queried.slice(start, start + limit);
+
+        return { state: "success", data };
+      } catch (error) {
+        console.error(error);
+        return { state: "failure", error };
+      }
+    }
+  );
+  ipcMain.handle(
+    IpcRendererChannel.ReadDefinition,
+    async (
+      _event,
+      projectDefinitionId: string
+    ): Promise<IpcResult<ProjectDefinitionSnapshot>> => {
+      try {
+        await makeDefinitionsDir();
+
+        const data = await readDefinition(projectDefinitionId);
+
+        return { state: "success", data };
+      } catch (error) {
+        console.error(error);
+        return { state: "failure", error };
+      }
+    }
+  );
+  ipcMain.handle(
+    IpcRendererChannel.RemoveDefinition,
+    async (_event, projectDefinitionId: string): Promise<IpcResult> => {
+      try {
+        await makeDefinitionsDir();
+
+        const previousList = await readDefinitionsList();
+
+        const filtered = previousList.filter(
+          (entry) => entry.id !== projectDefinitionId
+        );
+
+        await Promise.all([
+          removeDefinition(projectDefinitionId),
+          writeDefinitionsList(filtered),
+        ]);
+        return { state: "success" };
+      } catch (error) {
+        console.error(error);
+        return { state: "failure", error };
+      }
     }
   );
 };

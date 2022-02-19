@@ -1,16 +1,11 @@
-import { SnapshotOut } from "mobx-state-tree";
-import { ProjectDefinition } from "renderer/models";
+import { IpcDefinitionsService } from "renderer/services/types";
 
 export {};
 
 declare global {
   interface Window {
     electron: {
-      ipcRenderer: {
-        saveDefinition(
-          projectDefinition: SnapshotOut<typeof ProjectDefinition>
-        ): Promise<void>;
-      };
+      ipcDefinitions: IpcDefinitionsService;
     };
   }
 }
