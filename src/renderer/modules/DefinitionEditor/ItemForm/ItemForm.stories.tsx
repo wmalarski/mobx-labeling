@@ -1,10 +1,10 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps } from "react";
-import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import {
   mockItemDefinition,
   mockProjectDefinition,
-} from "renderer/utils/mocks";
+} from "renderer/tests/mocks";
+import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { ItemForm } from "./ItemForm";
 
 export default {

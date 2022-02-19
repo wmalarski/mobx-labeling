@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps } from "react";
+import { mockProjectDefinition } from "renderer/tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
-import { mockProjectDefinition } from "renderer/utils/mocks";
 import { DefinitionForm } from "./DefinitionForm";
 
 export default {

@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps } from "react";
+import { mockItemDefinition } from "renderer/tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
-import { mockItemDefinition } from "renderer/utils/mocks";
 import { FieldPlaceholder } from "./FieldPlaceholder";
 
 export default {

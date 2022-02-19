@@ -2,7 +2,7 @@ import "@testing-library/jest-dom";
 import "@testing-library/jest-dom/extend-expect";
 import { getSnapshot } from "mobx-state-tree";
 import { DefinitionNodeKind } from "renderer/models";
-import { mockProjectDefinition } from "renderer/utils/mocks";
+import { mockProjectDefinition } from "renderer/tests/mocks";
 
 describe("<ProjectDefinition />", () => {
   it("should not reorder when source is equal to target", async () => {

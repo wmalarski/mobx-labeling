@@ -3,8 +3,8 @@ import "@testing-library/jest-dom/extend-expect";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ComponentProps } from "react";
+import { mockFieldDefinition } from "renderer/tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
-import { mockFieldDefinition } from "renderer/utils/mocks";
 import { FieldListItem } from "./FieldListItem";
 
 type Props = ComponentProps<typeof FieldListItem>;

@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import "@testing-library/jest-dom/extend-expect";
-import { mockFieldDefinition, mockItemDefinition } from "renderer/utils/mocks";
+import { mockFieldDefinition, mockItemDefinition } from "renderer/tests/mocks";
 
 describe("<ItemDefinition />", () => {
   it("should put field in correct place", async () => {

@@ -3,9 +3,9 @@ import "@testing-library/jest-dom/extend-expect";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ComponentProps } from "react";
+import { mockItemDefinition } from "renderer/tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import i18n from "renderer/utils/i18next";
-import { mockItemDefinition } from "renderer/utils/mocks";
 import { FieldPlaceholder } from "./FieldPlaceholder";
 
 type Props = ComponentProps<typeof FieldPlaceholder>;
