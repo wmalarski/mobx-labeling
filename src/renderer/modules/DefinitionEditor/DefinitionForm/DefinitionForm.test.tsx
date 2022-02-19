@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import "@testing-library/jest-dom/extend-expect";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ComponentProps } from "react";
 import { mockDefinitionStore } from "renderer/tests/mocks";
@@ -68,5 +68,69 @@ describe("<DefinitionForm />", () => {
     expect(definitionStore.projectDefinition.description).toBe(
       "descriptionPlaceholder"
     );
+  });
+
+  it("should save definition", async () => {
+    expect.hasAssertions();
+
+    const definitionStore = mockDefinitionStore();
+    const saveDefinition = jest.fn(() =>
+      Promise.resolve({ state: "success" } as const)
+    );
+    window.electron = {
+      ipcDefinitions: {
+        saveDefinition,
+        readDefinition: jest.fn(),
+        readDefinitions: jest.fn(),
+        removeDefinition: jest.fn(),
+      },
+    };
+
+    renderComponent({ definitionStore });
+
+    const label = i18n.t<string>("saveDefinition", { ns: "definition" });
+    const success = i18n.t<string>("definitionSaved", { ns: "definition" });
+    const button = await screen.findByText(label);
+
+    userEvent.click(button);
+
+    await waitFor(async () => {
+      await expect(screen.findByText(success)).resolves.toBeInTheDocument();
+    });
+
+    await expect(screen.findByText(success)).resolves.toBeInTheDocument();
+    expect(saveDefinition).toHaveBeenCalledTimes(1);
+  });
+
+  it("should fail saving and show error message", async () => {
+    expect.hasAssertions();
+
+    const definitionStore = mockDefinitionStore();
+    const saveDefinition = jest.fn(() =>
+      Promise.reject({ state: "error" } as const)
+    );
+    window.electron = {
+      ipcDefinitions: {
+        saveDefinition,
+        readDefinition: jest.fn(),
+        readDefinitions: jest.fn(),
+        removeDefinition: jest.fn(),
+      },
+    };
+
+    renderComponent({ definitionStore });
+
+    const label = i18n.t<string>("saveDefinition", { ns: "definition" });
+    const fail = i18n.t<string>("saveFailed", { ns: "definition" });
+    const button = await screen.findByText(label);
+
+    userEvent.click(button);
+
+    await waitFor(async () => {
+      await expect(screen.findByText(fail)).resolves.toBeInTheDocument();
+    });
+
+    await expect(screen.findByText(fail)).resolves.toBeInTheDocument();
+    expect(saveDefinition).toHaveBeenCalledTimes(1);
   });
 });

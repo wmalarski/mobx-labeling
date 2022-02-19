@@ -4,7 +4,10 @@ import { ProjectDefinition } from "../definition/ProjectDefinition/ProjectDefini
 export const DefinitionStore = types
   .model("DefinitionStore", {
     projectDefinition: ProjectDefinition,
-    state: types.enumeration("State", ["pending", "done", "error"]),
+    state: types.optional(
+      types.enumeration("State", ["initialized", "pending", "done", "error"]),
+      "initialized"
+    ),
   })
   .actions((self) => ({
     save: flow(function* () {
@@ -14,7 +17,6 @@ export const DefinitionStore = types
         yield window.electron.ipcDefinitions.saveDefinition(snapshot);
         self.state = "done";
       } catch (error) {
-        console.error("Failed to fetch projects", error);
         self.state = "error";
       }
     }),

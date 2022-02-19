@@ -55,5 +55,7 @@
   "kindPlaceholder": "Select kind",
   "fieldFormHeader": "Field definition",
   "itemFormHeader": "Item definition",
-  "saveDefinition": "Save"
+  "saveDefinition": "Save",
+  "definitionSaved": "Saved",
+  "saveFailed": "Failed"
 }

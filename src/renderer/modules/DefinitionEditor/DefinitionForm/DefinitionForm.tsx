@@ -41,6 +41,12 @@ export const DefinitionForm = observer(
       <Container gap={0}>
         <Row align="center" justify="space-between">
           <Text h1>{t("newDefinitionHeader")}</Text>
+          {definitionStore.state === "done" && (
+            <Text color="$success">{t("definitionSaved")}</Text>
+          )}
+          {definitionStore.state === "error" && (
+            <Text color="$error">{t("saveFailed")}</Text>
+          )}
           <Button
             auto
             color="primary"

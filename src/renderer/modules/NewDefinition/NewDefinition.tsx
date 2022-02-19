@@ -12,7 +12,6 @@ export const NewDefinition = observer((): ReactElement => {
 
   const [definitionStore] = useState(() => {
     return DefinitionStore.create({
-      state: "done",
       projectDefinition: {
         name: t("defaultDefinitionName"),
       },

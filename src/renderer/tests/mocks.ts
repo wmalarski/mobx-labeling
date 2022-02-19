@@ -66,6 +66,5 @@ export const mockDefinitionStore = (
 ) => {
   return DefinitionStore.create({
     projectDefinition: mockProjectDefinition(args),
-    state: "done",
   });
 };
