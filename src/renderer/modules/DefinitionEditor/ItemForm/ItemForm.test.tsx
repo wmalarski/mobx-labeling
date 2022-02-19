@@ -20,6 +20,7 @@ const renderComponent = ({
   const defaultProps: Props = {
     itemDefinition: mockItemDefinition({ update: { name: "1" } }),
     onSelectedItemChange: () => void 0,
+    onSelectedFieldChange: () => void 0,
     projectDefinition: mockProjectDefinition(),
   };
 
@@ -129,5 +130,21 @@ describe("<ItemForm />", () => {
     const newId = projectDefinition.items.at(1)?.id;
     expect(onSelectedItemChange).toHaveBeenCalledTimes(1);
     expect(onSelectedItemChange).toHaveBeenLastCalledWith(newId);
+  });
+
+  it("should add new field", async () => {
+    expect.hasAssertions();
+
+    const onSelectedFieldChange = jest.fn();
+    const itemDefinition = mockItemDefinition({ update: { fields: [] } });
+
+    renderComponent({ onSelectedFieldChange, itemDefinition });
+
+    const label = i18n.t<string>("addNewField", { ns: "definition" });
+    const button = await screen.findByText(label);
+    userEvent.click(button);
+
+    expect(itemDefinition.fields).toHaveLength(1);
+    expect(onSelectedFieldChange).toHaveBeenCalledTimes(1);
   });
 });

@@ -45,6 +45,7 @@ export const DefinitionEditor = observer(
                   onSelectedItemChange={setItemId}
                   itemDefinition={itemDefinition}
                   projectDefinition={projectDefinition}
+                  onSelectedFieldChange={setFieldId}
                 />
                 {fieldDefinition && (
                   <>

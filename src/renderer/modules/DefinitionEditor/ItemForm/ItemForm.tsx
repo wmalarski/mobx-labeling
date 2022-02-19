@@ -7,17 +7,19 @@ import {
   Spacer,
   Text,
 } from "@nextui-org/react";
-import { CopyIcon, TrashIcon } from "@radix-ui/react-icons";
+import { CopyIcon, PlusIcon, TrashIcon } from "@radix-ui/react-icons";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ChangeEvent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
+import { Flex } from "renderer/components";
 import { ItemDefinition, ProjectDefinition } from "renderer/models";
 
 type Props = {
   itemDefinition: Instance<typeof ItemDefinition>;
   projectDefinition: Instance<typeof ProjectDefinition>;
   onSelectedItemChange: (itemId: string | null) => void;
+  onSelectedFieldChange: (fieldId: string | null) => void;
 };
 
 export const ItemForm = observer(
@@ -25,6 +27,7 @@ export const ItemForm = observer(
     itemDefinition,
     projectDefinition,
     onSelectedItemChange,
+    onSelectedFieldChange,
   }: Props): ReactElement => {
     const { t } = useTranslation("definition");
 
@@ -42,6 +45,11 @@ export const ItemForm = observer(
       onSelectedItemChange(selected);
     };
 
+    const handlePlusClick = () => {
+      const field = itemDefinition.addNewField(t("defaultFieldName"));
+      onSelectedFieldChange(field.id);
+    };
+
     const handleCopyClick = () => {
       const name = t("copyName", { name: itemDefinition.name });
       const copy = projectDefinition.copyItem(itemDefinition, name);
@@ -50,26 +58,37 @@ export const ItemForm = observer(
 
     return (
       <Container gap={0}>
-        <Row>
+        <Row justify="space-between" align="center">
           <Text h2>{t("itemFormHeader")}</Text>
-          <Spacer x={0.5} />
-          <Button
-            auto
-            color="secondary"
-            onClick={handleCopyClick}
-            icon={<CopyIcon />}
-          >
-            {t("copyItem")}
-          </Button>
-          <Spacer x={0.5} />
-          <Button
-            auto
-            color="error"
-            onClick={handleRemoveClick}
-            icon={<TrashIcon />}
-          >
-            {t("removeItem")}
-          </Button>
+          <Flex>
+            <Spacer x={0.5} />
+            <Button
+              auto
+              color="primary"
+              onClick={handlePlusClick}
+              icon={<PlusIcon />}
+            >
+              {t("addNewField")}
+            </Button>
+            <Spacer x={0.5} />
+            <Button
+              auto
+              color="secondary"
+              onClick={handleCopyClick}
+              icon={<CopyIcon />}
+            >
+              {t("copyItem")}
+            </Button>
+            <Spacer x={0.5} />
+            <Button
+              auto
+              color="error"
+              onClick={handleRemoveClick}
+              icon={<TrashIcon />}
+            >
+              {t("removeItem")}
+            </Button>
+          </Flex>
         </Row>
         <Spacer y={0.5} />
         <Row>

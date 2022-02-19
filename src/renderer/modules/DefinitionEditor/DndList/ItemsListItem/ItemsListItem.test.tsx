@@ -6,7 +6,6 @@ import { ComponentProps } from "react";
 import { DragDropContext, DragDropContextProps } from "react-beautiful-dnd";
 import { mockItemDefinition } from "renderer/tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
-import i18n from "renderer/utils/i18next";
 import { ItemsListItem } from "./ItemsListItem";
 
 type Props = ComponentProps<typeof ItemsListItem>;
@@ -74,20 +73,5 @@ describe("<ItemsListItem />", () => {
     userEvent.click(button[0]);
 
     expect(onFieldClick).toHaveBeenCalledTimes(1);
-  });
-
-  it("should add new field", async () => {
-    expect.hasAssertions();
-
-    const onFieldClick = jest.fn();
-    const itemDefinition = mockItemDefinition({ update: { fields: [] } });
-
-    renderComponent({ onFieldClick, itemDefinition });
-
-    const label = i18n.t<string>("addNewField", { ns: "definition" });
-    const button = await screen.findByText(label);
-    userEvent.click(button);
-
-    expect(itemDefinition.fields).toHaveLength(1);
   });
 });

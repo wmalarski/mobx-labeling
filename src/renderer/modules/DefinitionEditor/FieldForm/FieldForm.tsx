@@ -14,7 +14,7 @@ import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ChangeEvent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
-import { Select } from "renderer/components";
+import { Flex, Select } from "renderer/components";
 import {
   DefinitionKind,
   definitionKinds,
@@ -68,26 +68,28 @@ export const FieldForm = observer(
 
     return (
       <Container gap={0}>
-        <Row align="center">
+        <Row align="center" justify="space-between">
           <Text h3>{t("fieldFormHeader")}</Text>
-          <Spacer x={0.5} />
-          <Button
-            auto
-            color="secondary"
-            onClick={handleCopyClick}
-            icon={<CopyIcon />}
-          >
-            {t("copyField")}
-          </Button>
-          <Spacer x={0.5} />
-          <Button
-            auto
-            color="error"
-            onClick={handleRemoveClick}
-            icon={<TrashIcon />}
-          >
-            {t("removeField")}
-          </Button>
+          <Flex>
+            <Spacer x={0.5} />
+            <Button
+              auto
+              color="secondary"
+              onClick={handleCopyClick}
+              icon={<CopyIcon />}
+            >
+              {t("copyField")}
+            </Button>
+            <Spacer x={0.5} />
+            <Button
+              auto
+              color="error"
+              onClick={handleRemoveClick}
+              icon={<TrashIcon />}
+            >
+              {t("removeField")}
+            </Button>
+          </Flex>
         </Row>
         <Spacer y={0.5} />
         <Row>
