@@ -27,6 +27,7 @@ export const ItemsListItem = observer(
 
     const handleFieldClick = (fieldId: string) => () => {
       onFieldClick(fieldId);
+      onItemClick();
     };
 
     return (
