@@ -12,20 +12,6 @@ export enum IpcRendererChannel {
   RemoveDefinition = "RemoveDefinition",
 }
 
-export type IpcResult<TData = undefined> =
-  | (TData extends undefined
-      ? {
-          state: "success";
-        }
-      : {
-          state: "success";
-          data: TData;
-        })
-  | {
-      state: "failure";
-      error: unknown;
-    };
-
 export type PaginationArgs = {
   start: number;
   limit: number;

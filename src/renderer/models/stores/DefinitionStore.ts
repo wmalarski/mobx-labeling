@@ -1,13 +1,11 @@
 import { flow, getSnapshot, types } from "mobx-state-tree";
 import { ProjectDefinition } from "../definition/ProjectDefinition/ProjectDefinition";
+import { FetchState } from "./FetchState";
 
 export const DefinitionStore = types
   .model("DefinitionStore", {
     projectDefinition: ProjectDefinition,
-    state: types.optional(
-      types.enumeration("State", ["initialized", "pending", "done", "error"]),
-      "initialized"
-    ),
+    state: FetchState,
   })
   .actions((self) => ({
     save: flow(function* () {

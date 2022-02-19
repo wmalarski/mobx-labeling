@@ -74,9 +74,7 @@ describe("<DefinitionForm />", () => {
     expect.hasAssertions();
 
     const definitionStore = mockDefinitionStore();
-    const saveDefinition = jest.fn(() =>
-      Promise.resolve({ state: "success" } as const)
-    );
+    const saveDefinition = jest.fn(() => Promise.resolve());
     window.electron = {
       ipcDefinitions: {
         saveDefinition,
@@ -106,9 +104,7 @@ describe("<DefinitionForm />", () => {
     expect.hasAssertions();
 
     const definitionStore = mockDefinitionStore();
-    const saveDefinition = jest.fn(() =>
-      Promise.reject({ state: "error" } as const)
-    );
+    const saveDefinition = jest.fn(() => Promise.reject());
     window.electron = {
       ipcDefinitions: {
         saveDefinition,

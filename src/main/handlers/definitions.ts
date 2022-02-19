@@ -3,7 +3,6 @@ import { mkdir, readFile, rm, writeFile } from "fs/promises";
 import path from "path";
 import {
   IpcRendererChannel,
-  IpcResult,
   PaginationArgs,
   ProjectDefinitionSnapshot,
 } from "../types";
@@ -14,16 +13,18 @@ const definitionsListPath = path.join(appDataPath, "definitions.json");
 const makeDefinitionsDir = async (): Promise<void> => {
   try {
     await mkdir(appDataPath);
-    const initial = JSON.stringify([]);
-    await writeFile(definitionsListPath, initial, { flag: "wx" });
   } catch (err) {
     // Ignore already exists error
   }
 };
 
 const readDefinitionsList = async (): Promise<ProjectDefinitionSnapshot[]> => {
-  const data = await readFile(definitionsListPath);
-  return JSON.parse(data.toString());
+  try {
+    const data = await readFile(definitionsListPath);
+    return JSON.parse(data.toString());
+  } catch (err) {
+    return [];
+  }
 };
 
 const writeDefinitionsList = async (
@@ -62,28 +63,32 @@ const removeDefinition = async (projectDefinitionId: string): Promise<void> => {
 export const setupDefinitionsHandles = () => {
   ipcMain.handle(
     IpcRendererChannel.WriteDefinition,
-    async (_event, snapshot: ProjectDefinitionSnapshot): Promise<IpcResult> => {
-      try {
-        await makeDefinitionsDir();
+    async (_event, snapshot: ProjectDefinitionSnapshot): Promise<void> => {
+      await makeDefinitionsDir();
 
-        const definitions = await readDefinitionsList();
+      const definitions = await readDefinitionsList();
 
-        const entry = {
-          description: snapshot.description,
-          id: snapshot.id,
-          name: snapshot.name,
-          updatedAt: snapshot.updatedAt,
-        };
+      const entry = {
+        description: snapshot.description,
+        id: snapshot.id,
+        name: snapshot.name,
+        updatedAt: snapshot.updatedAt,
+      };
 
-        await Promise.all([
-          writeDefinition(snapshot),
-          writeDefinitionsList([...definitions, entry]),
-        ]);
-        return { state: "success" };
-      } catch (error) {
-        console.error(error);
-        return { state: "failure", error };
+      const index = definitions.findIndex(
+        (definition) => (definition.id = entry.id)
+      );
+
+      const updated = index < 0 ? [entry, ...definitions] : definitions;
+
+      if (index >= 0) {
+        updated[index] = entry;
       }
+
+      await Promise.all([
+        writeDefinition(snapshot),
+        writeDefinitionsList(updated),
+      ]);
     }
   );
   ipcMain.handle(
@@ -91,27 +96,20 @@ export const setupDefinitionsHandles = () => {
     async (
       _event,
       { limit, start, query }: PaginationArgs
-    ): Promise<IpcResult<ProjectDefinitionSnapshot[]>> => {
-      try {
-        await makeDefinitionsDir();
+    ): Promise<ProjectDefinitionSnapshot[]> => {
+      await makeDefinitionsDir();
 
-        const definitions = await readDefinitionsList();
+      const definitions = await readDefinitionsList();
 
-        const lower = query?.toLowerCase();
+      const lower = query?.toLowerCase();
 
-        const queried = !lower
-          ? definitions
-          : definitions.filter(({ name }) =>
-              name.toLowerCase().includes(lower)
-            );
+      const queried = !lower
+        ? definitions
+        : definitions.filter(({ name }) => name.toLowerCase().includes(lower));
 
-        const data = queried.slice(start, start + limit);
+      const data = queried.slice(start, start + limit);
 
-        return { state: "success", data };
-      } catch (error) {
-        console.error(error);
-        return { state: "failure", error };
-      }
+      return data;
     }
   );
   ipcMain.handle(
@@ -119,40 +117,29 @@ export const setupDefinitionsHandles = () => {
     async (
       _event,
       projectDefinitionId: string
-    ): Promise<IpcResult<ProjectDefinitionSnapshot>> => {
-      try {
-        await makeDefinitionsDir();
+    ): Promise<ProjectDefinitionSnapshot> => {
+      await makeDefinitionsDir();
 
-        const data = await readDefinition(projectDefinitionId);
+      const data = await readDefinition(projectDefinitionId);
 
-        return { state: "success", data };
-      } catch (error) {
-        console.error(error);
-        return { state: "failure", error };
-      }
+      return data;
     }
   );
   ipcMain.handle(
     IpcRendererChannel.RemoveDefinition,
-    async (_event, projectDefinitionId: string): Promise<IpcResult> => {
-      try {
-        await makeDefinitionsDir();
+    async (_event, projectDefinitionId: string): Promise<void> => {
+      await makeDefinitionsDir();
 
-        const previousList = await readDefinitionsList();
+      const previousList = await readDefinitionsList();
 
-        const filtered = previousList.filter(
-          (entry) => entry.id !== projectDefinitionId
-        );
+      const filtered = previousList.filter(
+        (entry) => entry.id !== projectDefinitionId
+      );
 
-        await Promise.all([
-          removeDefinition(projectDefinitionId),
-          writeDefinitionsList(filtered),
-        ]);
-        return { state: "success" };
-      } catch (error) {
-        console.error(error);
-        return { state: "failure", error };
-      }
+      await Promise.all([
+        removeDefinition(projectDefinitionId),
+        writeDefinitionsList(filtered),
+      ]);
     }
   );
 };
