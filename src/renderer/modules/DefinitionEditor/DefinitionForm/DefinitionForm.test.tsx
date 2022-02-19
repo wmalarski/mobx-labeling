@@ -3,7 +3,7 @@ import "@testing-library/jest-dom/extend-expect";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ComponentProps } from "react";
-import { mockProjectDefinition } from "renderer/tests/mocks";
+import { mockDefinitionStore } from "renderer/tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import i18n from "renderer/utils/i18next";
 import { DefinitionForm } from "./DefinitionForm";
@@ -15,7 +15,7 @@ const renderComponent = ({
   ...props
 }: PropsWithTestWrapper<Partial<Props>> = {}) => {
   const defaultProps: Props = {
-    projectDefinition: mockProjectDefinition(),
+    definitionStore: mockDefinitionStore(),
   };
 
   return render(
@@ -39,24 +39,24 @@ describe("<DefinitionForm />", () => {
   it("should change name", async () => {
     expect.hasAssertions();
 
-    const projectDefinition = mockProjectDefinition({ update: { name: "" } });
+    const definitionStore = mockDefinitionStore({ update: { name: "" } });
 
-    renderComponent({ projectDefinition });
+    renderComponent({ definitionStore });
 
     const label = i18n.t<string>("namePlaceholder", { ns: "definition" });
     const field = await screen.findByLabelText(label);
 
     userEvent.type(field, "name");
 
-    expect(projectDefinition.name).toBe("name");
+    expect(definitionStore.projectDefinition.name).toBe("name");
   });
 
   it("should change description", async () => {
     expect.hasAssertions();
 
-    const projectDefinition = mockProjectDefinition();
+    const definitionStore = mockDefinitionStore();
 
-    renderComponent({ projectDefinition });
+    renderComponent({ definitionStore });
 
     const label = i18n.t<string>("descriptionPlaceholder", {
       ns: "definition",
@@ -65,6 +65,8 @@ describe("<DefinitionForm />", () => {
 
     userEvent.type(field, "descriptionPlaceholder");
 
-    expect(projectDefinition.description).toBe("descriptionPlaceholder");
+    expect(definitionStore.projectDefinition.description).toBe(
+      "descriptionPlaceholder"
+    );
   });
 });

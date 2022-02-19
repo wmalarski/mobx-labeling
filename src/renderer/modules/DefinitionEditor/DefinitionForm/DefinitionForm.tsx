@@ -3,24 +3,27 @@ import {
   Container,
   FormElement,
   Input,
+  Loading,
   Row,
   Spacer,
   Text,
 } from "@nextui-org/react";
 import { Pencil1Icon } from "@radix-ui/react-icons";
 import { observer } from "mobx-react-lite";
-import { getSnapshot, Instance } from "mobx-state-tree";
+import { Instance } from "mobx-state-tree";
 import { ChangeEvent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
-import { ProjectDefinition } from "renderer/models";
+import { DefinitionStore } from "renderer/models";
 
 type Props = {
-  projectDefinition: Instance<typeof ProjectDefinition>;
+  definitionStore: Instance<typeof DefinitionStore>;
 };
 
 export const DefinitionForm = observer(
-  ({ projectDefinition }: Props): ReactElement => {
+  ({ definitionStore }: Props): ReactElement => {
     const { t } = useTranslation("definition");
+
+    const projectDefinition = definitionStore.projectDefinition;
 
     const handleNameChange = (event: ChangeEvent<FormElement>) => {
       projectDefinition.setName(event.target.value);
@@ -30,12 +33,8 @@ export const DefinitionForm = observer(
       projectDefinition.setDescription(event.target.value);
     };
 
-    const handleSaveClick = async () => {
-      const snapshot = getSnapshot(projectDefinition);
-      const result = await window.electron.ipcDefinitions.saveDefinition(
-        snapshot
-      );
-      console.log("result", { result });
+    const handleSaveClick = () => {
+      definitionStore.save();
     };
 
     return (
@@ -48,7 +47,11 @@ export const DefinitionForm = observer(
             onClick={handleSaveClick}
             icon={<Pencil1Icon />}
           >
-            {t("saveDefinition")}
+            {definitionStore.state === "pending" ? (
+              <Loading color="white" size="sm" />
+            ) : (
+              t("saveDefinition")
+            )}
           </Button>
         </Row>
         <Spacer y={0.5} />

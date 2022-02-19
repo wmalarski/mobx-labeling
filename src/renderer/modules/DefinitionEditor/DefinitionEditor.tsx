@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement, useState } from "react";
 import { Flex } from "renderer/components";
-import { ProjectDefinition } from "renderer/models";
+import { DefinitionStore } from "renderer/models";
 import { DefinitionForm } from "./DefinitionForm/DefinitionForm";
 import { DndList } from "./DndList/DndList";
 import { FieldEditor } from "./FieldEditor/FieldEditor";
@@ -13,20 +13,21 @@ import { ItemForm } from "./ItemForm/ItemForm";
 import { ItemPlaceholder } from "./ItemPlaceholder/ItemPlaceholder";
 
 type Props = {
-  projectDefinition: Instance<typeof ProjectDefinition>;
+  definitionStore: Instance<typeof DefinitionStore>;
 };
 
 export const DefinitionEditor = observer(
-  ({ projectDefinition }: Props): ReactElement => {
+  ({ definitionStore }: Props): ReactElement => {
     const [itemId, setItemId] = useState<string | null>(null);
     const [fieldId, setFieldId] = useState<string | null>(null);
 
+    const projectDefinition = definitionStore.projectDefinition;
     const itemDefinition = itemId ? projectDefinition.item(itemId) : null;
     const fieldDefinition = fieldId ? itemDefinition?.field(fieldId) : null;
 
     return (
       <Container gap={0}>
-        <DefinitionForm projectDefinition={projectDefinition} />
+        <DefinitionForm definitionStore={definitionStore} />
         <Spacer y={1} />
         <Flex gap="xl" direction="row">
           <Flex gap="xl" direction="column">

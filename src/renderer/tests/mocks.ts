@@ -1,6 +1,7 @@
 import { Instance, SnapshotIn } from "mobx-state-tree";
 import {
   definitionKinds,
+  DefinitionStore,
   FieldDefinition,
   ItemDefinition,
   ProjectDefinition,
@@ -54,5 +55,17 @@ export const mockProjectDefinition = ({
       .fill(0)
       .map((_, index) => mockItemDefinition({ index })),
     ...update,
+  });
+};
+
+export const mockDefinitionStore = (
+  args: {
+    itemsCount?: number;
+    update?: Partial<SnapshotIn<typeof ProjectDefinition>>;
+  } = {}
+) => {
+  return DefinitionStore.create({
+    projectDefinition: mockProjectDefinition(args),
+    state: "done",
   });
 };

@@ -33,10 +33,15 @@ const writeDefinitionsList = async (
   await writeFile(definitionsListPath, json);
 };
 
+const getDefinitionFilename = (projectDefinitionId: string): string => {
+  const filename = `${projectDefinitionId}.json`;
+  return path.join(appDataPath, filename);
+};
+
 const readDefinition = async (
   projectDefinitionId: string
 ): Promise<ProjectDefinitionSnapshot> => {
-  const definitionPath = path.join(appDataPath, projectDefinitionId);
+  const definitionPath = getDefinitionFilename(projectDefinitionId);
   const data = await readFile(definitionPath);
   return JSON.parse(data.toString());
 };
@@ -45,12 +50,12 @@ const writeDefinition = async (
   data: ProjectDefinitionSnapshot
 ): Promise<void> => {
   const json = JSON.stringify(data);
-  const definitionPath = path.join(appDataPath, data.id);
+  const definitionPath = getDefinitionFilename(data.id);
   await writeFile(definitionPath, json);
 };
 
 const removeDefinition = async (projectDefinitionId: string): Promise<void> => {
-  const definitionPath = path.join(appDataPath, projectDefinitionId);
+  const definitionPath = getDefinitionFilename(projectDefinitionId);
   await rm(definitionPath);
 };
 
