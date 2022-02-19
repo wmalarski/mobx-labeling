@@ -12,7 +12,7 @@ import { app, BrowserWindow, shell } from "electron";
 import log from "electron-log";
 import { autoUpdater } from "electron-updater";
 import path from "path";
-import { setupSaveDefinitionHandle } from "./definitions/saveDefinition";
+import { setupSaveDefinitionHandle } from "./handlers/definitions";
 import MenuBuilder from "./menu";
 import { resolveHtmlPath } from "./util";
 
