@@ -9,7 +9,7 @@ import {
 } from "@nextui-org/react";
 import { Pencil1Icon } from "@radix-ui/react-icons";
 import { observer } from "mobx-react-lite";
-import { Instance } from "mobx-state-tree";
+import { getSnapshot, Instance } from "mobx-state-tree";
 import { ChangeEvent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { ProjectDefinition } from "renderer/models";
@@ -30,8 +30,10 @@ export const DefinitionForm = observer(
       projectDefinition.setDescription(event.target.value);
     };
 
-    const handleSaveClick = () => {
-      //
+    const handleSaveClick = async () => {
+      const snapshot = getSnapshot(projectDefinition);
+      const result = await window.electron.ipcRenderer.saveDefinition(snapshot);
+      console.log("result", { result });
     };
 
     return (
