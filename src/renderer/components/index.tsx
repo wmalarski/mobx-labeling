@@ -1,5 +1,6 @@
 export * from "./ColorSlider/ColorSlider";
 export * from "./Dnd/Dnd";
+export * from "./DragIndicator/DragIndicator";
 export * from "./IntroLayout/IntroLayout";
 export * from "./ListBox/ListBox";
 export * from "./Page/Page";

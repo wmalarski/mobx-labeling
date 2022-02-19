@@ -1,4 +1,5 @@
 import { Button, Container, Row, Spacer, Text } from "@nextui-org/react";
+import { PlusIcon } from "@radix-ui/react-icons";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement, useCallback } from "react";
@@ -40,10 +41,10 @@ export const DndList = observer(
 
     return (
       <Container gap={0}>
-        <Row>
+        <Row align="center" justify="space-between">
           <Text h2>{t("definitionItems")}</Text>
           <Spacer y={0.5} />
-          <Button auto rounded onClick={handlePlusClick}>
+          <Button auto onClick={handlePlusClick} icon={<PlusIcon />}>
             {t("addNewItem")}
           </Button>
         </Row>

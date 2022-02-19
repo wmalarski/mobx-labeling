@@ -8,6 +8,7 @@ import {
   Spacer,
   Text,
 } from "@nextui-org/react";
+import { PlusIcon, TrashIcon } from "@radix-ui/react-icons";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ChangeEvent, KeyboardEvent, ReactElement, useState } from "react";
@@ -93,8 +94,9 @@ export const MultiSelectEditor = observer(
                   </Checkbox>
                   <Button
                     auto
-                    color="secondary"
+                    color="error"
                     onClick={handleRemoveClick(option)}
+                    icon={<TrashIcon />}
                   >
                     {t("multiSelectRemoveOption")}
                   </Button>
@@ -115,7 +117,12 @@ export const MultiSelectEditor = observer(
             aria-label={t("multiSelectInput")}
           />
           <Spacer x={1} />
-          <Button auto onClick={handleAddClick} disabled={!isValid}>
+          <Button
+            auto
+            onClick={handleAddClick}
+            disabled={!isValid}
+            icon={<PlusIcon />}
+          >
             {t("multiSelectAddOption")}
           </Button>
         </Row>

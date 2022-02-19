@@ -8,6 +8,7 @@ import {
   Spacer,
   Text,
 } from "@nextui-org/react";
+import { PlusIcon, TrashIcon } from "@radix-ui/react-icons";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ChangeEvent, KeyboardEvent, ReactElement, useState } from "react";
@@ -69,8 +70,9 @@ export const ComboBoxEditor = observer(
                   </Radio>
                   <Button
                     auto
-                    color="secondary"
+                    color="error"
                     onClick={handleRemoveClick(option)}
+                    icon={<TrashIcon />}
                   >
                     {t("comboBoxRemoveOption")}
                   </Button>
@@ -91,7 +93,12 @@ export const ComboBoxEditor = observer(
             aria-label={t("comboBoxOptionPlaceholder")}
           />
           <Spacer x={1} />
-          <Button auto onClick={handleAddClick} disabled={!isValid}>
+          <Button
+            auto
+            onClick={handleAddClick}
+            disabled={!isValid}
+            icon={<PlusIcon />}
+          >
             {t("comboBoAddOption")}
           </Button>
         </Row>

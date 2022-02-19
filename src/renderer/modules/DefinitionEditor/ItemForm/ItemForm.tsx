@@ -7,6 +7,7 @@ import {
   Spacer,
   Text,
 } from "@nextui-org/react";
+import { CopyIcon, TrashIcon } from "@radix-ui/react-icons";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ChangeEvent, ReactElement } from "react";
@@ -52,11 +53,21 @@ export const ItemForm = observer(
         <Row>
           <Text h2>{t("itemFormHeader")}</Text>
           <Spacer x={0.5} />
-          <Button auto color="secondary" rounded onClick={handleCopyClick}>
+          <Button
+            auto
+            color="secondary"
+            onClick={handleCopyClick}
+            icon={<CopyIcon />}
+          >
             {t("copyItem")}
           </Button>
           <Spacer x={0.5} />
-          <Button auto rounded onClick={handleRemoveClick} color="error">
+          <Button
+            auto
+            color="error"
+            onClick={handleRemoveClick}
+            icon={<TrashIcon />}
+          >
             {t("removeItem")}
           </Button>
         </Row>

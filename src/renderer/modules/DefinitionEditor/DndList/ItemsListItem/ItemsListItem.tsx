@@ -1,9 +1,18 @@
-import { Button, Card, Col, Container, Row, Text } from "@nextui-org/react";
+import {
+  Button,
+  Card,
+  Col,
+  Container,
+  Row,
+  Spacer,
+  Text,
+} from "@nextui-org/react";
+import { PlusIcon } from "@radix-ui/react-icons";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { MouseEvent as ReactMouseEvent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
-import { DndDraggable, DndDroppable } from "renderer/components";
+import { DndDraggable, DndDroppable, DragIndicator } from "renderer/components";
 import { DefinitionNodeKind, ItemDefinition } from "renderer/models";
 import { FieldListItem } from "./FieldListItem/FieldListItem";
 
@@ -31,9 +40,10 @@ export const ItemsListItem = observer(
     };
 
     return (
-      <Card clickable onClick={onItemClick}>
+      <Card clickable onClick={onItemClick} css={{ position: "relative" }}>
+        <DragIndicator />
         <Container gap={0}>
-          <Row>
+          <Row align="center" justify="space-between">
             <Col>
               <Text>{itemDefinition.name}</Text>
               {itemDefinition.description ? (
@@ -44,7 +54,8 @@ export const ItemsListItem = observer(
                 </Text>
               )}
             </Col>
-            <Button auto rounded onClick={handlePlusClick}>
+            <Spacer x={0.5} />
+            <Button auto onClick={handlePlusClick} icon={<PlusIcon />}>
               {t("addNewField")}
             </Button>
           </Row>

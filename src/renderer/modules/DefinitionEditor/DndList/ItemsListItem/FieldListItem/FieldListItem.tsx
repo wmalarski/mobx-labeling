@@ -3,6 +3,7 @@ import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { MouseEvent as ReactMouseEvent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
+import { DragIndicator } from "renderer/components";
 import { FieldDefinition } from "renderer/models";
 import * as Styles from "./FieldListItem.styles";
 
@@ -27,10 +28,11 @@ export const FieldListItem = observer(
         <Card
           hoverable
           clickable
-          css={{ backgroundColor: "black" }}
+          css={{ backgroundColor: "black", position: "relative" }}
           onClick={handleClick}
           data-testid="field-item"
         >
+          <DragIndicator />
           <Card.Body>
             <Text>{fieldDefinition.name}</Text>
             <Text i small>
