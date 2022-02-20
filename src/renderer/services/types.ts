@@ -14,7 +14,7 @@ export interface IpcDefinitionsService {
   ): Promise<void>;
   readDefinitions(
     args: PaginationArgs
-  ): Promise<SnapshotIn<typeof DefinitionEntry>>;
+  ): Promise<SnapshotIn<typeof DefinitionEntry>[]>;
   readDefinition(
     projectDefinitionId: string
   ): Promise<SnapshotIn<typeof ProjectDefinition>>;

@@ -57,5 +57,6 @@
   "itemFormHeader": "Item definition",
   "saveDefinition": "Save",
   "definitionSaved": "Saved",
-  "saveFailed": "Failed"
+  "saveFailed": "Failed",
+  "updatedAt": "Last update"
 }

@@ -1,5 +1,7 @@
 import { Instance, SnapshotIn } from "mobx-state-tree";
+import { nanoid } from "nanoid";
 import {
+  DefinitionEntry,
   definitionKinds,
   DefinitionStore,
   FieldDefinition,
@@ -56,6 +58,33 @@ export const mockProjectDefinition = ({
       .map((_, index) => mockItemDefinition({ index })),
     ...update,
   });
+};
+
+export const mockDefinitionEntry = ({
+  index,
+  update,
+}: {
+  index?: number;
+  update?: Partial<SnapshotIn<typeof DefinitionEntry>>;
+} = {}): Instance<typeof DefinitionEntry> => {
+  const id = nanoid();
+  return DefinitionEntry.create({
+    id,
+    name: `Project${index}`,
+    description: "",
+    updatedAt: new Date(1999, 9, 9).getTime(),
+    ...update,
+  });
+};
+
+export const mockDefinitionEntries = ({
+  entriesCount = 4,
+}: {
+  entriesCount?: number;
+} = {}): Instance<typeof DefinitionEntry>[] => {
+  return Array(entriesCount)
+    .fill(0)
+    .map((_, index) => mockDefinitionEntry({ index }));
 };
 
 export const mockDefinitionStore = (

@@ -1,11 +1,11 @@
 import { observer } from "mobx-react-lite";
-import { getSnapshot } from "mobx-state-tree";
 import { ReactElement, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-location";
 import { IntroLayout } from "renderer/components";
 import { DefinitionsList } from "renderer/models";
 import { routePaths } from "renderer/utils/routes";
+import { DefinitionsItem } from "./DefinitionsItem/DefinitionsItem";
 
 export const Definitions = observer((): ReactElement => {
   const { t } = useTranslation("definition");
@@ -21,7 +21,12 @@ export const Definitions = observer((): ReactElement => {
       <Link to={routePaths.home}>Home</Link>
       <Link to={routePaths.newDefinition}>{t("navNewDefinition")}</Link>
       <Link to={routePaths.newProject}>New Project</Link>
-      <pre>{JSON.stringify(getSnapshot(definitionsList), null, 2)}</pre>
+      {definitionsList.definitions.map((definitionEntry) => (
+        <DefinitionsItem
+          key={definitionEntry.id}
+          definitionEntry={definitionEntry}
+        />
+      ))}
     </IntroLayout>
   );
 });

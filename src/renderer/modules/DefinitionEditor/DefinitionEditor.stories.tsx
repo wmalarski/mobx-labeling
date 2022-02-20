@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps } from "react";
-import { mockProjectDefinition } from "renderer/tests/mocks";
+import { mockDefinitionStore } from "renderer/tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { DefinitionEditor } from "./DefinitionEditor";
 
@@ -28,5 +28,5 @@ const Template: ComponentStory<typeof DefinitionEditorStory> =
 export const Playground = Template.bind({});
 Playground.args = {
   wrapperProps: {},
-  projectDefinition: mockProjectDefinition(),
+  definitionStore: mockDefinitionStore(),
 };
