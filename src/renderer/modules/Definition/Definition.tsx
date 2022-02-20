@@ -1,23 +1,32 @@
-import { ReactElement } from "react";
+import { Spacer } from "@nextui-org/react";
+import { ReactElement, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useMatch } from "react-location";
-import { IntroLayout, StyledLink } from "renderer/components";
-import { LocationGenerics, routePaths } from "renderer/utils/routes";
+import { IntroLayout } from "renderer/components";
+import { DefinitionStore } from "renderer/models";
+import { LocationGenerics } from "renderer/utils/routes";
+import { DefinitionEditor } from "../DefinitionEditor/DefinitionEditor";
 import { Header } from "../Header/Header";
 
 export const Definition = (): ReactElement => {
   const { t } = useTranslation("definition");
 
-  const { params } = useMatch<LocationGenerics>();
+  const { data } = useMatch<LocationGenerics>();
+
+  const [definitionStore] = useState(() => {
+    return DefinitionStore.create({
+      projectDefinition: {
+        name: t("defaultDefinitionName"),
+        ...data.projectDefinition,
+      },
+    });
+  });
 
   return (
     <IntroLayout>
       <Header />
-      <p>{t("definitionHeader")}</p>
-      <p>{params.definitionId}</p>
-      <StyledLink to={routePaths.definitions}>
-        {t("definitionsList")}
-      </StyledLink>
+      <Spacer y={1} />
+      <DefinitionEditor definitionStore={definitionStore} />
     </IntroLayout>
   );
 };

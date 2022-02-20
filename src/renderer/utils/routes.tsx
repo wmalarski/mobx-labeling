@@ -1,9 +1,11 @@
+import { SnapshotIn } from "mobx-state-tree";
 import {
   createMemoryHistory,
   MakeGenerics,
   ReactLocation,
   Route,
 } from "react-location";
+import { ProjectDefinition } from "renderer/models";
 import { NewDefinition } from "renderer/modules/NewDefinition/NewDefinition";
 import { Definition } from "../modules/Definition/Definition";
 import { Definitions } from "../modules/Definitions/Definitions";
@@ -26,6 +28,9 @@ export type LocationGenerics = MakeGenerics<{
   };
   Search: {
     project: string;
+  };
+  LoaderData: {
+    projectDefinition: SnapshotIn<typeof ProjectDefinition>;
   };
 }>;
 
@@ -56,6 +61,11 @@ export const routes = (): Route<LocationGenerics>[] => [
   {
     path: "definition/:definitionId",
     element: <Definition />,
+    loader: async ({ params: { definitionId } }) => {
+      const projectDefinition =
+        await window.electron.ipcDefinitions.readDefinition(definitionId);
+      return { projectDefinition };
+    },
   },
   {
     path: "workspace",

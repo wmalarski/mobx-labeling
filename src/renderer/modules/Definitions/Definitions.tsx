@@ -56,7 +56,7 @@ export const Definitions = observer((): ReactElement => {
           onClick={handleNewDefinitionClick}
           icon={<PlusIcon />}
         >
-          {t("newDefinitionHeader")}
+          {t("newDefinitionButton")}
         </Button>
       </Row>
       <Spacer y={1} />
