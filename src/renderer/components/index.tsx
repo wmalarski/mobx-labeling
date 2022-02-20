@@ -1,4 +1,5 @@
 export * from "./ColorSlider/ColorSlider";
+export * from "./ComboBox/ComboBox";
 export * from "./Dnd/Dnd";
 export * from "./DragIndicator/DragIndicator";
 export * from "./Flex/Flex";
