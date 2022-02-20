@@ -8,6 +8,7 @@ import { useMatch } from "react-location";
 import { ComboBox, IntroLayout, StyledLink } from "renderer/components";
 import { DefinitionsList, NewProjectStore } from "renderer/models";
 import { useOpenDialog } from "renderer/services";
+import { useSaveDialog } from "renderer/services/resources/useSaveDialog";
 import { LocationGenerics, routePaths } from "renderer/utils/routes";
 import { Header } from "../Header/Header";
 
@@ -17,6 +18,12 @@ export const NewProject = observer((): ReactElement => {
   const { data } = useMatch<LocationGenerics>();
 
   const { open } = useOpenDialog({
+    onReturn: (result) => {
+      console.log({ result });
+    },
+  });
+
+  const { open: openSave } = useSaveDialog({
     onReturn: (result) => {
       console.log({ result });
     },
@@ -45,6 +52,10 @@ export const NewProject = observer((): ReactElement => {
     open({});
   };
 
+  const handleSaveClick = () => {
+    openSave({});
+  };
+
   return (
     <IntroLayout>
       <Header />
@@ -66,6 +77,7 @@ export const NewProject = observer((): ReactElement => {
         ))}
       </ComboBox>
       <Button onClick={handleOpenClick}>Open</Button>
+      <Button onClick={handleSaveClick}>Save</Button>
       <pre>{JSON.stringify(getSnapshot(newProjectStore), null, 2)}</pre>
     </IntroLayout>
   );

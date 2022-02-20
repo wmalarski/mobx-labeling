@@ -2,6 +2,8 @@ import type {
   IpcRendererEvent,
   OpenDialogOptions,
   OpenDialogReturnValue,
+  SaveDialogOptions,
+  SaveDialogReturnValue,
 } from "electron/renderer";
 import { SnapshotIn, SnapshotOut } from "mobx-state-tree";
 import { ProjectDefinition } from "renderer/models";
@@ -38,5 +40,12 @@ export type IpcResourcesService = {
   ): void;
   removeOnOpenListener(
     callback: (event: IpcRendererEvent, value: OpenDialogReturnValue) => void
+  ): void;
+  saveDialog(options: SaveDialogOptions): void;
+  addOnSaveListener(
+    callback: (event: IpcRendererEvent, value: SaveDialogReturnValue) => void
+  ): void;
+  removeOnSaveListener(
+    callback: (event: IpcRendererEvent, value: SaveDialogReturnValue) => void
   ): void;
 };

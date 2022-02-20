@@ -26,5 +26,14 @@ contextBridge.exposeInMainWorld("electron", {
     removeOnOpenListener(callback) {
       ipcRenderer.removeListener("OpenDialog", callback);
     },
+    saveDialog(args) {
+      return ipcRenderer.send("SaveDialog", args);
+    },
+    addOnSaveListener(callback) {
+      ipcRenderer.on("SaveDialog", callback);
+    },
+    removeOnSaveListener(callback) {
+      ipcRenderer.removeListener("SaveDialog", callback);
+    },
   },
 });
