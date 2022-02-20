@@ -17,3 +17,8 @@ export type PaginationArgs = {
   limit: number;
   query?: string;
 };
+
+export type PaginationResult<TData> = {
+  data: TData;
+  totalSize: number;
+};

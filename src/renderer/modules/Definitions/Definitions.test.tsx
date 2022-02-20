@@ -1,8 +1,10 @@
 import "@testing-library/jest-dom";
 import "@testing-library/jest-dom/extend-expect";
 import { render, screen, waitFor } from "@testing-library/react";
-import { getSnapshot } from "mobx-state-tree";
-import { mockDefinitionEntries } from "renderer/tests/mocks";
+import {
+  mockDefinitionEntries,
+  mockIpcDefinitionsService,
+} from "renderer/tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import i18n from "renderer/utils/i18next";
 import { Definitions } from "./Definitions";
@@ -28,17 +30,12 @@ describe("<Definitions />", () => {
   it("should show first definition name", async () => {
     expect.hasAssertions();
 
-    const definitions = mockDefinitionEntries().map((entry) =>
-      getSnapshot(entry)
-    );
-    const firstDefinition = definitions[0].name;
+    const entries = mockDefinitionEntries();
+    const firstDefinition = entries[0].name;
     window.electron = {
-      ipcDefinitions: {
-        saveDefinition: jest.fn(),
-        readDefinition: jest.fn(),
-        readDefinitions: jest.fn(() => Promise.resolve(definitions)),
-        removeDefinition: jest.fn(),
-      },
+      ipcDefinitions: mockIpcDefinitionsService({
+        updateEntries: entries,
+      }),
     };
 
     renderComponent();

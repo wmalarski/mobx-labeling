@@ -58,5 +58,9 @@
   "saveDefinition": "Save",
   "definitionSaved": "Saved",
   "saveFailed": "Failed",
-  "updatedAt": "Last update"
+  "updatedAt": "Last update",
+  "searchPlaceholder": "Search",
+  "removeDefinition": "Remove",
+  "useDefinition": "Use in project",
+  "editDefinition": "Edit definition"
 }

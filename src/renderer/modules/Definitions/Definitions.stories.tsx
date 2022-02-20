@@ -1,8 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { getSnapshot } from "mobx-state-tree";
 import { useState } from "react";
 import { Router } from "react-location";
-import { mockDefinitionEntries } from "renderer/tests/mocks";
+import { mockIpcDefinitionsService } from "renderer/tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { location, routes } from "renderer/utils/routes";
 import { Definitions } from "./Definitions";
@@ -12,16 +11,8 @@ export default {
   component: Definitions,
   loaders: [
     async () => {
-      const entries = mockDefinitionEntries().map((entry) =>
-        getSnapshot(entry)
-      );
       window.electron = {
-        ipcDefinitions: {
-          readDefinition: () => Promise.reject(),
-          readDefinitions: () => Promise.resolve(entries),
-          removeDefinition: () => Promise.resolve(),
-          saveDefinition: () => Promise.resolve(),
-        },
+        ipcDefinitions: mockIpcDefinitionsService(),
       };
       return {};
     },

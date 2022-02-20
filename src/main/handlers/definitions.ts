@@ -4,6 +4,7 @@ import path from "path";
 import {
   IpcRendererChannel,
   PaginationArgs,
+  PaginationResult,
   ProjectDefinitionSnapshot,
 } from "../types";
 
@@ -96,20 +97,20 @@ export const setupDefinitionsHandles = () => {
     async (
       _event,
       { limit, start, query }: PaginationArgs
-    ): Promise<ProjectDefinitionSnapshot[]> => {
+    ): Promise<PaginationResult<ProjectDefinitionSnapshot[]>> => {
       await makeDefinitionsDir();
 
-      const definitions = await readDefinitionsList();
+      const entries = await readDefinitionsList();
 
       const lower = query?.toLowerCase();
 
       const queried = !lower
-        ? definitions
-        : definitions.filter(({ name }) => name.toLowerCase().includes(lower));
+        ? entries
+        : entries.filter(({ name }) => name.toLowerCase().includes(lower));
 
       const data = queried.slice(start, start + limit);
 
-      return data;
+      return { data, totalSize: queried.length };
     }
   );
   ipcMain.handle(

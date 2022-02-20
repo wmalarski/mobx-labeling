@@ -1,4 +1,4 @@
-import { Instance, SnapshotIn } from "mobx-state-tree";
+import { getSnapshot, Instance, SnapshotIn } from "mobx-state-tree";
 import { nanoid } from "nanoid";
 import {
   DefinitionEntry,
@@ -8,6 +8,7 @@ import {
   ItemDefinition,
   ProjectDefinition,
 } from "renderer/models";
+import { IpcDefinitionsService } from "renderer/services/types";
 
 export const mockFieldDefinition = ({
   index,
@@ -96,4 +97,37 @@ export const mockDefinitionStore = (
   return DefinitionStore.create({
     projectDefinition: mockProjectDefinition(args),
   });
+};
+
+export const mockIpcDefinitionsService = ({
+  update,
+  updateEntries,
+  entriesCount = 45,
+}: {
+  update?: Partial<IpcDefinitionsService>;
+  updateEntries?: Instance<typeof DefinitionEntry>[];
+  entriesCount?: number;
+} = {}): IpcDefinitionsService => {
+  const projectDefinition = getSnapshot(mockProjectDefinition());
+  const entries = (
+    updateEntries ?? mockDefinitionEntries({ entriesCount })
+  ).map((entry) => getSnapshot(entry));
+
+  return {
+    readDefinition: () => Promise.resolve(projectDefinition),
+    readDefinitions: ({ limit, start, query }) => {
+      const lower = query?.toLowerCase();
+
+      const queried = !lower
+        ? entries
+        : entries.filter(({ name }) => name.toLowerCase().includes(lower));
+
+      const data = queried.slice(start, start + limit);
+
+      return Promise.resolve({ data, totalSize: queried.length });
+    },
+    removeDefinition: () => Promise.resolve(),
+    saveDefinition: () => Promise.resolve(),
+    ...update,
+  };
 };

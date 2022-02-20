@@ -8,13 +8,18 @@ type PaginationArgs = {
   query?: string;
 };
 
+type PaginationResult<TData> = {
+  data: TData;
+  totalSize: number;
+};
+
 export interface IpcDefinitionsService {
   saveDefinition(
     projectDefinition: SnapshotOut<typeof ProjectDefinition>
   ): Promise<void>;
   readDefinitions(
     args: PaginationArgs
-  ): Promise<SnapshotIn<typeof DefinitionEntry>[]>;
+  ): Promise<PaginationResult<SnapshotIn<typeof DefinitionEntry>[]>>;
   readDefinition(
     projectDefinitionId: string
   ): Promise<SnapshotIn<typeof ProjectDefinition>>;
