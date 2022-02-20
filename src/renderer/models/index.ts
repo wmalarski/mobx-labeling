@@ -18,4 +18,5 @@ export * from "./fields/Text";
 export * from "./stores/DefinitionEntry";
 export * from "./stores/DefinitionsList";
 export * from "./stores/DefinitionStore";
+export * from "./stores/NewProjectStore";
 export * from "./types";

@@ -15,7 +15,9 @@ export function StyledLink<TGenerics = DefaultGenerics>({
 }): ReactElement {
   return (
     <LocationLink {...props}>
-      <NextUiLink {...styleProps}>{children}</NextUiLink>
+      <NextUiLink as="span" {...styleProps}>
+        {children}
+      </NextUiLink>
     </LocationLink>
   );
 }

@@ -28,9 +28,10 @@ export type LocationGenerics = MakeGenerics<{
   };
   Search: {
     project: string;
+    definitionId: string;
   };
   LoaderData: {
-    projectDefinition: SnapshotIn<typeof ProjectDefinition>;
+    projectDefinition?: SnapshotIn<typeof ProjectDefinition>;
   };
 }>;
 
@@ -49,6 +50,13 @@ export const routes = (): Route<LocationGenerics>[] => [
   {
     path: "new-project",
     element: <NewProject />,
+    loader: async ({ search: { definitionId } }) => {
+      const projectDefinition =
+        definitionId && definitionId !== ""
+          ? await window.electron.ipcDefinitions.readDefinition(definitionId)
+          : undefined;
+      return { projectDefinition };
+    },
   },
   {
     path: "new-definition",
