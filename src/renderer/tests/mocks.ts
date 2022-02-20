@@ -62,7 +62,7 @@ export const mockProjectDefinition = ({
 };
 
 export const mockDefinitionEntry = ({
-  index,
+  index = 0,
   update,
 }: {
   index?: number;
@@ -73,7 +73,7 @@ export const mockDefinitionEntry = ({
     id,
     name: `Project${index}`,
     description: "",
-    updatedAt: new Date(1999, 9, 9).getTime(),
+    updatedAt: new Date(1999, 9, 9 + index).getTime(),
     ...update,
   });
 };
