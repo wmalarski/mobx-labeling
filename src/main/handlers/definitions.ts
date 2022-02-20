@@ -77,7 +77,7 @@ export const setupDefinitionsHandles = () => {
       };
 
       const index = definitions.findIndex(
-        (definition) => (definition.id = entry.id)
+        (definition) => definition.id === entry.id
       );
 
       const updated = index < 0 ? [entry, ...definitions] : definitions;

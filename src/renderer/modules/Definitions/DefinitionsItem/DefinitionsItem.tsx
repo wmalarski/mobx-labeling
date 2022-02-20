@@ -20,10 +20,11 @@ import { routePaths } from "renderer/utils/routes";
 
 type Props = {
   definitionEntry: Instance<typeof DefinitionEntry>;
+  onRemoveClick: () => void;
 };
 
 export const DefinitionsItem = observer(
-  ({ definitionEntry }: Props): ReactElement => {
+  ({ definitionEntry, onRemoveClick }: Props): ReactElement => {
     const { t } = useTranslation("definition");
 
     const locale = useLocale();
@@ -41,10 +42,6 @@ export const DefinitionsItem = observer(
       navigate({
         to: routePaths.definition(definitionEntry.id),
       });
-    };
-
-    const handleRemoveClick = () => {
-      //
     };
 
     return (
@@ -106,11 +103,7 @@ export const DefinitionsItem = observer(
               {t("editDefinition")}
             </Button>
             <Spacer x={0.5} />
-            <Button
-              color="error"
-              onClick={handleRemoveClick}
-              icon={<TrashIcon />}
-            >
+            <Button color="error" onClick={onRemoveClick} icon={<TrashIcon />}>
               {t("removeDefinition")}
             </Button>
           </Row>

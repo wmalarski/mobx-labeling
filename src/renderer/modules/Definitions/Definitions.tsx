@@ -35,6 +35,10 @@ export const Definitions = observer((): ReactElement => {
     definitionsList.load({ page: 0, query: event.target.value });
   };
 
+  const handleRemoveClick = (definitionId: string) => () => {
+    definitionsList.remove(definitionId);
+  };
+
   const handleNewDefinitionClick = () => {
     navigate({
       to: routePaths.newDefinition,
@@ -78,7 +82,10 @@ export const Definitions = observer((): ReactElement => {
       {definitionsList.definitions.map((definitionEntry) => (
         <Fragment key={definitionEntry.id}>
           <Row>
-            <DefinitionsItem definitionEntry={definitionEntry} />
+            <DefinitionsItem
+              definitionEntry={definitionEntry}
+              onRemoveClick={handleRemoveClick(definitionEntry.id)}
+            />
           </Row>
           <Spacer y={0.5} />
         </Fragment>
