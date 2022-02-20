@@ -59,7 +59,7 @@ export const ItemForm = observer(
     return (
       <Container gap={0}>
         <Row justify="space-between" align="center">
-          <Text h2>{t("itemFormHeader")}</Text>
+          <Text h3>{t("itemFormHeader")}</Text>
           <Flex>
             <Spacer x={0.5} />
             <Button

@@ -7,3 +7,4 @@ export * from "./ListBox/ListBox";
 export * from "./Page/Page";
 export * from "./Popover/Popover";
 export * from "./Select/Select";
+export * from "./StyledLink/StyledLink";

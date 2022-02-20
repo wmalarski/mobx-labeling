@@ -6,7 +6,7 @@ export const Recent = (): ReactElement => {
   const { t } = useTranslation("home");
   return (
     <div>
-      <Text h2>{t("recentHeader")}</Text>
+      <Text h3>{t("recentHeader")}</Text>
     </div>
   );
 };

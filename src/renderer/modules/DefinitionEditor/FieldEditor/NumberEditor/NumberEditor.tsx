@@ -39,7 +39,7 @@ export const NumberEditor = observer(
     return (
       <Container gap={0}>
         <Row>
-          <Text h4>{t("numberHeader")}</Text>
+          <Text h5>{t("numberHeader")}</Text>
         </Row>
         <Spacer y={1} />
         <Row>

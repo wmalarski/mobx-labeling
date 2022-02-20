@@ -3,5 +3,6 @@
   "navHome": "Home",
   "navNewProject": "New project",
   "navNewDefinition": "New definition",
-  "navDefinitions": "Definitions"
+  "navDefinitions": "Definitions",
+  "settingsButton": "Settings"
 }

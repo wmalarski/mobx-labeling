@@ -42,7 +42,7 @@ export const DndList = observer(
     return (
       <Container gap={0}>
         <Row align="center" justify="space-between">
-          <Text h2>{t("definitionItems")}</Text>
+          <Text h3>{t("definitionItems")}</Text>
           <Spacer y={0.5} />
           <Button
             auto

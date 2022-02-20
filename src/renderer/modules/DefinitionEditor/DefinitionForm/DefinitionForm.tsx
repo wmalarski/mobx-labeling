@@ -13,7 +13,9 @@ import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ChangeEvent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
+import { StyledLink } from "renderer/components";
 import { DefinitionStore } from "renderer/models";
+import { routePaths } from "renderer/utils/routes";
 
 type Props = {
   definitionStore: Instance<typeof DefinitionStore>;
@@ -38,9 +40,12 @@ export const DefinitionForm = observer(
     };
 
     return (
-      <Container gap={0}>
+      <Container gap={0} fluid>
         <Row align="center" justify="space-between">
-          <Text h1>{t("newDefinitionHeader")}</Text>
+          <Text h2>{t("newDefinitionHeader")}</Text>
+          <StyledLink to={routePaths.definitions}>
+            {t("definitionsList")}
+          </StyledLink>
           {definitionStore.state === "done" && (
             <Text color="$success">{t("definitionSaved")}</Text>
           )}

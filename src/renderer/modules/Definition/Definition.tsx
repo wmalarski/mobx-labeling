@@ -1,8 +1,9 @@
 import { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useMatch } from "react-location";
-import { IntroLayout } from "renderer/components";
+import { useMatch } from "react-location";
+import { IntroLayout, StyledLink } from "renderer/components";
 import { LocationGenerics, routePaths } from "renderer/utils/routes";
+import { Header } from "../Header/Header";
 
 export const Definition = (): ReactElement => {
   const { t } = useTranslation("definition");
@@ -11,9 +12,12 @@ export const Definition = (): ReactElement => {
 
   return (
     <IntroLayout>
+      <Header />
       <p>{t("definitionHeader")}</p>
       <p>{params.definitionId}</p>
-      <Link to={routePaths.definitions}>definitions</Link>
+      <StyledLink to={routePaths.definitions}>
+        {t("definitionsList")}
+      </StyledLink>
     </IntroLayout>
   );
 };

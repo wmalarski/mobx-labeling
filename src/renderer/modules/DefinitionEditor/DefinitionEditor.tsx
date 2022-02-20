@@ -26,7 +26,7 @@ export const DefinitionEditor = observer(
     const fieldDefinition = fieldId ? itemDefinition?.field(fieldId) : null;
 
     return (
-      <Container gap={0}>
+      <Container gap={0} fluid>
         <DefinitionForm definitionStore={definitionStore} />
         <Spacer y={1} />
         <Flex gap="xl" direction="row">

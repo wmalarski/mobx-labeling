@@ -62,7 +62,7 @@ export const SelectEditor = observer(
     return (
       <Container gap={0}>
         <Row>
-          <Text h4>{t("selectHeader")}</Text>
+          <Text h5>{t("selectHeader")}</Text>
         </Row>
         <Spacer y={1} />
         <Row>

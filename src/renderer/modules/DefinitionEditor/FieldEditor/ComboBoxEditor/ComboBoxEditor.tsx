@@ -53,7 +53,7 @@ export const ComboBoxEditor = observer(
     return (
       <Container gap={0}>
         <Row>
-          <Text h4>{t("comboBoxHeader")}</Text>
+          <Text h5>{t("comboBoxHeader")}</Text>
         </Row>
         <Spacer y={1} />
         <Row>

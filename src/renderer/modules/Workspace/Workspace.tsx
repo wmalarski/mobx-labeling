@@ -1,5 +1,6 @@
 import { ReactElement } from "react";
-import { Link, useSearch } from "react-location";
+import { useSearch } from "react-location";
+import { StyledLink } from "renderer/components";
 import { LocationGenerics, routePaths } from "renderer/utils/routes";
 
 export const Workspace = (): ReactElement => {
@@ -9,7 +10,7 @@ export const Workspace = (): ReactElement => {
     <div>
       <p>Workspace</p>
       <pre>{JSON.stringify(search, null, 2)}</pre>
-      <Link to={routePaths.home}>Home</Link>
+      <StyledLink to={routePaths.home}>Home</StyledLink>
     </div>
   );
 };

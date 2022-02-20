@@ -17,7 +17,7 @@ export const ColorEditor = observer(
     return (
       <Container>
         <Row>
-          <Text h4>{t("figureHeader")}</Text>
+          <Text h5>{t("figureHeader")}</Text>
         </Row>
         <Spacer y={1} />
         <Row>

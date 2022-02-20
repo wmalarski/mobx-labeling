@@ -1,12 +1,4 @@
-import {
-  Button,
-  Card,
-  Col,
-  Container,
-  Row,
-  Spacer,
-  Text,
-} from "@nextui-org/react";
+import { Button, Card, Grid, Spacer, Text } from "@nextui-org/react";
 import { CubeIcon, Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
 import { useLocale } from "@react-aria/i18n";
 import { observer } from "mobx-react-lite";
@@ -46,47 +38,41 @@ export const DefinitionsItem = observer(
 
     return (
       <Card>
-        <Container gap={0}>
-          <Row align="center">
-            <Col span={2}>
-              <Text small color="$accents6">
-                {t("namePlaceholder")}
-              </Text>
-            </Col>
-            <Col>
-              <Text h3>{definitionEntry.name}</Text>
-            </Col>
-          </Row>
-          <Spacer y={0.5} />
-          <Row>
-            <Col span={2}>
+        <Grid.Container gap={0.5} alignItems="center">
+          <Grid sm={2} xs={4}>
+            <Text small color="$accents6">
+              {t("namePlaceholder")}
+            </Text>
+          </Grid>
+          <Grid sm={10} xs={8}>
+            <Text h4>{definitionEntry.name}</Text>
+          </Grid>
+          <Grid sm={2} xs={4}>
+            <Text small color="$accents6">
+              {t("descriptionPlaceholder")}
+            </Text>
+          </Grid>
+          <Grid sm={10} xs={8}>
+            {definitionEntry.description ? (
+              <Text small>{definitionEntry.description}</Text>
+            ) : (
               <Text small color="$accents6">
                 {t("descriptionPlaceholder")}
               </Text>
-            </Col>
-            <Col>
-              {definitionEntry.description ? (
-                <Text small>{definitionEntry.description}</Text>
-              ) : (
-                <Text small color="$accents6">
-                  {t("descriptionPlaceholder")}
-                </Text>
-              )}
-            </Col>
-          </Row>
-          <Spacer y={0.5} />
-          <Row>
-            <Col span={2}>
-              <Text small color="$accents6">
-                {t("updatedAt")}
-              </Text>
-            </Col>
-            <Col>
-              <Text small>{formatTime(definitionEntry.updatedAt, locale)}</Text>
-            </Col>
-          </Row>
-          <Spacer y={1} />
-          <Row>
+            )}
+          </Grid>
+          <Grid sm={2} xs={4}>
+            <Text small color="$accents6">
+              {t("updatedAt")}
+            </Text>
+          </Grid>
+          <Grid sm={10} xs={8}>
+            <Text small>{formatTime(definitionEntry.updatedAt, locale)}</Text>
+          </Grid>
+        </Grid.Container>
+        <Spacer y={1} />
+        <Grid.Container gap={0.5}>
+          <Grid>
             <Button
               color="primary"
               onClick={handleNewProjectClick}
@@ -94,7 +80,8 @@ export const DefinitionsItem = observer(
             >
               {t("useDefinition")}
             </Button>
-            <Spacer x={0.5} />
+          </Grid>
+          <Grid>
             <Button
               color="secondary"
               onClick={handleEditClick}
@@ -102,12 +89,13 @@ export const DefinitionsItem = observer(
             >
               {t("editDefinition")}
             </Button>
-            <Spacer x={0.5} />
+          </Grid>
+          <Grid>
             <Button color="error" onClick={onRemoveClick} icon={<TrashIcon />}>
               {t("removeDefinition")}
             </Button>
-          </Row>
-        </Container>
+          </Grid>
+        </Grid.Container>
       </Card>
     );
   }

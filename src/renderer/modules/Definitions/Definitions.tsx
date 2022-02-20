@@ -1,6 +1,5 @@
 import {
   Button,
-  Col,
   FormElement,
   Input,
   Pagination,
@@ -12,10 +11,11 @@ import { PlusIcon } from "@radix-ui/react-icons";
 import { observer } from "mobx-react-lite";
 import { ChangeEvent, Fragment, ReactElement, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useNavigate } from "react-location";
+import { useNavigate } from "react-location";
 import { IntroLayout } from "renderer/components";
 import { DefinitionsList } from "renderer/models";
 import { routePaths } from "renderer/utils/routes";
+import { Header } from "../Header/Header";
 import { DefinitionsItem } from "./DefinitionsItem/DefinitionsItem";
 
 export const Definitions = observer((): ReactElement => {
@@ -47,23 +47,17 @@ export const Definitions = observer((): ReactElement => {
 
   return (
     <IntroLayout>
-      <Row>
-        <Link to={routePaths.home}>Home</Link>
-      </Row>
+      <Header />
       <Spacer y={1} />
-      <Row align="center">
-        <Col>
-          <Text h1>{t("definitionsHeader")}</Text>
-        </Col>
-        <Col span={2}>
-          <Button
-            color="primary"
-            onClick={handleNewDefinitionClick}
-            icon={<PlusIcon />}
-          >
-            {t("newDefinitionHeader")}
-          </Button>
-        </Col>
+      <Row align="center" justify="space-between">
+        <Text h2>{t("definitionsHeader")}</Text>
+        <Button
+          color="primary"
+          onClick={handleNewDefinitionClick}
+          icon={<PlusIcon />}
+        >
+          {t("newDefinitionHeader")}
+        </Button>
       </Row>
       <Spacer y={1} />
       <Row>

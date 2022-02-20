@@ -1,9 +1,8 @@
-import { Text } from "@nextui-org/react";
 import { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-location";
-import { IntroLayout } from "renderer/components";
+import { IntroLayout, StyledLink } from "renderer/components";
 import { routePaths } from "../../utils/routes";
+import { Header } from "../Header/Header";
 import { Recent } from "./Recent/Recent";
 
 export const Home = (): ReactElement => {
@@ -11,13 +10,11 @@ export const Home = (): ReactElement => {
 
   return (
     <IntroLayout>
-      <Text h1>{t("title")}</Text>
+      <Header />
       <div>
-        <Link to={routePaths.home} activeOptions={{ exact: true }}>
-          {t("navHome")}
-        </Link>
-        <Link to={routePaths.newProject}>{t("navNewProject")}</Link>
-        <Link to={routePaths.definitions}>{t("navDefinitions")}</Link>
+        <StyledLink to={routePaths.definitions}>
+          {t("navDefinitions")}
+        </StyledLink>
       </div>
       <Recent />
     </IntroLayout>

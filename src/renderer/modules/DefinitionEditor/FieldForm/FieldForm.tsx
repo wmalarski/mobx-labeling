@@ -69,7 +69,7 @@ export const FieldForm = observer(
     return (
       <Container gap={0}>
         <Row align="center" justify="space-between">
-          <Text h3>{t("fieldFormHeader")}</Text>
+          <Text h4>{t("fieldFormHeader")}</Text>
           <Flex>
             <Spacer x={0.5} />
             <Button
