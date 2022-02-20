@@ -71,7 +71,7 @@ export const DefinitionsItem = observer(
           </Grid>
         </Grid.Container>
         <Spacer y={1} />
-        <Grid.Container gap={0.5}>
+        <Grid.Container gap={1}>
           <Grid>
             <Button
               color="primary"

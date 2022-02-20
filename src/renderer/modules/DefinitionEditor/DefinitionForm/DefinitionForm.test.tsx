@@ -16,6 +16,7 @@ const renderComponent = ({
 }: PropsWithTestWrapper<Partial<Props>> = {}) => {
   const defaultProps: Props = {
     definitionStore: mockDefinitionStore(),
+    onSelectedItemChange: () => void 0,
   };
 
   return render(
@@ -128,5 +129,21 @@ describe("<DefinitionForm />", () => {
 
     await expect(screen.findByText(fail)).resolves.toBeInTheDocument();
     expect(saveDefinition).toHaveBeenCalledTimes(1);
+  });
+
+  it("should add new item after click on add", async () => {
+    expect.hasAssertions();
+
+    const definitionStore = mockDefinitionStore({});
+    const initialLength = definitionStore.projectDefinition.items.length;
+
+    renderComponent({ definitionStore });
+
+    const text = i18n.t<string>("addNewItem", { ns: "definition" });
+    userEvent.click(await screen.findByText(text));
+
+    expect(definitionStore.projectDefinition.items).toHaveLength(
+      initialLength + 1
+    );
   });
 });

@@ -19,7 +19,7 @@ describe("<Definition />", () => {
 
     renderComponent();
 
-    const header = i18n.t<string>("definitionHeader", { ns: "definition" });
+    const header = i18n.t<string>("newDefinitionHeader", { ns: "definition" });
 
     await expect(screen.findByText(header)).resolves.toBeInTheDocument();
   });

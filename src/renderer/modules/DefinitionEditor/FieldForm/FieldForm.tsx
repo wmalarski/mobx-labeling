@@ -2,6 +2,7 @@ import {
   Button,
   Container,
   FormElement,
+  Grid,
   Input,
   Radio,
   Row,
@@ -14,7 +15,7 @@ import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ChangeEvent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
-import { Flex, Select } from "renderer/components";
+import { Select } from "renderer/components";
 import {
   DefinitionKind,
   definitionKinds,
@@ -69,27 +70,33 @@ export const FieldForm = observer(
     return (
       <Container gap={0}>
         <Row align="center" justify="space-between">
-          <Text h4>{t("fieldFormHeader")}</Text>
-          <Flex>
-            <Spacer x={0.5} />
-            <Button
-              auto
-              color="secondary"
-              onClick={handleCopyClick}
-              icon={<CopyIcon />}
-            >
-              {t("copyField")}
-            </Button>
-            <Spacer x={0.5} />
-            <Button
-              auto
-              color="error"
-              onClick={handleRemoveClick}
-              icon={<TrashIcon />}
-            >
-              {t("removeField")}
-            </Button>
-          </Flex>
+          <div>
+            <Text h4>{t("fieldFormHeader")}</Text>
+          </div>
+          <div>
+            <Grid.Container justify="flex-end" alignItems="center" gap={1}>
+              <Grid>
+                <Button
+                  auto
+                  color="secondary"
+                  onClick={handleCopyClick}
+                  icon={<CopyIcon />}
+                >
+                  {t("copyField")}
+                </Button>
+              </Grid>
+              <Grid>
+                <Button
+                  auto
+                  color="error"
+                  onClick={handleRemoveClick}
+                  icon={<TrashIcon />}
+                >
+                  {t("removeField")}
+                </Button>
+              </Grid>
+            </Grid.Container>
+          </div>
         </Row>
         <Spacer y={0.5} />
         <Row>

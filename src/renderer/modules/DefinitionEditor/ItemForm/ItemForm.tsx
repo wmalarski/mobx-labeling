@@ -2,6 +2,7 @@ import {
   Button,
   Container,
   FormElement,
+  Grid,
   Input,
   Row,
   Spacer,
@@ -12,7 +13,6 @@ import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ChangeEvent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
-import { Flex } from "renderer/components";
 import { ItemDefinition, ProjectDefinition } from "renderer/models";
 
 type Props = {
@@ -57,40 +57,47 @@ export const ItemForm = observer(
     };
 
     return (
-      <Container gap={0}>
+      <Container gap={0} fluid>
         <Row justify="space-between" align="center">
-          <Text h3>{t("itemFormHeader")}</Text>
-          <Flex>
-            <Spacer x={0.5} />
-            <Button
-              auto
-              color="secondary"
-              onClick={handlePlusClick}
-              icon={<PlusIcon />}
-            >
-              {t("addNewField")}
-            </Button>
-            <Spacer x={0.5} />
-            <Button
-              auto
-              color="secondary"
-              onClick={handleCopyClick}
-              icon={<CopyIcon />}
-            >
-              {t("copyItem")}
-            </Button>
-            <Spacer x={0.5} />
-            <Button
-              auto
-              color="error"
-              onClick={handleRemoveClick}
-              icon={<TrashIcon />}
-            >
-              {t("removeItem")}
-            </Button>
-          </Flex>
+          <div>
+            <Text h3>{t("itemFormHeader")}</Text>
+          </div>
+          <div>
+            <Grid.Container justify="flex-end" alignItems="center" gap={1}>
+              <Grid>
+                <Button
+                  auto
+                  color="primary"
+                  onClick={handlePlusClick}
+                  icon={<PlusIcon />}
+                >
+                  {t("addNewField")}
+                </Button>
+              </Grid>
+              <Grid>
+                <Button
+                  auto
+                  color="secondary"
+                  onClick={handleCopyClick}
+                  icon={<CopyIcon />}
+                >
+                  {t("copyItem")}
+                </Button>
+              </Grid>
+              <Grid>
+                <Button
+                  auto
+                  color="error"
+                  onClick={handleRemoveClick}
+                  icon={<TrashIcon />}
+                >
+                  {t("removeItem")}
+                </Button>
+              </Grid>
+            </Grid.Container>
+          </div>
         </Row>
-        <Spacer y={0.5} />
+        <Spacer y={1} />
         <Row>
           <Input
             fullWidth

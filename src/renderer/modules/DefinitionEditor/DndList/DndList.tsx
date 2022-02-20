@@ -1,5 +1,4 @@
-import { Button, Container, Row, Spacer, Text } from "@nextui-org/react";
-import { PlusIcon } from "@radix-ui/react-icons";
+import { Container, Row, Text } from "@nextui-org/react";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement, useCallback } from "react";
@@ -30,11 +29,6 @@ export const DndList = observer(
       [projectDefinition]
     );
 
-    const handlePlusClick = () => {
-      const item = projectDefinition.addNewItem(t("defaultItemName"));
-      onSelectedItemChange(item.id);
-    };
-
     const handleItemClick = (itemId: string) => () => {
       onSelectedItemChange(itemId);
     };
@@ -43,36 +37,29 @@ export const DndList = observer(
       <Container gap={0}>
         <Row align="center" justify="space-between">
           <Text h3>{t("definitionItems")}</Text>
-          <Spacer y={0.5} />
-          <Button
-            auto
-            onClick={handlePlusClick}
-            color="secondary"
-            icon={<PlusIcon />}
-          >
-            {t("addNewItem")}
-          </Button>
         </Row>
-        <DragDropContext onDragEnd={onDragEnd}>
-          <DndDroppable
-            droppableId={projectDefinition.id}
-            type={DefinitionNodeKind.Item}
-          >
-            {projectDefinition.items.map((itemDefinition, index) => (
-              <DndDraggable
-                key={itemDefinition.id}
-                draggableId={itemDefinition.id}
-                index={index}
-              >
-                <ItemsListItem
-                  itemDefinition={itemDefinition}
-                  onFieldClick={onSelectedFieldChange}
-                  onItemClick={handleItemClick(itemDefinition.id)}
-                />
-              </DndDraggable>
-            ))}
-          </DndDroppable>
-        </DragDropContext>
+        <Row>
+          <DragDropContext onDragEnd={onDragEnd}>
+            <DndDroppable
+              droppableId={projectDefinition.id}
+              type={DefinitionNodeKind.Item}
+            >
+              {projectDefinition.items.map((itemDefinition, index) => (
+                <DndDraggable
+                  key={itemDefinition.id}
+                  draggableId={itemDefinition.id}
+                  index={index}
+                >
+                  <ItemsListItem
+                    itemDefinition={itemDefinition}
+                    onFieldClick={onSelectedFieldChange}
+                    onItemClick={handleItemClick(itemDefinition.id)}
+                  />
+                </DndDraggable>
+              ))}
+            </DndDroppable>
+          </DragDropContext>
+        </Row>
       </Container>
     );
   }

@@ -27,8 +27,11 @@ export const DefinitionEditor = observer(
 
     return (
       <Container gap={0} fluid>
-        <DefinitionForm definitionStore={definitionStore} />
-        <Spacer y={1} />
+        <DefinitionForm
+          definitionStore={definitionStore}
+          onSelectedItemChange={setItemId}
+        />
+        <Spacer y={2} />
         <Flex gap="xl" direction="row">
           <Flex gap="xl" direction="column">
             <DndList
@@ -46,6 +49,7 @@ export const DefinitionEditor = observer(
                   projectDefinition={projectDefinition}
                   onSelectedFieldChange={setFieldId}
                 />
+                <Spacer y={0.5} />
                 {fieldDefinition && (
                   <>
                     <FieldForm
@@ -53,7 +57,9 @@ export const DefinitionEditor = observer(
                       itemDefinition={itemDefinition}
                       onSelectedFieldChange={setFieldId}
                     />
+                    <Spacer y={0.5} />
                     <FieldEditor fieldDefinition={fieldDefinition} />
+                    <Spacer y={1} />
                   </>
                 )}
                 {!fieldDefinition && (

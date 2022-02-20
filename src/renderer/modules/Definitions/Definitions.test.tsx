@@ -148,7 +148,7 @@ describe("<Definitions />", () => {
 
     renderComponent();
 
-    const text = i18n.t<string>("newDefinitionHeader", { ns: "definition" });
+    const text = i18n.t<string>("newDefinitionButton", { ns: "definition" });
     userEvent.click(await screen.findByText(text));
 
     expect(mockNavigate).toHaveBeenCalledTimes(1);

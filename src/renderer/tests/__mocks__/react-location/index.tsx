@@ -8,7 +8,7 @@ jest.mock("react-location", () => {
   return {
     createMemoryHistory: jest.fn(),
     ReactLocation: class {},
-    useMatch: jest.fn(() => ({ params: {} })),
+    useMatch: jest.fn(() => ({ params: {}, data: {} })),
     useSearch: jest.fn(),
     useNavigate: jest.fn(() => mockNavigate),
     mockNavigate,

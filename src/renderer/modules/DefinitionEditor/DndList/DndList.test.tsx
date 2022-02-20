@@ -58,20 +58,6 @@ describe("<DndList />", () => {
     expect(projectDefinition.items[1].name).toBe("Item0");
   });
 
-  it("should add new item after click on add", async () => {
-    expect.hasAssertions();
-
-    const projectDefinition = mockProjectDefinition({});
-    const initialLength = projectDefinition.items.length;
-
-    renderComponent({ projectDefinition });
-
-    const text = i18n.t<string>("addNewItem", { ns: "definition" });
-    userEvent.click(await screen.findByText(text));
-
-    expect(projectDefinition.items).toHaveLength(initialLength + 1);
-  });
-
   it("should emit item id change after click on name", async () => {
     expect.hasAssertions();
 
