@@ -1,4 +1,4 @@
-import { Spacer } from "@nextui-org/react";
+import { Button, Spacer } from "@nextui-org/react";
 import { Item } from "@react-stately/collections";
 import { observer } from "mobx-react-lite";
 import { getSnapshot } from "mobx-state-tree";
@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { useMatch } from "react-location";
 import { ComboBox, IntroLayout, StyledLink } from "renderer/components";
 import { DefinitionsList, NewProjectStore } from "renderer/models";
+import { useOpenDialog } from "renderer/services";
 import { LocationGenerics, routePaths } from "renderer/utils/routes";
 import { Header } from "../Header/Header";
 
@@ -14,6 +15,12 @@ export const NewProject = observer((): ReactElement => {
   const { t } = useTranslation("definition");
 
   const { data } = useMatch<LocationGenerics>();
+
+  const { open } = useOpenDialog({
+    onReturn: (result) => {
+      console.log({ result });
+    },
+  });
 
   const [newProjectStore] = useState(() => {
     return NewProjectStore.create({
@@ -32,6 +39,10 @@ export const NewProject = observer((): ReactElement => {
 
   const handleSelectionChange = (key: string | number) => {
     newProjectStore.setDefinitionId(key as string);
+  };
+
+  const handleOpenClick = () => {
+    open({});
   };
 
   return (
@@ -54,6 +65,7 @@ export const NewProject = observer((): ReactElement => {
           <Item key={definition.id}>{definition.name}</Item>
         ))}
       </ComboBox>
+      <Button onClick={handleOpenClick}>Open</Button>
       <pre>{JSON.stringify(getSnapshot(newProjectStore), null, 2)}</pre>
     </IntroLayout>
   );

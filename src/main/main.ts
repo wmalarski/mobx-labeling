@@ -13,6 +13,7 @@ import log from "electron-log";
 import { autoUpdater } from "electron-updater";
 import path from "path";
 import { setupDefinitionsHandles } from "./handlers/definitions";
+import { setupResourcesHandles } from "./handlers/resources";
 import MenuBuilder from "./menu";
 import { resolveHtmlPath } from "./util";
 
@@ -27,6 +28,7 @@ export default class AppUpdater {
 let mainWindow: BrowserWindow | null = null;
 
 setupDefinitionsHandles();
+setupResourcesHandles();
 
 if (process.env.NODE_ENV === "production") {
   const sourceMapSupport = require("source-map-support");

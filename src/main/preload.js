@@ -16,4 +16,15 @@ contextBridge.exposeInMainWorld("electron", {
       return ipcRenderer.invoke("RemoveDefinition", projectDefinitionId);
     },
   },
+  ipcResources: {
+    openDialog(args) {
+      return ipcRenderer.send("OpenDialog", args);
+    },
+    addOnOpenListener(callback) {
+      ipcRenderer.on("OpenDialog", callback);
+    },
+    removeOnOpenListener(callback) {
+      ipcRenderer.removeListener("OpenDialog", callback);
+    },
+  },
 });

@@ -10,6 +10,7 @@ export enum IpcRendererChannel {
   ReadDefinitions = "ReadDefinitions",
   ReadDefinition = "ReadDefinition",
   RemoveDefinition = "RemoveDefinition",
+  OpenDialog = "OpenDialog",
 }
 
 export type PaginationArgs = {

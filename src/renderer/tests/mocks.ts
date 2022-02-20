@@ -8,7 +8,7 @@ import {
   ItemDefinition,
   ProjectDefinition,
 } from "renderer/models";
-import { IpcDefinitionsService } from "renderer/services/types";
+import { IpcDefinitionsService } from "renderer/services";
 
 export const mockFieldDefinition = ({
   index,
