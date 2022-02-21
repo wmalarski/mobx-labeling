@@ -54,8 +54,8 @@ export function ComboBox<T extends object>(
   };
 
   return (
-    <Styles.Container>
-      <StyledInputMainContainer size="md">
+    <Styles.Container css={{ width: "100%" }}>
+      <StyledInputMainContainer size="md" css={{ width: "100%" }}>
         <StyledInputContainer animated isTextarea={false} underlined={false}>
           <StyledInputWrapper
             as="label"

@@ -6,4 +6,5 @@ export const Container = styled("div", {
   background: "$accents1",
   marginTop: "$xs",
   zIndex: 1000,
+  borderRadius: "$md",
 });

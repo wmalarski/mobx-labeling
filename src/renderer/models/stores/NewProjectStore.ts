@@ -7,6 +7,7 @@ const defaultFps = 18;
 export const NewProjectStore = types
   .model("NewProjectStore", {
     name: types.string,
+    projectPath: types.maybe(types.string),
     definitionId: types.maybe(types.string),
     definitions: DefinitionsList,
     resources: types.array(Resource),
@@ -14,6 +15,12 @@ export const NewProjectStore = types
   .actions((self) => ({
     setDefinitionId(definitionId: string) {
       self.definitionId = definitionId;
+    },
+    setName(name: string) {
+      self.name = name;
+    },
+    setProjectPath(path: string) {
+      self.projectPath = path;
     },
     addResource(path: string) {
       self.resources.push({
