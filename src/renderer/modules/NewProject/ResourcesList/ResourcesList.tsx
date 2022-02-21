@@ -1,9 +1,11 @@
+import { Button, Container, Row, Spacer, Text } from "@nextui-org/react";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { NewProjectStore } from "renderer/models";
 import { useOpenDialog } from "renderer/services";
+import { ResourcesListItem } from "./ResourcesListItem/ResourcesListItem";
 
 type Props = {
   newProjectStore: Instance<typeof NewProjectStore>;
@@ -15,7 +17,9 @@ export const ResourcesList = observer(
 
     const { open: openSelectDialog } = useOpenDialog({
       onReturn: (result) => {
-        console.log({ result });
+        result.filePaths.forEach((path) => {
+          newProjectStore.addResource(path);
+        });
       },
     });
 
@@ -26,9 +30,23 @@ export const ResourcesList = observer(
     };
 
     return (
-      <div>
-        <p>ResourcesList</p>
-      </div>
+      <Container gap={0} fluid>
+        <Row align="center">
+          <Text h3>{t("resourcesList")}</Text>
+          <Spacer css={{ flexGrow: 1 }} />
+          <Button auto onClick={handleOpenClick}>
+            {t("resourceLocal")}
+          </Button>
+          <Spacer x={0.5} />
+          <Button auto>{t("resourceURL")}</Button>
+        </Row>
+        <Spacer y={1} />
+        {newProjectStore.resources.map((resource) => (
+          <Row key={resource.id}>
+            <ResourcesListItem resource={resource} />
+          </Row>
+        ))}
+      </Container>
     );
   }
 );

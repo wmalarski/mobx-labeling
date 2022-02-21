@@ -7,5 +7,8 @@
   "locationLabel": "Location",
   "namePlaceholder": "Name",
   "browseDefinitions": "Browse definitions",
-  "filetypeName": "Labels"
+  "filetypeName": "Labels",
+  "resourcesList": "Resources",
+  "resourceURL": "Add URL",
+  "resourceLocal": "Add local"
 }

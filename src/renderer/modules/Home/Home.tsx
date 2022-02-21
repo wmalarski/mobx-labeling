@@ -15,6 +15,7 @@ export const Home = (): ReactElement => {
         <StyledLink to={routePaths.definitions}>
           {t("navDefinitions")}
         </StyledLink>
+        <StyledLink to={routePaths.newProject}>{t("navNewProject")}</StyledLink>
       </div>
       <Recent />
     </IntroLayout>
