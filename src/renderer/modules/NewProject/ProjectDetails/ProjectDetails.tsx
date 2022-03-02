@@ -53,6 +53,10 @@ export const ProjectDetails = observer(
       newProjectStore.setName(event.target.value);
     };
 
+    const handleBatchSizeChange = (event: ChangeEvent<FormElement>) => {
+      newProjectStore.setBatchSize(Number(event.target.value.split(".")[0]));
+    };
+
     return (
       <Container gap={0} fluid>
         <Input
@@ -94,6 +98,18 @@ export const ProjectDetails = observer(
             </Button>
           }
         />
+        <Input
+          fullWidth
+          type="number"
+          step={1}
+          min={10}
+          labelLeft={t("batchSizePlaceholder")}
+          placeholder={t("batchSizePlaceholder")}
+          aria-label={t("batchSizePlaceholder")}
+          value={String(newProjectStore.batchSize)}
+          onChange={handleBatchSizeChange}
+        />
+        <Spacer y={0.5} />
       </Container>
     );
   }

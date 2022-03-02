@@ -10,5 +10,6 @@
   "filetypeName": "Labels",
   "resourcesList": "Resources",
   "resourceURL": "Add URL",
-  "resourceLocal": "Add local"
+  "resourceLocal": "Add local",
+  "batchSizePlaceholder": "Batch size"
 }

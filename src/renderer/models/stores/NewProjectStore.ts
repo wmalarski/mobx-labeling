@@ -11,6 +11,7 @@ export const NewProjectStore = types
     definitionId: types.maybe(types.string),
     definitions: DefinitionsList,
     resources: types.array(Resource),
+    batchSize: types.optional(types.number, 500),
   })
   .actions((self) => ({
     setDefinitionId(definitionId: string) {
@@ -27,5 +28,8 @@ export const NewProjectStore = types
         fps: defaultFps,
         path,
       });
+    },
+    setBatchSize(batchSize: number) {
+      self.batchSize = batchSize;
     },
   }));
