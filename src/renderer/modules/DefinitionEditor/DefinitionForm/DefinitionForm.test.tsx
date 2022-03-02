@@ -3,7 +3,10 @@ import "@testing-library/jest-dom/extend-expect";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ComponentProps } from "react";
-import { mockDefinitionStore } from "renderer/tests/mocks";
+import {
+  mockDefinitionStore,
+  mockIpcResourcesService,
+} from "renderer/tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import i18n from "renderer/utils/i18next";
 import { DefinitionForm } from "./DefinitionForm";
@@ -77,6 +80,7 @@ describe("<DefinitionForm />", () => {
     const definitionStore = mockDefinitionStore();
     const saveDefinition = jest.fn(() => Promise.resolve());
     window.electron = {
+      ipcResources: mockIpcResourcesService(),
       ipcDefinitions: {
         saveDefinition,
         readDefinition: jest.fn(),
@@ -107,6 +111,7 @@ describe("<DefinitionForm />", () => {
     const definitionStore = mockDefinitionStore();
     const saveDefinition = jest.fn(() => Promise.reject());
     window.electron = {
+      ipcResources: mockIpcResourcesService(),
       ipcDefinitions: {
         saveDefinition,
         readDefinition: jest.fn(),
