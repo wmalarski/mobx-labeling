@@ -98,6 +98,7 @@ export const ProjectDetails = observer(
             </Button>
           }
         />
+        <Spacer y={0.5} />
         <Input
           fullWidth
           type="number"
@@ -109,7 +110,6 @@ export const ProjectDetails = observer(
           value={String(newProjectStore.batchSize)}
           onChange={handleBatchSizeChange}
         />
-        <Spacer y={0.5} />
       </Container>
     );
   }

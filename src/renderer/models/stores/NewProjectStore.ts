@@ -1,8 +1,10 @@
-import { types } from "mobx-state-tree";
+import { Instance, types } from "mobx-state-tree";
 import { Resource } from "../project/Resource";
 import { DefinitionsList } from "./DefinitionsList";
 
 const defaultFps = 18;
+const defaultFrameShift = 0;
+const defaultBatchSize = 500;
 
 export const NewProjectStore = types
   .model("NewProjectStore", {
@@ -11,7 +13,7 @@ export const NewProjectStore = types
     definitionId: types.maybe(types.string),
     definitions: DefinitionsList,
     resources: types.array(Resource),
-    batchSize: types.optional(types.number, 500),
+    batchSize: types.optional(types.number, defaultBatchSize),
   })
   .actions((self) => ({
     setDefinitionId(definitionId: string) {
@@ -23,13 +25,17 @@ export const NewProjectStore = types
     setProjectPath(path: string) {
       self.projectPath = path;
     },
+    setBatchSize(batchSize: number) {
+      self.batchSize = batchSize;
+    },
     addResource(path: string) {
       self.resources.push({
         fps: defaultFps,
+        frameShift: defaultFrameShift,
         path,
       });
     },
-    setBatchSize(batchSize: number) {
-      self.batchSize = batchSize;
+    removeResource(resource: Instance<typeof Resource>) {
+      self.resources.remove(resource);
     },
   }));

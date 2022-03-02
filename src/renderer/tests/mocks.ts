@@ -8,7 +8,7 @@ import {
   ItemDefinition,
   ProjectDefinition,
 } from "renderer/models";
-import { IpcDefinitionsService } from "renderer/services";
+import { IpcDefinitionsService, IpcResourcesService } from "renderer/services";
 
 export const mockFieldDefinition = ({
   index,
@@ -128,6 +128,22 @@ export const mockIpcDefinitionsService = ({
     },
     removeDefinition: () => Promise.resolve(),
     saveDefinition: () => Promise.resolve(),
+    ...update,
+  };
+};
+
+export const mockIpcResourcesService = ({
+  update,
+}: {
+  update?: Partial<IpcResourcesService>;
+} = {}): IpcResourcesService => {
+  return {
+    addOnOpenListener: () => void 0,
+    addOnSaveListener: () => void 0,
+    openDialog: () => void 0,
+    removeOnOpenListener: () => void 0,
+    removeOnSaveListener: () => void 0,
+    saveDialog: () => void 0,
     ...update,
   };
 };

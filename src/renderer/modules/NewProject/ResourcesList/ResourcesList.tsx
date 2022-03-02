@@ -4,6 +4,7 @@ import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { NewProjectStore } from "renderer/models";
+import { Resource } from "renderer/models/project/Resource";
 import { useOpenDialog } from "renderer/services";
 import { ResourcesListItem } from "./ResourcesListItem/ResourcesListItem";
 
@@ -29,6 +30,10 @@ export const ResourcesList = observer(
       });
     };
 
+    const handleRemoveClick = (resource: Instance<typeof Resource>) => () => {
+      newProjectStore.removeResource(resource);
+    };
+
     return (
       <Container gap={0} fluid>
         <Row align="center">
@@ -43,7 +48,10 @@ export const ResourcesList = observer(
         <Spacer y={1} />
         {newProjectStore.resources.map((resource) => (
           <Row key={resource.id}>
-            <ResourcesListItem resource={resource} />
+            <ResourcesListItem
+              resource={resource}
+              onRemoveClick={handleRemoveClick(resource)}
+            />
           </Row>
         ))}
       </Container>

@@ -11,5 +11,9 @@
   "resourcesList": "Resources",
   "resourceURL": "Add URL",
   "resourceLocal": "Add local",
-  "batchSizePlaceholder": "Batch size"
+  "batchSizePlaceholder": "Batch size",
+  "resourcePathLabel": "Path",
+  "resourceFpsLabel": "Fps",
+  "resourceFrameShiftLabel": "Frame shift",
+  "resourceRemove": "Remove"
 }
