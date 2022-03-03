@@ -5,7 +5,7 @@ import userEvent from "@testing-library/user-event";
 import { ComponentProps } from "react";
 import {
   mockDefinitionStore,
-  mockIpcResourcesService,
+  mockElectronServices,
 } from "renderer/tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import i18n from "renderer/utils/i18next";
@@ -79,15 +79,14 @@ describe("<DefinitionForm />", () => {
 
     const definitionStore = mockDefinitionStore();
     const saveDefinition = jest.fn(() => Promise.resolve());
-    window.electron = {
-      ipcResources: mockIpcResourcesService(),
+    window.electron = mockElectronServices({
       ipcDefinitions: {
         saveDefinition,
         readDefinition: jest.fn(),
         readDefinitions: jest.fn(),
         removeDefinition: jest.fn(),
       },
-    };
+    });
 
     renderComponent({ definitionStore });
 
@@ -110,15 +109,14 @@ describe("<DefinitionForm />", () => {
 
     const definitionStore = mockDefinitionStore();
     const saveDefinition = jest.fn(() => Promise.reject());
-    window.electron = {
-      ipcResources: mockIpcResourcesService(),
+    window.electron = mockElectronServices({
       ipcDefinitions: {
         saveDefinition,
         readDefinition: jest.fn(),
         readDefinitions: jest.fn(),
         removeDefinition: jest.fn(),
       },
-    };
+    });
 
     renderComponent({ definitionStore });
 

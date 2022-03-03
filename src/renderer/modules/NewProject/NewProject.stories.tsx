@@ -1,8 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import {
-  mockIpcDefinitionsService,
-  mockIpcResourcesService,
-} from "renderer/tests/mocks";
+import { mockElectronServices } from "renderer/tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { NewProject } from "./NewProject";
 
@@ -11,10 +8,7 @@ export default {
   component: NewProject,
   loaders: [
     async () => {
-      window.electron = {
-        ipcDefinitions: mockIpcDefinitionsService(),
-        ipcResources: mockIpcResourcesService(),
-      };
+      window.electron = mockElectronServices();
       return {};
     },
   ],

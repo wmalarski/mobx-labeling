@@ -1,12 +1,9 @@
-import { IpcDefinitionsService, IpcResourcesService } from "renderer/services";
+import { ElectronServices } from "renderer/services";
 
 export {};
 
 declare global {
   interface Window {
-    electron: {
-      ipcDefinitions: IpcDefinitionsService;
-      ipcResources: IpcResourcesService;
-    };
+    electron: ElectronServices;
   }
 }

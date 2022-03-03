@@ -49,3 +49,8 @@ export type IpcResourcesService = {
     callback: (event: IpcRendererEvent, value: SaveDialogReturnValue) => void
   ): void;
 };
+
+export type ElectronServices = {
+  ipcDefinitions: IpcDefinitionsService;
+  ipcResources: IpcResourcesService;
+};

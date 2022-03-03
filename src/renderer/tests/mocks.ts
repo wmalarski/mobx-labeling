@@ -9,7 +9,12 @@ import {
   NewProjectStore,
   ProjectDefinition,
 } from "renderer/models";
-import { IpcDefinitionsService, IpcResourcesService } from "renderer/services";
+import { Resource } from "renderer/models/project/Resource";
+import {
+  ElectronServices,
+  IpcDefinitionsService,
+  IpcResourcesService,
+} from "renderer/services";
 
 export const mockFieldDefinition = ({
   index,
@@ -100,6 +105,19 @@ export const mockDefinitionStore = (
   });
 };
 
+export const mockResource = ({
+  update,
+}: {
+  update?: Partial<SnapshotIn<typeof Resource>>;
+} = {}) => {
+  return Resource.create({
+    fps: 20,
+    frameShift: 0,
+    path: "path",
+    ...update,
+  });
+};
+
 export const mockNewProjectStore = ({
   update,
 }: {
@@ -157,6 +175,16 @@ export const mockIpcResourcesService = ({
     removeOnOpenListener: () => void 0,
     removeOnSaveListener: () => void 0,
     saveDialog: () => void 0,
+    ...update,
+  };
+};
+
+export const mockElectronServices = (
+  update: Partial<ElectronServices> = {}
+): ElectronServices => {
+  return {
+    ipcResources: mockIpcResourcesService(),
+    ipcDefinitions: mockIpcDefinitionsService(),
     ...update,
   };
 };

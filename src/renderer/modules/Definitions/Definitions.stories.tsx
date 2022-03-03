@@ -1,10 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { useState } from "react";
 import { Router } from "react-location";
-import {
-  mockIpcDefinitionsService,
-  mockIpcResourcesService,
-} from "renderer/tests/mocks";
+import { mockElectronServices } from "renderer/tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { location, routes } from "renderer/utils/routes";
 import { Definitions } from "./Definitions";
@@ -14,10 +11,7 @@ export default {
   component: Definitions,
   loaders: [
     async () => {
-      window.electron = {
-        ipcDefinitions: mockIpcDefinitionsService(),
-        ipcResources: mockIpcResourcesService(),
-      };
+      window.electron = mockElectronServices();
       return {};
     },
   ],

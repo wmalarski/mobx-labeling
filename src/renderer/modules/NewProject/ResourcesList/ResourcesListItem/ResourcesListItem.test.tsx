@@ -3,7 +3,7 @@ import "@testing-library/jest-dom/extend-expect";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ComponentProps } from "react";
-import { Resource } from "renderer/models/project/Resource";
+import { mockResource } from "renderer/tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import i18n from "renderer/utils/i18next";
 import { ResourcesListItem } from "./ResourcesListItem";
@@ -16,7 +16,7 @@ const renderComponent = ({
 }: PropsWithTestWrapper<Partial<Props>> = {}) => {
   const defaultProps: Props = {
     onRemoveClick: () => void 0,
-    resource: Resource.create({ fps: 20, frameShift: 0, path: "path" }),
+    resource: mockResource(),
   };
 
   return render(
@@ -39,7 +39,7 @@ describe("<ResourcesListItem />", () => {
   it("should change fps value", async () => {
     expect.hasAssertions();
 
-    const resource = Resource.create({ fps: 10, frameShift: 0, path: "path" });
+    const resource = mockResource();
 
     renderComponent({ resource });
 
@@ -60,7 +60,7 @@ describe("<ResourcesListItem />", () => {
   it("should change frame shift value", async () => {
     expect.hasAssertions();
 
-    const resource = Resource.create({ fps: 10, frameShift: 0, path: "path" });
+    const resource = mockResource();
 
     renderComponent({ resource });
 

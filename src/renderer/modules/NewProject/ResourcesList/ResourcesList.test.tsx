@@ -4,7 +4,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ComponentProps } from "react";
 import {
-  mockIpcDefinitionsService,
+  mockElectronServices,
   mockIpcResourcesService,
   mockNewProjectStore,
 } from "renderer/tests/mocks";
@@ -31,10 +31,7 @@ const renderComponent = ({
 
 describe("<ResourcesList />", () => {
   beforeEach(() => {
-    window.electron = {
-      ipcResources: mockIpcResourcesService(),
-      ipcDefinitions: mockIpcDefinitionsService(),
-    };
+    window.electron = mockElectronServices();
   });
 
   it("should render", async () => {
@@ -69,14 +66,13 @@ describe("<ResourcesList />", () => {
 
     const openDialog = jest.fn();
 
-    window.electron = {
+    window.electron = mockElectronServices({
       ipcResources: mockIpcResourcesService({
         update: {
           openDialog,
         },
       }),
-      ipcDefinitions: mockIpcDefinitionsService(),
-    };
+    });
 
     renderComponent();
 
@@ -96,14 +92,13 @@ describe("<ResourcesList />", () => {
 
     const newProjectStore = mockNewProjectStore();
 
-    window.electron = {
-      ipcDefinitions: mockIpcDefinitionsService(),
+    window.electron = mockElectronServices({
       ipcResources: mockIpcResourcesService({
         update: {
           addOnOpenListener,
         },
       }),
-    };
+    });
 
     renderComponent({ newProjectStore });
 

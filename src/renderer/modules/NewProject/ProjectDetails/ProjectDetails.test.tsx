@@ -5,6 +5,7 @@ import userEvent from "@testing-library/user-event";
 import { ComponentProps } from "react";
 import {
   mockDefinitionEntries,
+  mockElectronServices,
   mockIpcDefinitionsService,
   mockIpcResourcesService,
   mockNewProjectStore,
@@ -32,10 +33,7 @@ const renderComponent = ({
 
 describe("<ProjectDetails />", () => {
   beforeEach(() => {
-    window.electron = {
-      ipcResources: mockIpcResourcesService(),
-      ipcDefinitions: mockIpcDefinitionsService(),
-    };
+    window.electron = mockElectronServices();
   });
 
   it("should render", async () => {
@@ -105,12 +103,11 @@ describe("<ProjectDetails />", () => {
 
     const entries = mockDefinitionEntries();
     const firstEntry = entries[0];
-    window.electron = {
-      ipcResources: mockIpcResourcesService(),
+    window.electron = mockElectronServices({
       ipcDefinitions: mockIpcDefinitionsService({
         updateEntries: entries,
       }),
-    };
+    });
 
     const newProjectStore = mockNewProjectStore();
 
@@ -135,14 +132,13 @@ describe("<ProjectDetails />", () => {
 
     const newProjectStore = mockNewProjectStore();
 
-    window.electron = {
-      ipcDefinitions: mockIpcDefinitionsService(),
+    window.electron = mockElectronServices({
       ipcResources: mockIpcResourcesService({
         update: {
           addOnSaveListener,
         },
       }),
-    };
+    });
 
     renderComponent({ newProjectStore });
 
@@ -162,14 +158,13 @@ describe("<ProjectDetails />", () => {
 
     const newProjectStore = mockNewProjectStore();
 
-    window.electron = {
-      ipcDefinitions: mockIpcDefinitionsService(),
+    window.electron = mockElectronServices({
       ipcResources: mockIpcResourcesService({
         update: {
           addOnSaveListener,
         },
       }),
-    };
+    });
 
     renderComponent({ newProjectStore });
 
@@ -187,14 +182,13 @@ describe("<ProjectDetails />", () => {
 
     const newProjectStore = mockNewProjectStore();
 
-    window.electron = {
-      ipcDefinitions: mockIpcDefinitionsService(),
+    window.electron = mockElectronServices({
       ipcResources: mockIpcResourcesService({
         update: {
           saveDialog,
         },
       }),
-    };
+    });
 
     renderComponent({ newProjectStore });
 

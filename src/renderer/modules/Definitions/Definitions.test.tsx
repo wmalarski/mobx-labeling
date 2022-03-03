@@ -4,8 +4,8 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import {
   mockDefinitionEntries,
+  mockElectronServices,
   mockIpcDefinitionsService,
-  mockIpcResourcesService,
 } from "renderer/tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import i18n from "renderer/utils/i18next";
@@ -39,12 +39,11 @@ describe("<Definitions />", () => {
 
     const entries = mockDefinitionEntries();
     const firstDefinition = entries[0].name;
-    window.electron = {
-      ipcResources: mockIpcResourcesService(),
+    window.electron = mockElectronServices({
       ipcDefinitions: mockIpcDefinitionsService({
         updateEntries: entries,
       }),
-    };
+    });
 
     renderComponent();
 
@@ -64,12 +63,11 @@ describe("<Definitions />", () => {
 
     const entries = mockDefinitionEntries({ entriesCount: 12 });
     const lastDefinition = entries[entries.length - 1].name;
-    window.electron = {
-      ipcResources: mockIpcResourcesService(),
+    window.electron = mockElectronServices({
       ipcDefinitions: mockIpcDefinitionsService({
         updateEntries: entries,
       }),
-    };
+    });
 
     renderComponent();
 
@@ -93,12 +91,11 @@ describe("<Definitions />", () => {
 
     const entries = mockDefinitionEntries({ entriesCount: 12 });
     const lastDefinition = entries[entries.length - 1].name;
-    window.electron = {
-      ipcResources: mockIpcResourcesService(),
+    window.electron = mockElectronServices({
       ipcDefinitions: mockIpcDefinitionsService({
         updateEntries: entries,
       }),
-    };
+    });
 
     renderComponent();
 
@@ -123,15 +120,14 @@ describe("<Definitions />", () => {
 
     const removeDefinition = jest.fn(() => Promise.resolve());
     const entries = mockDefinitionEntries({ entriesCount: 1 });
-    window.electron = {
-      ipcResources: mockIpcResourcesService(),
+    window.electron = mockElectronServices({
       ipcDefinitions: mockIpcDefinitionsService({
         updateEntries: entries,
         update: {
           removeDefinition,
         },
       }),
-    };
+    });
 
     renderComponent();
 
