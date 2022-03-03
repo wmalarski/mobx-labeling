@@ -1,9 +1,9 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps } from "react";
-import { NewProjectStore } from "renderer/models";
 import {
   mockIpcDefinitionsService,
   mockIpcResourcesService,
+  mockNewProjectStore,
 } from "renderer/tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { ResourcesList } from "./ResourcesList";
@@ -40,18 +40,20 @@ const Template: ComponentStory<typeof ResourcesListStory> = ResourcesListStory;
 export const Playground = Template.bind({});
 Playground.args = {
   wrapperProps: {},
-  newProjectStore: NewProjectStore.create({
-    definitions: {
-      definitions: [],
-    },
-    name: "Name123",
-    resources: [
-      {
-        fps: 20,
-        path: "path/to/file",
-        id: "qwe",
-        frameShift: 0,
+  newProjectStore: mockNewProjectStore({
+    update: {
+      definitions: {
+        definitions: [],
       },
-    ],
+      name: "Name123",
+      resources: [
+        {
+          fps: 20,
+          path: "path/to/file",
+          id: "qwe",
+          frameShift: 0,
+        },
+      ],
+    },
   }),
 };

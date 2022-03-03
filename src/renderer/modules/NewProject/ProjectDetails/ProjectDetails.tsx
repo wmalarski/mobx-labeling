@@ -94,7 +94,7 @@ export const ProjectDetails = observer(
               size="sm"
               css={{ padding: "$4" }}
             >
-              <Pencil1Icon />
+              <Pencil1Icon aria-label={t("browseLocation")} />
             </Button>
           }
         />

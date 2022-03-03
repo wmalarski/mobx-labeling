@@ -3,10 +3,10 @@ import "@testing-library/jest-dom/extend-expect";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ComponentProps } from "react";
-import { NewProjectStore } from "renderer/models";
 import {
   mockIpcDefinitionsService,
   mockIpcResourcesService,
+  mockNewProjectStore,
 } from "renderer/tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import i18n from "renderer/utils/i18next";
@@ -19,10 +19,7 @@ const renderComponent = ({
   ...props
 }: PropsWithTestWrapper<Partial<Props>> = {}) => {
   const defaultProps: Props = {
-    newProjectStore: NewProjectStore.create({
-      definitions: {},
-      name: "",
-    }),
+    newProjectStore: mockNewProjectStore(),
   };
 
   return render(
@@ -52,10 +49,10 @@ describe("<ResourcesList />", () => {
   it("should remove resource after click remove", async () => {
     expect.hasAssertions();
 
-    const newProjectStore = NewProjectStore.create({
-      definitions: {},
-      name: "",
-      resources: [{ fps: 10, frameShift: 0, path: "" }],
+    const newProjectStore = mockNewProjectStore({
+      update: {
+        resources: [{ fps: 10, frameShift: 0, path: "" }],
+      },
     });
 
     renderComponent({ newProjectStore });
@@ -97,18 +94,15 @@ describe("<ResourcesList />", () => {
       listener({}, { canceled: false, filePaths: ["newPath"] });
     });
 
-    const newProjectStore = NewProjectStore.create({
-      definitions: {},
-      name: "",
-    });
+    const newProjectStore = mockNewProjectStore();
 
     window.electron = {
+      ipcDefinitions: mockIpcDefinitionsService(),
       ipcResources: mockIpcResourcesService({
         update: {
           addOnOpenListener,
         },
       }),
-      ipcDefinitions: mockIpcDefinitionsService(),
     };
 
     renderComponent({ newProjectStore });

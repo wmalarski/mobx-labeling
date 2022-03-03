@@ -9,7 +9,7 @@ const defaultBatchSize = 500;
 export const NewProjectStore = types
   .model("NewProjectStore", {
     name: types.string,
-    projectPath: types.maybe(types.string),
+    projectPath: types.optional(types.string, ""),
     definitionId: types.maybe(types.string),
     definitions: DefinitionsList,
     resources: types.array(Resource),

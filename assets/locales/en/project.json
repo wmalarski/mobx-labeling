@@ -15,5 +15,6 @@
   "resourcePathLabel": "Path",
   "resourceFpsLabel": "Fps",
   "resourceFrameShiftLabel": "Frame shift",
-  "resourceRemove": "Remove"
+  "resourceRemove": "Remove",
+  "browseLocation": "Browse"
 }

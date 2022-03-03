@@ -6,6 +6,7 @@ import {
   DefinitionStore,
   FieldDefinition,
   ItemDefinition,
+  NewProjectStore,
   ProjectDefinition,
 } from "renderer/models";
 import { IpcDefinitionsService, IpcResourcesService } from "renderer/services";
@@ -96,6 +97,18 @@ export const mockDefinitionStore = (
 ) => {
   return DefinitionStore.create({
     projectDefinition: mockProjectDefinition(args),
+  });
+};
+
+export const mockNewProjectStore = ({
+  update,
+}: {
+  update?: Partial<SnapshotIn<typeof NewProjectStore>>;
+} = {}) => {
+  return NewProjectStore.create({
+    definitions: {},
+    name: "Project name",
+    ...update,
   });
 };
 
