@@ -63,5 +63,6 @@
   "searchPlaceholder": "Search",
   "removeDefinition": "Remove",
   "useDefinition": "Use in project",
-  "editDefinition": "Edit definition"
+  "editDefinition": "Edit definition",
+  "loadingError": "Loading error"
 }

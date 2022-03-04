@@ -84,6 +84,11 @@ export const Definitions = observer((): ReactElement => {
           <Spacer y={0.5} />
         </Fragment>
       ))}
+      {definitionsList.error && (
+        <Text h4 color="$error">
+          {t("loadingError")}
+        </Text>
+      )}
       <Spacer y={0.5} />
       <Row justify="center">
         <Pagination

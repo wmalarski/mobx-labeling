@@ -115,6 +115,30 @@ describe("<Definitions />", () => {
     ).resolves.toBeInTheDocument();
   });
 
+  it("should show failed loading message", async () => {
+    expect.hasAssertions();
+
+    const readDefinitions = () => Promise.reject("error");
+
+    window.electron = mockElectronServices({
+      ipcDefinitions: mockIpcDefinitionsService({
+        update: {
+          readDefinitions,
+        },
+      }),
+    });
+
+    renderComponent();
+
+    const label = i18n.t<string>("loadingError", { ns: "definition" });
+
+    await waitFor(async () => {
+      await expect(screen.findByText(label)).resolves.toBeInTheDocument();
+    });
+
+    await expect(screen.findByText(label)).resolves.toBeInTheDocument();
+  });
+
   it("should receive remove event", async () => {
     expect.hasAssertions();
 
@@ -140,6 +164,38 @@ describe("<Definitions />", () => {
     userEvent.click(await screen.findByText(label));
 
     expect(removeDefinition).toHaveBeenCalledTimes(1);
+  });
+
+  it("should show error message after failed remove", async () => {
+    expect.hasAssertions();
+
+    const removeDefinition = () => Promise.reject();
+    const entries = mockDefinitionEntries({ entriesCount: 1 });
+    window.electron = mockElectronServices({
+      ipcDefinitions: mockIpcDefinitionsService({
+        updateEntries: entries,
+        update: {
+          removeDefinition,
+        },
+      }),
+    });
+
+    renderComponent();
+
+    const remove = i18n.t<string>("removeDefinition", { ns: "definition" });
+    const error = i18n.t<string>("loadingError", { ns: "definition" });
+
+    await waitFor(async () => {
+      await expect(screen.findByText(remove)).resolves.toBeInTheDocument();
+    });
+
+    userEvent.click(await screen.findByText(remove));
+
+    await waitFor(async () => {
+      await expect(screen.findByText(error)).resolves.toBeInTheDocument();
+    });
+
+    await expect(screen.findByText(error)).resolves.toBeInTheDocument();
   });
 
   it("should navigate to new definition after click", async () => {

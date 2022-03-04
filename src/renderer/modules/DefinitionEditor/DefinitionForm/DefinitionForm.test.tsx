@@ -9,6 +9,7 @@ import {
 } from "renderer/tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import i18n from "renderer/utils/i18next";
+import { routePaths } from "renderer/utils/routes";
 import { DefinitionForm } from "./DefinitionForm";
 
 type Props = ComponentProps<typeof DefinitionForm>;
@@ -30,6 +31,10 @@ const renderComponent = ({
 };
 
 describe("<DefinitionForm />", () => {
+  beforeEach(() => {
+    jest.requireMock("react-location").mockNavigate.mockReset();
+  });
+
   it("should render", async () => {
     expect.hasAssertions();
 
@@ -148,5 +153,21 @@ describe("<DefinitionForm />", () => {
     expect(definitionStore.projectDefinition.items).toHaveLength(
       initialLength + 1
     );
+  });
+
+  it("should navigate to new definition after click", async () => {
+    expect.hasAssertions();
+
+    const mockNavigate = jest.requireMock("react-location").mockNavigate;
+
+    renderComponent();
+
+    const text = i18n.t<string>("definitionsList", { ns: "definition" });
+    userEvent.click(await screen.findByText(text));
+
+    expect(mockNavigate).toHaveBeenCalledTimes(1);
+    expect(mockNavigate).toHaveBeenCalledWith({
+      to: routePaths.definitions,
+    });
   });
 });
