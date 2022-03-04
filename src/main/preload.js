@@ -36,4 +36,25 @@ contextBridge.exposeInMainWorld("electron", {
       ipcRenderer.removeListener("SaveDialog", callback);
     },
   },
+  ipcProject: {
+    async createProject(project) {
+      return ipcRenderer.invoke("CreateProject", project);
+    },
+    async readProject(projectId) {
+      return ipcRenderer.invoke("ReadDefinitions", projectId);
+    },
+    async readBatch({ projectId, batchId }) {
+      return ipcRenderer.invoke("ReadBatch", { projectId, batchId });
+    },
+    async updateBatch({ projectId, batchId, batchData }) {
+      return ipcRenderer.invoke("UpdateBatch", {
+        projectId,
+        batchId,
+        batchData,
+      });
+    },
+    async readProjects({ start, limit, query }) {
+      return ipcRenderer.invoke("ReadProjects", { start, limit, query });
+    },
+  },
 });

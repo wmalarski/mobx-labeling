@@ -1,62 +1,20 @@
 import { ipcMain } from "electron";
-import { readFile, rm, writeFile } from "fs/promises";
 import path from "path";
 import {
   IpcRendererChannel,
   PaginationArgs,
   PaginationResult,
   ProjectDefinitionSnapshot,
+  ProjectRoot,
 } from "../types";
 import { appDataPath, makeDefinitionsDir } from "../util";
 
-const definitionsListPath = path.join(appDataPath, "definitions.json");
+const recentListPath = path.join(appDataPath, "recent.json");
 
-const readDefinitionsList = async (): Promise<ProjectDefinitionSnapshot[]> => {
-  try {
-    const data = await readFile(definitionsListPath);
-    return JSON.parse(data.toString());
-  } catch (err) {
-    return [];
-  }
-};
-
-const writeDefinitionsList = async (
-  data: ProjectDefinitionSnapshot[]
-): Promise<void> => {
-  const json = JSON.stringify(data);
-  await writeFile(definitionsListPath, json);
-};
-
-const getDefinitionFilename = (projectDefinitionId: string): string => {
-  const filename = `${projectDefinitionId}.json`;
-  return path.join(appDataPath, filename);
-};
-
-const readDefinition = async (
-  projectDefinitionId: string
-): Promise<ProjectDefinitionSnapshot> => {
-  const definitionPath = getDefinitionFilename(projectDefinitionId);
-  const data = await readFile(definitionPath);
-  return JSON.parse(data.toString());
-};
-
-const writeDefinition = async (
-  data: ProjectDefinitionSnapshot
-): Promise<void> => {
-  const json = JSON.stringify(data);
-  const definitionPath = getDefinitionFilename(data.id);
-  await writeFile(definitionPath, json);
-};
-
-const removeDefinition = async (projectDefinitionId: string): Promise<void> => {
-  const definitionPath = getDefinitionFilename(projectDefinitionId);
-  await rm(definitionPath);
-};
-
-export const setupDefinitionsHandles = () => {
+export const setupProjectHandles = () => {
   ipcMain.handle(
-    IpcRendererChannel.WriteDefinition,
-    async (_event, snapshot: ProjectDefinitionSnapshot): Promise<void> => {
+    IpcRendererChannel.CreateProject,
+    async (_event, project: ProjectRoot): Promise<void> => {
       await makeDefinitionsDir();
 
       const definitions = await readDefinitionsList();
@@ -85,7 +43,7 @@ export const setupDefinitionsHandles = () => {
     }
   );
   ipcMain.handle(
-    IpcRendererChannel.ReadDefinitions,
+    IpcRendererChannel.ReadProject,
     async (
       _event,
       { limit, start, query }: PaginationArgs
@@ -106,7 +64,7 @@ export const setupDefinitionsHandles = () => {
     }
   );
   ipcMain.handle(
-    IpcRendererChannel.ReadDefinition,
+    IpcRendererChannel.ReadBatch,
     async (
       _event,
       projectDefinitionId: string
@@ -119,7 +77,24 @@ export const setupDefinitionsHandles = () => {
     }
   );
   ipcMain.handle(
-    IpcRendererChannel.RemoveDefinition,
+    IpcRendererChannel.UpdateBatch,
+    async (_event, projectDefinitionId: string): Promise<void> => {
+      await makeDefinitionsDir();
+
+      const previousList = await readDefinitionsList();
+
+      const filtered = previousList.filter(
+        (entry) => entry.id !== projectDefinitionId
+      );
+
+      await Promise.all([
+        removeDefinition(projectDefinitionId),
+        writeDefinitionsList(filtered),
+      ]);
+    }
+  );
+  ipcMain.handle(
+    IpcRendererChannel.ReadProjects,
     async (_event, projectDefinitionId: string): Promise<void> => {
       await makeDefinitionsDir();
 

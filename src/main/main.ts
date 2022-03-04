@@ -13,6 +13,7 @@ import log from "electron-log";
 import { autoUpdater } from "electron-updater";
 import path from "path";
 import { setupDefinitionsHandles } from "./handlers/definitions";
+import { setupProjectHandles } from "./handlers/project";
 import { setupResourcesHandles } from "./handlers/resources";
 import MenuBuilder from "./menu";
 import { resolveHtmlPath } from "./util";
@@ -29,6 +30,7 @@ let mainWindow: BrowserWindow | null = null;
 
 setupDefinitionsHandles();
 setupResourcesHandles();
+setupProjectHandles();
 
 if (process.env.NODE_ENV === "production") {
   const sourceMapSupport = require("source-map-support");

@@ -5,6 +5,20 @@ export type ProjectDefinitionSnapshot = {
   updatedAt: number;
 };
 
+export type Resource = {
+  id: string;
+  path: string;
+  fps: number;
+  frameShift: number;
+};
+
+export type ProjectRoot = {
+  projectPath: string;
+  updatedAt: number;
+  batchSize: number;
+  resources: Resource[];
+};
+
 export enum IpcRendererChannel {
   WriteDefinition = "WriteDefinition",
   ReadDefinitions = "ReadDefinitions",
@@ -12,6 +26,11 @@ export enum IpcRendererChannel {
   RemoveDefinition = "RemoveDefinition",
   OpenDialog = "OpenDialog",
   SaveDialog = "SaveDialog",
+  CreateProject = "CreateProject",
+  ReadProject = "ReadProject",
+  ReadBatch = "ReadBatch",
+  UpdateBatch = "UpdateBatch",
+  ReadProjects = "ReadProjects",
 }
 
 export type PaginationArgs = {
