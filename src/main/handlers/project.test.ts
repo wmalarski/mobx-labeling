@@ -1,10 +1,15 @@
 import "@testing-library/jest-dom";
 import "@testing-library/jest-dom/extend-expect";
-import { rm } from "fs/promises";
+import { access, rm } from "fs/promises";
+import os from "os";
 import path from "path";
 import { ProjectRoot } from "../types";
 import { appDataPath } from "../util";
-import { handleCreateProject } from "./project";
+import {
+  handleCreateProject,
+  handleReadProject,
+  recentListPath,
+} from "./project";
 
 const mockProjectRoot = (update: Partial<ProjectRoot> = {}): ProjectRoot => {
   return {
@@ -28,7 +33,7 @@ const mockProjectRoot = (update: Partial<ProjectRoot> = {}): ProjectRoot => {
 
 jest.mock("electron", () => ({
   app: {
-    getPath: jest.fn(() => __dirname),
+    getPath: jest.fn(() => path.join(os.tmpdir(), "lab-tests")),
   },
 }));
 
@@ -48,6 +53,19 @@ describe("project handlers", () => {
 
     await handleCreateProject(project);
 
-    expect(true).toBeTruthy();
+    await expect(access(project.projectPath)).resolves.toBeUndefined();
+    await expect(access(recentListPath)).resolves.toBeUndefined();
+  });
+
+  it("should read project", async () => {
+    expect.hasAssertions();
+
+    const project = mockProjectRoot();
+
+    await handleCreateProject(project);
+
+    const result = await handleReadProject(project.projectPath);
+
+    expect(result).toStrictEqual(project);
   });
 });

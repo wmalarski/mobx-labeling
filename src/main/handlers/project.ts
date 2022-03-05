@@ -1,3 +1,4 @@
+import AdmZip from "adm-zip";
 import { ipcMain } from "electron";
 import { readFile, writeFile } from "fs/promises";
 import path from "path";
@@ -11,7 +12,9 @@ import {
 } from "../types";
 import { appDataPath, makeAppDir } from "../util";
 
-const recentListPath = path.join(appDataPath, "recent.json");
+export const recentListPath = path.join(appDataPath, "recent.json");
+const rootFilename = "root.json";
+const corruptedMessage = "File corrupted";
 
 const readRecentList = async (): Promise<ProjectInfo[]> => {
   try {
@@ -28,6 +31,7 @@ const writeRecentList = async (data: ProjectInfo[]): Promise<void> => {
 };
 
 const updateRecentList = async (project: ProjectRoot): Promise<void> => {
+  await makeAppDir();
   const recent = await readRecentList();
 
   const info: ProjectInfo = {
@@ -51,41 +55,39 @@ const updateRecentList = async (project: ProjectRoot): Promise<void> => {
 export const handleCreateProject = async (
   project: ProjectRoot
 ): Promise<void> => {
-  console.log("handleCreateProject", recentListPath, project);
-  await makeAppDir();
-
   await updateRecentList(project);
 
-  // await Promise.all([
-  //   writeDefinition(snapshot),
-  //   writeDefinitionsList(updated),
-  // ]);
-  // return Promise.("failure");
+  const zip = new AdmZip();
+
+  const buffer = Buffer.from(JSON.stringify(project));
+  zip.addFile(rootFilename, buffer);
+
+  zip.writeZip(project.projectPath);
 };
 
 export const handleReadProject = async (
   projectPath: string
 ): Promise<ProjectRoot> => {
-  await makeAppDir();
-  console.log("handleReadProject", recentListPath, projectPath);
-  // const entries = await readDefinitionsList();
+  const zip = new AdmZip(projectPath);
 
-  // const lower = query?.toLowerCase();
+  const root = zip.getEntry(rootFilename);
 
-  // const queried = !lower
-  //   ? entries
-  //   : entries.filter(({ name }) => name.toLowerCase().includes(lower));
+  if (!root) {
+    return Promise.reject(corruptedMessage);
+  }
 
-  // const data = queried.slice(start, start + limit);
+  const buffer = root.getData();
+  const project: ProjectRoot = JSON.parse(buffer.toString());
 
-  return Promise.reject("failure");
+  await updateRecentList(project);
+
+  return project;
 };
 
 export const handleReadBatch = async (
   projectPath: string,
   batchId: string
 ): Promise<Batch> => {
-  await makeAppDir();
   console.log("handleReadBatch", projectPath, batchId);
   // const data = await readDefinition(projectDefinitionId);
 
@@ -99,7 +101,6 @@ export const handleUpdateBatch = async (
   batchId: string,
   batch: Batch
 ): Promise<void> => {
-  await makeAppDir();
   console.log("handleUpdateBatch", projectId, batchId, batch);
   // const previousList = await readDefinitionsList();
 
@@ -120,7 +121,6 @@ export const handleReadProjects = async ({
   start,
   query,
 }: PaginationArgs): Promise<PaginationResult<ProjectInfo>> => {
-  await makeAppDir();
   console.log("handleReadProjects", limit, start, query);
   // const previousList = await readDefinitionsList();
 
@@ -132,6 +132,16 @@ export const handleReadProjects = async ({
   //   removeDefinition(projectDefinitionId),
   //   writeDefinitionsList(filtered),
   // ]);
+
+  // const entries = await readDefinitionsList();
+
+  // const lower = query?.toLowerCase();
+
+  // const queried = !lower
+  //   ? entries
+  //   : entries.filter(({ name }) => name.toLowerCase().includes(lower));
+
+  // const data = queried.slice(start, start + limit);
 
   return Promise.reject("failure" + start);
 };
