@@ -40,18 +40,14 @@ contextBridge.exposeInMainWorld("electron", {
     async createProject(project) {
       return ipcRenderer.invoke("CreateProject", project);
     },
-    async readProject(projectId) {
-      return ipcRenderer.invoke("ReadDefinitions", projectId);
+    async readProject(projectPath) {
+      return ipcRenderer.invoke("ReadDefinitions", projectPath);
     },
-    async readBatch({ projectId, batchId }) {
-      return ipcRenderer.invoke("ReadBatch", { projectId, batchId });
+    async readBatch({ projectPath, batchId }) {
+      return ipcRenderer.invoke("ReadBatch", projectPath, batchId);
     },
-    async updateBatch({ projectId, batchId, batchData }) {
-      return ipcRenderer.invoke("UpdateBatch", {
-        projectId,
-        batchId,
-        batchData,
-      });
+    async updateBatch({ projectPath, batchId, batchData }) {
+      return ipcRenderer.invoke("UpdateBatch", projectPath, batchId, batchData);
     },
     async readProjects({ start, limit, query }) {
       return ipcRenderer.invoke("ReadProjects", { start, limit, query });

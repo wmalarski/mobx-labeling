@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === "development") {
 
 export const appDataPath = path.join(app.getPath("userData"), "MobXLabeling");
 
-export const makeDefinitionsDir = async (): Promise<void> => {
+export const makeAppDir = async (): Promise<void> => {
   try {
     await mkdir(appDataPath);
   } catch (err) {
