@@ -1,4 +1,5 @@
 import { ipcMain } from "electron";
+import { readFile, writeFile } from "fs/promises";
 import path from "path";
 import {
   Batch,
@@ -12,36 +13,61 @@ import { appDataPath, makeAppDir } from "../util";
 
 const recentListPath = path.join(appDataPath, "recent.json");
 
+const readRecentList = async (): Promise<ProjectInfo[]> => {
+  try {
+    const data = await readFile(recentListPath);
+    return JSON.parse(data.toString());
+  } catch (err) {
+    return [];
+  }
+};
+
+const writeRecentList = async (data: ProjectInfo[]): Promise<void> => {
+  const json = JSON.stringify(data);
+  await writeFile(recentListPath, json);
+};
+
+const updateRecentList = async (project: ProjectRoot): Promise<void> => {
+  const recent = await readRecentList();
+
+  const info: ProjectInfo = {
+    definition: project.definition.name,
+    id: project.id,
+    name: project.name,
+    projectPath: project.projectPath,
+    updatedAt: project.updatedAt,
+  };
+
+  const index = recent.findIndex((entry) => entry.id === info.id);
+
+  const updated = index < 0 ? [info, ...recent] : recent;
+  if (index >= 0) {
+    updated[index] = info;
+  }
+
+  await writeRecentList(updated);
+};
+
 export const handleCreateProject = async (
   project: ProjectRoot
 ): Promise<void> => {
-  // await makeAppDir();
-  // const definitions = await readDefinitionsList();
-  // const entry = {
-  //   description: snapshot.description,
-  //   id: snapshot.id,
-  //   name: snapshot.name,
-  //   updatedAt: snapshot.updatedAt,
-  // };
-  // const index = definitions.findIndex(
-  //   (definition) => definition.id === entry.id
-  // );
-  // const updated = index < 0 ? [entry, ...definitions] : definitions;
-  // if (index >= 0) {
-  //   updated[index] = entry;
-  // }
+  console.log("handleCreateProject", recentListPath, project);
+  await makeAppDir();
+
+  await updateRecentList(project);
+
   // await Promise.all([
   //   writeDefinition(snapshot),
   //   writeDefinitionsList(updated),
   // ]);
-  return Promise.reject("failure");
+  // return Promise.("failure");
 };
 
 export const handleReadProject = async (
   projectPath: string
 ): Promise<ProjectRoot> => {
   await makeAppDir();
-
+  console.log("handleReadProject", recentListPath, projectPath);
   // const entries = await readDefinitionsList();
 
   // const lower = query?.toLowerCase();
@@ -60,7 +86,7 @@ export const handleReadBatch = async (
   batchId: string
 ): Promise<Batch> => {
   await makeAppDir();
-
+  console.log("handleReadBatch", projectPath, batchId);
   // const data = await readDefinition(projectDefinitionId);
 
   // return data;
@@ -74,7 +100,7 @@ export const handleUpdateBatch = async (
   batch: Batch
 ): Promise<void> => {
   await makeAppDir();
-
+  console.log("handleUpdateBatch", projectId, batchId, batch);
   // const previousList = await readDefinitionsList();
 
   // const filtered = previousList.filter(
@@ -95,7 +121,7 @@ export const handleReadProjects = async ({
   query,
 }: PaginationArgs): Promise<PaginationResult<ProjectInfo>> => {
   await makeAppDir();
-
+  console.log("handleReadProjects", limit, start, query);
   // const previousList = await readDefinitionsList();
 
   // const filtered = previousList.filter(
