@@ -16,6 +16,10 @@ export const recentListPath = path.join(appDataPath, "recent.json");
 const rootFilename = "root.json";
 const corruptedMessage = "File corrupted";
 
+const batchFilename = (batchId: string): string => {
+  return `batch-${batchId}.json`;
+};
+
 const readRecentList = async (): Promise<ProjectInfo[]> => {
   try {
     const data = await readFile(recentListPath);
@@ -88,62 +92,48 @@ export const handleReadBatch = async (
   projectPath: string,
   batchId: string
 ): Promise<Batch> => {
-  console.log("handleReadBatch", projectPath, batchId);
-  // const data = await readDefinition(projectDefinitionId);
+  const zip = new AdmZip(projectPath);
+  const entry = zip.getEntry(batchFilename(batchId));
 
-  // return data;
+  if (!entry) {
+    return Promise.reject(corruptedMessage);
+  }
 
-  return Promise.reject("failure");
+  const buffer = entry.getData();
+  const batch: Batch = JSON.parse(buffer.toString());
+
+  return batch;
 };
 
 export const handleUpdateBatch = async (
-  projectId: string,
+  projectPath: string,
   batchId: string,
   batch: Batch
 ): Promise<void> => {
-  console.log("handleUpdateBatch", projectId, batchId, batch);
-  // const previousList = await readDefinitionsList();
+  const zip = new AdmZip(projectPath);
 
-  // const filtered = previousList.filter(
-  //   (entry) => entry.id !== projectDefinitionId
-  // );
+  const buffer = Buffer.from(JSON.stringify(batch));
 
-  // await Promise.all([
-  //   removeDefinition(projectDefinitionId),
-  //   writeDefinitionsList(filtered),
-  // ]);
-
-  return Promise.reject("failure");
+  zip.updateFile(batchFilename(batchId), buffer);
 };
 
 export const handleReadProjects = async ({
   limit,
   start,
   query,
-}: PaginationArgs): Promise<PaginationResult<ProjectInfo>> => {
+}: PaginationArgs): Promise<PaginationResult<ProjectInfo[]>> => {
   console.log("handleReadProjects", limit, start, query);
-  // const previousList = await readDefinitionsList();
+  const entries = await readRecentList();
 
-  // const filtered = previousList.filter(
-  //   (entry) => entry.id !== projectDefinitionId
-  // );
+  const lower = query?.toLowerCase();
 
-  // await Promise.all([
-  //   removeDefinition(projectDefinitionId),
-  //   writeDefinitionsList(filtered),
-  // ]);
+  const queried = !lower
+    ? entries
+    : entries.filter(({ name }) => name.toLowerCase().includes(lower));
 
-  // const entries = await readDefinitionsList();
+  const data = queried.slice(start, start + limit);
 
-  // const lower = query?.toLowerCase();
-
-  // const queried = !lower
-  //   ? entries
-  //   : entries.filter(({ name }) => name.toLowerCase().includes(lower));
-
-  // const data = queried.slice(start, start + limit);
-
-  return Promise.reject("failure" + start);
+  return { data, totalSize: queried.length };
 };
 
 export const setupProjectHandles = () => {
@@ -185,7 +175,7 @@ export const setupProjectHandles = () => {
     async (
       _event: Electron.IpcMainInvokeEvent,
       args: PaginationArgs
-    ): Promise<PaginationResult<ProjectInfo>> => {
+    ): Promise<PaginationResult<ProjectInfo[]>> => {
       return handleReadProjects(args);
     }
   );
