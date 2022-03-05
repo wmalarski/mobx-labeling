@@ -1,4 +1,4 @@
-import { Link as NextUiLink } from "@nextui-org/react";
+import { Link as GeistUiLink } from "@geist-ui/core";
 import { ComponentPropsWithoutRef, ReactElement } from "react";
 import {
   DefaultGenerics,
@@ -11,13 +11,11 @@ export function StyledLink<TGenerics = DefaultGenerics>({
   styleProps,
   ...props
 }: LinkProps<TGenerics> & {
-  styleProps?: ComponentPropsWithoutRef<typeof NextUiLink>;
+  styleProps?: ComponentPropsWithoutRef<typeof GeistUiLink>;
 }): ReactElement {
   return (
     <LocationLink {...props}>
-      <NextUiLink as="span" {...styleProps}>
-        {children}
-      </NextUiLink>
+      <GeistUiLink {...styleProps}>{children}</GeistUiLink>
     </LocationLink>
   );
 }

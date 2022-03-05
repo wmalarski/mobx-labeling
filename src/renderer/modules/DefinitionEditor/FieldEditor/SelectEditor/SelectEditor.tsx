@@ -1,17 +1,14 @@
-import {
-  Button,
-  Container,
-  FormElement,
-  Input,
-  Radio,
-  Row,
-  Spacer,
-  Text,
-} from "@nextui-org/react";
+import { Button, Grid, Input, Radio, Spacer, Text } from "@geist-ui/core";
 import { PlusIcon, TrashIcon } from "@radix-ui/react-icons";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
-import { ChangeEvent, KeyboardEvent, ReactElement, useState } from "react";
+import {
+  ChangeEvent,
+  Fragment,
+  KeyboardEvent,
+  ReactElement,
+  useState,
+} from "react";
 import { useTranslation } from "react-i18next";
 import { SelectDefinition, SelectDefinitionOption } from "renderer/models";
 
@@ -32,11 +29,11 @@ export const SelectEditor = observer(
       fieldDefinition.setDefault(value as string);
     };
 
-    const handleInputChange = (event: ChangeEvent<FormElement>) => {
+    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
       setNewOption(event.target.value);
     };
 
-    const handleInputKeyDown = (event: KeyboardEvent<FormElement>) => {
+    const handleInputKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
       if (event.key !== "Enter" || !isValid) return;
 
       fieldDefinition.pushOption({ text: newOption, size: 2 });
@@ -55,65 +52,72 @@ export const SelectEditor = observer(
 
     const handleSizeChange =
       (option: Instance<typeof SelectDefinitionOption>) =>
-      (event: ChangeEvent<FormElement>) => {
+      (event: ChangeEvent<HTMLInputElement>) => {
         option.setSize(Number(event.target.value));
       };
 
     return (
-      <Container gap={0}>
-        <Row>
+      <Grid.Container gap={1}>
+        <Grid xs={24}>
           <Text h5>{t("selectHeader")}</Text>
-        </Row>
-        <Spacer y={1} />
-        <Row>
+        </Grid>
+        <Grid xs={24}>
           <Radio.Group
             value={fieldDefinition.default}
             onChange={handleDefaultChange}
-            css={{ width: "100%" }}
           >
-            <Container gap={0}>
+            <Grid.Container gap={0.5}>
               {fieldDefinition.options.map((option) => (
-                <Row key={option.text} justify="space-between">
-                  <Radio value={option.text}>
-                    <Text>{option.text}</Text>
-                    <Spacer x={1} />
+                <Fragment key={option.text}>
+                  <Grid
+                    xs={9}
+                    sm={12}
+                    md={15}
+                    justify="space-between"
+                    alignItems="center"
+                  >
+                    <Radio value={option.text}>
+                      <Text>{option.text}</Text>
+                    </Radio>
+                  </Grid>
+                  <Grid xs={15} sm={12} md={9}>
                     <Input
-                      type="number"
+                      width="100%"
                       min={1}
                       max={12}
                       step={1}
                       placeholder={t("selectSize")}
                       aria-label={t("selectSize")}
-                      labelLeft={t("selectSize")}
+                      label={t("selectSize")}
                       value={String(option.size)}
                       onChange={handleSizeChange(option)}
                     />
-                  </Radio>
-                  <Button
-                    auto
-                    color="error"
-                    onClick={handleRemoveClick(option)}
-                    icon={<TrashIcon />}
-                  >
-                    {t("selectRemoveOption")}
-                  </Button>
-                </Row>
+                    <Spacer w={1} />
+                    <Button
+                      auto
+                      color="error"
+                      onClick={handleRemoveClick(option)}
+                      icon={<TrashIcon />}
+                    >
+                      {t("selectRemoveOption")}
+                    </Button>
+                  </Grid>
+                </Fragment>
               ))}
-            </Container>
+            </Grid.Container>
           </Radio.Group>
-        </Row>
-        <Spacer y={1.5} />
-        <Row>
+        </Grid>
+        <Grid xs={24}>
           <Input
-            fullWidth
+            width="100%"
             value={newOption}
             onChange={handleInputChange}
             onKeyDown={handleInputKeyDown}
             placeholder={t("selectInput")}
-            labelLeft={t("selectInput")}
+            label={t("selectInput")}
             aria-label={t("selectInput")}
           />
-          <Spacer x={1} />
+          <Spacer w={1} />
           <Button
             auto
             color="secondary"
@@ -123,8 +127,8 @@ export const SelectEditor = observer(
           >
             {t("selectAddOption")}
           </Button>
-        </Row>
-      </Container>
+        </Grid>
+      </Grid.Container>
     );
   }
 );

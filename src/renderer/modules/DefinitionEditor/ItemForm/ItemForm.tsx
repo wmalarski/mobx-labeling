@@ -1,13 +1,4 @@
-import {
-  Button,
-  Container,
-  FormElement,
-  Grid,
-  Input,
-  Row,
-  Spacer,
-  Text,
-} from "@nextui-org/react";
+import { Button, Grid, Input, Spacer, Text } from "@geist-ui/core";
 import { CopyIcon, PlusIcon, TrashIcon } from "@radix-ui/react-icons";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
@@ -31,11 +22,11 @@ export const ItemForm = observer(
   }: Props): ReactElement => {
     const { t } = useTranslation("definition");
 
-    const handleNameChange = (event: ChangeEvent<FormElement>) => {
+    const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
       itemDefinition.setName(event.target.value);
     };
 
-    const handleDescriptionChange = (event: ChangeEvent<FormElement>) => {
+    const handleDescriptionChange = (event: ChangeEvent<HTMLInputElement>) => {
       itemDefinition.setDescription(event.target.value);
     };
 
@@ -57,8 +48,8 @@ export const ItemForm = observer(
     };
 
     return (
-      <Container gap={0} fluid>
-        <Row justify="space-between" align="center">
+      <Grid.Container gap={0}>
+        <Grid justify="space-between" alignItems="center">
           <div>
             <Text h3>{t("itemFormHeader")}</Text>
           </div>
@@ -96,30 +87,30 @@ export const ItemForm = observer(
               </Grid>
             </Grid.Container>
           </div>
-        </Row>
-        <Spacer y={1} />
-        <Row>
+        </Grid>
+        <Spacer h={1} />
+        <Grid>
           <Input
-            fullWidth
+            width="100%"
             value={itemDefinition.name}
             onChange={handleNameChange}
             placeholder={t("namePlaceholder")}
-            labelLeft={t("namePlaceholder")}
+            label={t("namePlaceholder")}
             aria-label={t("namePlaceholder")}
           />
-        </Row>
-        <Spacer y={0.5} />
-        <Row>
+        </Grid>
+        <Spacer h={0.5} />
+        <Grid>
           <Input
-            fullWidth
+            width="100%"
             value={itemDefinition.description}
             onChange={handleDescriptionChange}
             placeholder={t("descriptionPlaceholder")}
-            labelLeft={t("descriptionPlaceholder")}
+            label={t("descriptionPlaceholder")}
             aria-label={t("descriptionPlaceholder")}
           />
-        </Row>
-      </Container>
+        </Grid>
+      </Grid.Container>
     );
   }
 );

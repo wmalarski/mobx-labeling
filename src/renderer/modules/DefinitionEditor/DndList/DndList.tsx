@@ -1,4 +1,4 @@
-import { Container, Row, Text } from "@nextui-org/react";
+import { Grid, Text } from "@geist-ui/core";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement, useCallback } from "react";
@@ -34,11 +34,11 @@ export const DndList = observer(
     };
 
     return (
-      <Container gap={0}>
-        <Row align="center" justify="space-between">
+      <Grid.Container gap={1}>
+        <Grid xs={24}>
           <Text h3>{t("definitionItems")}</Text>
-        </Row>
-        <Row>
+        </Grid>
+        <Grid xs={24}>
           <DragDropContext onDragEnd={onDragEnd}>
             <DndDroppable
               droppableId={projectDefinition.id}
@@ -59,8 +59,8 @@ export const DndList = observer(
               ))}
             </DndDroppable>
           </DragDropContext>
-        </Row>
-      </Container>
+        </Grid>
+      </Grid.Container>
     );
   }
 );

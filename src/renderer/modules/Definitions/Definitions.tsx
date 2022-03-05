@@ -1,12 +1,4 @@
-import {
-  Button,
-  FormElement,
-  Input,
-  Pagination,
-  Row,
-  Spacer,
-  Text,
-} from "@nextui-org/react";
+import { Button, Grid, Input, Pagination, Spacer, Text } from "@geist-ui/core";
 import { PlusIcon } from "@radix-ui/react-icons";
 import { observer } from "mobx-react-lite";
 import { ChangeEvent, Fragment, ReactElement, useState } from "react";
@@ -31,7 +23,7 @@ export const Definitions = observer((): ReactElement => {
     definitionsList.load({ page: page - 1 });
   };
 
-  const handleQueryChange = (event: ChangeEvent<FormElement>) => {
+  const handleQueryChange = (event: ChangeEvent<HTMLInputElement>) => {
     definitionsList.load({ page: 0, query: event.target.value });
   };
 
@@ -48,8 +40,8 @@ export const Definitions = observer((): ReactElement => {
   return (
     <IntroLayout>
       <Header />
-      <Spacer y={1} />
-      <Row align="center" justify="space-between">
+      <Spacer h={1} />
+      <Grid alignItems="center" justify="space-between">
         <Text h2>{t("definitionsHeader")}</Text>
         <Button
           color="primary"
@@ -58,46 +50,45 @@ export const Definitions = observer((): ReactElement => {
         >
           {t("newDefinitionButton")}
         </Button>
-      </Row>
-      <Spacer y={1} />
-      <Row>
+      </Grid>
+      <Spacer h={1} />
+      <Grid>
         <Input
-          fullWidth
-          type="search"
+          width="100%"
           clearable
           value={definitionsList.query}
           onChange={handleQueryChange}
-          labelLeft={t("searchPlaceholder")}
+          label={t("searchPlaceholder")}
           placeholder={t("searchPlaceholder")}
           aria-label={t("searchPlaceholder")}
         />
-      </Row>
-      <Spacer y={1} />
+      </Grid>
+      <Spacer h={1} />
       {definitionsList.definitions.map((definitionEntry) => (
         <Fragment key={definitionEntry.id}>
-          <Row>
+          <Grid>
             <DefinitionsItem
               definitionEntry={definitionEntry}
               onRemoveClick={handleRemoveClick(definitionEntry.id)}
             />
-          </Row>
-          <Spacer y={0.5} />
+          </Grid>
+          <Spacer h={0.5} />
         </Fragment>
       ))}
       {definitionsList.error && (
-        <Text h4 color="$error">
+        <Text h4 type="error">
           {t("loadingError")}
         </Text>
       )}
-      <Spacer y={0.5} />
-      <Row justify="center">
+      <Spacer h={0.5} />
+      <Grid justify="center">
         <Pagination
-          total={definitionsList.totalPages}
+          count={definitionsList.totalPages}
           page={definitionsList.page}
           onChange={handlePageChange}
         />
-      </Row>
-      <Spacer y={1} />
+      </Grid>
+      <Spacer h={1} />
     </IntroLayout>
   );
 });

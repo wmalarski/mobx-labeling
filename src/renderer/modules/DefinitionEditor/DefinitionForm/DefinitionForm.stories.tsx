@@ -1,7 +1,9 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps } from "react";
-import { mockProjectDefinition } from "renderer/tests/mocks";
+import { Router } from "react-location";
+import { mockDefinitionStore } from "renderer/tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
+import { location, routes } from "renderer/utils/routes";
 import { DefinitionForm } from "./DefinitionForm";
 
 export default {
@@ -16,9 +18,11 @@ const DefinitionFormStory = ({
   ...props
 }: PropsWithTestWrapper<Props>) => {
   return (
-    <TestWrapper {...wrapperProps}>
-      <DefinitionForm {...props} />
-    </TestWrapper>
+    <Router location={location} routes={routes()}>
+      <TestWrapper {...wrapperProps}>
+        <DefinitionForm {...props} />
+      </TestWrapper>
+    </Router>
   );
 };
 
@@ -28,5 +32,5 @@ const Template: ComponentStory<typeof DefinitionFormStory> =
 export const Playground = Template.bind({});
 Playground.args = {
   wrapperProps: {},
-  projectDefinition: mockProjectDefinition(),
+  definitionStore: mockDefinitionStore(),
 };

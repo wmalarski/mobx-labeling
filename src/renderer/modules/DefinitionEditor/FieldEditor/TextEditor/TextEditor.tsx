@@ -1,11 +1,4 @@
-import {
-  Container,
-  FormElement,
-  Input,
-  Row,
-  Spacer,
-  Text,
-} from "@nextui-org/react";
+import { Grid, Input, Text } from "@geist-ui/core";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ChangeEvent, ReactElement } from "react";
@@ -20,27 +13,26 @@ export const TextEditor = observer(
   ({ fieldDefinition }: Props): ReactElement => {
     const { t } = useTranslation("definition");
 
-    const handleDefaultChange = (event: ChangeEvent<FormElement>) => {
+    const handleDefaultChange = (event: ChangeEvent<HTMLInputElement>) => {
       fieldDefinition.setDefault(event.target.value);
     };
 
     return (
-      <Container gap={0}>
-        <Row>
+      <Grid.Container gap={1}>
+        <Grid xs={24}>
           <Text h5>{t("textHeader")}</Text>
-        </Row>
-        <Spacer y={1} />
-        <Row>
+        </Grid>
+        <Grid xs={24}>
           <Input
-            fullWidth
+            width="100%"
             aria-label={t("textDefault")}
-            labelLeft={t("textDefault")}
+            label={t("textDefault")}
             placeholder={t("textDefault")}
             value={fieldDefinition.default}
             onChange={handleDefaultChange}
           />
-        </Row>
-      </Container>
+        </Grid>
+      </Grid.Container>
     );
   }
 );

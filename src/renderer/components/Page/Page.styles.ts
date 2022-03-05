@@ -1,4 +1,4 @@
-import { styled } from "@nextui-org/react";
+import { styled } from "@stitches/react";
 
 export const Container = styled("div", {
   width: "100vw",

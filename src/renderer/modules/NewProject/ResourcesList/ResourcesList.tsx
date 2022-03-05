@@ -1,4 +1,4 @@
-import { Button, Container, Row, Spacer, Text } from "@nextui-org/react";
+import { Button, Grid, Spacer, Text } from "@geist-ui/core";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
@@ -35,26 +35,26 @@ export const ResourcesList = observer(
     };
 
     return (
-      <Container gap={0} fluid>
-        <Row align="center">
+      <Grid.Container gap={0}>
+        <Grid alignItems="center">
           <Text h3>{t("resourcesList")}</Text>
           <Spacer css={{ flexGrow: 1 }} />
           <Button auto onClick={handleOpenClick}>
             {t("resourceLocal")}
           </Button>
-          <Spacer x={0.5} />
+          <Spacer w={0.5} />
           <Button auto>{t("resourceURL")}</Button>
-        </Row>
-        <Spacer y={1} />
+        </Grid>
+        <Spacer h={1} />
         {newProjectStore.resources.map((resource) => (
-          <Row key={resource.id}>
+          <Grid key={resource.id}>
             <ResourcesListItem
               resource={resource}
               onRemoveClick={handleRemoveClick(resource)}
             />
-          </Row>
+          </Grid>
         ))}
-      </Container>
+      </Grid.Container>
     );
   }
 );

@@ -1,4 +1,4 @@
-import { styled } from "@nextui-org/react";
+import { styled } from "@stitches/react";
 
 const TRACK_THICKNESS = 28;
 const THUMB_SIZE = 20;

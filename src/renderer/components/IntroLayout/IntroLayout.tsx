@@ -1,4 +1,4 @@
-import { Container } from "@nextui-org/react";
+import { Page } from "@geist-ui/core";
 import { ReactElement, ReactNode } from "react";
 
 type Props = {
@@ -6,5 +6,5 @@ type Props = {
 };
 
 export const IntroLayout = ({ children }: Props): ReactElement => {
-  return <Container md>{children}</Container>;
+  return <Page>{children}</Page>;
 };

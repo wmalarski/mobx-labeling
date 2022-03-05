@@ -1,4 +1,4 @@
-import { Button, Container, Row, Spacer, Text } from "@nextui-org/react";
+import { Button, Grid, Spacer, Text } from "@geist-ui/core";
 import { RowsIcon } from "@radix-ui/react-icons";
 import { ReactElement, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -36,9 +36,9 @@ export const NewProject = (): ReactElement => {
   return (
     <IntroLayout>
       <Header />
-      <Spacer y={1} />
-      <Container gap={0} fluid>
-        <Row justify="space-between" align="center">
+      <Spacer h={1} />
+      <Grid.Container gap={0}>
+        <Grid justify="space-between" alignItems="center">
           <Text h2>{t("newProject")}</Text>
           <Button
             color="primary"
@@ -48,11 +48,11 @@ export const NewProject = (): ReactElement => {
           >
             {t("definitionsLink")}
           </Button>
-        </Row>
-      </Container>
-      <Spacer y={1} />
+        </Grid>
+      </Grid.Container>
+      <Spacer h={1} />
       <ProjectDetails newProjectStore={newProjectStore} />
-      <Spacer y={1} />
+      <Spacer h={1} />
       <ResourcesList newProjectStore={newProjectStore} />
     </IntroLayout>
   );

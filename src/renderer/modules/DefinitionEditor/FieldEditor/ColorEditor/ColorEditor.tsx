@@ -1,4 +1,4 @@
-import { Container, Row, Spacer, Text } from "@nextui-org/react";
+import { Grid, Text } from "@geist-ui/core";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
@@ -15,12 +15,11 @@ export const ColorEditor = observer(
     const { t } = useTranslation("definition");
 
     return (
-      <Container>
-        <Row>
+      <Grid.Container gap={1}>
+        <Grid xs={24}>
           <Text h5>{t("figureHeader")}</Text>
-        </Row>
-        <Spacer y={1} />
-        <Row>
+        </Grid>
+        <Grid xs={24}>
           <ColorSlider
             channel="hue"
             value={fieldDefinition.color}
@@ -29,8 +28,8 @@ export const ColorEditor = observer(
             }}
             label={t("colorSliderLabel")}
           />
-        </Row>
-      </Container>
+        </Grid>
+      </Grid.Container>
     );
   }
 );

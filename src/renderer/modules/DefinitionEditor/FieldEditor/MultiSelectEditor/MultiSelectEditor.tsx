@@ -1,17 +1,14 @@
-import {
-  Button,
-  Checkbox,
-  Container,
-  FormElement,
-  Input,
-  Row,
-  Spacer,
-  Text,
-} from "@nextui-org/react";
+import { Button, Checkbox, Grid, Input, Spacer, Text } from "@geist-ui/core";
 import { PlusIcon, TrashIcon } from "@radix-ui/react-icons";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
-import { ChangeEvent, KeyboardEvent, ReactElement, useState } from "react";
+import {
+  ChangeEvent,
+  Fragment,
+  KeyboardEvent,
+  ReactElement,
+  useState,
+} from "react";
 import { useTranslation } from "react-i18next";
 import {
   MultiSelectDefinition,
@@ -35,11 +32,11 @@ export const MultiSelectEditor = observer(
       fieldDefinition.setDefault(values);
     };
 
-    const handleInputChange = (event: ChangeEvent<FormElement>) => {
+    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
       setNewOption(event.target.value);
     };
 
-    const handleInputKeyDown = (event: KeyboardEvent<FormElement>) => {
+    const handleInputKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
       if (event.key !== "Enter" || !isValid) return;
 
       fieldDefinition.pushOption({ text: newOption, size: 2 });
@@ -58,65 +55,66 @@ export const MultiSelectEditor = observer(
 
     const handleSizeChange =
       (option: Instance<typeof MultiSelectDefinitionOption>) =>
-      (event: ChangeEvent<FormElement>) => {
+      (event: ChangeEvent<HTMLInputElement>) => {
         option.setSize(Number(event.target.value));
       };
 
     return (
-      <Container gap={0}>
-        <Row>
+      <Grid.Container gap={1}>
+        <Grid xs={24}>
           <Text h5>{t("multiSelectHeader")}</Text>
-        </Row>
-        <Spacer y={1} />
-        <Row>
+        </Grid>
+        <Grid xs={24}>
           <Checkbox.Group
             value={fieldDefinition.default}
             onChange={handleDefaultChange}
-            css={{ width: "100%" }}
           >
-            <Container gap={0}>
+            <Grid.Container gap={0.5}>
               {fieldDefinition.options.map((option) => (
-                <Row key={option.text} justify="space-between">
-                  <Checkbox value={option.text}>
-                    <Text>{option.text}</Text>
-                    <Spacer x={1} />
+                <Fragment key={option.text}>
+                  <Grid xs={9} sm={12} md={15} justify="space-between">
+                    <Checkbox value={option.text}>
+                      <Text small>{option.text}</Text>
+                    </Checkbox>
+                  </Grid>
+                  <Grid xs={15} sm={12} md={9}>
                     <Input
-                      type="number"
+                      width="100%"
                       min={1}
                       max={12}
                       step={1}
                       placeholder={t("multiSelectSize")}
                       aria-label={t("multiSelectSize")}
-                      labelLeft={t("multiSelectSize")}
+                      label={t("multiSelectSize")}
                       value={String(option.size)}
                       onChange={handleSizeChange(option)}
                     />
-                  </Checkbox>
-                  <Button
-                    auto
-                    color="error"
-                    onClick={handleRemoveClick(option)}
-                    icon={<TrashIcon />}
-                  >
-                    {t("multiSelectRemoveOption")}
-                  </Button>
-                </Row>
+                    <Spacer w={1} />
+                    <Button
+                      auto
+                      color="error"
+                      onClick={handleRemoveClick(option)}
+                      icon={<TrashIcon />}
+                    >
+                      {t("multiSelectRemoveOption")}
+                    </Button>
+                  </Grid>
+                </Fragment>
               ))}
-            </Container>
+            </Grid.Container>
           </Checkbox.Group>
-        </Row>
-        <Spacer y={1.5} />
-        <Row>
+        </Grid>
+        <Grid xs={24}>
           <Input
-            fullWidth
+            width="100%"
             value={newOption}
             onChange={handleInputChange}
             onKeyDown={handleInputKeyDown}
             placeholder={t("multiSelectInput")}
-            labelLeft={t("multiSelectInput")}
+            label={t("multiSelectInput")}
             aria-label={t("multiSelectInput")}
           />
-          <Spacer x={1} />
+          <Spacer w={1} />
           <Button
             auto
             color="secondary"
@@ -126,8 +124,8 @@ export const MultiSelectEditor = observer(
           >
             {t("multiSelectAddOption")}
           </Button>
-        </Row>
-      </Container>
+        </Grid>
+      </Grid.Container>
     );
   }
 );

@@ -1,11 +1,5 @@
-import {
-  Checkbox,
-  CheckboxEvent,
-  Container,
-  Row,
-  Spacer,
-  Text,
-} from "@nextui-org/react";
+import { Checkbox, Grid, Text } from "@geist-ui/core";
+import { CheckboxEvent } from "@geist-ui/core/esm/checkbox";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
@@ -25,19 +19,18 @@ export const CheckBoxEditor = observer(
     };
 
     return (
-      <Container gap={0}>
-        <Row>
+      <Grid.Container gap={1}>
+        <Grid xs={24}>
           <Text h5>{t("checkboxHeader")}</Text>
-        </Row>
-        <Spacer y={1} />
-        <Row>
+        </Grid>
+        <Grid xs={24}>
           <Checkbox checked={fieldDefinition.default} onChange={handleChange}>
             {fieldDefinition.default
               ? t("checkboxDefaultTrue")
               : t("checkboxDefaultFalse")}
           </Checkbox>
-        </Row>
-      </Container>
+        </Grid>
+      </Grid.Container>
     );
   }
 );

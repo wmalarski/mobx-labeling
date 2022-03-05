@@ -1,4 +1,4 @@
-import { Spacer } from "@nextui-org/react";
+import { Spacer } from "@geist-ui/core";
 import { observer } from "mobx-react-lite";
 import { ReactElement, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -21,7 +21,7 @@ export const NewDefinition = observer((): ReactElement => {
   return (
     <IntroLayout>
       <Header />
-      <Spacer y={1} />
+      <Spacer h={1} />
       <DefinitionEditor definitionStore={definitionStore} />
     </IntroLayout>
   );

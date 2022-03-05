@@ -1,13 +1,4 @@
-import {
-  Button,
-  Container,
-  FormElement,
-  Input,
-  Radio,
-  Row,
-  Spacer,
-  Text,
-} from "@nextui-org/react";
+import { Button, Grid, Input, Radio, Spacer, Text } from "@geist-ui/core";
 import { PlusIcon, TrashIcon } from "@radix-ui/react-icons";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
@@ -30,11 +21,11 @@ export const ComboBoxEditor = observer(
       fieldDefinition.setDefault(value as string);
     };
 
-    const handleInputChange = (event: ChangeEvent<FormElement>) => {
+    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
       setNewOption(event.target.value);
     };
 
-    const handleInputKeyDown = (event: KeyboardEvent<FormElement>) => {
+    const handleInputKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
       if (event.key !== "Enter" || !isValid) return;
 
       fieldDefinition.pushOption(newOption);
@@ -51,22 +42,20 @@ export const ComboBoxEditor = observer(
     };
 
     return (
-      <Container gap={0}>
-        <Row>
+      <Grid.Container gap={1}>
+        <Grid xs={24}>
           <Text h5>{t("comboBoxHeader")}</Text>
-        </Row>
-        <Spacer y={1} />
-        <Row>
+        </Grid>
+        <Grid xs={24}>
           <Radio.Group
             value={fieldDefinition.default}
             onChange={handleDefaultChange}
-            css={{ width: "100%" }}
           >
-            <Container gap={0}>
+            <Grid.Container gap={0.5}>
               {fieldDefinition.options.map((option) => (
-                <Row key={option} justify="space-between">
+                <Grid xs={24} key={option} justify="space-between">
                   <Radio value={option}>
-                    <Text>{option}</Text>
+                    <Text small>{option}</Text>
                   </Radio>
                   <Button
                     auto
@@ -76,23 +65,22 @@ export const ComboBoxEditor = observer(
                   >
                     {t("comboBoxRemoveOption")}
                   </Button>
-                </Row>
+                </Grid>
               ))}
-            </Container>
+            </Grid.Container>
           </Radio.Group>
-        </Row>
-        <Spacer y={1.5} />
-        <Row>
+        </Grid>
+        <Grid xs={24}>
           <Input
-            fullWidth
+            width="100%"
             value={newOption}
             onChange={handleInputChange}
             onKeyDown={handleInputKeyDown}
             placeholder={t("comboBoxOptionPlaceholder")}
-            labelLeft={t("comboBoxOptionPlaceholder")}
+            label={t("comboBoxOptionPlaceholder")}
             aria-label={t("comboBoxOptionPlaceholder")}
           />
-          <Spacer x={1} />
+          <Spacer w={1} />
           <Button
             auto
             onClick={handleAddClick}
@@ -102,8 +90,8 @@ export const ComboBoxEditor = observer(
           >
             {t("comboBoAddOption")}
           </Button>
-        </Row>
-      </Container>
+        </Grid>
+      </Grid.Container>
     );
   }
 );

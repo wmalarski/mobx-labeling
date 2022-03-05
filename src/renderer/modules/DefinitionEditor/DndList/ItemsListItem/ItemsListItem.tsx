@@ -1,4 +1,4 @@
-import { Card, Container, Text } from "@nextui-org/react";
+import { Card, Divider, Text } from "@geist-ui/core";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
@@ -24,37 +24,44 @@ export const ItemsListItem = observer(
 
     return (
       <Card
-        clickable
         onClick={onItemClick}
-        css={{ position: "relative", width: "100%" }}
+        hoverable
+        style={{
+          position: "relative",
+          width: "100%",
+          margin: "5px",
+        }}
       >
-        <Container gap={0}>
+        <Card.Content>
           <Text>{itemDefinition.name}</Text>
           {itemDefinition.description ? (
             <Text small>{itemDefinition.description}</Text>
           ) : (
-            <Text small color="$accents6">
+            <Text small type="secondary">
               {t("descriptionPlaceholder")}
             </Text>
           )}
-        </Container>
-        <DndDroppable
-          droppableId={itemDefinition.id}
-          type={DefinitionNodeKind.Field}
-        >
-          {itemDefinition.fields.map((fieldDefinition, index) => (
-            <DndDraggable
-              key={fieldDefinition.id}
-              draggableId={fieldDefinition.id}
-              index={index}
-            >
-              <FieldListItem
-                fieldDefinition={fieldDefinition}
-                onClick={handleFieldClick(fieldDefinition.id)}
-              />
-            </DndDraggable>
-          ))}
-        </DndDroppable>
+        </Card.Content>
+        <Divider h="1px" my={0} />
+        <Card.Content>
+          <DndDroppable
+            droppableId={itemDefinition.id}
+            type={DefinitionNodeKind.Field}
+          >
+            {itemDefinition.fields.map((fieldDefinition, index) => (
+              <DndDraggable
+                key={fieldDefinition.id}
+                draggableId={fieldDefinition.id}
+                index={index}
+              >
+                <FieldListItem
+                  fieldDefinition={fieldDefinition}
+                  onClick={handleFieldClick(fieldDefinition.id)}
+                />
+              </DndDraggable>
+            ))}
+          </DndDroppable>
+        </Card.Content>
       </Card>
     );
   }

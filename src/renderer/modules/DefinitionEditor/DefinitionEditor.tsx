@@ -1,8 +1,7 @@
-import { Container, Spacer } from "@nextui-org/react";
+import { Grid, Spacer } from "@geist-ui/core";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement, useState } from "react";
-import { Flex } from "renderer/components";
 import { DefinitionStore } from "renderer/models";
 import { DefinitionForm } from "./DefinitionForm/DefinitionForm";
 import { DndList } from "./DndList/DndList";
@@ -26,21 +25,21 @@ export const DefinitionEditor = observer(
     const fieldDefinition = fieldId ? itemDefinition?.field(fieldId) : null;
 
     return (
-      <Container gap={0} fluid>
+      <Grid>
         <DefinitionForm
           definitionStore={definitionStore}
           onSelectedItemChange={setItemId}
         />
-        <Spacer y={2} />
-        <Flex gap="xl" direction="row">
-          <Flex gap="xl" direction="column">
+        <Spacer h={2} />
+        <Grid direction="row">
+          <Grid direction="column">
             <DndList
               projectDefinition={projectDefinition}
               onSelectedItemChange={setItemId}
               onSelectedFieldChange={setFieldId}
             />
-          </Flex>
-          <Flex gap="lg" direction="column" css={{ width: "100%" }}>
+          </Grid>
+          <Grid direction="column" css={{ width: "100%" }}>
             {itemDefinition && (
               <>
                 <ItemForm
@@ -49,7 +48,7 @@ export const DefinitionEditor = observer(
                   projectDefinition={projectDefinition}
                   onSelectedFieldChange={setFieldId}
                 />
-                <Spacer y={0.5} />
+                <Spacer h={0.5} />
                 {fieldDefinition && (
                   <>
                     <FieldForm
@@ -57,9 +56,9 @@ export const DefinitionEditor = observer(
                       itemDefinition={itemDefinition}
                       onSelectedFieldChange={setFieldId}
                     />
-                    <Spacer y={0.5} />
+                    <Spacer h={0.5} />
                     <FieldEditor fieldDefinition={fieldDefinition} />
-                    <Spacer y={1} />
+                    <Spacer h={1} />
                   </>
                 )}
                 {!fieldDefinition && (
@@ -76,9 +75,9 @@ export const DefinitionEditor = observer(
                 projectDefinition={projectDefinition}
               />
             )}
-          </Flex>
-        </Flex>
-      </Container>
+          </Grid>
+        </Grid>
+      </Grid>
     );
   }
 );

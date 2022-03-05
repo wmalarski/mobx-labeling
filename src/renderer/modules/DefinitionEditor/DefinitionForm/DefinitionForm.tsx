@@ -1,14 +1,4 @@
-import {
-  Button,
-  Container,
-  FormElement,
-  Grid,
-  Input,
-  Loading,
-  Row,
-  Spacer,
-  Text,
-} from "@nextui-org/react";
+import { Button, Grid, Input, Loading, Text } from "@geist-ui/core";
 import { ExitIcon, Pencil1Icon, PlusIcon } from "@radix-ui/react-icons";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
@@ -31,11 +21,11 @@ export const DefinitionForm = observer(
 
     const projectDefinition = definitionStore.projectDefinition;
 
-    const handleNameChange = (event: ChangeEvent<FormElement>) => {
+    const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
       projectDefinition.setName(event.target.value);
     };
 
-    const handleDescriptionChange = (event: ChangeEvent<FormElement>) => {
+    const handleDescriptionChange = (event: ChangeEvent<HTMLInputElement>) => {
       projectDefinition.setDescription(event.target.value);
     };
 
@@ -55,81 +45,77 @@ export const DefinitionForm = observer(
     };
 
     return (
-      <Container gap={0} fluid>
-        <Row align="center" justify="space-between">
-          <div>
-            <Text h2>{t("newDefinitionHeader")}</Text>
-          </div>
-          <div>
-            <Grid.Container justify="flex-end" alignItems="center" gap={1}>
-              <Grid>
-                {definitionStore.state === "done" && (
-                  <Text color="$success">{t("definitionSaved")}</Text>
+      <Grid.Container gap={1}>
+        <Grid xs={8} md={12} alignItems="center">
+          <Text h2>{t("newDefinitionHeader")}</Text>
+        </Grid>
+        <Grid xs={16} md={12} alignItems="center" justify="space-between">
+          <Grid.Container justify="flex-end" alignItems="center" gap={1}>
+            <Grid>
+              {definitionStore.state === "done" && (
+                <Text type="success">{t("definitionSaved")}</Text>
+              )}
+              {definitionStore.state === "error" && (
+                <Text type="error">{t("saveFailed")}</Text>
+              )}
+            </Grid>
+            <Grid>
+              <Button
+                auto
+                onClick={handlePlusClick}
+                color="primary"
+                icon={<PlusIcon />}
+              >
+                {t("addNewItem")}
+              </Button>
+            </Grid>
+            <Grid>
+              <Button
+                auto
+                color="primary"
+                onClick={handleSaveClick}
+                icon={<Pencil1Icon />}
+              >
+                {definitionStore.state === "pending" ? (
+                  <Loading color="white" />
+                ) : (
+                  t("saveDefinition")
                 )}
-                {definitionStore.state === "error" && (
-                  <Text color="$error">{t("saveFailed")}</Text>
-                )}
-              </Grid>
-              <Grid>
-                <Button
-                  auto
-                  onClick={handlePlusClick}
-                  color="primary"
-                  icon={<PlusIcon />}
-                >
-                  {t("addNewItem")}
-                </Button>
-              </Grid>
-              <Grid>
-                <Button
-                  auto
-                  color="primary"
-                  onClick={handleSaveClick}
-                  icon={<Pencil1Icon />}
-                >
-                  {definitionStore.state === "pending" ? (
-                    <Loading color="white" size="sm" />
-                  ) : (
-                    t("saveDefinition")
-                  )}
-                </Button>
-              </Grid>
-              <Grid>
-                <Button
-                  auto
-                  color="secondary"
-                  onClick={handleBoBackClick}
-                  icon={<ExitIcon />}
-                >
-                  {t("definitionsList")}
-                </Button>
-              </Grid>
-            </Grid.Container>
-          </div>
-        </Row>
-        <Spacer y={1} />
-        <Row>
+              </Button>
+            </Grid>
+            <Grid>
+              <Button
+                auto
+                color="secondary"
+                onClick={handleBoBackClick}
+                icon={<ExitIcon />}
+              >
+                {t("definitionsList")}
+              </Button>
+            </Grid>
+          </Grid.Container>
+        </Grid>
+        <Grid xs={24}>
           <Input
-            fullWidth
+            width="100%"
             value={projectDefinition.name}
             onChange={handleNameChange}
             placeholder={t("namePlaceholder")}
-            labelLeft={t("namePlaceholder")}
+            label={t("namePlaceholder")}
             aria-label={t("namePlaceholder")}
           />
-        </Row>
-        <Spacer y={0.5} />
-        <Row>
+        </Grid>
+        <Grid xs={24}>
           <Input
-            fullWidth
+            width="100%"
             value={projectDefinition.description}
             onChange={handleDescriptionChange}
             placeholder={t("descriptionPlaceholder")}
-            labelLeft={t("descriptionPlaceholder")}
+            label={t("descriptionPlaceholder")}
             aria-label={t("descriptionPlaceholder")}
           />
-        </Row>
-      </Container>
+        </Grid>
+      </Grid.Container>
     );
   }
 );

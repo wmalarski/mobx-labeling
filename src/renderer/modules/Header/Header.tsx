@@ -1,4 +1,4 @@
-import { Button, Row, Text } from "@nextui-org/react";
+import { Button, Grid, Text } from "@geist-ui/core";
 import { GearIcon } from "@radix-ui/react-icons";
 import { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
@@ -8,13 +8,12 @@ import { routePaths } from "renderer/utils/routes";
 export const Header = (): ReactElement => {
   const { t } = useTranslation("common");
   return (
-    <Row justify="space-between" align="center">
+    <Grid justify="space-between" alignItems="center">
       <StyledLink to={routePaths.home}>
         <Text h1>{t("title")}</Text>
       </StyledLink>
       <Button
         auto
-        light
         icon={<GearIcon />}
         css={{
           paddingLeft: "$7",
@@ -24,6 +23,6 @@ export const Header = (): ReactElement => {
       >
         {t("settingsButton")}
       </Button>
-    </Row>
+    </Grid>
   );
 };

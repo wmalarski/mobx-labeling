@@ -1,4 +1,4 @@
-import { Card, Text } from "@nextui-org/react";
+import { Card, Text } from "@geist-ui/core";
 import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
@@ -22,7 +22,6 @@ export const FieldPlaceholder = ({
 
   return (
     <Card
-      clickable
       onClick={handleClick}
       css={{
         height: "$40",

@@ -1,11 +1,4 @@
-import {
-  Container,
-  FormElement,
-  Input,
-  Row,
-  Spacer,
-  Text,
-} from "@nextui-org/react";
+import { Grid, Input, Text } from "@geist-ui/core";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ChangeEvent, ReactElement } from "react";
@@ -20,76 +13,68 @@ export const NumberEditor = observer(
   ({ fieldDefinition }: Props): ReactElement => {
     const { t } = useTranslation("definition");
 
-    const handleMinChange = (event: ChangeEvent<FormElement>) => {
+    const handleMinChange = (event: ChangeEvent<HTMLInputElement>) => {
       fieldDefinition.setMin(Number(event.target.value));
     };
 
-    const handleMaxChange = (event: ChangeEvent<FormElement>) => {
+    const handleMaxChange = (event: ChangeEvent<HTMLInputElement>) => {
       fieldDefinition.setMax(Number(event.target.value));
     };
 
-    const handleStepChange = (event: ChangeEvent<FormElement>) => {
+    const handleStepChange = (event: ChangeEvent<HTMLInputElement>) => {
       fieldDefinition.setStep(Number(event.target.value));
     };
 
-    const handleDefaultChange = (event: ChangeEvent<FormElement>) => {
+    const handleDefaultChange = (event: ChangeEvent<HTMLInputElement>) => {
       fieldDefinition.setDefault(Number(event.target.value));
     };
 
     return (
-      <Container gap={0}>
-        <Row>
+      <Grid.Container gap={0.5}>
+        <Grid xs={24}>
           <Text h5>{t("numberHeader")}</Text>
-        </Row>
-        <Spacer y={1} />
-        <Row>
+        </Grid>
+        <Grid xs={24}>
           <Input
-            fullWidth
-            type="number"
+            width="100%"
             aria-label={t("numberMin")}
-            labelLeft={t("numberMin")}
+            label={t("numberMin")}
             placeholder={t("numberMin")}
             value={String(fieldDefinition.min)}
             onChange={handleMinChange}
           />
-        </Row>
-        <Spacer y={0.5} />
-        <Row>
+        </Grid>
+        <Grid xs={24}>
           <Input
-            fullWidth
-            type="number"
+            width="100%"
             aria-label={t("numberMax")}
-            labelLeft={t("numberMax")}
+            label={t("numberMax")}
             placeholder={t("numberMax")}
             value={String(fieldDefinition.max)}
             onChange={handleMaxChange}
           />
-        </Row>
-        <Spacer y={0.5} />
-        <Row>
+        </Grid>
+        <Grid xs={24}>
           <Input
-            fullWidth
-            type="number"
+            width="100%"
             aria-label={t("numberStep")}
-            labelLeft={t("numberStep")}
+            label={t("numberStep")}
             placeholder={t("numberStep")}
             value={String(fieldDefinition.step)}
             onChange={handleStepChange}
           />
-        </Row>
-        <Spacer y={0.5} />
-        <Row>
+        </Grid>
+        <Grid xs={24}>
           <Input
-            fullWidth
-            type="number"
+            width="100%"
             aria-label={t("numberDefault")}
-            labelLeft={t("numberDefault")}
+            label={t("numberDefault")}
             placeholder={t("numberDefault")}
             value={String(fieldDefinition.default)}
             onChange={handleDefaultChange}
           />
-        </Row>
-      </Container>
+        </Grid>
+      </Grid.Container>
     );
   }
 );

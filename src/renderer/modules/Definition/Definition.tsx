@@ -1,4 +1,4 @@
-import { Spacer } from "@nextui-org/react";
+import { Spacer } from "@geist-ui/core";
 import { ReactElement, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useMatch } from "react-location";
@@ -25,7 +25,7 @@ export const Definition = (): ReactElement => {
   return (
     <IntroLayout>
       <Header />
-      <Spacer y={1} />
+      <Spacer h={1} />
       <DefinitionEditor definitionStore={definitionStore} />
     </IntroLayout>
   );

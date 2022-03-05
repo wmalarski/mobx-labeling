@@ -1,4 +1,4 @@
-import { Text } from "@nextui-org/react";
+import { Text } from "@geist-ui/core";
 import { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 

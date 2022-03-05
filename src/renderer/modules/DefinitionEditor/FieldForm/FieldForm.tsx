@@ -1,21 +1,17 @@
 import {
   Button,
-  Container,
-  FormElement,
   Grid,
   Input,
   Radio,
-  Row,
+  Select,
   Spacer,
   Text,
-} from "@nextui-org/react";
+} from "@geist-ui/core";
 import { CopyIcon, TrashIcon } from "@radix-ui/react-icons";
-import { Item } from "@react-stately/collections";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ChangeEvent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
-import { Select } from "renderer/components";
 import {
   DefinitionKind,
   definitionKinds,
@@ -50,11 +46,11 @@ export const FieldForm = observer(
       onSelectedFieldChange(copy.id);
     };
 
-    const handleNameChange = (event: ChangeEvent<FormElement>) => {
+    const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
       fieldDefinition.setName(event.target.value);
     };
 
-    const handleDescriptionChange = (event: ChangeEvent<FormElement>) => {
+    const handleDescriptionChange = (event: ChangeEvent<HTMLInputElement>) => {
       fieldDefinition.setDescription(event.target.value);
     };
 
@@ -63,13 +59,13 @@ export const FieldForm = observer(
       fieldDefinition.setChange(change);
     };
 
-    const handleKindChange = (key: string | number) => {
+    const handleKindChange = (key: string | string[]) => {
       itemDefinition.changeKind(fieldDefinition, key as DefinitionKind);
     };
 
     return (
-      <Container gap={0}>
-        <Row align="center" justify="space-between">
+      <Grid.Container gap={0}>
+        <Grid alignItems="center" justify="space-between">
           <div>
             <Text h4>{t("fieldFormHeader")}</Text>
           </div>
@@ -97,35 +93,34 @@ export const FieldForm = observer(
               </Grid>
             </Grid.Container>
           </div>
-        </Row>
-        <Spacer y={0.5} />
-        <Row>
+        </Grid>
+        <Spacer h={0.5} />
+        <Grid>
           <Input
-            fullWidth
+            width="100%"
             value={fieldDefinition.name}
             onChange={handleNameChange}
-            labelLeft={t("namePlaceholder")}
+            label={t("namePlaceholder")}
             placeholder={t("namePlaceholder")}
             aria-label={t("namePlaceholder")}
           />
-        </Row>
-        <Spacer y={0.5} />
-        <Row>
+        </Grid>
+        <Spacer h={0.5} />
+        <Grid>
           <Input
-            fullWidth
+            width="100%"
             value={fieldDefinition.description}
             onChange={handleDescriptionChange}
-            labelLeft={t("descriptionPlaceholder")}
+            label={t("descriptionPlaceholder")}
             placeholder={t("descriptionPlaceholder")}
             aria-label={t("descriptionPlaceholder")}
           />
-        </Row>
-        <Spacer y={1} />
-        <Row>
+        </Grid>
+        <Spacer h={1} />
+        <Grid>
           <Radio.Group
             value={fieldDefinition.change}
             onChange={handleGroupChange}
-            row
           >
             <Radio value="EveryFrame">
               {t("everyFrameKey")}
@@ -142,21 +137,21 @@ export const FieldForm = observer(
               <Radio.Desc>{t("singletonDescription")}</Radio.Desc>
             </Radio>
           </Radio.Group>
-        </Row>
-        <Spacer y={1} />
-        <Row>
+        </Grid>
+        <Spacer h={1} />
+        <Grid>
           <Select
-            label={t("kindLabel")}
+            aria-label={t("kindLabel")}
             placeholder={t("kindPlaceholder")}
-            selectedKey={fieldDefinition.kind}
-            onSelectionChange={handleKindChange}
+            value={fieldDefinition.kind}
+            onChange={handleKindChange}
           >
             {definitionKinds.map((kind) => (
-              <Item key={kind}>{kind}</Item>
+              <Select.Option key={kind}>{kind}</Select.Option>
             ))}
           </Select>
-        </Row>
-      </Container>
+        </Grid>
+      </Grid.Container>
     );
   }
 );

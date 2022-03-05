@@ -1,4 +1,4 @@
-import { Button, Card, Grid, Spacer, Text } from "@nextui-org/react";
+import { Button, Card, Grid, Spacer, Text } from "@geist-ui/core";
 import { CubeIcon, Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
 import { useLocale } from "@react-aria/i18n";
 import { observer } from "mobx-react-lite";
@@ -40,7 +40,7 @@ export const DefinitionsItem = observer(
       <Card>
         <Grid.Container gap={0.5} alignItems="center">
           <Grid sm={2} xs={4}>
-            <Text small color="$accents6">
+            <Text small type="secondary">
               {t("namePlaceholder")}
             </Text>
           </Grid>
@@ -48,7 +48,7 @@ export const DefinitionsItem = observer(
             <Text h4>{definitionEntry.name}</Text>
           </Grid>
           <Grid sm={2} xs={4}>
-            <Text small color="$accents6">
+            <Text small type="secondary">
               {t("descriptionPlaceholder")}
             </Text>
           </Grid>
@@ -56,13 +56,13 @@ export const DefinitionsItem = observer(
             {definitionEntry.description ? (
               <Text small>{definitionEntry.description}</Text>
             ) : (
-              <Text small color="$accents6">
+              <Text small type="secondary">
                 {t("descriptionPlaceholder")}
               </Text>
             )}
           </Grid>
           <Grid sm={2} xs={4}>
-            <Text small color="$accents6">
+            <Text small type="secondary">
               {t("updatedAt")}
             </Text>
           </Grid>
@@ -70,7 +70,7 @@ export const DefinitionsItem = observer(
             <Text small>{formatTime(definitionEntry.updatedAt, locale)}</Text>
           </Grid>
         </Grid.Container>
-        <Spacer y={1} />
+        <Spacer h={1} />
         <Grid.Container gap={1}>
           <Grid>
             <Button

@@ -1,17 +1,9 @@
-import {
-  Button,
-  Container,
-  FormElement,
-  Input,
-  Spacer,
-} from "@nextui-org/react";
+import { AutoComplete, Button, Grid, Input, Spacer } from "@geist-ui/core";
 import { Pencil1Icon } from "@radix-ui/react-icons";
-import { Item } from "@react-stately/collections";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ChangeEvent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
-import { ComboBox } from "renderer/components";
 import { NewProjectStore } from "renderer/models";
 import { useSaveDialog } from "renderer/services/resources/useSaveDialog";
 
@@ -34,7 +26,7 @@ export const ProjectDetails = observer(
       newProjectStore.definitions.load({ query });
     };
 
-    const handlePathChange = (event: ChangeEvent<FormElement>) => {
+    const handlePathChange = (event: ChangeEvent<HTMLInputElement>) => {
       newProjectStore.setProjectPath(event.target.value);
     };
 
@@ -49,68 +41,63 @@ export const ProjectDetails = observer(
       });
     };
 
-    const handleNameChange = (event: ChangeEvent<FormElement>) => {
+    const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
       newProjectStore.setName(event.target.value);
     };
 
-    const handleBatchSizeChange = (event: ChangeEvent<FormElement>) => {
+    const handleBatchSizeChange = (event: ChangeEvent<HTMLInputElement>) => {
       newProjectStore.setBatchSize(Number(event.target.value.split(".")[0]));
     };
 
     return (
-      <Container gap={0} fluid>
+      <Grid.Container gap={0}>
         <Input
-          fullWidth
-          labelLeft={t("namePlaceholder")}
+          width="100%"
+          label={t("namePlaceholder")}
           placeholder={t("namePlaceholder")}
           aria-label={t("namePlaceholder")}
           value={newProjectStore.name}
           onChange={handleNameChange}
         />
-        <Spacer y={0.5} />
-        <ComboBox
-          label={t("selectDefinitionLabel")}
-          inputValue={newProjectStore.definitions.query}
-          onInputChange={handleInputChange}
-          onSelectionChange={handleSelectionChange}
+        <Spacer h={0.5} />
+        <AutoComplete
+          aria-label={t("selectDefinitionLabel")}
+          value={newProjectStore.definitions.query}
+          onSearch={handleInputChange}
+          onSelect={handleSelectionChange}
         >
           {newProjectStore.definitions.definitions.map((definition) => (
-            <Item key={definition.id}>{definition.name}</Item>
+            <AutoComplete.Item value={definition.name} key={definition.id}>
+              {definition.name}
+            </AutoComplete.Item>
           ))}
-        </ComboBox>
-        <Spacer y={0.5} />
+        </AutoComplete>
+        <Spacer h={0.5} />
         <Input
-          fullWidth
-          labelLeft={t("locationLabel")}
+          width="100%"
+          label={t("locationLabel")}
           placeholder={t("locationLabel")}
           aria-label={t("locationLabel")}
           onChange={handlePathChange}
           value={newProjectStore.projectPath}
-          contentRight={
-            <Button
-              auto
-              rounded
-              onClick={handleSaveClick}
-              size="sm"
-              css={{ padding: "$4" }}
-            >
+          iconRight={
+            <Button auto onClick={handleSaveClick} css={{ padding: "$4" }}>
               <Pencil1Icon aria-label={t("browseLocation")} />
             </Button>
           }
         />
-        <Spacer y={0.5} />
+        <Spacer h={0.5} />
         <Input
-          fullWidth
-          type="number"
+          width="100%"
           step={1}
           min={10}
-          labelLeft={t("batchSizePlaceholder")}
+          label={t("batchSizePlaceholder")}
           placeholder={t("batchSizePlaceholder")}
           aria-label={t("batchSizePlaceholder")}
           value={String(newProjectStore.batchSize)}
           onChange={handleBatchSizeChange}
         />
-      </Container>
+      </Grid.Container>
     );
   }
 );

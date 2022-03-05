@@ -1,12 +1,4 @@
-import {
-  Button,
-  Card,
-  FormElement,
-  Grid,
-  Input,
-  Spacer,
-  Text,
-} from "@nextui-org/react";
+import { Button, Card, Grid, Input, Spacer, Text } from "@geist-ui/core";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
@@ -23,11 +15,11 @@ export const ResourcesListItem = observer(
   ({ resource, onRemoveClick }: Props): ReactElement => {
     const { t } = useTranslation("project");
 
-    const handleFpsChange = (event: ChangeEvent<FormElement>) => {
+    const handleFpsChange = (event: ChangeEvent<HTMLInputElement>) => {
       resource.setFps(Number(event.target.value.split(".")[0]));
     };
 
-    const handleFrameShiftChange = (event: ChangeEvent<FormElement>) => {
+    const handleFrameShiftChange = (event: ChangeEvent<HTMLInputElement>) => {
       resource.setFrameShift(Number(event.target.value.split(".")[0]));
     };
 
@@ -35,7 +27,7 @@ export const ResourcesListItem = observer(
       <Card>
         <Grid.Container gap={0.5} alignItems="center">
           <Grid sm={2} xs={4}>
-            <Text small color="$accents6">
+            <Text small type="secondary">
               {t("resourcePathLabel")}
             </Text>
           </Grid>
@@ -43,17 +35,16 @@ export const ResourcesListItem = observer(
             <Text h5>{resource.path}</Text>
           </Grid>
           <Grid sm={2} xs={4}>
-            <Text small color="$accents6">
+            <Text small type="secondary">
               {t("resourceFpsLabel")}
             </Text>
           </Grid>
           <Grid sm={10} xs={8}>
             <Input
-              fullWidth
-              type="number"
+              width="100%"
               step={1}
               min={1}
-              labelLeft={t("resourceFpsLabel")}
+              label={t("resourceFpsLabel")}
               placeholder={t("resourceFpsLabel")}
               aria-label={t("resourceFpsLabel")}
               value={String(resource.fps)}
@@ -61,16 +52,15 @@ export const ResourcesListItem = observer(
             />
           </Grid>
           <Grid sm={2} xs={4}>
-            <Text small color="$accents6">
+            <Text small type="secondary">
               {t("resourceFrameShiftLabel")}
             </Text>
           </Grid>
           <Grid sm={10} xs={8}>
             <Input
-              fullWidth
-              type="number"
+              width="100%"
               step={1}
-              labelLeft={t("resourceFrameShiftLabel")}
+              label={t("resourceFrameShiftLabel")}
               placeholder={t("resourceFrameShiftLabel")}
               aria-label={t("resourceFrameShiftLabel")}
               value={String(resource.frameShift)}
@@ -78,7 +68,7 @@ export const ResourcesListItem = observer(
             />
           </Grid>
         </Grid.Container>
-        <Spacer y={1} />
+        <Spacer h={1} />
         <Grid.Container gap={1}>
           <Grid>
             <Button color="error" onClick={onRemoveClick} icon={<TrashIcon />}>
