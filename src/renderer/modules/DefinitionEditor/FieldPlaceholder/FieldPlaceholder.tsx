@@ -1,4 +1,4 @@
-import { Card, Text } from "@geist-ui/core";
+import { Button, Text } from "@geist-ui/core";
 import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
@@ -21,16 +21,8 @@ export const FieldPlaceholder = ({
   };
 
   return (
-    <Card
-      onClick={handleClick}
-      css={{
-        height: "$40",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
+    <Button width="100%" onClick={handleClick} h={4}>
       <Text>{t("selectFieldDefinition")}</Text>
-    </Card>
+    </Button>
   );
 };

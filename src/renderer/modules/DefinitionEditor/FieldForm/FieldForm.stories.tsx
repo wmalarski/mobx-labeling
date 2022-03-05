@@ -1,6 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps } from "react";
 import { CheckBoxDefinition } from "renderer/models";
+import { mockItemDefinition } from "renderer/tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { FieldForm } from "./FieldForm";
 
@@ -29,10 +30,17 @@ const FieldFormStory = ({
 
 const Template: ComponentStory<typeof FieldFormStory> = FieldFormStory;
 
+const fieldDefinition = CheckBoxDefinition.create({
+  name: "Name123",
+});
+
 export const Playground = Template.bind({});
 Playground.args = {
   wrapperProps: {},
-  fieldDefinition: CheckBoxDefinition.create({
-    name: "Name123",
+  itemDefinition: mockItemDefinition({
+    update: {
+      fields: [fieldDefinition],
+    },
   }),
+  fieldDefinition,
 };

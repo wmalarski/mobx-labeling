@@ -1,4 +1,4 @@
-import { Grid, Spacer } from "@geist-ui/core";
+import { Grid } from "@geist-ui/core";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement, useState } from "react";
@@ -25,40 +25,44 @@ export const DefinitionEditor = observer(
     const fieldDefinition = fieldId ? itemDefinition?.field(fieldId) : null;
 
     return (
-      <Grid>
-        <DefinitionForm
-          definitionStore={definitionStore}
-          onSelectedItemChange={setItemId}
-        />
-        <Spacer h={2} />
-        <Grid direction="row">
-          <Grid direction="column">
-            <DndList
-              projectDefinition={projectDefinition}
-              onSelectedItemChange={setItemId}
-              onSelectedFieldChange={setFieldId}
-            />
-          </Grid>
-          <Grid direction="column" css={{ width: "100%" }}>
+      <Grid.Container gap={3}>
+        <Grid xs={24}>
+          <DefinitionForm
+            definitionStore={definitionStore}
+            onSelectedItemChange={setItemId}
+          />
+        </Grid>
+        <Grid xs={24} sm={9} md={6}>
+          <DndList
+            projectDefinition={projectDefinition}
+            onSelectedItemChange={setItemId}
+            onSelectedFieldChange={setFieldId}
+          />
+        </Grid>
+        <Grid xs={24} sm={15} md={18} direction="column">
+          <Grid.Container gap={3}>
             {itemDefinition && (
               <>
-                <ItemForm
-                  onSelectedItemChange={setItemId}
-                  itemDefinition={itemDefinition}
-                  projectDefinition={projectDefinition}
-                  onSelectedFieldChange={setFieldId}
-                />
-                <Spacer h={0.5} />
+                <Grid xs={24}>
+                  <ItemForm
+                    onSelectedItemChange={setItemId}
+                    itemDefinition={itemDefinition}
+                    projectDefinition={projectDefinition}
+                    onSelectedFieldChange={setFieldId}
+                  />
+                </Grid>
                 {fieldDefinition && (
                   <>
-                    <FieldForm
-                      fieldDefinition={fieldDefinition}
-                      itemDefinition={itemDefinition}
-                      onSelectedFieldChange={setFieldId}
-                    />
-                    <Spacer h={0.5} />
-                    <FieldEditor fieldDefinition={fieldDefinition} />
-                    <Spacer h={1} />
+                    <Grid xs={24}>
+                      <FieldForm
+                        fieldDefinition={fieldDefinition}
+                        itemDefinition={itemDefinition}
+                        onSelectedFieldChange={setFieldId}
+                      />
+                    </Grid>
+                    <Grid xs={24}>
+                      <FieldEditor fieldDefinition={fieldDefinition} />
+                    </Grid>
                   </>
                 )}
                 {!fieldDefinition && (
@@ -70,14 +74,17 @@ export const DefinitionEditor = observer(
               </>
             )}
             {!itemDefinition && (
-              <ItemPlaceholder
-                onSelectedItemChange={setItemId}
-                projectDefinition={projectDefinition}
-              />
+              <Grid xs={24}>
+                <ItemPlaceholder
+                  onSelectedItemChange={setItemId}
+                  projectDefinition={projectDefinition}
+                />
+              </Grid>
             )}
-          </Grid>
+            <Grid xs={24} style={{ flexGrow: 1 }} />
+          </Grid.Container>
         </Grid>
-      </Grid>
+      </Grid.Container>
     );
   }
 );

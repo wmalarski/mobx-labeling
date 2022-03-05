@@ -1,12 +1,4 @@
-import {
-  Button,
-  Grid,
-  Input,
-  Radio,
-  Select,
-  Spacer,
-  Text,
-} from "@geist-ui/core";
+import { Button, Grid, Input, Radio, Select, Text } from "@geist-ui/core";
 import { CopyIcon, TrashIcon } from "@radix-ui/react-icons";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
@@ -64,38 +56,35 @@ export const FieldForm = observer(
     };
 
     return (
-      <Grid.Container gap={0}>
-        <Grid alignItems="center" justify="space-between">
-          <div>
-            <Text h4>{t("fieldFormHeader")}</Text>
-          </div>
-          <div>
-            <Grid.Container justify="flex-end" alignItems="center" gap={1}>
-              <Grid>
-                <Button
-                  auto
-                  color="secondary"
-                  onClick={handleCopyClick}
-                  icon={<CopyIcon />}
-                >
-                  {t("copyField")}
-                </Button>
-              </Grid>
-              <Grid>
-                <Button
-                  auto
-                  color="error"
-                  onClick={handleRemoveClick}
-                  icon={<TrashIcon />}
-                >
-                  {t("removeField")}
-                </Button>
-              </Grid>
-            </Grid.Container>
-          </div>
+      <Grid.Container gap={1}>
+        <Grid xs={9} alignItems="center">
+          <Text h4>{t("fieldFormHeader")}</Text>
         </Grid>
-        <Spacer h={0.5} />
-        <Grid>
+        <Grid xs={15} alignItems="center" justify="space-between">
+          <Grid.Container justify="flex-end" alignItems="center" gap={1}>
+            <Grid>
+              <Button
+                auto
+                color="secondary"
+                onClick={handleCopyClick}
+                icon={<CopyIcon />}
+              >
+                {t("copyField")}
+              </Button>
+            </Grid>
+            <Grid>
+              <Button
+                auto
+                color="error"
+                onClick={handleRemoveClick}
+                icon={<TrashIcon />}
+              >
+                {t("removeField")}
+              </Button>
+            </Grid>
+          </Grid.Container>
+        </Grid>
+        <Grid xs={24}>
           <Input
             width="100%"
             value={fieldDefinition.name}
@@ -105,8 +94,7 @@ export const FieldForm = observer(
             aria-label={t("namePlaceholder")}
           />
         </Grid>
-        <Spacer h={0.5} />
-        <Grid>
+        <Grid xs={24}>
           <Input
             width="100%"
             value={fieldDefinition.description}
@@ -116,11 +104,26 @@ export const FieldForm = observer(
             aria-label={t("descriptionPlaceholder")}
           />
         </Grid>
-        <Spacer h={1} />
-        <Grid>
+        <Grid xs={24}>
+          <Select
+            width="100%"
+            aria-label={t("kindLabel")}
+            placeholder={t("kindPlaceholder")}
+            value={fieldDefinition.kind}
+            onChange={handleKindChange}
+          >
+            {definitionKinds.map((kind) => (
+              <Select.Option key={kind} value={kind}>
+                {kind}
+              </Select.Option>
+            ))}
+          </Select>
+        </Grid>
+        <Grid xs={24}>
           <Radio.Group
             value={fieldDefinition.change}
             onChange={handleGroupChange}
+            useRow
           >
             <Radio value="EveryFrame">
               {t("everyFrameKey")}
@@ -137,19 +140,6 @@ export const FieldForm = observer(
               <Radio.Desc>{t("singletonDescription")}</Radio.Desc>
             </Radio>
           </Radio.Group>
-        </Grid>
-        <Spacer h={1} />
-        <Grid>
-          <Select
-            aria-label={t("kindLabel")}
-            placeholder={t("kindPlaceholder")}
-            value={fieldDefinition.kind}
-            onChange={handleKindChange}
-          >
-            {definitionKinds.map((kind) => (
-              <Select.Option key={kind}>{kind}</Select.Option>
-            ))}
-          </Select>
         </Grid>
       </Grid.Container>
     );

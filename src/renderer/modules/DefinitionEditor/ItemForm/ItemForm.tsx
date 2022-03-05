@@ -1,4 +1,4 @@
-import { Button, Grid, Input, Spacer, Text } from "@geist-ui/core";
+import { Button, Grid, Input, Text } from "@geist-ui/core";
 import { CopyIcon, PlusIcon, TrashIcon } from "@radix-ui/react-icons";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
@@ -48,48 +48,45 @@ export const ItemForm = observer(
     };
 
     return (
-      <Grid.Container gap={0}>
-        <Grid justify="space-between" alignItems="center">
-          <div>
-            <Text h3>{t("itemFormHeader")}</Text>
-          </div>
-          <div>
-            <Grid.Container justify="flex-end" alignItems="center" gap={1}>
-              <Grid>
-                <Button
-                  auto
-                  color="primary"
-                  onClick={handlePlusClick}
-                  icon={<PlusIcon />}
-                >
-                  {t("addNewField")}
-                </Button>
-              </Grid>
-              <Grid>
-                <Button
-                  auto
-                  color="secondary"
-                  onClick={handleCopyClick}
-                  icon={<CopyIcon />}
-                >
-                  {t("copyItem")}
-                </Button>
-              </Grid>
-              <Grid>
-                <Button
-                  auto
-                  color="error"
-                  onClick={handleRemoveClick}
-                  icon={<TrashIcon />}
-                >
-                  {t("removeItem")}
-                </Button>
-              </Grid>
-            </Grid.Container>
-          </div>
+      <Grid.Container gap={1}>
+        <Grid xs={9} justify="space-between" alignItems="center">
+          <Text h3>{t("itemFormHeader")}</Text>
         </Grid>
-        <Spacer h={1} />
-        <Grid>
+        <Grid xs={15} justify="space-between" alignItems="center">
+          <Grid.Container justify="flex-end" alignItems="center" gap={1}>
+            <Grid>
+              <Button
+                auto
+                color="primary"
+                onClick={handlePlusClick}
+                icon={<PlusIcon />}
+              >
+                {t("addNewField")}
+              </Button>
+            </Grid>
+            <Grid>
+              <Button
+                auto
+                color="secondary"
+                onClick={handleCopyClick}
+                icon={<CopyIcon />}
+              >
+                {t("copyItem")}
+              </Button>
+            </Grid>
+            <Grid>
+              <Button
+                auto
+                color="error"
+                onClick={handleRemoveClick}
+                icon={<TrashIcon />}
+              >
+                {t("removeItem")}
+              </Button>
+            </Grid>
+          </Grid.Container>
+        </Grid>
+        <Grid xs={24}>
           <Input
             width="100%"
             value={itemDefinition.name}
@@ -99,8 +96,7 @@ export const ItemForm = observer(
             aria-label={t("namePlaceholder")}
           />
         </Grid>
-        <Spacer h={0.5} />
-        <Grid>
+        <Grid xs={24}>
           <Input
             width="100%"
             value={itemDefinition.description}
