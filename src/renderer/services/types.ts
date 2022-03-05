@@ -6,8 +6,12 @@ import type {
   SaveDialogReturnValue,
 } from "electron/renderer";
 import { SnapshotIn, SnapshotOut } from "mobx-state-tree";
-import { ProjectDefinition } from "renderer/models";
-import { DefinitionEntry } from "renderer/models/stores/DefinitionEntry";
+import {
+  DefinitionEntry,
+  ProjectDefinition,
+  ProjectEntry,
+  Resource,
+} from "renderer/models";
 
 type PaginationArgs = {
   start: number;
@@ -18,6 +22,37 @@ type PaginationArgs = {
 type PaginationResult<TData> = {
   data: TData;
   totalSize: number;
+};
+
+export type Range = {
+  start: number;
+  end: number;
+};
+
+export type Item = {
+  id: string;
+  ranges: Range[];
+};
+
+export type BatchInfo = {
+  id: string;
+  range: Range[];
+};
+
+export type ProjectRoot = {
+  id: string;
+  name: string;
+  projectPath: string;
+  updatedAt: number;
+  batchSize: number;
+  resources: SnapshotOut<typeof Resource>[];
+  items: Item[];
+  batches: BatchInfo[];
+  definition: SnapshotOut<typeof ProjectDefinition>;
+};
+
+export type Batch = {
+  id: string;
 };
 
 export type IpcDefinitionsService = {
@@ -50,7 +85,22 @@ export type IpcResourcesService = {
   ): void;
 };
 
+export type IpcProjectService = {
+  createProject(project: ProjectRoot): Promise<void>;
+  readProject(projectPath: string): Promise<ProjectRoot>;
+  readBatch(args: { projectPath: string; batchId: string }): Promise<Batch>;
+  updateBatch(args: {
+    projectPath: string;
+    batchId: string;
+    batch: Batch;
+  }): Promise<void>;
+  readProjects(
+    args: PaginationArgs
+  ): Promise<PaginationResult<SnapshotIn<typeof ProjectEntry>[]>>;
+};
+
 export type ElectronServices = {
   ipcDefinitions: IpcDefinitionsService;
   ipcResources: IpcResourcesService;
+  ipcProject: IpcProjectService;
 };

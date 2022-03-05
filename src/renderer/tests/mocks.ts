@@ -8,12 +8,15 @@ import {
   ItemDefinition,
   NewProjectStore,
   ProjectDefinition,
+  ProjectEntry,
 } from "renderer/models";
 import { Resource } from "renderer/models/project/Resource";
 import {
   ElectronServices,
   IpcDefinitionsService,
+  IpcProjectService,
   IpcResourcesService,
+  ProjectRoot,
 } from "renderer/services";
 
 export const mockFieldDefinition = ({
@@ -130,6 +133,59 @@ export const mockNewProjectStore = ({
   });
 };
 
+export const mockProjectRoot = ({
+  update,
+}: {
+  update?: Partial<ProjectRoot>;
+} = {}): ProjectRoot => {
+  return {
+    batchSize: 100,
+    batches: [],
+    definition: {
+      createdAt: 0,
+      description: "",
+      id: "1",
+      items: [],
+      name: "name",
+      updatedAt: 0,
+    },
+    id: "1",
+    items: [],
+    name: "name",
+    projectPath: "path",
+    resources: [],
+    updatedAt: 0,
+    ...update,
+  };
+};
+
+export const mockProjectEntry = ({
+  index,
+  update,
+}: {
+  index?: number;
+  update?: Partial<SnapshotIn<typeof ProjectEntry>>;
+} = {}): Instance<typeof ProjectEntry> => {
+  return ProjectEntry.create({
+    definition: `Definition${index}`,
+    id: `${index ?? nanoid()}`,
+    name: `Name${index}`,
+    projectPath: `Path${index}`,
+    updatedAt: 0,
+    ...update,
+  });
+};
+
+export const mockProjectEntries = ({
+  entriesCount = 15,
+}: {
+  entriesCount?: number;
+} = {}): Instance<typeof ProjectEntry>[] => {
+  return Array(entriesCount)
+    .fill(0)
+    .map((_, index) => mockProjectEntry({ index }));
+};
+
 export const mockIpcDefinitionsService = ({
   update,
   updateEntries,
@@ -179,12 +235,34 @@ export const mockIpcResourcesService = ({
   };
 };
 
+export const mockIpcProjectService = ({
+  update,
+}: {
+  update?: Partial<IpcProjectService>;
+} = {}): IpcProjectService => {
+  return {
+    createProject: () => Promise.resolve(),
+    readBatch: () => Promise.resolve({ id: "1" }),
+    readProject: () => Promise.resolve(mockProjectRoot()),
+    readProjects: () =>
+      Promise.resolve({
+        data: mockProjectEntries({
+          entriesCount: 20,
+        }),
+        totalSize: 20,
+      }),
+    updateBatch: () => Promise.resolve(),
+    ...update,
+  };
+};
+
 export const mockElectronServices = (
   update: Partial<ElectronServices> = {}
 ): ElectronServices => {
   return {
     ipcResources: mockIpcResourcesService(),
     ipcDefinitions: mockIpcDefinitionsService(),
+    ipcProject: mockIpcProjectService(),
     ...update,
   };
 };
