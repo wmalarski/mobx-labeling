@@ -1,5 +1,5 @@
 import { Button, Grid, Input, Loading, Text } from "@geist-ui/core";
-import { ExitIcon, Pencil1Icon, PlusIcon } from "@radix-ui/react-icons";
+import { Pencil1Icon, PlusIcon, RowsIcon } from "@radix-ui/react-icons";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ChangeEvent, ReactElement } from "react";
@@ -88,7 +88,7 @@ export const DefinitionForm = observer(
                 auto
                 color="secondary"
                 onClick={handleBoBackClick}
-                icon={<ExitIcon />}
+                icon={<RowsIcon />}
               >
                 {t("definitionsList")}
               </Button>

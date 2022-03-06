@@ -9,6 +9,7 @@ import {
   NewProjectStore,
   ProjectDefinition,
   ProjectEntry,
+  ProjectsList,
 } from "renderer/models";
 import { Resource } from "renderer/models/project/Resource";
 import {
@@ -184,6 +185,16 @@ export const mockProjectEntries = ({
   return Array(entriesCount)
     .fill(0)
     .map((_, index) => mockProjectEntry({ index }));
+};
+
+export const mockProjectsList = ({
+  update,
+}: {
+  update?: Partial<SnapshotIn<typeof ProjectsList>>;
+} = {}): Instance<typeof ProjectsList> => {
+  return ProjectsList.create({
+    ...update,
+  });
 };
 
 export const mockIpcDefinitionsService = ({

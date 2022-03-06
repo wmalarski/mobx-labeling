@@ -8,7 +8,7 @@ import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { ResourcesList } from "./ResourcesList";
 
 export default {
-  title: "NewProject/ResourcesList",
+  title: "pages/NewProject/ResourcesList",
   component: ResourcesList,
   loaders: [
     async () => {

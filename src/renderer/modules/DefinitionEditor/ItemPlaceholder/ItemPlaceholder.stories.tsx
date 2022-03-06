@@ -5,7 +5,7 @@ import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { ItemPlaceholder } from "./ItemPlaceholder";
 
 export default {
-  title: "DefinitionEditor/ItemPlaceholder",
+  title: "modules/DefinitionEditor/ItemPlaceholder",
   component: ItemPlaceholder,
   argTypes: {
     onSelectedItemChange: {

@@ -8,7 +8,7 @@ import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { ItemForm } from "./ItemForm";
 
 export default {
-  title: "DefinitionEditor/ItemForm",
+  title: "modules/DefinitionEditor/ItemForm",
   component: ItemForm,
 } as ComponentMeta<typeof ItemForm>;
 

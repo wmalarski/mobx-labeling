@@ -19,6 +19,7 @@ export * from "./fields/Select";
 export * from "./fields/Text";
 export * from "./project/Resource";
 export * from "./projects/ProjectEntry";
+export * from "./projects/ProjectsList";
 export * from "./stores/DefinitionsStore";
 export * from "./stores/DefinitionStore";
 export * from "./stores/NewProjectStore";

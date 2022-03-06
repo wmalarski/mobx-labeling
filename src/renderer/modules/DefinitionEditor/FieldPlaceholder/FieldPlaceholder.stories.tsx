@@ -5,7 +5,7 @@ import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { FieldPlaceholder } from "./FieldPlaceholder";
 
 export default {
-  title: "DefinitionEditor/FieldPlaceholder",
+  title: "modules/DefinitionEditor/FieldPlaceholder",
   component: FieldPlaceholder,
   argTypes: {
     onSelectedFieldChange: {

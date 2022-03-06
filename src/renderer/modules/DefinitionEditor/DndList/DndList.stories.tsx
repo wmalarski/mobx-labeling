@@ -5,7 +5,7 @@ import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { DndList } from "./DndList";
 
 export default {
-  title: "DefinitionEditor/DndList",
+  title: "modules/DefinitionEditor/DndList",
   component: DndList,
   argTypes: {
     onSelectedFieldChange: {

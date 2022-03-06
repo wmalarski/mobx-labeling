@@ -1,7 +1,7 @@
 import { Button, Grid, Input, Page, Pagination, Text } from "@geist-ui/core";
 import { PlusIcon } from "@radix-ui/react-icons";
 import { observer } from "mobx-react-lite";
-import { ChangeEvent, ReactElement, useCallback, useState } from "react";
+import { ChangeEvent, ReactElement, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-location";
 import { DefinitionsStore } from "renderer/models";
@@ -22,12 +22,9 @@ export const Definitions = observer((): ReactElement => {
 
   const definitionsList = definitionsStore.definitions;
 
-  const handlePageChange = useCallback(
-    (page: number) => {
-      definitionsList.load({ page: page - 1 });
-    },
-    [definitionsList]
-  );
+  const handlePageChange = (page: number) => {
+    definitionsList.load({ page: page - 1 });
+  };
 
   const handleQueryChange = (event: ChangeEvent<HTMLInputElement>) => {
     definitionsList.load({ page: 0, query: event.target.value });
@@ -42,11 +39,6 @@ export const Definitions = observer((): ReactElement => {
       to: routePaths.newDefinition,
     });
   };
-
-  console.log({
-    count: definitionsList.totalPages,
-    page: definitionsList.page,
-  });
 
   return (
     <Page>

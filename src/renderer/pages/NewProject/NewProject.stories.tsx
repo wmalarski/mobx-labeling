@@ -6,7 +6,7 @@ import { location, routes } from "renderer/utils/routes";
 import { NewProject } from "./NewProject";
 
 export default {
-  title: "NewProject/NewProject",
+  title: "pages/NewProject/NewProject",
   component: NewProject,
   loaders: [
     async () => {

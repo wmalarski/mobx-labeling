@@ -5,7 +5,7 @@ import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { MultiSelectEditor } from "./MultiSelectEditor";
 
 export default {
-  title: "DefinitionEditor/FieldEditor/MultiSelectEditor",
+  title: "modules/DefinitionEditor/FieldEditor/MultiSelectEditor",
   component: MultiSelectEditor,
 } as ComponentMeta<typeof MultiSelectEditor>;
 

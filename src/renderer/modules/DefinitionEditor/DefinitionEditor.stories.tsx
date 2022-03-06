@@ -7,7 +7,7 @@ import { location, routes } from "renderer/utils/routes";
 import { DefinitionEditor } from "./DefinitionEditor";
 
 export default {
-  title: "DefinitionEditor/DefinitionEditor",
+  title: "modules/DefinitionEditor/DefinitionEditor",
   component: DefinitionEditor,
 } as ComponentMeta<typeof DefinitionEditor>;
 

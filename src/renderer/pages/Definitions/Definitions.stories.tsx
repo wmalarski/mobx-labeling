@@ -7,7 +7,7 @@ import { location, routes } from "renderer/utils/routes";
 import { Definitions } from "./Definitions";
 
 export default {
-  title: "Definitions/Definitions",
+  title: "pages/Definitions/Definitions",
   component: Definitions,
   loaders: [
     async () => {

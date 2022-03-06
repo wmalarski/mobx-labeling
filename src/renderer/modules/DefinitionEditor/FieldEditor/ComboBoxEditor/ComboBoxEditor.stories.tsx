@@ -5,7 +5,7 @@ import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { ComboBoxEditor } from "./ComboBoxEditor";
 
 export default {
-  title: "DefinitionEditor/FieldEditor/ComboBoxEditor",
+  title: "modules/DefinitionEditor/FieldEditor/ComboBoxEditor",
   component: ComboBoxEditor,
 } as ComponentMeta<typeof ComboBoxEditor>;
 

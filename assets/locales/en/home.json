@@ -1,3 +1,11 @@
 {
-  "recentHeader": "Open recent"
+  "recentHeader": "Open recent",
+  "nameLabel": "Name",
+  "pathLabel": "Path",
+  "definitionLabel": "Definition",
+  "updatedAtLabel": "Updated At",
+  "openProject": "Open",
+  "searchPlaceholder": "Search",
+  "navNewProject": "New project",
+  "navDefinitions": "Definitions"
 }

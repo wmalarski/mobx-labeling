@@ -1,36 +1,38 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps } from "react";
 import { Router } from "react-location";
-import { mockDefinitionStore } from "renderer/tests/mocks";
+import { mockElectronServices, mockProjectsList } from "renderer/tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { location, routes } from "renderer/utils/routes";
-import { DefinitionForm } from "./DefinitionForm";
+import { Recent } from "./Recent";
 
 export default {
-  title: "modules/DefinitionEditor/DefinitionForm",
-  component: DefinitionForm,
-} as ComponentMeta<typeof DefinitionForm>;
+  title: "pages/Home/Recent",
+  component: Recent,
+  loaders: [
+    async () => {
+      window.electron = mockElectronServices();
+      return {};
+    },
+  ],
+} as ComponentMeta<typeof Recent>;
 
-type Props = ComponentProps<typeof DefinitionForm>;
+type Props = ComponentProps<typeof Recent>;
 
-const DefinitionFormStory = ({
+const RecentStory = ({
   wrapperProps,
   ...props
 }: PropsWithTestWrapper<Props>) => {
   return (
     <Router location={location} routes={routes()}>
       <TestWrapper {...wrapperProps}>
-        <DefinitionForm {...props} />
+        <Recent {...props} />
       </TestWrapper>
     </Router>
   );
 };
 
-const Template: ComponentStory<typeof DefinitionFormStory> =
-  DefinitionFormStory;
+const Template: ComponentStory<typeof RecentStory> = RecentStory;
 
 export const Playground = Template.bind({});
-Playground.args = {
-  wrapperProps: {},
-  definitionStore: mockDefinitionStore(),
-};
+Playground.args = { wrapperProps: {}, projectsList: mockProjectsList() };

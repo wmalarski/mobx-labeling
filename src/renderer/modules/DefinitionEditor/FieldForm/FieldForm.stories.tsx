@@ -6,7 +6,7 @@ import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { FieldForm } from "./FieldForm";
 
 export default {
-  title: "DefinitionEditor/FieldForm",
+  title: "modules/DefinitionEditor/FieldForm",
   component: FieldForm,
   argTypes: {
     onKindChange: {
