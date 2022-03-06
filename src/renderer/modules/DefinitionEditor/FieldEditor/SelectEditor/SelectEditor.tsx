@@ -82,9 +82,10 @@ export const SelectEditor = observer(
                   </Grid>
                   <Grid xs={15} sm={12} md={9}>
                     <Input
+                      htmlType="number"
                       width="100%"
                       min={1}
-                      max={12}
+                      max={24}
                       step={1}
                       placeholder={t("selectSize")}
                       aria-label={t("selectSize")}

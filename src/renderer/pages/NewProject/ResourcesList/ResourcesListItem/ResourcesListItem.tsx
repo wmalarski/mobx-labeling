@@ -44,6 +44,7 @@ export const ResourcesListItem = observer(
               width="100%"
               step={1}
               min={1}
+              htmlType="number"
               label={t("resourceFpsLabel")}
               placeholder={t("resourceFpsLabel")}
               aria-label={t("resourceFpsLabel")}
@@ -55,6 +56,7 @@ export const ResourcesListItem = observer(
             <Input
               width="100%"
               step={1}
+              htmlType="number"
               label={t("resourceFrameShiftLabel")}
               placeholder={t("resourceFrameShiftLabel")}
               aria-label={t("resourceFrameShiftLabel")}

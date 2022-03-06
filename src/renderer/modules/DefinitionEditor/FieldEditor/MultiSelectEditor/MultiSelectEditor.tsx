@@ -81,7 +81,8 @@ export const MultiSelectEditor = observer(
                     <Input
                       width="100%"
                       min={1}
-                      max={12}
+                      htmlType="number"
+                      max={24}
                       step={1}
                       placeholder={t("multiSelectSize")}
                       aria-label={t("multiSelectSize")}

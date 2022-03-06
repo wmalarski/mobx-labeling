@@ -36,6 +36,7 @@ export const NumberEditor = observer(
         </Grid>
         <Grid xs={24}>
           <Input
+            htmlType="number"
             width="100%"
             aria-label={t("numberMin")}
             label={t("numberMin")}
@@ -46,6 +47,7 @@ export const NumberEditor = observer(
         </Grid>
         <Grid xs={24}>
           <Input
+            htmlType="number"
             width="100%"
             aria-label={t("numberMax")}
             label={t("numberMax")}
@@ -56,6 +58,7 @@ export const NumberEditor = observer(
         </Grid>
         <Grid xs={24}>
           <Input
+            htmlType="number"
             width="100%"
             aria-label={t("numberStep")}
             label={t("numberStep")}
@@ -66,6 +69,7 @@ export const NumberEditor = observer(
         </Grid>
         <Grid xs={24}>
           <Input
+            htmlType="number"
             width="100%"
             aria-label={t("numberDefault")}
             label={t("numberDefault")}
