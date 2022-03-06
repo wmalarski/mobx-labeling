@@ -1,13 +1,13 @@
-import { Button, Grid, Input, Page, Pagination, Text } from "@geist-ui/core";
+import { Button, Grid, Page, Text } from "@geist-ui/core";
 import { PlusIcon } from "@radix-ui/react-icons";
 import { observer } from "mobx-react-lite";
-import { ChangeEvent, ReactElement, useState } from "react";
+import { ReactElement, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-location";
 import { DefinitionsStore } from "renderer/models";
 import { routePaths } from "renderer/utils/routes";
 import { Header } from "../../modules/Header/Header";
-import { DefinitionsItem } from "./DefinitionsItem/DefinitionsItem";
+import { DefinitionsList } from "./DefinitionsList/DefinitionsList";
 
 export const Definitions = observer((): ReactElement => {
   const { t } = useTranslation("definition");
@@ -20,17 +20,7 @@ export const Definitions = observer((): ReactElement => {
     });
   });
 
-  const definitionsList = definitionsStore.definitions;
-
-  const handlePageChange = (page: number) => {
-    definitionsList.load({ page: page - 1 });
-  };
-
-  const handleQueryChange = (event: ChangeEvent<HTMLInputElement>) => {
-    definitionsList.load({ page: 0, query: event.target.value });
-  };
-
-  const handleRemoveClick = (definitionId: string) => () => {
+  const handleRemoveClick = (definitionId: string) => {
     definitionsStore.remove(definitionId);
   };
 
@@ -59,39 +49,10 @@ export const Definitions = observer((): ReactElement => {
               {t("newDefinitionButton")}
             </Button>
           </Grid>
-          <Grid xs={24}>
-            <Input
-              width="100%"
-              clearable
-              value={definitionsList.query}
-              onChange={handleQueryChange}
-              label={t("searchPlaceholder")}
-              placeholder={t("searchPlaceholder")}
-              aria-label={t("searchPlaceholder")}
-            />
-          </Grid>
-          {definitionsList.definitions.map((definitionEntry) => (
-            <Grid xs={24} key={definitionEntry.id}>
-              <DefinitionsItem
-                definitionEntry={definitionEntry}
-                onRemoveClick={handleRemoveClick(definitionEntry.id)}
-              />
-            </Grid>
-          ))}
-          {definitionsList.error && (
-            <Grid xs={24}>
-              <Text h4 type="error">
-                {t("loadingError")}
-              </Text>
-            </Grid>
-          )}
-          <Grid xs={24} justify="center">
-            <Pagination
-              count={definitionsList.totalPages}
-              page={definitionsList.page + 1}
-              onChange={handlePageChange}
-            />
-          </Grid>
+          <DefinitionsList
+            definitionsList={definitionsStore.definitions}
+            onRemoveClick={handleRemoveClick}
+          />
         </Grid.Container>
       </Page.Content>
     </Page>
