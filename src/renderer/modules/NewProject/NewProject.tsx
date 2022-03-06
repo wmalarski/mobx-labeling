@@ -3,7 +3,6 @@ import { RowsIcon } from "@radix-ui/react-icons";
 import { ReactElement, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useMatch, useNavigate } from "react-location";
-import { IntroLayout } from "renderer/components";
 import { DefinitionsList, NewProjectStore } from "renderer/models";
 import { LocationGenerics, routePaths } from "renderer/utils/routes";
 import { Header } from "../Header/Header";
@@ -34,8 +33,10 @@ export const NewProject = (): ReactElement => {
   };
 
   return (
-    <IntroLayout>
-      <Header />
+    <Page>
+      <Page.Header>
+        <Header />
+      </Page.Header>
       <Page.Content>
         <Grid.Container gap={1} justify="space-between" alignItems="center">
           <Grid>
@@ -59,6 +60,6 @@ export const NewProject = (): ReactElement => {
           </Grid>
         </Grid.Container>
       </Page.Content>
-    </IntroLayout>
+    </Page>
   );
 };

@@ -1,8 +1,7 @@
-import { Spacer } from "@geist-ui/core";
+import { Page } from "@geist-ui/core";
 import { observer } from "mobx-react-lite";
 import { ReactElement, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { IntroLayout } from "renderer/components";
 import { DefinitionStore } from "renderer/models";
 import { DefinitionEditor } from "../DefinitionEditor/DefinitionEditor";
 import { Header } from "../Header/Header";
@@ -19,10 +18,13 @@ export const NewDefinition = observer((): ReactElement => {
   });
 
   return (
-    <IntroLayout>
-      <Header />
-      <Spacer h={1} />
-      <DefinitionEditor definitionStore={definitionStore} />
-    </IntroLayout>
+    <Page>
+      <Page.Header>
+        <Header />
+      </Page.Header>
+      <Page.Content>
+        <DefinitionEditor definitionStore={definitionStore} />
+      </Page.Content>
+    </Page>
   );
 });
