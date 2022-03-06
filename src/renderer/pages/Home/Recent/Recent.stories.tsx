@@ -1,9 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps } from "react";
-import { Router } from "react-location";
 import { mockElectronServices, mockProjectsList } from "renderer/tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
-import { location, routes } from "renderer/utils/routes";
 import { Recent } from "./Recent";
 
 export default {
@@ -24,11 +22,9 @@ const RecentStory = ({
   ...props
 }: PropsWithTestWrapper<Props>) => {
   return (
-    <Router location={location} routes={routes()}>
-      <TestWrapper {...wrapperProps}>
-        <Recent {...props} />
-      </TestWrapper>
-    </Router>
+    <TestWrapper {...wrapperProps}>
+      <Recent {...props} />
+    </TestWrapper>
   );
 };
 

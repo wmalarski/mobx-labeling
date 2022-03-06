@@ -1,9 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps } from "react";
-import { Router } from "react-location";
 import { mockDefinitionStore } from "renderer/tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
-import { location, routes } from "renderer/utils/routes";
 import { DefinitionEditor } from "./DefinitionEditor";
 
 export default {
@@ -18,11 +16,9 @@ const DefinitionEditorStory = ({
   ...props
 }: PropsWithTestWrapper<Props>) => {
   return (
-    <Router location={location} routes={routes()}>
-      <TestWrapper {...wrapperProps}>
-        <DefinitionEditor {...props} />
-      </TestWrapper>
-    </Router>
+    <TestWrapper {...wrapperProps}>
+      <DefinitionEditor {...props} />
+    </TestWrapper>
   );
 };
 

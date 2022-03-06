@@ -1,7 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { Router } from "react-location";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
-import { location, routes } from "renderer/utils/routes";
 import { Header } from "./Header";
 
 export default {
@@ -11,11 +9,9 @@ export default {
 
 const HeaderStory = ({ wrapperProps }: PropsWithTestWrapper) => {
   return (
-    <Router location={location} routes={routes()}>
-      <TestWrapper {...wrapperProps}>
-        <Header />
-      </TestWrapper>
-    </Router>
+    <TestWrapper {...wrapperProps}>
+      <Header />
+    </TestWrapper>
   );
 };
 

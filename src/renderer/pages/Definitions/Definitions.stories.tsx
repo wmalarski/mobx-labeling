@@ -1,9 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { useState } from "react";
-import { Router } from "react-location";
 import { mockElectronServices } from "renderer/tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
-import { location, routes } from "renderer/utils/routes";
 import { Definitions } from "./Definitions";
 
 export default {
@@ -18,14 +15,10 @@ export default {
 } as ComponentMeta<typeof Definitions>;
 
 const DefinitionsStory = ({ wrapperProps }: PropsWithTestWrapper) => {
-  const [routerRoutes] = useState(routes);
-
   return (
-    <Router location={location} routes={routerRoutes}>
-      <TestWrapper {...wrapperProps}>
-        <Definitions />
-      </TestWrapper>
-    </Router>
+    <TestWrapper {...wrapperProps}>
+      <Definitions />
+    </TestWrapper>
   );
 };
 
