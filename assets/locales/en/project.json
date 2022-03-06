@@ -16,5 +16,10 @@
   "resourceFpsLabel": "Fps",
   "resourceFrameShiftLabel": "Frame shift",
   "resourceRemove": "Remove",
-  "browseLocation": "Browse"
+  "browseLocation": "Browse",
+  "addURLTitle": "Add URL",
+  "addURLSubtitle": "Add URL path to remote resource",
+  "addURLCancel": "Cancel",
+  "addURLSave": "Add",
+  "pathLabel": "Path"
 }

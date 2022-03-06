@@ -1,5 +1,5 @@
 import { Button, Grid, Text } from "@geist-ui/core";
-import { FileIcon, Link1Icon } from "@radix-ui/react-icons";
+import { FileIcon } from "@radix-ui/react-icons";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
@@ -8,6 +8,7 @@ import { NewProjectStore } from "renderer/models";
 import { Resource } from "renderer/models/project/Resource";
 import { useOpenDialog } from "renderer/services";
 import { ResourcesListItem } from "./ResourcesListItem/ResourcesListItem";
+import { UrlResourceModal } from "./UrlResourceModal/UrlResourceModal";
 
 type Props = {
   newProjectStore: Instance<typeof NewProjectStore>;
@@ -47,9 +48,7 @@ export const ResourcesList = observer(
           </Button>
         </Grid>
         <Grid>
-          <Button icon={<Link1Icon />} auto>
-            {t("resourceURL")}
-          </Button>
+          <UrlResourceModal newProjectStore={newProjectStore} />
         </Grid>
         {newProjectStore.resources.map((resource) => (
           <Grid xs={24} key={resource.id}>

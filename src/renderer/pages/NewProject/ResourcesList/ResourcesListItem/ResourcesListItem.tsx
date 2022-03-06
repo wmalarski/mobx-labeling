@@ -24,7 +24,7 @@ export const ResourcesListItem = observer(
     };
 
     return (
-      <Card>
+      <Card width="100%">
         <Grid.Container gap={0.5} alignItems="center" justify="space-between">
           <Grid>
             <Text h5>{resource.path}</Text>
