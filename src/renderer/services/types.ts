@@ -36,7 +36,7 @@ export type Item = {
 
 export type BatchInfo = {
   id: string;
-  range: Range[];
+  range: Range;
 };
 
 export type ProjectRoot = {

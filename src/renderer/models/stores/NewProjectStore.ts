@@ -1,4 +1,5 @@
-import { Instance, types } from "mobx-state-tree";
+import { flow, getSnapshot, Instance, types } from "mobx-state-tree";
+import { nanoid } from "nanoid";
 import { DefinitionsList } from "../definitions/DefinitionsList";
 import { Resource } from "../project/Resource";
 
@@ -38,4 +39,25 @@ export const NewProjectStore = types
     removeResource(resource: Instance<typeof Resource>) {
       self.resources.remove(resource);
     },
+    createProject: flow(function* (onSuccess: () => void) {
+      if (!self.definitionId) return;
+
+      const definition = yield window.electron.ipcDefinitions.readDefinition(
+        self.definitionId
+      );
+
+      yield window.electron.ipcProject.createProject({
+        batchSize: self.batchSize,
+        batches: [{ id: nanoid(), range: { start: 0, end: self.batchSize } }],
+        definition,
+        id: nanoid(),
+        items: [],
+        name: self.name,
+        projectPath: self.projectPath,
+        resources: getSnapshot(self.resources),
+        updatedAt: new Date().getTime(),
+      });
+
+      onSuccess();
+    }),
   }));

@@ -27,23 +27,12 @@ export const ProjectsList = types
       self.query = query;
       self.state = "pending";
       try {
-        console.log({
-          limit: pageLimit,
-          start: self.page * pageLimit,
-          query: self.query,
-        });
         const { data, totalSize } =
           yield window.electron.ipcProject.readProjects({
             limit: pageLimit,
             start: self.page * pageLimit,
             query: self.query,
           });
-
-        console.log({
-          data,
-          totalSize,
-        });
-
         self.projects.replace(data);
         self.totalSize = totalSize;
         self.state = "done";

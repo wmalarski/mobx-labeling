@@ -21,5 +21,6 @@
   "addURLSubtitle": "Add URL path to remote resource",
   "addURLCancel": "Cancel",
   "addURLSave": "Add",
-  "pathLabel": "Path"
+  "pathLabel": "Path",
+  "create": "Create"
 }

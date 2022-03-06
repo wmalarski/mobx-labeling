@@ -1,5 +1,5 @@
 import { Button, Grid, Page, Text } from "@geist-ui/core";
-import { RowsIcon } from "@radix-ui/react-icons";
+import { Pencil1Icon, RowsIcon } from "@radix-ui/react-icons";
 import { ReactElement, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useMatch, useNavigate } from "react-location";
@@ -32,6 +32,15 @@ export const NewProject = (): ReactElement => {
     });
   };
 
+  const handleCreateClick = () => {
+    newProjectStore.createProject(() => {
+      navigate({
+        to: routePaths.workspace,
+        search: { project: newProjectStore.projectPath },
+      });
+    });
+  };
+
   return (
     <Page>
       <Page.Header>
@@ -42,15 +51,29 @@ export const NewProject = (): ReactElement => {
           <Grid>
             <Text h2>{t("newProject")}</Text>
           </Grid>
-          <Grid>
-            <Button
-              color="primary"
-              auto
-              onClick={handleDefinitionsClick}
-              icon={<RowsIcon />}
-            >
-              {t("definitionsLink")}
-            </Button>
+          <Grid justify="flex-end">
+            <Grid.Container gap={1}>
+              <Grid>
+                <Button
+                  color="primary"
+                  auto
+                  onClick={handleCreateClick}
+                  icon={<Pencil1Icon />}
+                >
+                  {t("create")}
+                </Button>
+              </Grid>
+              <Grid>
+                <Button
+                  color="primary"
+                  auto
+                  onClick={handleDefinitionsClick}
+                  icon={<RowsIcon />}
+                >
+                  {t("definitionsLink")}
+                </Button>
+              </Grid>
+            </Grid.Container>
           </Grid>
           <Grid xs={24}>
             <ProjectDetails newProjectStore={newProjectStore} />
