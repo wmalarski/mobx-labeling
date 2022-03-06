@@ -1,4 +1,5 @@
-import { Button, Grid, Spacer, Text } from "@geist-ui/core";
+import { Button, Grid, Text } from "@geist-ui/core";
+import { FileIcon, Link1Icon } from "@radix-ui/react-icons";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
@@ -35,19 +36,23 @@ export const ResourcesList = observer(
     };
 
     return (
-      <Grid.Container gap={0}>
-        <Grid alignItems="center">
+      <Grid.Container gap={1} justify="space-between" alignItems="center">
+        <Grid>
           <Text h3>{t("resourcesList")}</Text>
-          <Spacer css={{ flexGrow: 1 }} />
-          <Button auto onClick={handleOpenClick}>
+        </Grid>
+        <Grid style={{ flexGrow: 1 }} />
+        <Grid>
+          <Button icon={<FileIcon />} auto onClick={handleOpenClick}>
             {t("resourceLocal")}
           </Button>
-          <Spacer w={0.5} />
-          <Button auto>{t("resourceURL")}</Button>
         </Grid>
-        <Spacer h={1} />
+        <Grid>
+          <Button icon={<Link1Icon />} auto>
+            {t("resourceURL")}
+          </Button>
+        </Grid>
         {newProjectStore.resources.map((resource) => (
-          <Grid key={resource.id}>
+          <Grid xs={24} key={resource.id}>
             <ResourcesListItem
               resource={resource}
               onRemoveClick={handleRemoveClick(resource)}

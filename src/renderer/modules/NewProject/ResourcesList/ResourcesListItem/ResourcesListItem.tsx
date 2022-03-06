@@ -1,4 +1,4 @@
-import { Button, Card, Grid, Input, Spacer, Text } from "@geist-ui/core";
+import { Button, Card, Grid, Input, Text } from "@geist-ui/core";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
@@ -25,21 +25,21 @@ export const ResourcesListItem = observer(
 
     return (
       <Card>
-        <Grid.Container gap={0.5} alignItems="center">
-          <Grid sm={2} xs={4}>
-            <Text small type="secondary">
-              {t("resourcePathLabel")}
-            </Text>
-          </Grid>
-          <Grid sm={10} xs={8}>
+        <Grid.Container gap={0.5} alignItems="center" justify="space-between">
+          <Grid>
             <Text h5>{resource.path}</Text>
           </Grid>
-          <Grid sm={2} xs={4}>
-            <Text small type="secondary">
-              {t("resourceFpsLabel")}
-            </Text>
+          <Grid>
+            <Button
+              auto
+              color="error"
+              onClick={onRemoveClick}
+              icon={<TrashIcon />}
+            >
+              {t("resourceRemove")}
+            </Button>
           </Grid>
-          <Grid sm={10} xs={8}>
+          <Grid xs={24}>
             <Input
               width="100%"
               step={1}
@@ -51,12 +51,7 @@ export const ResourcesListItem = observer(
               onChange={handleFpsChange}
             />
           </Grid>
-          <Grid sm={2} xs={4}>
-            <Text small type="secondary">
-              {t("resourceFrameShiftLabel")}
-            </Text>
-          </Grid>
-          <Grid sm={10} xs={8}>
+          <Grid xs={24}>
             <Input
               width="100%"
               step={1}
@@ -66,14 +61,6 @@ export const ResourcesListItem = observer(
               value={String(resource.frameShift)}
               onChange={handleFrameShiftChange}
             />
-          </Grid>
-        </Grid.Container>
-        <Spacer h={1} />
-        <Grid.Container gap={1}>
-          <Grid>
-            <Button color="error" onClick={onRemoveClick} icon={<TrashIcon />}>
-              {t("resourceRemove")}
-            </Button>
           </Grid>
         </Grid.Container>
       </Card>

@@ -1,4 +1,4 @@
-import { AutoComplete, Button, Grid, Input, Spacer } from "@geist-ui/core";
+import { AutoComplete, Grid, Input } from "@geist-ui/core";
 import { Pencil1Icon } from "@radix-ui/react-icons";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
@@ -50,53 +50,58 @@ export const ProjectDetails = observer(
     };
 
     return (
-      <Grid.Container gap={0}>
-        <Input
-          width="100%"
-          label={t("namePlaceholder")}
-          placeholder={t("namePlaceholder")}
-          aria-label={t("namePlaceholder")}
-          value={newProjectStore.name}
-          onChange={handleNameChange}
-        />
-        <Spacer h={0.5} />
-        <AutoComplete
-          aria-label={t("selectDefinitionLabel")}
-          value={newProjectStore.definitions.query}
-          onSearch={handleInputChange}
-          onSelect={handleSelectionChange}
-        >
-          {newProjectStore.definitions.definitions.map((definition) => (
-            <AutoComplete.Item value={definition.name} key={definition.id}>
-              {definition.name}
-            </AutoComplete.Item>
-          ))}
-        </AutoComplete>
-        <Spacer h={0.5} />
-        <Input
-          width="100%"
-          label={t("locationLabel")}
-          placeholder={t("locationLabel")}
-          aria-label={t("locationLabel")}
-          onChange={handlePathChange}
-          value={newProjectStore.projectPath}
-          iconRight={
-            <Button auto onClick={handleSaveClick} css={{ padding: "$4" }}>
-              <Pencil1Icon aria-label={t("browseLocation")} />
-            </Button>
-          }
-        />
-        <Spacer h={0.5} />
-        <Input
-          width="100%"
-          step={1}
-          min={10}
-          label={t("batchSizePlaceholder")}
-          placeholder={t("batchSizePlaceholder")}
-          aria-label={t("batchSizePlaceholder")}
-          value={String(newProjectStore.batchSize)}
-          onChange={handleBatchSizeChange}
-        />
+      <Grid.Container gap={0.5}>
+        <Grid xs={24}>
+          <Input
+            width="100%"
+            label={t("namePlaceholder")}
+            placeholder={t("namePlaceholder")}
+            aria-label={t("namePlaceholder")}
+            value={newProjectStore.name}
+            onChange={handleNameChange}
+          />
+        </Grid>
+        <Grid xs={24}>
+          <AutoComplete
+            width="100%"
+            aria-label={t("selectDefinitionLabel")}
+            placeholder={t("selectDefinitionLabel")}
+            value={newProjectStore.definitions.query}
+            onSearch={handleInputChange}
+            onSelect={handleSelectionChange}
+          >
+            {newProjectStore.definitions.definitions.map((definition) => (
+              <AutoComplete.Item value={definition.name} key={definition.id}>
+                {definition.name}
+              </AutoComplete.Item>
+            ))}
+          </AutoComplete>
+        </Grid>
+        <Grid xs={24}>
+          <Input
+            width="100%"
+            label={t("locationLabel")}
+            placeholder={t("locationLabel")}
+            aria-label={t("locationLabel")}
+            onChange={handlePathChange}
+            value={newProjectStore.projectPath}
+            iconClickable
+            onIconClick={handleSaveClick}
+            iconRight={<Pencil1Icon aria-label={t("browseLocation")} />}
+          />
+        </Grid>
+        <Grid xs={24}>
+          <Input
+            width="100%"
+            step={1}
+            min={10}
+            label={t("batchSizePlaceholder")}
+            placeholder={t("batchSizePlaceholder")}
+            aria-label={t("batchSizePlaceholder")}
+            value={String(newProjectStore.batchSize)}
+            onChange={handleBatchSizeChange}
+          />
+        </Grid>
       </Grid.Container>
     );
   }

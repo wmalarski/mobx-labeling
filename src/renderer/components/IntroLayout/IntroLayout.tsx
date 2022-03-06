@@ -6,5 +6,9 @@ type Props = {
 };
 
 export const IntroLayout = ({ children }: Props): ReactElement => {
-  return <Page>{children}</Page>;
+  return (
+    <Page dotBackdrop dotSize="5px" style={{ color: "white" }}>
+      {children}
+    </Page>
+  );
 };

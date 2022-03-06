@@ -1,4 +1,4 @@
-import { Button, Grid, Spacer, Text } from "@geist-ui/core";
+import { Button, Grid, Page, Text } from "@geist-ui/core";
 import { RowsIcon } from "@radix-ui/react-icons";
 import { ReactElement, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -36,24 +36,29 @@ export const NewProject = (): ReactElement => {
   return (
     <IntroLayout>
       <Header />
-      <Spacer h={1} />
-      <Grid.Container gap={0}>
-        <Grid justify="space-between" alignItems="center">
-          <Text h2>{t("newProject")}</Text>
-          <Button
-            color="primary"
-            auto
-            onClick={handleDefinitionsClick}
-            icon={<RowsIcon />}
-          >
-            {t("definitionsLink")}
-          </Button>
-        </Grid>
-      </Grid.Container>
-      <Spacer h={1} />
-      <ProjectDetails newProjectStore={newProjectStore} />
-      <Spacer h={1} />
-      <ResourcesList newProjectStore={newProjectStore} />
+      <Page.Content>
+        <Grid.Container gap={1} justify="space-between" alignItems="center">
+          <Grid>
+            <Text h2>{t("newProject")}</Text>
+          </Grid>
+          <Grid>
+            <Button
+              color="primary"
+              auto
+              onClick={handleDefinitionsClick}
+              icon={<RowsIcon />}
+            >
+              {t("definitionsLink")}
+            </Button>
+          </Grid>
+          <Grid xs={24}>
+            <ProjectDetails newProjectStore={newProjectStore} />
+          </Grid>
+          <Grid xs={24}>
+            <ResourcesList newProjectStore={newProjectStore} />
+          </Grid>
+        </Grid.Container>
+      </Page.Content>
     </IntroLayout>
   );
 };

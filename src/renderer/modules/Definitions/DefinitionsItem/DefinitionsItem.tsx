@@ -36,23 +36,28 @@ export const DefinitionsItem = observer(
       });
     };
 
+    const leftXs = 12;
+    const rightXs = 12;
+    const leftSm = 6;
+    const rightSm = 18;
+
     return (
-      <Card>
-        <Grid.Container gap={0.5} alignItems="center">
-          <Grid sm={2} xs={4}>
+      <Card width="100%">
+        <Grid.Container gap={1} alignItems="center">
+          <Grid xs={leftXs} sm={leftSm}>
             <Text small type="secondary">
               {t("namePlaceholder")}
             </Text>
           </Grid>
-          <Grid sm={10} xs={8}>
+          <Grid xs={rightXs} sm={rightSm}>
             <Text h4>{definitionEntry.name}</Text>
           </Grid>
-          <Grid sm={2} xs={4}>
+          <Grid sm={leftSm} xs={leftXs}>
             <Text small type="secondary">
               {t("descriptionPlaceholder")}
             </Text>
           </Grid>
-          <Grid sm={10} xs={8}>
+          <Grid sm={rightSm} xs={rightXs}>
             {definitionEntry.description ? (
               <Text small>{definitionEntry.description}</Text>
             ) : (
@@ -61,12 +66,12 @@ export const DefinitionsItem = observer(
               </Text>
             )}
           </Grid>
-          <Grid sm={2} xs={4}>
+          <Grid sm={leftSm} xs={leftXs}>
             <Text small type="secondary">
               {t("updatedAt")}
             </Text>
           </Grid>
-          <Grid sm={10} xs={8}>
+          <Grid sm={rightSm} xs={rightXs}>
             <Text small>{formatTime(definitionEntry.updatedAt, locale)}</Text>
           </Grid>
         </Grid.Container>

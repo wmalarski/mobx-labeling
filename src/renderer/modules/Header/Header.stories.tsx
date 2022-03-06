@@ -1,32 +1,25 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { Router } from "react-location";
-import { mockElectronServices } from "renderer/tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { location, routes } from "renderer/utils/routes";
-import { NewProject } from "./NewProject";
+import { Header } from "./Header";
 
 export default {
-  title: "NewProject/NewProject",
-  component: NewProject,
-  loaders: [
-    async () => {
-      window.electron = mockElectronServices();
-      return {};
-    },
-  ],
-} as ComponentMeta<typeof NewProject>;
+  title: "Header/Header",
+  component: Header,
+} as ComponentMeta<typeof Header>;
 
-const NewProjectStory = ({ wrapperProps }: PropsWithTestWrapper) => {
+const HeaderStory = ({ wrapperProps }: PropsWithTestWrapper) => {
   return (
     <Router location={location} routes={routes()}>
       <TestWrapper {...wrapperProps}>
-        <NewProject />
+        <Header />
       </TestWrapper>
     </Router>
   );
 };
 
-const Template: ComponentStory<typeof NewProjectStory> = NewProjectStory;
+const Template: ComponentStory<typeof HeaderStory> = HeaderStory;
 
 export const Playground = Template.bind({});
 Playground.args = { wrapperProps: {} };
