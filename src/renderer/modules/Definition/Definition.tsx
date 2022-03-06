@@ -4,8 +4,8 @@ import { useTranslation } from "react-i18next";
 import { useMatch } from "react-location";
 import { DefinitionStore } from "renderer/models";
 import { LocationGenerics } from "renderer/utils/routes";
-import { DefinitionEditor } from "../DefinitionEditor/DefinitionEditor";
-import { Header } from "../Header/Header";
+import { DefinitionEditor } from "../../fragments/DefinitionEditor/DefinitionEditor";
+import { Header } from "../../fragments/Header/Header";
 
 export const Definition = (): ReactElement => {
   const { t } = useTranslation("definition");

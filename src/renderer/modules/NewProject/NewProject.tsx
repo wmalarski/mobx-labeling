@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useMatch, useNavigate } from "react-location";
 import { DefinitionsList, NewProjectStore } from "renderer/models";
 import { LocationGenerics, routePaths } from "renderer/utils/routes";
-import { Header } from "../Header/Header";
+import { Header } from "../../fragments/Header/Header";
 import { ProjectDetails } from "./ProjectDetails/ProjectDetails";
 import { ResourcesList } from "./ResourcesList/ResourcesList";
 

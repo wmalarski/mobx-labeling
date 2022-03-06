@@ -3,8 +3,8 @@ import { observer } from "mobx-react-lite";
 import { ReactElement, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { DefinitionStore } from "renderer/models";
-import { DefinitionEditor } from "../DefinitionEditor/DefinitionEditor";
-import { Header } from "../Header/Header";
+import { DefinitionEditor } from "../../fragments/DefinitionEditor/DefinitionEditor";
+import { Header } from "../../fragments/Header/Header";
 
 export const NewDefinition = observer((): ReactElement => {
   const { t } = useTranslation("definition");

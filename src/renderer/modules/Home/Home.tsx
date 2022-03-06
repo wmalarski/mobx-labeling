@@ -2,8 +2,8 @@ import { Page } from "@geist-ui/core";
 import { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { StyledLink } from "renderer/components";
+import { Header } from "../../fragments/Header/Header";
 import { routePaths } from "../../utils/routes";
-import { Header } from "../Header/Header";
 import { Recent } from "./Recent/Recent";
 
 export const Home = (): ReactElement => {
