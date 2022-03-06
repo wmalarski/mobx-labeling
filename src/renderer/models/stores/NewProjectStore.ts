@@ -1,6 +1,6 @@
 import { Instance, types } from "mobx-state-tree";
+import { DefinitionsList } from "../definitions/DefinitionsList";
 import { Resource } from "../project/Resource";
-import { DefinitionsList } from "./DefinitionsList";
 
 const defaultFps = 18;
 const defaultFrameShift = 0;

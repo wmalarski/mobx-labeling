@@ -1,6 +1,6 @@
 import { flow, types } from "mobx-state-tree";
+import { FetchState } from "../common/FetchState";
 import { DefinitionEntry } from "./DefinitionEntry";
-import { FetchState } from "./FetchState";
 
 const pageLimit = 10;
 

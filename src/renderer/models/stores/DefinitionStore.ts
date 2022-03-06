@@ -1,6 +1,6 @@
 import { flow, getSnapshot, types } from "mobx-state-tree";
+import { FetchState } from "../common/FetchState";
 import { ProjectDefinition } from "../definition/ProjectDefinition/ProjectDefinition";
-import { FetchState } from "./FetchState";
 
 export const DefinitionStore = types
   .model("DefinitionStore", {
