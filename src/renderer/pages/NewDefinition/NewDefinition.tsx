@@ -1,22 +1,18 @@
 import { Page } from "@geist-ui/core";
+import { observer } from "mobx-react-lite";
 import { ReactElement, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useMatch } from "react-location";
 import { DefinitionStore } from "renderer/models";
-import { LocationGenerics } from "renderer/utils/routes";
-import { DefinitionEditor } from "../../fragments/DefinitionEditor/DefinitionEditor";
-import { Header } from "../../fragments/Header/Header";
+import { DefinitionEditor } from "../../modules/DefinitionEditor/DefinitionEditor";
+import { Header } from "../../modules/Header/Header";
 
-export const Definition = (): ReactElement => {
+export const NewDefinition = observer((): ReactElement => {
   const { t } = useTranslation("definition");
-
-  const { data } = useMatch<LocationGenerics>();
 
   const [definitionStore] = useState(() => {
     return DefinitionStore.create({
       projectDefinition: {
         name: t("defaultDefinitionName"),
-        ...data.projectDefinition,
       },
     });
   });
@@ -31,4 +27,4 @@ export const Definition = (): ReactElement => {
       </Page.Content>
     </Page>
   );
-};
+});

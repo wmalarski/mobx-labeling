@@ -2,7 +2,7 @@ import { Page } from "@geist-ui/core";
 import { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { StyledLink } from "renderer/components";
-import { Header } from "../../fragments/Header/Header";
+import { Header } from "../../modules/Header/Header";
 import { routePaths } from "../../utils/routes";
 import { Recent } from "./Recent/Recent";
 

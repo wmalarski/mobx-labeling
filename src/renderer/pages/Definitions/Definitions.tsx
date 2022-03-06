@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-location";
 import { DefinitionsList } from "renderer/models";
 import { routePaths } from "renderer/utils/routes";
-import { Header } from "../../fragments/Header/Header";
+import { Header } from "../../modules/Header/Header";
 import { DefinitionsItem } from "./DefinitionsItem/DefinitionsItem";
 
 export const Definitions = observer((): ReactElement => {

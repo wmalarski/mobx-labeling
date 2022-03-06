@@ -6,12 +6,12 @@ import {
   Route,
 } from "react-location";
 import { ProjectDefinition } from "renderer/models";
-import { NewDefinition } from "renderer/modules/NewDefinition/NewDefinition";
-import { Definition } from "../modules/Definition/Definition";
-import { Definitions } from "../modules/Definitions/Definitions";
-import { Home } from "../modules/Home/Home";
-import { NewProject } from "../modules/NewProject/NewProject";
-import { Workspace } from "../modules/Workspace/Workspace";
+import { NewDefinition } from "renderer/pages/NewDefinition/NewDefinition";
+import { Definition } from "../pages/Definition/Definition";
+import { Definitions } from "../pages/Definitions/Definitions";
+import { Home } from "../pages/Home/Home";
+import { NewProject } from "../pages/NewProject/NewProject";
+import { Workspace } from "../pages/Workspace/Workspace";
 
 export const routePaths = {
   home: "/",
