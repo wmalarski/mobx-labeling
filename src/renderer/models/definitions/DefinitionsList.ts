@@ -42,21 +42,8 @@ export const DefinitionsList = types
       }
     });
 
-    const remove = flow(function* (definitionId: string) {
-      self.state = "pending";
-      try {
-        yield window.electron.ipcDefinitions.removeDefinition(definitionId);
-        self.state = "done";
-        load();
-      } catch (error) {
-        self.state = "error";
-        self.error = String(error);
-      }
-    });
-
     return {
       load,
-      remove,
       afterCreate() {
         load();
       },

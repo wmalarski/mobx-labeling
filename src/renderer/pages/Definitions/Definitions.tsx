@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { ChangeEvent, ReactElement, useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-location";
-import { DefinitionsList } from "renderer/models";
+import { DefinitionsStore } from "renderer/models";
 import { routePaths } from "renderer/utils/routes";
 import { Header } from "../../modules/Header/Header";
 import { DefinitionsItem } from "./DefinitionsItem/DefinitionsItem";
@@ -14,9 +14,13 @@ export const Definitions = observer((): ReactElement => {
 
   const navigate = useNavigate();
 
-  const [definitionsList] = useState(() => {
-    return DefinitionsList.create({});
+  const [definitionsStore] = useState(() => {
+    return DefinitionsStore.create({
+      definitions: {},
+    });
   });
+
+  const definitionsList = definitionsStore.definitions;
 
   const handlePageChange = useCallback(
     (page: number) => {
@@ -30,7 +34,7 @@ export const Definitions = observer((): ReactElement => {
   };
 
   const handleRemoveClick = (definitionId: string) => () => {
-    definitionsList.remove(definitionId);
+    definitionsStore.remove(definitionId);
   };
 
   const handleNewDefinitionClick = () => {
