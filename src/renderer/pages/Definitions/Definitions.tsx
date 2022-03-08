@@ -53,6 +53,13 @@ export const Definitions = observer((): ReactElement => {
             definitionsList={definitionsStore.definitions}
             onRemoveClick={handleRemoveClick}
           />
+          {definitionsStore.error && (
+            <Grid xs={24}>
+              <Text h4 type="error">
+                {t("loadingError")}
+              </Text>
+            </Grid>
+          )}
         </Grid.Container>
       </Page.Content>
     </Page>

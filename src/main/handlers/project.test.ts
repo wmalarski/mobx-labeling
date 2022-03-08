@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import "@testing-library/jest-dom/extend-expect";
-import { access, rm } from "fs/promises";
+import { access, mkdir, rm } from "fs/promises";
 import os from "os";
 import path from "path";
 import { ProjectRoot } from "../types";
@@ -38,6 +38,10 @@ jest.mock("electron", () => ({
 }));
 
 describe("project handlers", () => {
+  beforeAll(async () => {
+    await mkdir(appDataPath, { recursive: true });
+  });
+
   beforeEach(async () => {
     await rm(appDataPath, { recursive: true, force: true });
   });

@@ -112,7 +112,7 @@ describe("<FieldForm />", () => {
 
     userEvent.click(await screen.findByText("ComboBox", { selector: "span" }));
 
-    userEvent.click(await screen.findByText("CheckBox", { selector: "li" }));
+    userEvent.click(await screen.findByText("CheckBox", { selector: "span" }));
 
     expect(itemDefinition.fields.at(0)?.kind).toBe("CheckBox");
   });

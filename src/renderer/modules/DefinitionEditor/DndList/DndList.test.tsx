@@ -46,7 +46,6 @@ describe("<DndList />", () => {
     renderComponent({ projectDefinition });
 
     userEvent.tab();
-    userEvent.tab();
     userEvent.keyboard("{space}{arrowdown}");
     userEvent.keyboard("{space}");
 

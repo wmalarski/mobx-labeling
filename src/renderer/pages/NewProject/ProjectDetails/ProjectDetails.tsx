@@ -31,7 +31,11 @@ export const ProjectDetails = observer(
     };
 
     const handleSelectionChange = (key: string | number) => {
-      newProjectStore.setDefinitionId(key as string);
+      const selectedDefinition = newProjectStore.definitions.definitions.find(
+        (definition) => definition.name === key
+      );
+      if (!selectedDefinition) return;
+      newProjectStore.setDefinitionId(selectedDefinition.id);
     };
 
     const handleSaveClick = () => {
@@ -64,18 +68,20 @@ export const ProjectDetails = observer(
         <Grid xs={24}>
           <AutoComplete
             width="100%"
+            disableFreeSolo
             aria-label={t("selectDefinitionLabel")}
             placeholder={t("selectDefinitionLabel")}
             value={newProjectStore.definitions.query}
             onSearch={handleInputChange}
             onSelect={handleSelectionChange}
-          >
-            {newProjectStore.definitions.definitions.map((definition) => (
-              <AutoComplete.Item value={definition.name} key={definition.id}>
-                {definition.name}
-              </AutoComplete.Item>
-            ))}
-          </AutoComplete>
+            options={newProjectStore.definitions.definitions.map(
+              (definition) => ({
+                key: definition.id,
+                label: definition.name,
+                value: definition.name,
+              })
+            )}
+          />
         </Grid>
         <Grid xs={24}>
           <Input

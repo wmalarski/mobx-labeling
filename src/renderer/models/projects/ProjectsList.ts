@@ -37,7 +37,6 @@ export const ProjectsList = types
         self.totalSize = totalSize;
         self.state = "done";
       } catch (error) {
-        console.log({ error });
         self.state = "error";
         self.error = String(error);
       }

@@ -44,10 +44,11 @@ describe("<FieldListItem />", () => {
     expect.hasAssertions();
 
     const onClick = jest.fn();
+    const fieldDefinition = mockFieldDefinition();
 
-    renderComponent({ onClick });
+    renderComponent({ onClick, fieldDefinition });
 
-    const button = await screen.findByRole("button");
+    const button = await screen.findByText(fieldDefinition.name);
     userEvent.click(button);
 
     expect(onClick).toHaveBeenCalledTimes(1);

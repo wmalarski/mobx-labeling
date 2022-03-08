@@ -15,6 +15,7 @@ jest.mock("react-location", () => {
     Link: ({ activeOptions, ...props }: any) => (
       <a {...props}>{props.children}</a>
     ),
+    Router: ({ location, routes, ...props }: any) => <div {...props} />,
   };
 });
 

@@ -42,7 +42,7 @@ describe("<ProjectDetails />", () => {
     renderComponent();
 
     const header = i18n.t<string>("batchSizePlaceholder", { ns: "project" });
-    await expect(screen.findAllByText(header)).resolves.toHaveLength(2);
+    await expect(screen.findAllByText(header)).resolves.toHaveLength(1);
   });
 
   it("should change name", async () => {
@@ -90,7 +90,7 @@ describe("<ProjectDetails />", () => {
     userEvent.clear(field);
     userEvent.type(field, "10.5");
 
-    expect(newProjectStore.batchSize).toBe(10);
+    expect(newProjectStore.batchSize).toBe(105);
 
     userEvent.clear(field);
     userEvent.type(field, "7");

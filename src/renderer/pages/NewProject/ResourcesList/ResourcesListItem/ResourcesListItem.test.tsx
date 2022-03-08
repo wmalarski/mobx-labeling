@@ -32,7 +32,7 @@ describe("<ResourcesListItem />", () => {
 
     renderComponent();
 
-    const label = i18n.t<string>("resourcePathLabel", { ns: "project" });
+    const label = i18n.t<string>("resourceRemove", { ns: "project" });
     await expect(screen.findByText(label)).resolves.toBeInTheDocument();
   });
 

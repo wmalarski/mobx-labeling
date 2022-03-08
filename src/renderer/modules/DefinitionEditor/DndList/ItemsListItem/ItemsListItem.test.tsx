@@ -53,11 +53,12 @@ describe("<ItemsListItem />", () => {
     const itemDefinition = mockItemDefinition({
       update: { fields: [], description: "Desc" },
     });
+    const name = itemDefinition.name;
 
     renderComponent({ onItemClick, itemDefinition });
 
-    const button = await screen.findAllByRole("button");
-    userEvent.click(button[0]);
+    const button = await screen.findByText(name);
+    userEvent.click(button);
 
     expect(onItemClick).toHaveBeenCalledTimes(1);
   });
