@@ -1,4 +1,4 @@
-import { Button, Input, Modal } from "@geist-ui/core";
+import { Button, Input, Modal, useModal } from "@geist-ui/core";
 import { Link1Icon } from "@radix-ui/react-icons";
 import { Instance } from "mobx-state-tree";
 import { ChangeEvent, ReactElement, useState } from "react";
@@ -12,21 +12,18 @@ type Props = {
 export const UrlResourceModal = ({ newProjectStore }: Props): ReactElement => {
   const { t } = useTranslation("project");
 
-  const [isVisible, setIsVisible] = useState(false);
+  const { setVisible, bindings } = useModal();
+
   const [path, setPath] = useState("");
 
   const handleOpenClick = () => {
     setPath("");
-    setIsVisible(true);
-  };
-
-  const handleCloseClick = () => {
-    setIsVisible(false);
+    setVisible(true);
   };
 
   const handleAddClick = () => {
     newProjectStore.addResource(path);
-    setIsVisible(false);
+    setVisible(false);
   };
 
   const handlePathChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -38,7 +35,7 @@ export const UrlResourceModal = ({ newProjectStore }: Props): ReactElement => {
       <Button icon={<Link1Icon />} auto onClick={handleOpenClick}>
         {t("resourceURL")}
       </Button>
-      <Modal visible={isVisible} onClose={handleCloseClick}>
+      <Modal {...bindings}>
         <Modal.Title>{t("addURLTitle")}</Modal.Title>
         <Modal.Subtitle>{t("addURLSubtitle")}</Modal.Subtitle>
         <Modal.Content>
@@ -46,11 +43,12 @@ export const UrlResourceModal = ({ newProjectStore }: Props): ReactElement => {
             width="100%"
             label={t("pathLabel")}
             placeholder={t("pathLabel")}
+            aria-label={t("pathLabel")}
             value={path}
             onChange={handlePathChange}
           />
         </Modal.Content>
-        <Modal.Action passive onClick={handleCloseClick}>
+        <Modal.Action passive onClick={bindings.onClose}>
           {t("addURLCancel")}
         </Modal.Action>
         <Modal.Action disabled={path.length < 1} onClick={handleAddClick}>
