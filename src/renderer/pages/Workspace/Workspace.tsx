@@ -1,18 +1,38 @@
-import { Page } from "@geist-ui/core";
-import { ReactElement } from "react";
+import { Page, Text } from "@geist-ui/core";
+import { ReactElement, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useMatch } from "react-location";
 import { StyledLink } from "renderer/components";
+import { WorkspaceStore } from "renderer/models";
 import { LocationGenerics, routePaths } from "renderer/utils/routes";
+import { WorkspaceLayout } from "./WorkspaceLayout/WorkspaceLayout";
 
 export const Workspace = (): ReactElement => {
-  const { data, search } = useMatch<LocationGenerics>();
+  const { t } = useTranslation("workspace");
+
+  const { data } = useMatch<LocationGenerics>();
+
+  const [workspaceStore] = useState(() => {
+    if (!data.project) return null;
+    return WorkspaceStore.create({
+      batch: data.batch,
+      project: data.project,
+    });
+  });
+
+  if (!workspaceStore) {
+    return (
+      <Page>
+        <Text>{t("error")}</Text>
+        <StyledLink to={routePaths.home}>{t("errorLink")}</StyledLink>
+      </Page>
+    );
+  }
 
   return (
     <Page>
       <Page.Content>
-        <p>Workspace</p>
-        <pre>{JSON.stringify({ search, data }, null, 2)}</pre>
-        <StyledLink to={routePaths.home}>Home</StyledLink>
+        <WorkspaceLayout />
       </Page.Content>
     </Page>
   );

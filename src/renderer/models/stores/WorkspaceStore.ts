@@ -1,11 +1,15 @@
 import { getSnapshot, Instance, types } from "mobx-state-tree";
+import { nanoid } from "nanoid";
 import { Batch } from "../project/Batch";
 import { Project } from "../project/Project";
 
 export const WorkspaceStore = types
   .model("WorkspaceStore", {
     project: Project,
-    batch: Batch,
+    batch: types.optional(Batch, () => ({
+      id: nanoid(),
+      items: [],
+    })),
   })
   .views((self) => ({
     projectRoot() {

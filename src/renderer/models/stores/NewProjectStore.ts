@@ -48,7 +48,7 @@ export const NewProjectStore = types
 
       yield window.electron.ipcProject.createProject({
         batchSize: self.batchSize,
-        batches: [{ id: nanoid(), range: { start: 0, end: self.batchSize } }],
+        batches: [],
         definition,
         id: nanoid(),
         items: [],
