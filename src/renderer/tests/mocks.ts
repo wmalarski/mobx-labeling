@@ -9,6 +9,7 @@ import {
   NewProjectStore,
   ProjectDefinition,
   ProjectEntry,
+  ProjectRoot,
   ProjectsList,
 } from "renderer/models";
 import { Resource } from "renderer/models/project/Resource";
@@ -17,7 +18,6 @@ import {
   IpcDefinitionsService,
   IpcProjectService,
   IpcResourcesService,
-  ProjectRoot,
 } from "renderer/services";
 
 export const mockFieldDefinition = ({

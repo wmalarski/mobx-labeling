@@ -5,9 +5,8 @@ import {
   ReactLocation,
   Route,
 } from "react-location";
-import { ProjectDefinition } from "renderer/models";
+import { Batch, ProjectDefinition, ProjectRoot } from "renderer/models";
 import { NewDefinition } from "renderer/pages/NewDefinition/NewDefinition";
-import { Batch, ProjectRoot } from "renderer/services";
 import { Definition } from "../pages/Definition/Definition";
 import { Definitions } from "../pages/Definitions/Definitions";
 import { Home } from "../pages/Home/Home";
@@ -34,7 +33,7 @@ export type LocationGenerics = MakeGenerics<{
   LoaderData: {
     projectDefinition: SnapshotIn<typeof ProjectDefinition>;
     project: ProjectRoot;
-    batch: Batch;
+    batch: SnapshotIn<typeof Batch>;
   };
 }>;
 

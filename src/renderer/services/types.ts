@@ -7,10 +7,11 @@ import type {
 } from "electron/renderer";
 import { SnapshotIn, SnapshotOut } from "mobx-state-tree";
 import {
+  Batch,
   DefinitionEntry,
   ProjectDefinition,
   ProjectEntry,
-  Resource,
+  ProjectRoot,
 } from "renderer/models";
 
 type PaginationArgs = {
@@ -22,37 +23,6 @@ type PaginationArgs = {
 type PaginationResult<TData> = {
   data: TData;
   totalSize: number;
-};
-
-export type Range = {
-  start: number;
-  end: number;
-};
-
-export type Item = {
-  id: string;
-  ranges: Range[];
-};
-
-export type BatchInfo = {
-  id: string;
-  range: Range;
-};
-
-export type ProjectRoot = {
-  id: string;
-  name: string;
-  projectPath: string;
-  updatedAt: number;
-  batchSize: number;
-  resources: SnapshotOut<typeof Resource>[];
-  items: Item[];
-  batches: BatchInfo[];
-  definition: SnapshotOut<typeof ProjectDefinition>;
-};
-
-export type Batch = {
-  id: string;
 };
 
 export type IpcDefinitionsService = {
@@ -88,11 +58,14 @@ export type IpcResourcesService = {
 export type IpcProjectService = {
   createProject(project: ProjectRoot): Promise<void>;
   readProject(projectPath: string): Promise<ProjectRoot>;
-  readBatch(args: { projectPath: string; batchId: string }): Promise<Batch>;
+  readBatch(args: {
+    projectPath: string;
+    batchId: string;
+  }): Promise<SnapshotIn<typeof Batch>>;
   updateBatch(args: {
     projectPath: string;
     batchId: string;
-    batch: Batch;
+    batch: SnapshotOut<typeof Batch>;
   }): Promise<void>;
   readProjects(
     args: PaginationArgs
