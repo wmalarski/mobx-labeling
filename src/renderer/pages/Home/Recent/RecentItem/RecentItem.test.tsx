@@ -2,20 +2,31 @@ import "@testing-library/jest-dom";
 import "@testing-library/jest-dom/extend-expect";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { ComponentProps } from "react";
+import { mockProjectEntry } from "renderer/tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import i18n from "renderer/utils/i18next";
 import { routePaths } from "renderer/utils/routes";
-import { Home } from "./Home";
+import { RecentItem } from "./RecentItem";
 
-const renderComponent = ({ wrapperProps }: PropsWithTestWrapper = {}) => {
+type Props = ComponentProps<typeof RecentItem>;
+
+const renderComponent = ({
+  wrapperProps,
+  ...props
+}: PropsWithTestWrapper<Partial<Props>> = {}) => {
+  const defaultProps: Props = {
+    projectEntry: mockProjectEntry(),
+  };
+
   return render(
     <TestWrapper {...wrapperProps}>
-      <Home />
+      <RecentItem {...defaultProps} {...props} />
     </TestWrapper>
   );
 };
 
-describe("<Home />", () => {
+describe("<RecentItem />", () => {
   beforeEach(() => {
     jest.requireMock("react-location").mockNavigate.mockReset();
   });
@@ -25,39 +36,25 @@ describe("<Home />", () => {
 
     renderComponent();
 
-    const header = i18n.t<string>("recentHeader", { ns: "home" });
+    const header = i18n.t<string>("nameLabel", { ns: "home" });
     await expect(screen.findByText(header)).resolves.toBeInTheDocument();
   });
 
-  it("should navigate to new definition after click", async () => {
+  it("should redirect to workspace", async () => {
     expect.hasAssertions();
 
     const mockNavigate = jest.requireMock("react-location").mockNavigate;
+    const label = i18n.t<string>("openProject", { ns: "home" });
+    const projectEntry = mockProjectEntry();
 
-    renderComponent();
+    renderComponent({ projectEntry });
 
-    const text = i18n.t<string>("navDefinitions", { ns: "home" });
-    userEvent.click(await screen.findByText(text));
-
-    expect(mockNavigate).toHaveBeenCalledTimes(1);
-    expect(mockNavigate).toHaveBeenCalledWith({
-      to: routePaths.definitions,
-    });
-  });
-
-  it("should navigate to new new project page", async () => {
-    expect.hasAssertions();
-
-    const mockNavigate = jest.requireMock("react-location").mockNavigate;
-
-    renderComponent();
-
-    const text = i18n.t<string>("navNewProject", { ns: "home" });
-    userEvent.click(await screen.findByText(text));
+    userEvent.click(await screen.findByText(label));
 
     expect(mockNavigate).toHaveBeenCalledTimes(1);
     expect(mockNavigate).toHaveBeenCalledWith({
-      to: routePaths.newProject,
+      to: routePaths.workspace,
+      search: { project: projectEntry.projectPath },
     });
   });
 });

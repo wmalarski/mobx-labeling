@@ -34,8 +34,9 @@ export const ProjectDetails = observer(
       const selectedDefinition = newProjectStore.definitions.definitions.find(
         (definition) => definition.name === key
       );
-      if (!selectedDefinition) return;
-      newProjectStore.setDefinitionId(selectedDefinition.id);
+
+      selectedDefinition &&
+        newProjectStore.setDefinitionId(selectedDefinition.id);
     };
 
     const handleSaveClick = () => {
