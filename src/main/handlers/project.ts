@@ -122,7 +122,6 @@ export const handleReadProjects = async ({
   start,
   query,
 }: PaginationArgs): Promise<PaginationResult<ProjectInfo[]>> => {
-  console.log("handleReadProjects", limit, start, query);
   const entries = await readRecentList();
 
   const lower = query?.toLowerCase();

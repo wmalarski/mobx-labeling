@@ -41,7 +41,7 @@ contextBridge.exposeInMainWorld("electron", {
       return ipcRenderer.invoke("CreateProject", project);
     },
     async readProject(projectPath) {
-      return ipcRenderer.invoke("ReadDefinitions", projectPath);
+      return ipcRenderer.invoke("ReadProject", projectPath);
     },
     async readBatch({ projectPath, batchId }) {
       return ipcRenderer.invoke("ReadBatch", projectPath, batchId);

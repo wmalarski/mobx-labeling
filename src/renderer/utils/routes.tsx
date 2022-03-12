@@ -7,6 +7,7 @@ import {
 } from "react-location";
 import { ProjectDefinition } from "renderer/models";
 import { NewDefinition } from "renderer/pages/NewDefinition/NewDefinition";
+import { Batch, ProjectRoot } from "renderer/services";
 import { Definition } from "../pages/Definition/Definition";
 import { Definitions } from "../pages/Definitions/Definitions";
 import { Home } from "../pages/Home/Home";
@@ -31,7 +32,9 @@ export type LocationGenerics = MakeGenerics<{
     definitionId: string;
   };
   LoaderData: {
-    projectDefinition?: SnapshotIn<typeof ProjectDefinition>;
+    projectDefinition: SnapshotIn<typeof ProjectDefinition>;
+    project: ProjectRoot;
+    batch: Batch;
   };
 }>;
 
@@ -78,5 +81,25 @@ export const routes = (): Route<LocationGenerics>[] => [
   {
     path: "workspace",
     element: <Workspace />,
+    loader: async ({ search }) => {
+      if (!search.project) {
+        throw new Error("Project not defined");
+      }
+
+      const project = await window.electron.ipcProject.readProject(
+        search.project
+      );
+
+      const batchId = project.batches.at(0)?.id;
+
+      if (!batchId) return { project };
+
+      const batch = await window.electron.ipcProject.readBatch({
+        projectPath: search.project,
+        batchId,
+      });
+
+      return { project, batch };
+    },
   },
 ];
