@@ -1,8 +1,7 @@
-import { Button, Text } from "@geist-ui/core";
+import { Button } from "@geist-ui/core";
 import * as FlexLayout from "flexlayout-react";
 import { ReactElement, useCallback, useState } from "react";
 import "./dark.css";
-import * as Styles from "./WorkspaceLayout.styles";
 
 export const WorkspaceLayout = (): ReactElement => {
   const [model, setModel] = useState(() => {
@@ -55,15 +54,10 @@ export const WorkspaceLayout = (): ReactElement => {
   }, []);
 
   return (
-    <Styles.Container>
-      <Text>Hello</Text>
-      <Styles.Wrapper>
-        <FlexLayout.Layout
-          onModelChange={setModel}
-          model={model}
-          factory={factory}
-        />
-      </Styles.Wrapper>
-    </Styles.Container>
+    <FlexLayout.Layout
+      onModelChange={setModel}
+      model={model}
+      factory={factory}
+    />
   );
 };
