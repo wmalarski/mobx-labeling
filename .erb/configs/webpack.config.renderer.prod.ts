@@ -2,7 +2,9 @@
  * Build config for electron renderer process
  */
 
+import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import path from "path";
 import TerserPlugin from "terser-webpack-plugin";
 import webpack from "webpack";
@@ -43,6 +45,27 @@ const configuration: webpack.Configuration = {
 
   module: {
     rules: [
+      {
+        test: /\.s?(a|c)ss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+              sourceMap: true,
+              importLoaders: 1,
+            },
+          },
+          "sass-loader",
+        ],
+        include: /\.module\.s?(c|a)ss$/,
+      },
+      {
+        test: /\.s?(a|c)ss$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+        exclude: /\.module\.s?(c|a)ss$/,
+      },
       // Fonts
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
@@ -62,6 +85,7 @@ const configuration: webpack.Configuration = {
       new TerserPlugin({
         parallel: true,
       }),
+      new CssMinimizerPlugin(),
     ],
   },
 
@@ -78,6 +102,10 @@ const configuration: webpack.Configuration = {
     new webpack.EnvironmentPlugin({
       NODE_ENV: "production",
       DEBUG_PROD: false,
+    }),
+
+    new MiniCssExtractPlugin({
+      filename: "style.css",
     }),
 
     new BundleAnalyzerPlugin({

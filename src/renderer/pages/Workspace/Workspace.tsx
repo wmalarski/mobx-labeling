@@ -23,17 +23,13 @@ export const Workspace = (): ReactElement => {
   if (!workspaceStore) {
     return (
       <Page>
-        <Text>{t("error")}</Text>
-        <StyledLink to={routePaths.home}>{t("errorLink")}</StyledLink>
+        <Page.Content>
+          <Text>{t("error")}</Text>
+          <StyledLink to={routePaths.home}>{t("errorLink")}</StyledLink>
+        </Page.Content>
       </Page>
     );
   }
 
-  return (
-    <Page>
-      <Page.Content>
-        <WorkspaceLayout />
-      </Page.Content>
-    </Page>
-  );
+  return <WorkspaceLayout />;
 };
