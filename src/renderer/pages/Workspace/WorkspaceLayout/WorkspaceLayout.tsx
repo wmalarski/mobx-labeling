@@ -1,57 +1,44 @@
 import { Button } from "@geist-ui/core";
 import * as FlexLayout from "flexlayout-react";
-import { ReactElement, useCallback, useState } from "react";
+import { Instance } from "mobx-state-tree";
+import { ReactElement, ReactNode, useCallback, useState } from "react";
+import { WorkspaceStore } from "renderer/models";
 import "./dark.css";
+import { ItemsList } from "./ItemsList/ItemsList";
+import { getDefaultModel, LayoutNodeKind } from "./WorkspaceLayout.utils";
 
-export const WorkspaceLayout = (): ReactElement => {
-  const [model, setModel] = useState(() => {
-    return FlexLayout.Model.fromJson({
-      global: {},
-      borders: [],
-      layout: {
-        type: "row",
-        weight: 200,
-        children: [
-          {
-            type: "tabset",
-            weight: 100,
-            children: [
-              {
-                type: "tab",
-                name: "One",
-                component: "button",
-              },
-            ],
-          },
-          {
-            type: "tabset",
-            weight: 100,
-            children: [
-              {
-                type: "tab",
-                name: "Two",
-                component: "button",
-              },
-            ],
-          },
-        ],
-      },
-    });
-  });
+type Props = {
+  workspaceStore: Instance<typeof WorkspaceStore>;
+};
 
-  const factory = useCallback((node) => {
-    const component = node.getComponent();
-    if (component === "button") {
-      return (
-        <div
-          style={{ width: "100%", height: "100%", border: "1px solid gray" }}
-        >
-          <Button>{node.getName()}</Button>
-        </div>
-      );
-    }
-    return <p>AA</p>;
-  }, []);
+export const WorkspaceLayout = ({ workspaceStore }: Props): ReactElement => {
+  const [model, setModel] = useState(getDefaultModel);
+
+  const factory = useCallback(
+    (node: FlexLayout.TabNode): ReactNode => {
+      const component = node.getComponent();
+      switch (component) {
+        case "button": {
+          return (
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                border: "1px solid gray",
+              }}
+            >
+              <Button>{node.getName()}</Button>
+            </div>
+          );
+        }
+        case LayoutNodeKind.ItemsList:
+          return <ItemsList workspaceStore={workspaceStore} node={node} />;
+        default:
+          return <p>AA</p>;
+      }
+    },
+    [workspaceStore]
+  );
 
   return (
     <FlexLayout.Layout

@@ -40,7 +40,7 @@ export const Workspace = (): ReactElement => {
       <Styles.Row>
         <WorkspaceSideBar />
         <Styles.Column>
-          <WorkspaceLayout />
+          <WorkspaceLayout workspaceStore={workspaceStore} />
         </Styles.Column>
       </Styles.Row>
     </Styles.Container>
