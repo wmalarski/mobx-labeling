@@ -6,6 +6,7 @@ import { Project } from "../project/Project";
 export const WorkspaceStore = types
   .model("WorkspaceStore", {
     project: Project,
+    currentFrame: types.optional(types.number, 0),
     batch: types.optional(Batch, () => ({
       id: nanoid(),
       items: [],

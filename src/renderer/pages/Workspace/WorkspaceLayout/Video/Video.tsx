@@ -1,26 +1,43 @@
 import * as FlexLayout from "flexlayout-react";
-import { observer } from "mobx-react-lite";
+import Konva from "konva";
 import { Instance, SnapshotOut } from "mobx-state-tree";
-import { ReactElement } from "react";
-import { useTranslation } from "react-i18next";
+import { ReactElement, useRef } from "react";
+import { Circle, Layer, Rect, Stage } from "react-konva";
 import { Resource, WorkspaceStore } from "renderer/models";
+import * as Styles from "./Video.styles";
+import { useVideoResize } from "./Video.utils";
+import { VideoImage } from "./VideoImage/VideoImage";
 
 type Props = {
   workspaceStore: Instance<typeof WorkspaceStore>;
   node: FlexLayout.TabNode;
 };
 
-export const Video = observer(
-  ({ workspaceStore, node }: Props): ReactElement => {
-    const { t } = useTranslation("workspace");
+export const Video = ({ node, workspaceStore }: Props): ReactElement => {
+  const stageRef = useRef<Konva.Stage>(null);
 
-    const resource: SnapshotOut<typeof Resource> = node.getConfig();
+  const resource: SnapshotOut<typeof Resource> = node.getConfig();
+  const rect = node.getRect();
 
-    return (
-      <div>
-        <p>{t("Video")}</p>
-        <div>{JSON.stringify(resource, null, 2)}</div>
-      </div>
-    );
-  }
-);
+  useVideoResize({ stageRef, node });
+
+  const handleImageClick = () => {
+    //
+  };
+
+  return (
+    <Styles.Container>
+      <Stage ref={stageRef} width={rect.width} height={rect.height}>
+        <Layer>
+          <VideoImage
+            onClick={handleImageClick}
+            resource={resource}
+            workspaceStore={workspaceStore}
+          />
+          <Rect width={50} height={50} fill="red" />
+          <Circle x={200} y={200} stroke="white" radius={50} />
+        </Layer>
+      </Stage>
+    </Styles.Container>
+  );
+};
