@@ -1,4 +1,7 @@
 {
   "error": "Error",
-  "errorLink": "Return to home"
+  "errorLink": "Return to home",
+  "commentsNode": "Comments",
+  "timelineNode": "Timeline",
+  "itemsNode": "Items"
 }
