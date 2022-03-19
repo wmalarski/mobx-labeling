@@ -47,7 +47,7 @@ export const WorkspaceLayout = observer(
       <Styles.Container>
         <TopBar workspaceStore={workspaceStore} />
         <Styles.Row>
-          <SideBar />
+          <SideBar workspaceStore={workspaceStore} />
           <Styles.Column>
             <FlexLayout.Layout
               onModelChange={setModel}

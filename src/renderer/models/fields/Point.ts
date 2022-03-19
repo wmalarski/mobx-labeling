@@ -22,7 +22,6 @@ export const PointField = types
     "PointField",
     FieldBase,
     types.model({
-      kind,
       definition: PointDefinition,
       values: types.optional(types.map(PointValue), {}),
     })

@@ -24,7 +24,6 @@ export const Box3dField = types
     "Box3dField",
     FieldBase,
     types.model({
-      kind,
       definition: Box3dDefinition,
       values: types.optional(types.map(Box3dValue), {}),
     })

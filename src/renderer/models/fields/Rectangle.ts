@@ -22,7 +22,6 @@ export const RectangleField = types
     "RectangleField",
     FieldBase,
     types.model({
-      kind,
       definition: RectangleDefinition,
       values: types.optional(types.map(RectangleValue), {}),
     })

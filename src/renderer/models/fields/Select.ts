@@ -58,7 +58,6 @@ export const SelectField = types
     "SelectField",
     FieldBase,
     types.model({
-      kind,
       definition: SelectDefinition,
       values: types.optional(types.map(SelectValue), {}),
     })

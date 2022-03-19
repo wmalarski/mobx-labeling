@@ -29,7 +29,6 @@ export const TextField = types
     "TextField",
     FieldBase,
     types.model({
-      kind,
       definition: TextDefinition,
       values: types.optional(types.map(TextValue), {}),
     })

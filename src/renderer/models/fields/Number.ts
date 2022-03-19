@@ -41,7 +41,6 @@ export const NumberField = types
     "NumberField",
     FieldBase,
     types.model({
-      kind,
       definition: NumberDefinition,
       values: types.optional(types.map(NumberValue), {}),
     })

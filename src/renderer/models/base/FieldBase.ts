@@ -4,10 +4,10 @@ import { nanoid } from "nanoid";
 export const FieldBase = types
   .model("FieldBase", {
     id: types.optional(types.identifier, nanoid),
-    currentFrame: types.string,
+    currentFrame: types.number,
   })
   .actions((self) => ({
-    setCurrentFrame(currentFrame: string) {
+    setCurrentFrame(currentFrame: number) {
       self.currentFrame = currentFrame;
     },
   }));

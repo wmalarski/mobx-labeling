@@ -22,7 +22,6 @@ export const PolygonField = types
     "PolygonField",
     FieldBase,
     types.model({
-      kind,
       definition: PolygonDefinition,
       values: types.optional(types.map(PolygonValue), {}),
     })

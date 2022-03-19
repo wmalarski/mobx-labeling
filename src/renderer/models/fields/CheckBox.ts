@@ -35,7 +35,6 @@ export const CheckBoxField = types
     "CheckBoxField",
     FieldBase,
     types.model({
-      kind,
       definition: CheckBoxDefinition,
       values: types.optional(types.map(CheckBoxValue), {}),
     })
