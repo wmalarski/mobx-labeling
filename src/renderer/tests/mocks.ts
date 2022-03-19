@@ -1,3 +1,4 @@
+import * as FlexLayout from "flexlayout-react";
 import { getSnapshot, Instance, SnapshotIn } from "mobx-state-tree";
 import { nanoid } from "nanoid";
 import {
@@ -11,6 +12,7 @@ import {
   ProjectEntry,
   ProjectRoot,
   ProjectsList,
+  WorkspaceStore,
 } from "renderer/models";
 import { Resource } from "renderer/models/project/Resource";
 import {
@@ -115,9 +117,9 @@ export const mockResource = ({
   update?: Partial<SnapshotIn<typeof Resource>>;
 } = {}) => {
   return Resource.create({
-    fps: 20,
+    fps: 24,
     frameShift: 0,
-    path: "path",
+    path: "https://www.w3schools.com/html/mov_bbb.mp4",
     ...update,
   });
 };
@@ -195,6 +197,44 @@ export const mockProjectsList = ({
   return ProjectsList.create({
     ...update,
   });
+};
+
+export const mockWorkspaceStore = ({
+  update,
+}: {
+  update?: Partial<SnapshotIn<typeof WorkspaceStore>>;
+} = {}) => {
+  return WorkspaceStore.create({
+    project: {
+      batchSize: 100,
+      definition: mockProjectDefinition(),
+      id: "id",
+      name: "Name",
+      projectPath: "projectPath",
+      updatedAt: 0,
+      batches: [],
+      resources: [mockResource()],
+    },
+    ...update,
+  });
+};
+
+export const mockLayoutNode = (): FlexLayout.TabNode => {
+  return {
+    getRect() {
+      return { width: 500, height: 500 };
+    },
+    getConfig() {
+      return getSnapshot(mockResource());
+    },
+    setEventListener() {
+      void 0;
+    },
+    removeEventListener() {
+      void 0;
+    },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } as any;
 };
 
 export const mockIpcDefinitionsService = ({
