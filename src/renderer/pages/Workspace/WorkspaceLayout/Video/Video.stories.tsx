@@ -1,5 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ComponentProps } from "react";
+import { styled } from "renderer/styles/config";
 import { mockLayoutNode, mockWorkspaceStore } from "renderer/tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { Video } from "./Video";
@@ -11,13 +12,19 @@ export default {
 
 type Props = ComponentProps<typeof Video>;
 
+const Box = styled("div", {
+  border: "1px solid gray",
+});
+
 const VideoStory = ({
   wrapperProps,
   ...props
 }: PropsWithTestWrapper<Props>) => {
   return (
     <TestWrapper {...wrapperProps}>
-      <Video {...props} />
+      <Box>
+        <Video {...props} />
+      </Box>
     </TestWrapper>
   );
 };

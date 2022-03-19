@@ -3,6 +3,7 @@ import Konva from "konva";
 import { Instance, SnapshotOut } from "mobx-state-tree";
 import { ReactElement, useRef } from "react";
 import { Circle, Layer, Rect, Stage } from "react-konva";
+import { useStageZoom } from "renderer/hooks";
 import { Resource, WorkspaceStore } from "renderer/models";
 import * as Styles from "./Video.styles";
 import { useVideoResize } from "./Video.utils";
@@ -21,13 +22,26 @@ export const Video = ({ node, workspaceStore }: Props): ReactElement => {
 
   useVideoResize({ stageRef, node });
 
+  const { handleWheel, stageScale, stageX, stageY } = useStageZoom({
+    scaleBy: 1.1,
+  });
+
   const handleImageClick = () => {
     //
   };
 
   return (
     <Styles.Container>
-      <Stage ref={stageRef} width={rect.width} height={rect.height}>
+      <Stage
+        ref={stageRef}
+        width={rect.width}
+        height={rect.height}
+        onWheel={handleWheel}
+        scaleX={stageScale}
+        scaleY={stageScale}
+        x={stageX}
+        y={stageY}
+      >
         <Layer>
           <VideoImage
             onClick={handleImageClick}

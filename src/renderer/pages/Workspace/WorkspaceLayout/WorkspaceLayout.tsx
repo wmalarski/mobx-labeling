@@ -6,8 +6,11 @@ import { WorkspaceStore } from "renderer/models";
 import { Comments } from "./Comments/Comments";
 import "./dark.css";
 import { ItemsList } from "./ItemsList/ItemsList";
+import { SideBar } from "./SideBar/SideBar";
 import { Timeline } from "./Timeline/Timeline";
+import { TopBar } from "./TopBar/TopBar";
 import { Video } from "./Video/Video";
+import * as Styles from "./WorkspaceLayout.styles";
 import { getDefaultModel, LayoutNodeKind } from "./WorkspaceLayout.utils";
 
 type Props = {
@@ -41,11 +44,19 @@ export const WorkspaceLayout = observer(
     );
 
     return (
-      <FlexLayout.Layout
-        onModelChange={setModel}
-        model={model}
-        factory={factory}
-      />
+      <Styles.Container>
+        <TopBar />
+        <Styles.Row>
+          <SideBar />
+          <Styles.Column>
+            <FlexLayout.Layout
+              onModelChange={setModel}
+              model={model}
+              factory={factory}
+            />
+          </Styles.Column>
+        </Styles.Row>
+      </Styles.Container>
     );
   }
 );

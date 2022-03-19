@@ -5,10 +5,7 @@ import { useMatch } from "react-location";
 import { StyledLink } from "renderer/components";
 import { WorkspaceStore } from "renderer/models";
 import { LocationGenerics, routePaths } from "renderer/utils/routes";
-import * as Styles from "./Workspace.styles";
 import { WorkspaceLayout } from "./WorkspaceLayout/WorkspaceLayout";
-import { WorkspaceSideBar } from "./WorkspaceSideBar/WorkspaceSideBar";
-import { WorkspaceTopBar } from "./WorkspaceTopBar/WorkspaceTopBar";
 
 export const Workspace = (): ReactElement => {
   const { t } = useTranslation("workspace");
@@ -34,15 +31,5 @@ export const Workspace = (): ReactElement => {
     );
   }
 
-  return (
-    <Styles.Container>
-      <WorkspaceTopBar />
-      <Styles.Row>
-        <WorkspaceSideBar />
-        <Styles.Column>
-          <WorkspaceLayout workspaceStore={workspaceStore} />
-        </Styles.Column>
-      </Styles.Row>
-    </Styles.Container>
-  );
+  return <WorkspaceLayout workspaceStore={workspaceStore} />;
 };
