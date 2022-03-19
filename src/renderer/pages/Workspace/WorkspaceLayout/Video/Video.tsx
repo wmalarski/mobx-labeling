@@ -1,10 +1,12 @@
 import * as FlexLayout from "flexlayout-react";
 import Konva from "konva";
+import { observer } from "mobx-react-lite";
 import { Instance, SnapshotOut } from "mobx-state-tree";
 import { ReactElement, useRef } from "react";
 import { Circle, Layer, Rect, Stage } from "react-konva";
 import { useStageZoom } from "renderer/hooks";
 import { Resource, WorkspaceStore } from "renderer/models";
+import { ToolKind } from "renderer/models/project/Tool";
 import * as Styles from "./Video.styles";
 import { useVideoResize } from "./Video.utils";
 import { VideoImage } from "./VideoImage/VideoImage";
@@ -14,44 +16,46 @@ type Props = {
   node: FlexLayout.TabNode;
 };
 
-export const Video = ({ node, workspaceStore }: Props): ReactElement => {
-  const stageRef = useRef<Konva.Stage>(null);
+export const Video = observer(
+  ({ node, workspaceStore }: Props): ReactElement => {
+    const stageRef = useRef<Konva.Stage>(null);
 
-  const resource: SnapshotOut<typeof Resource> = node.getConfig();
-  const rect = node.getRect();
+    const resource: SnapshotOut<typeof Resource> = node.getConfig();
+    const rect = node.getRect();
 
-  useVideoResize({ stageRef, node });
+    useVideoResize({ stageRef, node });
 
-  const { handleWheel, stageScale, stageX, stageY } = useStageZoom({
-    scaleBy: 1.1,
-  });
+    const { handleWheel, stageScale, stageX, stageY } = useStageZoom({
+      scaleBy: 1.1,
+    });
 
-  const handleImageClick = () => {
-    //
-  };
+    const handleImageClick = () => {
+      //
+    };
 
-  return (
-    <Styles.Container>
-      <Stage
-        ref={stageRef}
-        width={rect.width}
-        height={rect.height}
-        onWheel={handleWheel}
-        scaleX={stageScale}
-        scaleY={stageScale}
-        x={stageX}
-        y={stageY}
-      >
-        <Layer>
-          <VideoImage
-            onClick={handleImageClick}
-            resource={resource}
-            workspaceStore={workspaceStore}
-          />
-          <Rect width={50} height={50} fill="red" />
-          <Circle x={200} y={200} stroke="white" radius={50} />
-        </Layer>
-      </Stage>
-    </Styles.Container>
-  );
-};
+    return (
+      <Styles.Container>
+        <Stage
+          ref={stageRef}
+          width={rect.width}
+          height={rect.height}
+          onWheel={handleWheel}
+          scaleX={stageScale}
+          scaleY={stageScale}
+          x={stageX}
+          y={stageY}
+        >
+          <Layer draggable={workspaceStore.tool.kind === ToolKind.Drag}>
+            <VideoImage
+              onClick={handleImageClick}
+              resource={resource}
+              workspaceStore={workspaceStore}
+            />
+            <Rect width={50} height={50} fill="red" />
+            <Circle x={200} y={200} stroke="white" radius={50} />
+          </Layer>
+        </Stage>
+      </Styles.Container>
+    );
+  }
+);

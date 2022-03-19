@@ -2,12 +2,17 @@ import { getSnapshot, Instance, types } from "mobx-state-tree";
 import { nanoid } from "nanoid";
 import { Batch } from "../project/Batch";
 import { Project } from "../project/Project";
+import { Tool, ToolKind } from "../project/Tool";
 
 export const WorkspaceStore = types
   .model("WorkspaceStore", {
     project: Project,
     currentFrame: types.optional(types.number, 0),
     framesCount: types.optional(types.number, 1),
+    tool: types.optional(Tool, () => ({
+      kind: ToolKind.Drag,
+      field: null,
+    })),
     batch: types.optional(Batch, () => ({
       id: nanoid(),
       items: [],

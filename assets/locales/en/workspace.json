@@ -4,5 +4,7 @@
   "commentsNode": "Comments",
   "timelineNode": "Timeline",
   "itemsNode": "Items",
-  "currentFrameLabel": "Current Frame"
+  "currentFrameLabel": "Current Frame",
+  "dragButton": "Move scene",
+  "cursorButton": "Selector"
 }
