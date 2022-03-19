@@ -45,7 +45,7 @@ export const WorkspaceLayout = observer(
 
     return (
       <Styles.Container>
-        <TopBar />
+        <TopBar workspaceStore={workspaceStore} />
         <Styles.Row>
           <SideBar />
           <Styles.Column>

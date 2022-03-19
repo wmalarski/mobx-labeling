@@ -7,6 +7,7 @@ export const WorkspaceStore = types
   .model("WorkspaceStore", {
     project: Project,
     currentFrame: types.optional(types.number, 0),
+    framesCount: types.optional(types.number, 1),
     batch: types.optional(Batch, () => ({
       id: nanoid(),
       items: [],
@@ -18,6 +19,17 @@ export const WorkspaceStore = types
         ...getSnapshot(self.project),
         items: self.batch.itemsInfo(),
       };
+    },
+  }))
+  .actions((self) => ({
+    updateFramesCount(framesCount: number) {
+      self.framesCount = Math.max(framesCount, self.framesCount);
+    },
+    setCurrentFrame(currentFrame: number) {
+      self.currentFrame = currentFrame;
+      self.batch.items.forEach((item) => {
+        item.setCurrentFrame(currentFrame);
+      });
     },
   }));
 

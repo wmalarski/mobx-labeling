@@ -37,14 +37,13 @@ export const VideoImage = observer(
 
         const durationSeconds = videoElement.duration;
         const framesDuration = Math.floor(durationSeconds * fps);
-        // dispatch(workspaceActions.setDurationReducer(framesDuration));
-        console.log({ framesDuration });
+        workspaceStore.updateFramesCount(framesDuration);
       };
       videoElement.addEventListener("loadedmetadata", onload);
       return () => {
         videoElement.removeEventListener("loadedmetadata", onload);
       };
-    }, [fps, videoElement]);
+    }, [fps, videoElement, workspaceStore]);
 
     // use Konva.Animation to redraw a layer
     useEffect(() => {

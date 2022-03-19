@@ -3,5 +3,6 @@
   "errorLink": "Return to home",
   "commentsNode": "Comments",
   "timelineNode": "Timeline",
-  "itemsNode": "Items"
+  "itemsNode": "Items",
+  "currentFrameLabel": "Current Frame"
 }

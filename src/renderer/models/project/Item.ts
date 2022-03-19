@@ -16,6 +16,7 @@ export const Item = types
     fields: types.array(Field),
     definition: ItemDefinition,
     ranges: types.array(Range),
+    currentFrame: types.optional(types.number, 0),
   })
   .views((self) => ({
     info(): ItemInfo {
@@ -23,5 +24,10 @@ export const Item = types
         id: self.id,
         ranges: getSnapshot(self.ranges),
       };
+    },
+  }))
+  .actions((self) => ({
+    setCurrentFrame(currentFrame: number) {
+      self.currentFrame = currentFrame;
     },
   }));
