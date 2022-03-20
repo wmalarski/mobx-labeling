@@ -45,7 +45,7 @@ export const ComboBoxField = types
     "ComboBoxField",
     FieldBase,
     types.model({
-      definition: ComboBoxDefinition,
+      definition: types.reference(ComboBoxDefinition),
       values: types.optional(types.map(ComboBoxValue), {}),
     })
   )

@@ -25,7 +25,7 @@ export const GraphField = types
     "GraphField",
     FieldBase,
     types.model({
-      definition: GraphDefinition,
+      definition: types.reference(GraphDefinition),
       values: types.optional(types.map(GraphValue), {}),
     })
   )

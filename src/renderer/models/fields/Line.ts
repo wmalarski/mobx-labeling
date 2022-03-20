@@ -22,7 +22,7 @@ export const LineField = types
     "LineField",
     FieldBase,
     types.model({
-      definition: LineDefinition,
+      definition: types.reference(LineDefinition),
       values: types.optional(types.map(LineValue), {}),
     })
   )

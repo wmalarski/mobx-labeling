@@ -14,7 +14,7 @@ export const Item = types
     id: types.optional(types.identifier, nanoid),
     name: types.string,
     fields: types.array(Field),
-    definition: ItemDefinition,
+    definition: types.reference(ItemDefinition),
     ranges: types.array(Range),
     currentFrame: types.optional(types.number, 0),
   })

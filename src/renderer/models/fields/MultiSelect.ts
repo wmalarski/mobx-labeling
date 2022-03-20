@@ -58,7 +58,7 @@ export const MultiSelectField = types
     "MultiSelectField",
     FieldBase,
     types.model({
-      definition: MultiSelectDefinition,
+      definition: types.reference(MultiSelectDefinition),
       values: types.optional(types.map(MultiSelectValue), {}),
     })
   )

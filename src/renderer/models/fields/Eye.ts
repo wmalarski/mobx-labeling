@@ -22,7 +22,7 @@ export const EyeField = types
     "EyeField",
     FieldBase,
     types.model({
-      definition: EyeDefinition,
+      definition: types.reference(EyeDefinition),
       values: types.optional(types.map(EyeValue), {}),
     })
   )

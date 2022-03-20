@@ -22,7 +22,7 @@ export const RectangleField = types
     "RectangleField",
     FieldBase,
     types.model({
-      definition: RectangleDefinition,
+      definition: types.reference(RectangleDefinition),
       values: types.optional(types.map(RectangleValue), {}),
     })
   )

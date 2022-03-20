@@ -40,28 +40,24 @@ export const WorkspaceStore = types
       });
     },
     addItem(itemDefinition: Instance<typeof ItemDefinition>) {
-      const definition = ItemDefinition.create(getSnapshot(itemDefinition));
-
       const fieldCopies = itemDefinition.fields.map((fieldDefinition) =>
         FieldDefinition.create(getSnapshot(fieldDefinition))
       );
 
       const fields = fieldCopies.map((fieldDefinition) => ({
         currentFrame: self.currentFrame,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        definition: fieldDefinition as any,
+        definition: fieldDefinition.id,
       }));
 
       self.batch.items.push(
         Item.create({
           name: nanoid(),
-          definition,
+          definition: itemDefinition.id,
           fields,
           currentFrame: self.currentFrame,
           ranges: [{ start: self.currentFrame, end: self.currentFrame }],
         })
       );
-      console.log(self.batch.items.length);
     },
   }));
 
