@@ -6,17 +6,23 @@ import { currentValue } from "./utils";
 
 const defaultValue = "Sunny";
 const defaultOptions = [
-  { text: "Sunny", size: 3 },
-  { text: "Rain", size: 3 },
-  { text: "Clouds", size: 3 },
-  { text: "Snow", size: 3 },
+  { text: "Sunny", size: 12 },
+  { text: "Rain", size: 12 },
+  { text: "Clouds", size: 12 },
+  { text: "Snow", size: 12 },
 ];
 
 const kind = types.optional(types.literal("Select"), "Select");
 
-export const SelectValue = types.model("SelectValue", {
-  value: types.string,
-});
+export const SelectValue = types
+  .model("SelectValue", {
+    value: types.string,
+  })
+  .actions((self) => ({
+    setValue(value: string) {
+      self.value = value;
+    },
+  }));
 
 export const SelectDefinitionOption = types
   .model("SelectDefinitionOption", {
