@@ -6,5 +6,6 @@
   "itemsNode": "Items",
   "currentFrameLabel": "Current Frame",
   "dragButton": "Move scene",
-  "cursorButton": "Selector"
+  "cursorButton": "Selector",
+  "invalidField": "Invalid field"
 }
