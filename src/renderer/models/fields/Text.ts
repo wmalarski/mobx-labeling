@@ -6,9 +6,15 @@ import { currentValue } from "./utils";
 
 const kind = types.optional(types.literal("Text"), "Text");
 
-export const TextValue = types.model("TextValue", {
-  value: types.string,
-});
+export const TextValue = types
+  .model("TextValue", {
+    value: types.string,
+  })
+  .actions((self) => ({
+    setValue(value: string) {
+      self.value = value;
+    },
+  }));
 
 export const TextDefinition = types
   .compose(
@@ -33,7 +39,7 @@ export const TextField = types
     types.model({
       kind,
       definition: types.reference(TextDefinition),
-      values: types.optional(types.map(TextValue), {}),
+      values: types.map(TextValue),
     })
   )
   .views((self) => ({

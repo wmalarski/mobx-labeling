@@ -123,7 +123,11 @@
       "release/app/dist"
     ],
     "setupFiles": [
-      "./.erb/scripts/check-build-exists.ts"
+      "./.erb/scripts/check-build-exists.ts",
+      "jest-canvas-mock"
+    ],
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(konva)/)"
     ]
   },
   "devDependencies": {
@@ -176,6 +180,7 @@
     "html-webpack-plugin": "^5.5.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.5.1",
+    "jest-canvas-mock": "^2.3.1",
     "mini-css-extract-plugin": "^2.6.0",
     "opencollective-postinstall": "^2.0.3",
     "prettier": "^2.5.1",
