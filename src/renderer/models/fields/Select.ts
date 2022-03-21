@@ -1,4 +1,5 @@
 import { Instance, SnapshotIn, types } from "mobx-state-tree";
+import { nanoid } from "nanoid";
 import { FieldBase } from "../base/FieldBase";
 import { FieldDefinitionBase } from "../base/FieldDefinitionBase";
 import { currentValue } from "./utils";
@@ -33,6 +34,7 @@ export const SelectDefinition = types
     "SelectDefinition",
     FieldDefinitionBase,
     types.model({
+      id: types.optional(types.identifier, nanoid),
       kind,
       default: types.optional(types.string, defaultValue),
       options: types.optional(
@@ -58,6 +60,7 @@ export const SelectField = types
     "SelectField",
     FieldBase,
     types.model({
+      kind,
       definition: types.reference(SelectDefinition),
       values: types.optional(types.map(SelectValue), {}),
     })

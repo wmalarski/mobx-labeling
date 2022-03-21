@@ -1,6 +1,5 @@
 import { getSnapshot, Instance, types } from "mobx-state-tree";
 import { nanoid } from "nanoid";
-import { FieldDefinition } from "../definition/FieldDefinition";
 import { ItemDefinition } from "../definition/ItemDefinition/ItemDefinition";
 import { Batch } from "../project/Batch";
 import { Item } from "../project/Item";
@@ -12,6 +11,7 @@ export const WorkspaceStore = types
     project: Project,
     currentFrame: types.optional(types.number, 0),
     framesCount: types.optional(types.number, 1),
+    selectedItems: types.array(types.reference(Item)),
     tool: types.optional(Tool, () => ({
       kind: ToolKind.Drag,
       field: null,
@@ -40,24 +40,20 @@ export const WorkspaceStore = types
       });
     },
     addItem(itemDefinition: Instance<typeof ItemDefinition>) {
-      const fieldCopies = itemDefinition.fields.map((fieldDefinition) =>
-        FieldDefinition.create(getSnapshot(fieldDefinition))
-      );
-
-      const fields = fieldCopies.map((fieldDefinition) => ({
-        currentFrame: self.currentFrame,
-        definition: fieldDefinition.id,
-      }));
-
-      self.batch.items.push(
-        Item.create({
-          name: nanoid(),
-          definition: itemDefinition.id,
-          fields,
+      const item = Item.create({
+        name: nanoid(),
+        definition: itemDefinition.id,
+        fields: itemDefinition.fields.map((fieldDefinition) => ({
+          kind: fieldDefinition.kind,
           currentFrame: self.currentFrame,
-          ranges: [{ start: self.currentFrame, end: self.currentFrame }],
-        })
-      );
+          definition: fieldDefinition.id,
+        })),
+        currentFrame: self.currentFrame,
+        ranges: [{ start: self.currentFrame, end: self.currentFrame }],
+      });
+
+      self.batch.items.push(item);
+      self.selectedItems.replace([item]);
     },
   }));
 

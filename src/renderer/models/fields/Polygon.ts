@@ -1,4 +1,5 @@
 import { types } from "mobx-state-tree";
+import { nanoid } from "nanoid";
 import { FieldBase } from "../base/FieldBase";
 import { ShapeDefinitionBase } from "../base/ShapeDefinitionBase";
 import { currentValue } from "./utils";
@@ -13,6 +14,7 @@ export const PolygonDefinition = types.compose(
   "PolygonDefinition",
   ShapeDefinitionBase,
   types.model({
+    id: types.optional(types.identifier, nanoid),
     kind,
   })
 );
@@ -22,6 +24,7 @@ export const PolygonField = types
     "PolygonField",
     FieldBase,
     types.model({
+      kind,
       definition: types.reference(PolygonDefinition),
       values: types.optional(types.map(PolygonValue), {}),
     })

@@ -1,4 +1,5 @@
 import { types } from "mobx-state-tree";
+import { nanoid } from "nanoid";
 import { FieldBase } from "../base/FieldBase";
 import { FieldDefinitionBase } from "../base/FieldDefinitionBase";
 import { currentValue } from "./utils";
@@ -20,6 +21,7 @@ export const CheckBoxDefinition = types
     "CheckBoxDefinition",
     FieldDefinitionBase,
     types.model({
+      id: types.optional(types.identifier, nanoid),
       kind,
       default: types.optional(types.boolean, false),
     })
@@ -35,6 +37,7 @@ export const CheckBoxField = types
     "CheckBoxField",
     FieldBase,
     types.model({
+      kind,
       definition: types.reference(CheckBoxDefinition),
       values: types.optional(types.map(CheckBoxValue), {}),
     })

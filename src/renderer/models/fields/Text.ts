@@ -1,4 +1,5 @@
 import { types } from "mobx-state-tree";
+import { nanoid } from "nanoid";
 import { FieldBase } from "../base/FieldBase";
 import { FieldDefinitionBase } from "../base/FieldDefinitionBase";
 import { currentValue } from "./utils";
@@ -14,6 +15,7 @@ export const TextDefinition = types
     "TextDefinition",
     FieldDefinitionBase,
     types.model({
+      id: types.optional(types.identifier, nanoid),
       kind,
       default: types.optional(types.string, ""),
     })
@@ -29,6 +31,7 @@ export const TextField = types
     "TextField",
     FieldBase,
     types.model({
+      kind,
       definition: types.reference(TextDefinition),
       values: types.optional(types.map(TextValue), {}),
     })

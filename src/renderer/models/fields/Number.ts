@@ -1,4 +1,5 @@
 import { types } from "mobx-state-tree";
+import { nanoid } from "nanoid";
 import { FieldBase } from "../base/FieldBase";
 import { FieldDefinitionBase } from "../base/FieldDefinitionBase";
 import { currentValue } from "./utils";
@@ -14,6 +15,7 @@ export const NumberDefinition = types
     "NumberDefinition",
     FieldDefinitionBase,
     types.model({
+      id: types.optional(types.identifier, nanoid),
       kind,
       min: types.optional(types.number, 0),
       max: types.optional(types.number, 100),
@@ -41,6 +43,7 @@ export const NumberField = types
     "NumberField",
     FieldBase,
     types.model({
+      kind,
       definition: types.reference(NumberDefinition),
       values: types.optional(types.map(NumberValue), {}),
     })

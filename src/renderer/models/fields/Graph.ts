@@ -1,4 +1,5 @@
 import { types } from "mobx-state-tree";
+import { nanoid } from "nanoid";
 import { FieldBase } from "../base/FieldBase";
 import { ShapeDefinitionBase } from "../base/ShapeDefinitionBase";
 import { currentValue } from "./utils";
@@ -16,6 +17,7 @@ export const GraphDefinition = types.compose(
   "GraphDefinition",
   ShapeDefinitionBase,
   types.model({
+    id: types.optional(types.identifier, nanoid),
     kind,
   })
 );
@@ -25,6 +27,7 @@ export const GraphField = types
     "GraphField",
     FieldBase,
     types.model({
+      kind,
       definition: types.reference(GraphDefinition),
       values: types.optional(types.map(GraphValue), {}),
     })

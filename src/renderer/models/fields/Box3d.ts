@@ -1,4 +1,5 @@
 import { types } from "mobx-state-tree";
+import { nanoid } from "nanoid";
 import { FieldBase } from "../base/FieldBase";
 import { ShapeDefinitionBase } from "../base/ShapeDefinitionBase";
 import { currentValue } from "./utils";
@@ -15,6 +16,7 @@ export const Box3dDefinition = types.compose(
   "Box3dDefinition",
   ShapeDefinitionBase,
   types.model({
+    id: types.optional(types.identifier, nanoid),
     kind,
   })
 );
@@ -24,6 +26,7 @@ export const Box3dField = types
     "Box3dField",
     FieldBase,
     types.model({
+      kind,
       definition: types.reference(Box3dDefinition),
       values: types.optional(types.map(Box3dValue), {}),
     })

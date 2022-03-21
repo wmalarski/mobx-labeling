@@ -1,4 +1,5 @@
 import { types } from "mobx-state-tree";
+import { nanoid } from "nanoid";
 import { FieldBase } from "../base/FieldBase";
 import { FieldDefinitionBase } from "../base/FieldDefinitionBase";
 import { currentValue } from "./utils";
@@ -23,6 +24,7 @@ export const ComboBoxDefinition = types
     "ComboBoxDefinition",
     FieldDefinitionBase,
     types.model({
+      id: types.optional(types.identifier, nanoid),
       kind,
       default: types.optional(types.string, defaultValue),
       options: types.optional(types.array(types.string), defaultOptions),
@@ -45,6 +47,7 @@ export const ComboBoxField = types
     "ComboBoxField",
     FieldBase,
     types.model({
+      kind,
       definition: types.reference(ComboBoxDefinition),
       values: types.optional(types.map(ComboBoxValue), {}),
     })

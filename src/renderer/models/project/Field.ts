@@ -15,19 +15,19 @@ import { TextField } from "../fields/Text";
 
 const Field1 = types.union(
   Box3dField,
-  CheckBoxField,
-  ComboBoxField,
   EyeField,
   GraphField,
   LineField,
-  MultiSelectField,
-  NumberField,
+  PolygonField,
   PointField
 );
 
 const Field2 = types.union(
-  PolygonField,
+  CheckBoxField,
+  ComboBoxField,
+  MultiSelectField,
   RectangleField,
+  NumberField,
   SelectField,
   TextField
 );
