@@ -3,6 +3,7 @@ import { getSnapshot, Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { Field } from "renderer/models/project/Field";
+import { RectangleForm } from "./RectangleForm/RectangleForm";
 import { SelectForm } from "./SelectForm/SelectForm";
 import { TextForm } from "./TextForm/TextForm";
 
@@ -14,6 +15,8 @@ export const FieldListItem = observer(({ field }: Props): ReactElement => {
   const { t } = useTranslation("workspace");
 
   switch (field.kind) {
+    case "Rectangle":
+      return <RectangleForm rectangleField={field} />;
     case "Select":
       return <SelectForm selectField={field} />;
     case "Text":

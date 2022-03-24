@@ -9,29 +9,27 @@ type Props = {
   textField: Instance<typeof TextField>;
 };
 
-export const TextForm = observer(
-  ({ textField }: Props): ReactElement | null => {
-    const { t } = useTranslation("workspace");
+export const TextForm = observer(({ textField }: Props): ReactElement => {
+  const { t } = useTranslation("workspace");
 
-    const current = textField.current;
+  const current = textField.current;
 
-    if (!current) {
-      return <Text type="error">{t("invalidField")}</Text>;
-    }
-
-    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-      current.setValue(event.target.value);
-    };
-
-    return (
-      <Input
-        value={current.value}
-        onChange={handleChange}
-        aria-label={textField.definition.name}
-        placeholder={textField.definition.name}
-        width="100%"
-        clearable
-      />
-    );
+  if (!current) {
+    return <Text type="error">{t("invalidField")}</Text>;
   }
-);
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    current.setValue(event.target.value);
+  };
+
+  return (
+    <Input
+      value={current.value}
+      onChange={handleChange}
+      aria-label={textField.definition.name}
+      placeholder={textField.definition.name}
+      width="100%"
+      clearable
+    />
+  );
+});

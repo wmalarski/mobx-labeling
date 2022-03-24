@@ -7,5 +7,9 @@
   "currentFrameLabel": "Current Frame",
   "dragButton": "Move scene",
   "cursorButton": "Selector",
-  "invalidField": "Invalid field"
+  "invalidField": "Invalid field",
+  "rectangleTop": "Top",
+  "rectangleBottom": "Bottom",
+  "rectangleLeft": "Left",
+  "rectangleRight": "Right"
 }

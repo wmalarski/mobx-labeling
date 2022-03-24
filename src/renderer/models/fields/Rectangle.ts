@@ -6,9 +6,15 @@ import { currentValue } from "./utils";
 
 const kind = types.optional(types.literal("Rectangle"), "Rectangle");
 
-export const RectangleValue = types.model("RectangleValue", {
-  value: types.array(types.number),
-});
+export const RectangleValue = types
+  .model("RectangleValue", {
+    value: types.array(types.number),
+  })
+  .actions((self) => ({
+    updateValue(index: number, value: number) {
+      self.value[index] = value;
+    },
+  }));
 
 export const RectangleDefinition = types.compose(
   "RectangleDefinition",
