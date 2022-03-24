@@ -11,5 +11,12 @@
   "rectangleTop": "Top",
   "rectangleBottom": "Bottom",
   "rectangleLeft": "Left",
-  "rectangleRight": "Right"
+  "rectangleRight": "Right",
+  "polygonX": "X{{index}}",
+  "polygonY": "Y{{index}}",
+  "polygonAdd": "Add at {{index}}",
+  "polygonRemove": "Remove {{index}}",
+  "polygonUp": "Move {{index}} up",
+  "polygonDown": "Move {{index}} down",
+  "polygonPoints": "Points"
 }
