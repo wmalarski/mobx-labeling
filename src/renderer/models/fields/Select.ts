@@ -2,7 +2,7 @@ import { Instance, SnapshotIn, types } from "mobx-state-tree";
 import { nanoid } from "nanoid";
 import { FieldBase } from "../base/FieldBase";
 import { FieldDefinitionBase } from "../base/FieldDefinitionBase";
-import { currentValue } from "./utils";
+import { currentValue, currentValueKey } from "./utils";
 
 const defaultValue = "Sunny";
 const defaultOptions = [
@@ -74,5 +74,13 @@ export const SelectField = types
   .views((self) => ({
     get current() {
       return currentValue(self);
+    },
+  }))
+  .actions((self) => ({
+    afterCreate() {
+      if (self.values.size > 1) return;
+      self.values.set(currentValueKey(self), {
+        value: self.definition.default,
+      });
     },
   }));

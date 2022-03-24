@@ -2,7 +2,7 @@ import { Instance, SnapshotIn, types } from "mobx-state-tree";
 import { nanoid } from "nanoid";
 import { FieldBase } from "../base/FieldBase";
 import { FieldDefinitionBase } from "../base/FieldDefinitionBase";
-import { currentValue } from "./utils";
+import { currentValue, currentValueKey } from "./utils";
 
 const defaultValues = ["Left Lane", "Right Lane"];
 const defaultOptions = [
@@ -68,5 +68,13 @@ export const MultiSelectField = types
   .views((self) => ({
     get current() {
       return currentValue(self);
+    },
+  }))
+  .actions((self) => ({
+    afterCreate() {
+      if (self.values.size > 1) return;
+      self.values.set(currentValueKey(self), {
+        values: self.definition.default,
+      });
     },
   }));
