@@ -6,13 +6,13 @@ import { useTranslation } from "react-i18next";
 import { SelectField } from "renderer/models";
 
 type Props = {
-  selectField: Instance<typeof SelectField>;
+  field: Instance<typeof SelectField>;
 };
 
-export const SelectForm = observer(({ selectField }: Props): ReactElement => {
+export const SelectForm = observer(({ field }: Props): ReactElement => {
   const { t } = useTranslation("workspace");
 
-  const current = selectField.current;
+  const current = field.current;
 
   if (!current) {
     return <Text type="error">{t("invalidField")}</Text>;
@@ -25,7 +25,7 @@ export const SelectForm = observer(({ selectField }: Props): ReactElement => {
   return (
     <Radio.Group value={current.value} onChange={handleChange}>
       <Grid.Container gap={1}>
-        {selectField.definition.options.map((option) => (
+        {field.definition.options.map((option) => (
           <Grid key={option.text} xs={option.size}>
             <Radio value={option.text}>{option.text}</Radio>
           </Grid>

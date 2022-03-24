@@ -47,4 +47,4 @@ const instance = Model.create({
 });
 
 export const Playground = Template.bind({});
-Playground.args = { wrapperProps: {}, rectangleField: instance.field };
+Playground.args = { wrapperProps: {}, field: instance.field };

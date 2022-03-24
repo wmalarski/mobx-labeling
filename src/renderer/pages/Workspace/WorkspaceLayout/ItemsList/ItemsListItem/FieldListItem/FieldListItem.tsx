@@ -22,11 +22,11 @@ export const FieldListItem = observer(({ field }: Props): ReactElement => {
     case "Polygon":
       return <PolygonForm field={field} />;
     case "Rectangle":
-      return <RectangleForm rectangleField={field} />;
+      return <RectangleForm field={field} />;
     case "Select":
-      return <SelectForm selectField={field} />;
+      return <SelectForm field={field} />;
     case "Text":
-      return <TextForm textField={field} />;
+      return <TextForm field={field} />;
     default:
       return (
         <div>

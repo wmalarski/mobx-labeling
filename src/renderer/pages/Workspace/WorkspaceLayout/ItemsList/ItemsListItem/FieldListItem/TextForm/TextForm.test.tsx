@@ -50,7 +50,7 @@ const renderComponent = ({
 }: PropsWithTestWrapper<Partial<Props>> = {}) => {
   const instance = getInstance();
   const defaultProps: Props = {
-    textField: instance.field,
+    field: instance.field,
   };
 
   return render(
@@ -77,7 +77,7 @@ describe("<TextForm />", () => {
     });
 
     renderComponent({
-      textField: instance.field,
+      field: instance.field,
     });
 
     const header = i18n.t<string>("invalidField", { ns: "workspace" });
@@ -90,7 +90,7 @@ describe("<TextForm />", () => {
     const instance = getInstance();
 
     renderComponent({
-      textField: instance.field,
+      field: instance.field,
     });
 
     const input = await screen.findByLabelText(instance.definition.name);

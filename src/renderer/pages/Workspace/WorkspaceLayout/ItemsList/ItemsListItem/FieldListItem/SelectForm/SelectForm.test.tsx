@@ -48,7 +48,7 @@ const renderComponent = ({
 }: PropsWithTestWrapper<Partial<Props>> = {}) => {
   const instance = getInstance();
   const defaultProps: Props = {
-    selectField: instance.field,
+    field: instance.field,
   };
 
   return render(
@@ -66,7 +66,7 @@ describe("<SelectForm />", () => {
       field: { values: {} },
     });
 
-    renderComponent({ selectField: instance.field });
+    renderComponent({ field: instance.field });
 
     const header = i18n.t<string>("invalidField", { ns: "workspace" });
     await expect(screen.findByText(header)).resolves.toBeInTheDocument();
@@ -79,7 +79,7 @@ describe("<SelectForm />", () => {
     const option = instance.definition.options[1].text;
 
     renderComponent({
-      selectField: instance.field,
+      field: instance.field,
     });
 
     const input = await screen.findByText(option);

@@ -6,13 +6,13 @@ import { useTranslation } from "react-i18next";
 import { TextField } from "renderer/models";
 
 type Props = {
-  textField: Instance<typeof TextField>;
+  field: Instance<typeof TextField>;
 };
 
-export const TextForm = observer(({ textField }: Props): ReactElement => {
+export const TextForm = observer(({ field }: Props): ReactElement => {
   const { t } = useTranslation("workspace");
 
-  const current = textField.current;
+  const current = field.current;
 
   if (!current) {
     return <Text type="error">{t("invalidField")}</Text>;
@@ -26,8 +26,8 @@ export const TextForm = observer(({ textField }: Props): ReactElement => {
     <Input
       value={current.value}
       onChange={handleChange}
-      aria-label={textField.definition.name}
-      placeholder={textField.definition.name}
+      aria-label={field.definition.name}
+      placeholder={field.definition.name}
       width="100%"
       clearable
     />

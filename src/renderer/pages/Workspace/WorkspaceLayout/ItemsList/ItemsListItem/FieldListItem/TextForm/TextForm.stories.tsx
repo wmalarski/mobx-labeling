@@ -52,5 +52,5 @@ const instance = Model.create({
 export const Playground = Template.bind({});
 Playground.args = {
   wrapperProps: {},
-  textField: instance.field,
+  field: instance.field,
 };

@@ -46,7 +46,7 @@ const renderComponent = ({
   ...props
 }: PropsWithTestWrapper<Partial<Props>> = {}) => {
   const defaultProps: Props = {
-    rectangleField: getInstance().field,
+    field: getInstance().field,
   };
 
   return render(
@@ -64,7 +64,7 @@ describe("<RectangleForm />", () => {
       field: { values: {} },
     });
 
-    renderComponent({ rectangleField: instance.field });
+    renderComponent({ field: instance.field });
 
     const header = i18n.t<string>("invalidField", { ns: "workspace" });
     await expect(screen.findByText(header)).resolves.toBeInTheDocument();
@@ -75,7 +75,7 @@ describe("<RectangleForm />", () => {
 
     const instance = getInstance();
 
-    renderComponent({ rectangleField: instance.field });
+    renderComponent({ field: instance.field });
 
     const label = i18n.t<string>("rectangleTop", { ns: "workspace" });
     const input = await screen.findByLabelText(label);
