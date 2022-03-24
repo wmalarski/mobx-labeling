@@ -6,9 +6,15 @@ import { currentValue } from "./utils";
 
 const kind = types.optional(types.literal("Point"), "Point");
 
-export const PointValue = types.model("PointValue", {
-  value: types.array(types.number),
-});
+export const PointValue = types
+  .model("PointValue", {
+    value: types.array(types.number),
+  })
+  .actions((self) => ({
+    updateValue(index: number, value: number) {
+      self.value[index] = value;
+    },
+  }));
 
 export const PointDefinition = types.compose(
   "PointDefinition",

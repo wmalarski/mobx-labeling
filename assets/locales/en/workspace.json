@@ -18,5 +18,7 @@
   "polygonRemove": "Remove {{index}}",
   "polygonUp": "Move {{index}} up",
   "polygonDown": "Move {{index}} down",
-  "polygonPoints": "Points"
+  "polygonPoints": "Points",
+  "pointX": "X",
+  "pointY": "Y"
 }
