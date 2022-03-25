@@ -1,4 +1,4 @@
-import { Instance, SnapshotIn, types } from "mobx-state-tree";
+import { getSnapshot, Instance, SnapshotIn, types } from "mobx-state-tree";
 import { nanoid } from "nanoid";
 import { FieldBase } from "../base/FieldBase";
 import { FieldDefinitionBase } from "../base/FieldDefinitionBase";
@@ -14,9 +14,15 @@ const defaultOptions = [
 
 const kind = types.optional(types.literal("MultiSelect"), "MultiSelect");
 
-export const MultiSelectValue = types.model("MultiSelectValue", {
-  values: types.array(types.string),
-});
+export const MultiSelectValue = types
+  .model("MultiSelectValue", {
+    values: types.array(types.string),
+  })
+  .actions((self) => ({
+    setValues(values: string[]) {
+      self.values.replace(values);
+    },
+  }));
 
 export const MultiSelectDefinitionOption = types
   .model("MultiSelectDefinitionOption", {
@@ -74,7 +80,7 @@ export const MultiSelectField = types
     afterCreate() {
       if (self.values.size > 0) return;
       self.values.set(currentValueKey(self), {
-        values: self.definition.default,
+        values: getSnapshot(self.definition.default),
       });
     },
   }));
