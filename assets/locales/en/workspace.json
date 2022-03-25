@@ -20,5 +20,12 @@
   "polygonDown": "Move {{index}} down",
   "polygonPoints": "Points",
   "pointX": "X",
-  "pointY": "Y"
+  "pointY": "Y",
+  "lineX": "X{{index}}",
+  "lineY": "Y{{index}}",
+  "lineAdd": "Add at {{index}}",
+  "lineRemove": "Remove {{index}}",
+  "lineUp": "Move {{index}} up",
+  "lineDown": "Move {{index}} down",
+  "linePoints": "Points"
 }

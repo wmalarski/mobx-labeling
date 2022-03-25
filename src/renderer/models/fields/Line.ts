@@ -6,9 +6,21 @@ import { currentValue } from "./utils";
 
 const kind = types.optional(types.literal("Line"), "Line");
 
-export const LineValue = types.model({
-  values: types.array(types.number),
-});
+export const LineValue = types
+  .model({
+    values: types.array(types.number),
+  })
+  .actions((self) => ({
+    updateValue(index: number, value: number) {
+      self.values[index] = value;
+    },
+    addPoint(index: number, x: number, y: number) {
+      self.values.splice(index, 0, x, y);
+    },
+    removePoint(index: number) {
+      self.values.splice(index, 2);
+    },
+  }));
 
 export const LineDefinition = types.compose(
   "LineDefinition",
