@@ -59,7 +59,7 @@ export const ComboBoxField = types
   }))
   .actions((self) => ({
     afterCreate() {
-      if (self.values.size > 1) return;
+      if (self.values.size > 0) return;
       self.values.set(currentValueKey(self), {
         value: self.definition.default,
       });

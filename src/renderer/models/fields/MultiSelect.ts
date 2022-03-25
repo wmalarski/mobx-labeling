@@ -72,7 +72,7 @@ export const MultiSelectField = types
   }))
   .actions((self) => ({
     afterCreate() {
-      if (self.values.size > 1) return;
+      if (self.values.size > 0) return;
       self.values.set(currentValueKey(self), {
         values: self.definition.default,
       });

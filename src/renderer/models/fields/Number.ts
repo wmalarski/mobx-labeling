@@ -6,9 +6,15 @@ import { currentValue, currentValueKey } from "./utils";
 
 const kind = types.optional(types.literal("Number"), "Number");
 
-export const NumberValue = types.model("NumberValue", {
-  value: types.number,
-});
+export const NumberValue = types
+  .model("NumberValue", {
+    value: types.number,
+  })
+  .actions((self) => ({
+    setValue(value: number) {
+      self.value = value;
+    },
+  }));
 
 export const NumberDefinition = types
   .compose(
@@ -55,7 +61,7 @@ export const NumberField = types
   }))
   .actions((self) => ({
     afterCreate() {
-      if (self.values.size > 1) return;
+      if (self.values.size > 0) return;
       self.values.set(currentValueKey(self), {
         value: self.definition.default,
       });

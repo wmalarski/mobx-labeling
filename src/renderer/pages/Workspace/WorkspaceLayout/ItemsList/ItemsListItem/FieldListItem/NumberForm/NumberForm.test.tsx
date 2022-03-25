@@ -4,38 +4,38 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { SnapshotIn, types } from "mobx-state-tree";
 import { ComponentProps } from "react";
-import { SelectDefinition, SelectField } from "renderer/models";
+import { NumberDefinition, NumberField } from "renderer/models";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import i18n from "renderer/utils/i18next";
-import { SelectForm } from "./SelectForm";
+import { NumberForm } from "./NumberForm";
 
-type Props = ComponentProps<typeof SelectForm>;
+type Props = ComponentProps<typeof NumberForm>;
 
 const Model = types.model({
-  definition: SelectDefinition,
-  field: SelectField,
+  definition: NumberDefinition,
+  field: NumberField,
 });
 
 const getInstance = ({
   definition,
   field,
 }: {
-  definition?: Partial<SnapshotIn<typeof SelectDefinition>>;
-  field?: Partial<SnapshotIn<typeof SelectField>>;
+  definition?: Partial<SnapshotIn<typeof NumberDefinition>>;
+  field?: Partial<SnapshotIn<typeof NumberField>>;
 } = {}) => {
   return Model.create({
     definition: {
-      name: "Text",
+      name: "Number",
       change: "EveryFrame",
+      kind: "Number",
       id: "id",
-      kind: "Select",
       ...definition,
     },
     field: {
       currentFrame: 1,
       definition: "id",
       id: "1",
-      kind: "Select",
+      kind: "Number",
       ...field,
     },
   });
@@ -45,27 +45,28 @@ const renderComponent = ({
   wrapperProps,
   ...props
 }: PropsWithTestWrapper<Partial<Props>> = {}) => {
-  const instance = getInstance();
   const defaultProps: Props = {
-    field: instance.field,
+    field: getInstance().field,
   };
 
   return render(
     <TestWrapper {...wrapperProps}>
-      <SelectForm {...defaultProps} {...props} />
+      <NumberForm {...defaultProps} {...props} />
     </TestWrapper>
   );
 };
 
-describe("<SelectForm />", () => {
+describe("<NumberForm />", () => {
   it("should render error message", async () => {
     expect.hasAssertions();
 
     const instance = getInstance({
-      field: { values: { "5": { value: "A" } } },
+      field: { values: { "5": { value: 5 } } },
     });
 
-    renderComponent({ field: instance.field });
+    renderComponent({
+      field: instance.field,
+    });
 
     const header = i18n.t<string>("invalidField", { ns: "workspace" });
     await expect(screen.findByText(header)).resolves.toBeInTheDocument();
@@ -75,15 +76,15 @@ describe("<SelectForm />", () => {
     expect.hasAssertions();
 
     const instance = getInstance();
-    const option = instance.definition.options[1].text;
 
     renderComponent({
       field: instance.field,
     });
 
-    const input = await screen.findByText(option);
-    userEvent.click(input);
+    const input = await screen.findByLabelText(instance.definition.name);
+    userEvent.clear(input);
+    userEvent.type(input, "2");
 
-    expect(instance.field.current?.value).toBe(option);
+    expect(instance.field.current?.value).toBe(2);
   });
 });

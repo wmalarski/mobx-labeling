@@ -38,7 +38,6 @@ const getInstance = ({
       definition: "id",
       id: "1",
       kind: "Text",
-      values: { "1": { value: "hello" } },
       ...field,
     },
   });
@@ -73,7 +72,7 @@ describe("<TextForm />", () => {
     expect.hasAssertions();
 
     const instance = getInstance({
-      field: { values: {} },
+      field: { values: { "5": { value: "A" } } },
     });
 
     renderComponent({
