@@ -27,5 +27,15 @@
   "lineRemove": "Remove {{index}}",
   "lineUp": "Move {{index}} up",
   "lineDown": "Move {{index}} down",
-  "linePoints": "Points"
+  "linePoints": "Points",
+  "graphPoints": "Points",
+  "graphAddPoint": "Add point",
+  "graphAddEdge": "Add edge",
+  "graphEdges": "Edges",
+  "graphX": "X{{index}}",
+  "graphY": "Y{{index}}",
+  "graphFrom": "{{index}} From",
+  "graphTo": "{{index}} To",
+  "graphRemovePoint": "Remove point {{index}}",
+  "graphRemoveEdge": "Remove edge {{index}}"
 }

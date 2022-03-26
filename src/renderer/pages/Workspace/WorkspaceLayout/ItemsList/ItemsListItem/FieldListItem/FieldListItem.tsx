@@ -3,6 +3,7 @@ import { getSnapshot, Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { Field } from "renderer/models/project/Field";
+import { GraphForm } from "./GraphForm/GraphForm";
 import { LineForm } from "./LineForm/LineForm";
 import { MultiSelectForm } from "./MultiSelectForm/MultiSelectForm";
 import { NumberForm } from "./NumberForm/NumberForm";
@@ -20,6 +21,8 @@ export const FieldListItem = observer(({ field }: Props): ReactElement => {
   const { t } = useTranslation("workspace");
 
   switch (field.kind) {
+    case "Graph":
+      return <GraphForm field={field} />;
     case "Line":
       return <LineForm field={field} />;
     case "MultiSelect":
