@@ -43,7 +43,7 @@ const getInstance = ({
       id: "1",
       kind: "Box3d",
       values: {
-        "1": {
+        "0": {
           front: [0, 0, 0, 100, 100, 100, 100, 0],
           sideType: "None",
         },
@@ -110,7 +110,7 @@ describe("<Box3dForm />", () => {
     const instance = getInstance({
       field: {
         values: {
-          "1": {
+          "0": {
             front: [0, 0, 0, 100, 100, 100, 100, 0],
             side: [200, 0, 200, 100],
             sideType: "Right",

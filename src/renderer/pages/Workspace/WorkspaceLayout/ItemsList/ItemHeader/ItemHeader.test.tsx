@@ -84,12 +84,12 @@ describe("<ItemHeader />", () => {
     const input = await screen.findByLabelText(unblock);
     userEvent.click(input);
 
-    expect(item.blocked).toBeFalsy();
+    expect(item.blocked).toBeTruthy();
 
     const block = i18n.t<string>("itemBlock", { ns: "workspace" });
     const button = await screen.findByLabelText(block);
     userEvent.click(button);
 
-    expect(item.blocked).toBeTruthy();
+    expect(item.blocked).toBeFalsy();
   });
 });

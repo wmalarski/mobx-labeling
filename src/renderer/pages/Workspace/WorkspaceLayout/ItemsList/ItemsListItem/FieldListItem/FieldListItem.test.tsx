@@ -45,7 +45,7 @@ const renderComponent = ({
       id: "1",
       kind: "Box3d",
       values: {
-        "1": {
+        "0": {
           front: [0, 0, 0, 100, 100, 100, 100, 0],
           sideType: "None",
         },
@@ -80,11 +80,11 @@ describe("<FieldListItem />", () => {
     const instance = getInstance({
       definition: { name: "CheckBox", id: "id", kind: "CheckBox" },
       field: {
-        currentFrame: 1,
+        currentFrame: "id",
         definition: "id",
         id: "1",
         kind: "CheckBox",
-        values: { "1": { value: false } },
+        values: { "0": { value: false } },
       },
     });
 
@@ -101,11 +101,11 @@ describe("<FieldListItem />", () => {
     const instance = getInstance({
       definition: { name: "ComboBox", id: "id", kind: "ComboBox" },
       field: {
-        currentFrame: 1,
+        currentFrame: "id",
         definition: "id",
         id: "1",
         kind: "ComboBox",
-        values: { "1": { value: "Car" } },
+        values: { "0": { value: "Car" } },
       },
     });
 
@@ -122,11 +122,11 @@ describe("<FieldListItem />", () => {
     const instance = getInstance({
       definition: { name: "Eye", id: "id", kind: "Eye" },
       field: {
-        currentFrame: 1,
+        currentFrame: "id",
         definition: "id",
         id: "1",
         kind: "Eye",
-        values: { "1": { values: [0, 50, 50, 100, 100, 50, 50, 0] } },
+        values: { "0": { values: [0, 50, 50, 100, 100, 50, 50, 0] } },
       },
     });
 
@@ -142,12 +142,12 @@ describe("<FieldListItem />", () => {
     const instance = getInstance({
       definition: { name: "Graph", id: "id", kind: "Graph" },
       field: {
-        currentFrame: 1,
+        currentFrame: "id",
         definition: "id",
         id: "1",
         kind: "Graph",
         values: {
-          "1": {
+          "0": {
             edges: [{ from: 0, to: 1 }],
             points: [
               { x: 0, y: 0 },
@@ -170,11 +170,11 @@ describe("<FieldListItem />", () => {
     const instance = getInstance({
       definition: { name: "Line", id: "id", kind: "Line" },
       field: {
-        currentFrame: 1,
+        currentFrame: "id",
         definition: "id",
         id: "1",
         kind: "Line",
-        values: { "1": { values: [0, 0, 100, 100] } },
+        values: { "0": { values: [0, 0, 100, 100] } },
       },
     });
 
@@ -190,7 +190,7 @@ describe("<FieldListItem />", () => {
     const instance = getInstance({
       definition: { name: "MultiSelect", id: "id", kind: "MultiSelect" },
       field: {
-        currentFrame: 1,
+        currentFrame: "id",
         definition: "id",
         id: "1",
         kind: "MultiSelect",
@@ -208,7 +208,7 @@ describe("<FieldListItem />", () => {
     const instance = getInstance({
       definition: { name: "Number", id: "id", kind: "Number" },
       field: {
-        currentFrame: 1,
+        currentFrame: "id",
         definition: "id",
         id: "1",
         kind: "Number",
@@ -226,11 +226,11 @@ describe("<FieldListItem />", () => {
     const instance = getInstance({
       definition: { name: "Point", id: "id", kind: "Point" },
       field: {
-        currentFrame: 1,
+        currentFrame: "id",
         definition: "id",
         id: "1",
         kind: "Point",
-        values: { "1": { value: [0, 0] } },
+        values: { "0": { value: [0, 0] } },
       },
     });
 
@@ -246,11 +246,11 @@ describe("<FieldListItem />", () => {
     const instance = getInstance({
       definition: { name: "Polygon", id: "id", kind: "Polygon" },
       field: {
-        currentFrame: 1,
+        currentFrame: "id",
         definition: "id",
         id: "1",
         kind: "Polygon",
-        values: { "1": { values: [0, 0, 100, 100] } },
+        values: { "0": { values: [0, 0, 100, 100] } },
       },
     });
 
@@ -266,11 +266,11 @@ describe("<FieldListItem />", () => {
     const instance = getInstance({
       definition: { name: "Rectangle", id: "id", kind: "Rectangle" },
       field: {
-        currentFrame: 1,
+        currentFrame: "id",
         definition: "id",
         id: "1",
         kind: "Rectangle",
-        values: { "1": { value: [0, 0, 100, 100] } },
+        values: { "0": { value: [0, 0, 100, 100] } },
       },
     });
 
@@ -286,7 +286,7 @@ describe("<FieldListItem />", () => {
     const instance = getInstance({
       definition: { name: "Select", id: "id", kind: "Select" },
       field: {
-        currentFrame: 1,
+        currentFrame: "id",
         definition: "id",
         id: "1",
         kind: "Select",
@@ -304,7 +304,7 @@ describe("<FieldListItem />", () => {
     const instance = getInstance({
       definition: { name: "Text", id: "id", kind: "Text" },
       field: {
-        currentFrame: 1,
+        currentFrame: "id",
         definition: "id",
         id: "1",
         kind: "Text",

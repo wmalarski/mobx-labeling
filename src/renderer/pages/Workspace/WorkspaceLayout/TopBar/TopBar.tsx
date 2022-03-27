@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Input } from "@geist-ui/core";
+import { Button, ButtonGroup, Grid, Input } from "@geist-ui/core";
 import { CursorArrowIcon, HandIcon } from "@radix-ui/react-icons";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
@@ -29,32 +29,37 @@ export const TopBar = observer(({ workspaceStore }: Props): ReactElement => {
   const toolKind = workspaceStore.tool.kind;
 
   return (
-    <div>
-      <ButtonGroup>
-        <Button
-          auto
-          aria-label={t("cursorButton")}
-          iconRight={<CursorArrowIcon />}
-          onClick={handleCursorClick}
-          type={toolKind === ToolKind.Selector ? "success-light" : "default"}
+    <Grid.Container gap={1} margin={0.5}>
+      <Grid>
+        <ButtonGroup>
+          <Button
+            auto
+            aria-label={t("cursorButton")}
+            iconRight={<CursorArrowIcon />}
+            onClick={handleCursorClick}
+            type={toolKind === ToolKind.Selector ? "success-light" : "default"}
+          />
+          <Button
+            auto
+            aria-label={t("dragButton")}
+            iconRight={<HandIcon />}
+            onClick={handleDragClick}
+            type={toolKind === ToolKind.Drag ? "success" : "default"}
+          />
+        </ButtonGroup>
+      </Grid>
+      <Grid>
+        <Input
+          label={t("currentFrameLabel")}
+          aria-label={t("currentFrameLabel")}
+          value={String(workspaceStore.currentFrame.frame)}
+          min={0}
+          max={workspaceStore.framesCount - 1}
+          step={1}
+          htmlType="number"
+          onChange={handleCurrentFrameChange}
         />
-        <Button
-          auto
-          aria-label={t("dragButton")}
-          iconRight={<HandIcon />}
-          onClick={handleDragClick}
-          type={toolKind === ToolKind.Drag ? "success" : "default"}
-        />
-      </ButtonGroup>
-      <Input
-        label={t("currentFrameLabel")}
-        value={String(workspaceStore.currentFrame.frame)}
-        min={0}
-        max={workspaceStore.framesCount - 1}
-        step={1}
-        htmlType="number"
-        onChange={handleCurrentFrameChange}
-      />
-    </div>
+      </Grid>
+    </Grid.Container>
   );
 });

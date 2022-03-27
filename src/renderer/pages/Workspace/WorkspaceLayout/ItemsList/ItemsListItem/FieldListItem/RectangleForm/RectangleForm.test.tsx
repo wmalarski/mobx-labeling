@@ -42,7 +42,7 @@ const getInstance = ({
       definition: "id",
       id: "1",
       kind: "Rectangle",
-      values: { "1": { value: [0, 0, 100, 100] } },
+      values: { "0": { value: [0, 0, 100, 100] } },
       ...field,
     },
   });

@@ -15,7 +15,7 @@ export const Comments = observer(({ workspaceStore }: Props): ReactElement => {
 
   return (
     <div>
-      <p>{t("Comments")}</p>
+      <p>{t("commentsNode")}</p>
       <div>{workspaceStore.project.name}</div>
     </div>
   );

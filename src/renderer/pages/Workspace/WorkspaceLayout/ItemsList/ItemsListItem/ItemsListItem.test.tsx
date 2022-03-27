@@ -26,15 +26,15 @@ const getInstance = () => {
     item: {
       definition: definition.id,
       name: "Name",
-      currentFrame: "frame",
+      currentFrame: "id",
       fields: definition.fields.map((fieldDefinition) => ({
         kind: fieldDefinition.kind,
-        currentFrame: "frame",
+        currentFrame: "id",
         definition: fieldDefinition.id,
       })),
     },
     tool: { kind: "Selector" },
-    currentFrame: { id: "frame" },
+    currentFrame: { id: "id" },
   });
 };
 

@@ -49,7 +49,7 @@ const instance = Model.create({
     definition: "id",
     id: "1",
     kind: "Eye",
-    values: { "1": { values: [0, 0, 100, 100, 0, 100, 100, 0] } },
+    values: { "0": { values: [0, 0, 100, 100, 0, 100, 100, 0] } },
   },
 });
 

@@ -43,7 +43,7 @@ const getInstance = ({
       id: "1",
       kind: "Graph",
       values: {
-        "1": {
+        "0": {
           edges: [{ from: 0, to: 1 }],
           points: [
             { x: 0, y: 0 },

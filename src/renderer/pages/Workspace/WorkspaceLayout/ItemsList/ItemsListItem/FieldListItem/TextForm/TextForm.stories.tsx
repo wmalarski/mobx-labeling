@@ -47,7 +47,7 @@ const instance = Model.create({
     definition: "id",
     id: "1",
     kind: "Text",
-    values: { "1": { value: "hello" } },
+    values: { "0": { value: "hello" } },
   },
   currentFrame: { id: "id" },
 });

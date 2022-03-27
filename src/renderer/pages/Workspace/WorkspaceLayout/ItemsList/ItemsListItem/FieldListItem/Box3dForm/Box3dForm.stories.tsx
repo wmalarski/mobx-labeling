@@ -50,7 +50,7 @@ const instance = Model.create({
     id: "1",
     kind: "Box3d",
     values: {
-      "1": {
+      "0": {
         front: [0, 0, 0, 100, 100, 100, 100, 0],
         sideType: "None",
       },

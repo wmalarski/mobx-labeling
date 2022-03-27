@@ -45,7 +45,7 @@ const instance = Model.create({
     definition: "id",
     id: "1",
     kind: "Select",
-    values: { "1": { value: "Sunny" } },
+    values: { "0": { value: "Sunny" } },
   },
 });
 

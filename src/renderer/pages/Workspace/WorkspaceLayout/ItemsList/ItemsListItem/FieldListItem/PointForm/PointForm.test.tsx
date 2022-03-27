@@ -42,7 +42,7 @@ const getInstance = ({
       definition: "id",
       id: "1",
       kind: "Point",
-      values: { "1": { value: [0, 0] } },
+      values: { "0": { value: [0, 0] } },
       ...field,
     },
   });

@@ -42,7 +42,7 @@ const getInstance = ({
       definition: "id",
       id: "1",
       kind: "Eye",
-      values: { "1": { values: [0, 50, 50, 100, 100, 50, 50, 0] } },
+      values: { "0": { values: [0, 50, 50, 100, 100, 50, 50, 0] } },
       ...field,
     },
   });
