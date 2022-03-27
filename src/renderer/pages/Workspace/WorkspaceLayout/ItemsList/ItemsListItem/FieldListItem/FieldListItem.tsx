@@ -1,8 +1,8 @@
 import { observer } from "mobx-react-lite";
-import { getSnapshot, Instance } from "mobx-state-tree";
+import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
-import { useTranslation } from "react-i18next";
 import { Field } from "renderer/models/project/Field";
+import { Box3dForm } from "./Box3dForm/Box3dForm";
 import { CheckBoxForm } from "./CheckBoxForm/CheckBoxForm";
 import { ComboBoxForm } from "./ComboBoxForm/ComboBoxForm";
 import { EyeForm } from "./EyeForm/EyeForm";
@@ -21,9 +21,9 @@ type Props = {
 };
 
 export const FieldListItem = observer(({ field }: Props): ReactElement => {
-  const { t } = useTranslation("workspace");
-
   switch (field.kind) {
+    case "Box3d":
+      return <Box3dForm field={field} />;
     case "CheckBox":
       return <CheckBoxForm field={field} />;
     case "ComboBox":
@@ -48,21 +48,5 @@ export const FieldListItem = observer(({ field }: Props): ReactElement => {
       return <SelectForm field={field} />;
     case "Text":
       return <TextForm field={field} />;
-    default:
-      return (
-        <div>
-          <p>{t("FieldListItem")}</p>
-          <pre>
-            {JSON.stringify(
-              {
-                field: getSnapshot(field),
-                definition: getSnapshot(field.definition),
-              },
-              null,
-              2
-            )}
-          </pre>
-        </div>
-      );
   }
 });

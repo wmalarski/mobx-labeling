@@ -39,5 +39,13 @@
   "graphRemovePoint": "Remove point {{index}}",
   "graphRemoveEdge": "Remove edge {{index}}",
   "eyeX": "X{{index}}",
-  "eyeY": "Y{{index}}"
+  "eyeY": "Y{{index}}",
+  "box3dX": "X{{index}}",
+  "box3dY": "Y{{index}}",
+  "box3dPlaceholder": "Type",
+  "box3dRight": "Right",
+  "box3dLeft": "Left",
+  "box3dNone": "None",
+  "box3dSideX": "Side X{{index}}",
+  "box3dSideY": "Side Y{{index}}"
 }
