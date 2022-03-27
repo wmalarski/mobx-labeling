@@ -5,18 +5,28 @@ import { Instance } from "mobx-state-tree";
 import { ChangeEvent, Fragment, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { GraphField } from "renderer/models";
+import { Tool } from "renderer/models/project/Tool";
 
 type Props = {
   field: Instance<typeof GraphField>;
+  tool: Instance<typeof Tool>;
 };
 
-export const GraphForm = observer(({ field }: Props): ReactElement => {
+export const GraphForm = observer(({ field, tool }: Props): ReactElement => {
   const { t } = useTranslation("workspace");
 
   const current = field.current;
 
+  const handleDrawClick = () => {
+    tool.setCreator(field);
+  };
+
   if (!current) {
-    return <Text type="error">{t("invalidField")}</Text>;
+    return (
+      <Button width="100%" onClick={handleDrawClick}>
+        {t("graphDraw")}
+      </Button>
+    );
   }
 
   const handleXChange =

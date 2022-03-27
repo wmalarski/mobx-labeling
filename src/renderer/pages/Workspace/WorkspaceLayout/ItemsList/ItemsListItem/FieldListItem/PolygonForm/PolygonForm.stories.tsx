@@ -2,6 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { types } from "mobx-state-tree";
 import { ComponentProps } from "react";
 import { PolygonDefinition, PolygonField } from "renderer/models";
+import { Tool } from "renderer/models/project/Tool";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { PolygonForm } from "./PolygonForm";
 
@@ -29,9 +30,13 @@ const Template: ComponentStory<typeof PolygonFormStory> = PolygonFormStory;
 const Model = types.model({
   definition: PolygonDefinition,
   field: PolygonField,
+  tool: Tool,
 });
 
 const instance = Model.create({
+  tool: {
+    kind: "Selector",
+  },
   definition: {
     name: "Polygon",
     id: "id",
@@ -47,4 +52,8 @@ const instance = Model.create({
 });
 
 export const Playground = Template.bind({});
-Playground.args = { wrapperProps: {}, field: instance.field };
+Playground.args = {
+  wrapperProps: {},
+  field: instance.field,
+  tool: instance.tool,
+};

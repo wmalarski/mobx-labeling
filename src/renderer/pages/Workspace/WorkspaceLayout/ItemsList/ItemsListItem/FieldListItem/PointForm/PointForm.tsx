@@ -1,21 +1,31 @@
-import { Grid, Input, Text } from "@geist-ui/core";
+import { Button, Grid, Input } from "@geist-ui/core";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ChangeEvent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { PointField } from "renderer/models";
+import { Tool } from "renderer/models/project/Tool";
 
 type Props = {
   field: Instance<typeof PointField>;
+  tool: Instance<typeof Tool>;
 };
 
-export const PointForm = observer(({ field }: Props): ReactElement => {
+export const PointForm = observer(({ field, tool }: Props): ReactElement => {
   const { t } = useTranslation("workspace");
 
   const current = field.current;
 
+  const handleDrawClick = () => {
+    tool.setCreator(field);
+  };
+
   if (!current) {
-    return <Text type="error">{t("invalidField")}</Text>;
+    return (
+      <Button width="100%" onClick={handleDrawClick}>
+        {t("pointDraw")}
+      </Button>
+    );
   }
 
   const handleChange =

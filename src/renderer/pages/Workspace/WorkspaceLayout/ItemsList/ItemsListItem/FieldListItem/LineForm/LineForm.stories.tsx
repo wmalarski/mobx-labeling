@@ -2,6 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { types } from "mobx-state-tree";
 import { ComponentProps } from "react";
 import { LineDefinition, LineField } from "renderer/models";
+import { Tool } from "renderer/models/project/Tool";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { LineForm } from "./LineForm";
 
@@ -29,9 +30,13 @@ const Template: ComponentStory<typeof LineFormStory> = LineFormStory;
 const Model = types.model({
   definition: LineDefinition,
   field: LineField,
+  tool: Tool,
 });
 
 const instance = Model.create({
+  tool: {
+    kind: "Selector",
+  },
   definition: {
     name: "Line",
     id: "id",
@@ -47,4 +52,8 @@ const instance = Model.create({
 });
 
 export const Playground = Template.bind({});
-Playground.args = { wrapperProps: {}, field: instance.field };
+Playground.args = {
+  wrapperProps: {},
+  field: instance.field,
+  tool: instance.tool,
+};

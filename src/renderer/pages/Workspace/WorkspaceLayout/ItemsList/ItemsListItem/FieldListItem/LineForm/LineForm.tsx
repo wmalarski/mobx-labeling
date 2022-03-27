@@ -11,18 +11,28 @@ import { ChangeEvent, Fragment, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { LineField } from "renderer/models";
 import { toPairs } from "renderer/models/fields/utils";
+import { Tool } from "renderer/models/project/Tool";
 
 type Props = {
   field: Instance<typeof LineField>;
+  tool: Instance<typeof Tool>;
 };
 
-export const LineForm = observer(({ field }: Props): ReactElement => {
+export const LineForm = observer(({ field, tool }: Props): ReactElement => {
   const { t } = useTranslation("workspace");
 
   const current = field.current;
 
+  const handleDrawClick = () => {
+    tool.setCreator(field);
+  };
+
   if (!current) {
-    return <Text type="error">{t("invalidField")}</Text>;
+    return (
+      <Button width="100%" onClick={handleDrawClick}>
+        {t("lineDraw")}
+      </Button>
+    );
   }
 
   const pairs = toPairs(current.values);

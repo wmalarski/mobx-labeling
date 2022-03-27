@@ -5,6 +5,7 @@ import userEvent from "@testing-library/user-event";
 import { SnapshotIn, types } from "mobx-state-tree";
 import { ComponentProps } from "react";
 import { PointDefinition, PointField } from "renderer/models";
+import { Tool } from "renderer/models/project/Tool";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import i18n from "renderer/utils/i18next";
 import { PointForm } from "./PointForm";
@@ -14,6 +15,7 @@ type Props = ComponentProps<typeof PointForm>;
 const Model = types.model({
   definition: PointDefinition,
   field: PointField,
+  tool: Tool,
 });
 
 const getInstance = ({
@@ -24,6 +26,9 @@ const getInstance = ({
   field?: Partial<SnapshotIn<typeof PointField>>;
 } = {}) => {
   return Model.create({
+    tool: {
+      kind: "Selector",
+    },
     definition: {
       name: "Point",
       id: "id",
@@ -45,8 +50,10 @@ const renderComponent = ({
   wrapperProps,
   ...props
 }: PropsWithTestWrapper<Partial<Props>> = {}) => {
+  const instance = getInstance();
   const defaultProps: Props = {
-    field: getInstance().field,
+    field: instance.field,
+    tool: instance.tool,
   };
 
   return render(
@@ -64,10 +71,13 @@ describe("<PointForm />", () => {
       field: { values: {} },
     });
 
-    renderComponent({ field: instance.field });
+    renderComponent({ field: instance.field, tool: instance.tool });
 
-    const header = i18n.t<string>("invalidField", { ns: "workspace" });
+    const header = i18n.t<string>("pointDraw", { ns: "workspace" });
     await expect(screen.findByText(header)).resolves.toBeInTheDocument();
+
+    userEvent.click(await screen.findByText(header));
+    expect(instance.tool.field?.id).toBe(instance.field.id);
   });
 
   it("should change X value", async () => {

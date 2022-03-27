@@ -2,6 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { types } from "mobx-state-tree";
 import { ComponentProps } from "react";
 import { RectangleDefinition, RectangleField } from "renderer/models";
+import { Tool } from "renderer/models/project/Tool";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { RectangleForm } from "./RectangleForm";
 
@@ -29,9 +30,13 @@ const Template: ComponentStory<typeof RectangleFormStory> = RectangleFormStory;
 const Model = types.model({
   definition: RectangleDefinition,
   field: RectangleField,
+  tool: Tool,
 });
 
 const instance = Model.create({
+  tool: {
+    kind: "Selector",
+  },
   definition: {
     name: "Rectangle",
     id: "id",
@@ -47,4 +52,8 @@ const instance = Model.create({
 });
 
 export const Playground = Template.bind({});
-Playground.args = { wrapperProps: {}, field: instance.field };
+Playground.args = {
+  wrapperProps: {},
+  field: instance.field,
+  tool: instance.tool,
+};

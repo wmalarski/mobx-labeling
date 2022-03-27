@@ -32,21 +32,21 @@ export const FieldListItem = observer(
       case "ComboBox":
         return <ComboBoxForm field={field} />;
       case "Eye":
-        return <EyeForm field={field} />;
+        return <EyeForm field={field} tool={tool} />;
       case "Graph":
-        return <GraphForm field={field} />;
+        return <GraphForm field={field} tool={tool} />;
       case "Line":
-        return <LineForm field={field} />;
+        return <LineForm field={field} tool={tool} />;
       case "MultiSelect":
         return <MultiSelectForm field={field} />;
       case "Number":
         return <NumberForm field={field} />;
       case "Point":
-        return <PointForm field={field} />;
+        return <PointForm field={field} tool={tool} />;
       case "Polygon":
-        return <PolygonForm field={field} />;
+        return <PolygonForm field={field} tool={tool} />;
       case "Rectangle":
-        return <RectangleForm field={field} />;
+        return <RectangleForm field={field} tool={tool} />;
       case "Select":
         return <SelectForm field={field} />;
       case "Text":

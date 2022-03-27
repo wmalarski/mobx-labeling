@@ -2,6 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { types } from "mobx-state-tree";
 import { ComponentProps } from "react";
 import { EyeDefinition, EyeField } from "renderer/models";
+import { Tool } from "renderer/models/project/Tool";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { EyeForm } from "./EyeForm";
 
@@ -29,9 +30,13 @@ const Template: ComponentStory<typeof EyeFormStory> = EyeFormStory;
 const Model = types.model({
   definition: EyeDefinition,
   field: EyeField,
+  tool: Tool,
 });
 
 const instance = Model.create({
+  tool: {
+    kind: "Selector",
+  },
   definition: {
     name: "Eye",
     id: "id",
@@ -47,4 +52,8 @@ const instance = Model.create({
 });
 
 export const Playground = Template.bind({});
-Playground.args = { wrapperProps: {}, field: instance.field };
+Playground.args = {
+  wrapperProps: {},
+  field: instance.field,
+  tool: instance.tool,
+};

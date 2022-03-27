@@ -1,22 +1,32 @@
-import { Grid, Input, Text } from "@geist-ui/core";
+import { Button, Grid, Input } from "@geist-ui/core";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ChangeEvent, Fragment, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { EyeField } from "renderer/models";
 import { toPairs } from "renderer/models/fields/utils";
+import { Tool } from "renderer/models/project/Tool";
 
 type Props = {
   field: Instance<typeof EyeField>;
+  tool: Instance<typeof Tool>;
 };
 
-export const EyeForm = observer(({ field }: Props): ReactElement => {
+export const EyeForm = observer(({ field, tool }: Props): ReactElement => {
   const { t } = useTranslation("workspace");
 
   const current = field.current;
 
+  const handleDrawClick = () => {
+    tool.setCreator(field);
+  };
+
   if (!current) {
-    return <Text type="error">{t("invalidField")}</Text>;
+    return (
+      <Button width="100%" onClick={handleDrawClick}>
+        {t("eyeDraw")}
+      </Button>
+    );
   }
 
   const pairs = toPairs(current.values);

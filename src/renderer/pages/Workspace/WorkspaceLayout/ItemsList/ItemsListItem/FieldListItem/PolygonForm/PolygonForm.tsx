@@ -11,18 +11,28 @@ import { ChangeEvent, Fragment, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { PolygonField } from "renderer/models";
 import { toPairs } from "renderer/models/fields/utils";
+import { Tool } from "renderer/models/project/Tool";
 
 type Props = {
   field: Instance<typeof PolygonField>;
+  tool: Instance<typeof Tool>;
 };
 
-export const PolygonForm = observer(({ field }: Props): ReactElement => {
+export const PolygonForm = observer(({ field, tool }: Props): ReactElement => {
   const { t } = useTranslation("workspace");
 
   const current = field.current;
 
+  const handleDrawClick = () => {
+    tool.setCreator(field);
+  };
+
   if (!current) {
-    return <Text type="error">{t("invalidField")}</Text>;
+    return (
+      <Button width="100%" onClick={handleDrawClick}>
+        {t("polygonDraw")}
+      </Button>
+    );
   }
 
   const pairs = toPairs(current.values);

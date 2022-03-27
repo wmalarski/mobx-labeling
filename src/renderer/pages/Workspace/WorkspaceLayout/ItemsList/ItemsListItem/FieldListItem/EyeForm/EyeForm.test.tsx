@@ -5,6 +5,7 @@ import userEvent from "@testing-library/user-event";
 import { SnapshotIn, types } from "mobx-state-tree";
 import { ComponentProps } from "react";
 import { EyeDefinition, EyeField } from "renderer/models";
+import { Tool } from "renderer/models/project/Tool";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import i18n from "renderer/utils/i18next";
 import { EyeForm } from "./EyeForm";
@@ -14,6 +15,7 @@ type Props = ComponentProps<typeof EyeForm>;
 const Model = types.model({
   definition: EyeDefinition,
   field: EyeField,
+  tool: Tool,
 });
 
 const getInstance = ({
@@ -24,6 +26,9 @@ const getInstance = ({
   field?: Partial<SnapshotIn<typeof EyeField>>;
 } = {}) => {
   return Model.create({
+    tool: {
+      kind: "Selector",
+    },
     definition: {
       name: "Eye",
       id: "id",
@@ -45,8 +50,10 @@ const renderComponent = ({
   wrapperProps,
   ...props
 }: PropsWithTestWrapper<Partial<Props>> = {}) => {
+  const instance = getInstance();
   const defaultProps: Props = {
-    field: getInstance().field,
+    field: instance.field,
+    tool: instance.tool,
   };
 
   return render(
@@ -64,10 +71,13 @@ describe("<EyeForm />", () => {
       field: { values: {} },
     });
 
-    renderComponent({ field: instance.field });
+    renderComponent({ field: instance.field, tool: instance.tool });
 
-    const header = i18n.t<string>("invalidField", { ns: "workspace" });
+    const header = i18n.t<string>("eyeDraw", { ns: "workspace" });
     await expect(screen.findByText(header)).resolves.toBeInTheDocument();
+
+    userEvent.click(await screen.findByText(header));
+    expect(instance.tool.field?.id).toBe(instance.field.id);
   });
 
   it("should render and change values", async () => {
