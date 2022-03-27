@@ -18,7 +18,7 @@ export const ItemsList = observer(({ workspaceStore }: Props): ReactElement => {
     <div>
       <p>{t("ItemsList")}</p>
       {workspaceStore.batch.items.map((item) => (
-        <ItemsListItem key={item.id} item={item} />
+        <ItemsListItem key={item.id} item={item} tool={workspaceStore.tool} />
       ))}
     </div>
   );

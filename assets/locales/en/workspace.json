@@ -47,5 +47,6 @@
   "box3dLeft": "Left",
   "box3dNone": "None",
   "box3dSideX": "Side X{{index}}",
-  "box3dSideY": "Side Y{{index}}"
+  "box3dSideY": "Side Y{{index}}",
+  "box3dDraw": "Draw box shape"
 }

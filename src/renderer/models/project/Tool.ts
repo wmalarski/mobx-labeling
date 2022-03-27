@@ -10,7 +10,7 @@ export enum ToolKind {
 export const Tool = types
   .model("Tool", {
     kind: types.enumeration("ToolKind", Object.keys(ToolKind)),
-    field: types.maybeNull(Field),
+    field: types.maybeNull(types.reference(Field)),
   })
   .actions((self) => ({
     setSelector() {

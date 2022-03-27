@@ -5,6 +5,7 @@ import userEvent from "@testing-library/user-event";
 import { SnapshotIn, types } from "mobx-state-tree";
 import { ComponentProps } from "react";
 import { Box3dDefinition, Box3dField } from "renderer/models";
+import { Tool } from "renderer/models/project/Tool";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import i18n from "renderer/utils/i18next";
 import { Box3dForm } from "./Box3dForm";
@@ -14,6 +15,7 @@ type Props = ComponentProps<typeof Box3dForm>;
 const Model = types.model({
   definition: Box3dDefinition,
   field: Box3dField,
+  tool: Tool,
 });
 
 const getInstance = ({
@@ -24,6 +26,9 @@ const getInstance = ({
   field?: Partial<SnapshotIn<typeof Box3dField>>;
 } = {}) => {
   return Model.create({
+    tool: {
+      kind: "Selector",
+    },
     definition: {
       name: "Box3d",
       id: "id",
@@ -50,8 +55,10 @@ const renderComponent = ({
   wrapperProps,
   ...props
 }: PropsWithTestWrapper<Partial<Props>> = {}) => {
+  const instance = getInstance();
   const defaultProps: Props = {
-    field: getInstance().field,
+    field: instance.field,
+    tool: instance.tool,
   };
 
   return render(
@@ -69,10 +76,13 @@ describe("<Box3dForm />", () => {
       field: { values: {} },
     });
 
-    renderComponent({ field: instance.field });
+    renderComponent({ field: instance.field, tool: instance.tool });
 
-    const header = i18n.t<string>("invalidField", { ns: "workspace" });
+    const header = i18n.t<string>("box3dDraw", { ns: "workspace" });
     await expect(screen.findByText(header)).resolves.toBeInTheDocument();
+
+    userEvent.click(await screen.findByText(header));
+    expect(instance.tool.field?.id).toBe(instance.field.id);
   });
 
   it("should render and change front values", async () => {

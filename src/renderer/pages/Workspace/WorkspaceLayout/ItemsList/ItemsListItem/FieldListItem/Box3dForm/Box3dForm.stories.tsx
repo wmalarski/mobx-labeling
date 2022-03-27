@@ -2,6 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { types } from "mobx-state-tree";
 import { ComponentProps } from "react";
 import { Box3dDefinition, Box3dField } from "renderer/models";
+import { Tool } from "renderer/models/project/Tool";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { Box3dForm } from "./Box3dForm";
 
@@ -29,9 +30,13 @@ const Template: ComponentStory<typeof Box3dFormStory> = Box3dFormStory;
 const Model = types.model({
   definition: Box3dDefinition,
   field: Box3dField,
+  tool: Tool,
 });
 
 const instance = Model.create({
+  tool: {
+    kind: "Selector",
+  },
   definition: {
     name: "Box3d",
     id: "id",
