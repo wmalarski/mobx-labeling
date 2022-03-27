@@ -2,6 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { types } from "mobx-state-tree";
 import { ComponentProps } from "react";
 import { TextDefinition, TextField } from "renderer/models";
+import { CurrentFrame } from "renderer/models/project/CurrentFrame";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { TextForm } from "./TextForm";
 
@@ -29,6 +30,7 @@ const Template: ComponentStory<typeof TextFormStory> = TextFormStory;
 const Model = types.model({
   definition: TextDefinition,
   field: TextField,
+  currentFrame: CurrentFrame,
 });
 
 const instance = Model.create({
@@ -41,12 +43,13 @@ const instance = Model.create({
     kind: "Text",
   },
   field: {
-    currentFrame: 1,
+    currentFrame: "id",
     definition: "id",
     id: "1",
     kind: "Text",
     values: { "1": { value: "hello" } },
   },
+  currentFrame: { id: "id" },
 });
 
 export const Playground = Template.bind({});

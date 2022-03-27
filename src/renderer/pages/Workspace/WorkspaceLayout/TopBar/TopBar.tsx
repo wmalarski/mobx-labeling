@@ -15,7 +15,7 @@ export const TopBar = observer(({ workspaceStore }: Props): ReactElement => {
 
   const handleCurrentFrameChange = (event: ChangeEvent<HTMLInputElement>) => {
     const currentFrame = Number(event.target.value);
-    workspaceStore.setCurrentFrame(currentFrame);
+    workspaceStore.currentFrame.setFrame(currentFrame);
   };
 
   const handleCursorClick = () => {
@@ -48,7 +48,7 @@ export const TopBar = observer(({ workspaceStore }: Props): ReactElement => {
       </ButtonGroup>
       <Input
         label={t("currentFrameLabel")}
-        value={String(workspaceStore.currentFrame)}
+        value={String(workspaceStore.currentFrame.frame)}
         min={0}
         max={workspaceStore.framesCount - 1}
         step={1}

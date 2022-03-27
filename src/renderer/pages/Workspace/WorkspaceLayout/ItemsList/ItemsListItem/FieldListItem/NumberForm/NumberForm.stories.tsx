@@ -2,6 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { types } from "mobx-state-tree";
 import { ComponentProps } from "react";
 import { NumberDefinition, NumberField } from "renderer/models";
+import { CurrentFrame } from "renderer/models/project/CurrentFrame";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { NumberForm } from "./NumberForm";
 
@@ -29,16 +30,18 @@ const Template: ComponentStory<typeof NumberFormStory> = NumberFormStory;
 const Model = types.model({
   definition: NumberDefinition,
   field: NumberField,
+  currentFrame: CurrentFrame,
 });
 
 const instance = Model.create({
+  currentFrame: { id: "id" },
   definition: {
     name: "Number",
     id: "id",
     kind: "Number",
   },
   field: {
-    currentFrame: 1,
+    currentFrame: "id",
     definition: "id",
     id: "1",
     kind: "Number",

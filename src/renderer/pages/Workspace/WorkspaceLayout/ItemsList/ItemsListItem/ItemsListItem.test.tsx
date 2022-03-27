@@ -4,6 +4,7 @@ import { render, screen } from "@testing-library/react";
 import { types } from "mobx-state-tree";
 import { ComponentProps } from "react";
 import { Item, ItemDefinition, Tool } from "renderer/models";
+import { CurrentFrame } from "renderer/models/project/CurrentFrame";
 import { mockItemDefinition } from "renderer/tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import i18n from "renderer/utils/i18next";
@@ -15,6 +16,7 @@ const Model = types.model({
   item: Item,
   definition: ItemDefinition,
   tool: Tool,
+  currentFrame: CurrentFrame,
 });
 
 const getInstance = () => {
@@ -24,13 +26,15 @@ const getInstance = () => {
     item: {
       definition: definition.id,
       name: "Name",
+      currentFrame: "frame",
       fields: definition.fields.map((fieldDefinition) => ({
         kind: fieldDefinition.kind,
-        currentFrame: 1,
+        currentFrame: "frame",
         definition: fieldDefinition.id,
       })),
     },
     tool: { kind: "Selector" },
+    currentFrame: { id: "frame" },
   });
 };
 

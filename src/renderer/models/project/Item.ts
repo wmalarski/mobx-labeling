@@ -1,6 +1,7 @@
 import { getSnapshot, SnapshotOut, types } from "mobx-state-tree";
 import { nanoid } from "nanoid";
 import { ItemDefinition } from "../definition/ItemDefinition/ItemDefinition";
+import { CurrentFrame } from "./CurrentFrame";
 import { Field } from "./Field";
 import { Range } from "./Range";
 
@@ -17,7 +18,7 @@ export const Item = types
     fields: types.array(Field),
     definition: types.reference(ItemDefinition),
     ranges: types.array(Range),
-    currentFrame: types.optional(types.number, 0),
+    currentFrame: types.reference(CurrentFrame),
   })
   .views((self) => ({
     info(): ItemInfo {
@@ -28,12 +29,6 @@ export const Item = types
     },
   }))
   .actions((self) => ({
-    setCurrentFrame(currentFrame: number) {
-      self.currentFrame = currentFrame;
-      self.fields.forEach((field) => {
-        field.setCurrentFrame(currentFrame);
-      });
-    },
     setName(name: string) {
       self.name = name;
     },

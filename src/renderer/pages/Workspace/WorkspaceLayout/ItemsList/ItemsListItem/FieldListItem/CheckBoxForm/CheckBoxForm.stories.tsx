@@ -2,6 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { types } from "mobx-state-tree";
 import { ComponentProps } from "react";
 import { CheckBoxDefinition, CheckBoxField } from "renderer/models";
+import { CurrentFrame } from "renderer/models/project/CurrentFrame";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { CheckBoxForm } from "./CheckBoxForm";
 
@@ -29,16 +30,18 @@ const Template: ComponentStory<typeof CheckBoxFormStory> = CheckBoxFormStory;
 const Model = types.model({
   definition: CheckBoxDefinition,
   field: CheckBoxField,
+  currentFrame: CurrentFrame,
 });
 
 const instance = Model.create({
+  currentFrame: { id: "id" },
   definition: {
     name: "CheckBox",
     id: "id",
     kind: "CheckBox",
   },
   field: {
-    currentFrame: 1,
+    currentFrame: "id",
     definition: "id",
     id: "1",
     kind: "CheckBox",

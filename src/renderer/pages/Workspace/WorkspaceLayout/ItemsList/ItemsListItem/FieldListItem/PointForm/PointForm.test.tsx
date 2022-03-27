@@ -5,6 +5,7 @@ import userEvent from "@testing-library/user-event";
 import { SnapshotIn, types } from "mobx-state-tree";
 import { ComponentProps } from "react";
 import { PointDefinition, PointField, Tool } from "renderer/models";
+import { CurrentFrame } from "renderer/models/project/CurrentFrame";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import i18n from "renderer/utils/i18next";
 import { PointForm } from "./PointForm";
@@ -15,6 +16,7 @@ const Model = types.model({
   definition: PointDefinition,
   field: PointField,
   tool: Tool,
+  currentFrame: CurrentFrame,
 });
 
 const getInstance = ({
@@ -25,6 +27,7 @@ const getInstance = ({
   field?: Partial<SnapshotIn<typeof PointField>>;
 } = {}) => {
   return Model.create({
+    currentFrame: { id: "id" },
     tool: {
       kind: "Selector",
     },
@@ -35,7 +38,7 @@ const getInstance = ({
       ...definition,
     },
     field: {
-      currentFrame: 1,
+      currentFrame: "id",
       definition: "id",
       id: "1",
       kind: "Point",

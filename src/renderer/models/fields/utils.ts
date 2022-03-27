@@ -2,7 +2,7 @@ import { Instance } from "mobx-state-tree";
 import { FieldDefinitionBase } from "../base/FieldDefinitionBase";
 
 type FieldModel<V> = {
-  currentFrame: number;
+  currentFrame: { frame: number };
   definition: Instance<typeof FieldDefinitionBase>;
   values: {
     get: (key: string) => V;
@@ -13,7 +13,7 @@ export const currentValueKey = <V>(self: FieldModel<V>): string => {
   switch (self.definition.change) {
     case "EveryFrame":
     case "FrameChanges":
-      return String(self.currentFrame);
+      return String(self.currentFrame.frame);
     case "Singleton":
       return "All";
   }

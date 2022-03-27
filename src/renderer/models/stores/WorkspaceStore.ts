@@ -2,6 +2,7 @@ import { getSnapshot, Instance, types } from "mobx-state-tree";
 import { nanoid } from "nanoid";
 import { ItemDefinition } from "../definition/ItemDefinition/ItemDefinition";
 import { Batch } from "../project/Batch";
+import { CurrentFrame } from "../project/CurrentFrame";
 import { Item } from "../project/Item";
 import { Project } from "../project/Project";
 import { Tool, ToolKind } from "../project/Tool";
@@ -9,7 +10,9 @@ import { Tool, ToolKind } from "../project/Tool";
 export const WorkspaceStore = types
   .model("WorkspaceStore", {
     project: Project,
-    currentFrame: types.optional(types.number, 0),
+    currentFrame: types.optional(CurrentFrame, () => {
+      return CurrentFrame.create();
+    }),
     framesCount: types.optional(types.number, 1),
     selectedItems: types.array(types.reference(Item)),
     tool: types.optional(Tool, () => ({
@@ -33,23 +36,21 @@ export const WorkspaceStore = types
     updateFramesCount(framesCount: number) {
       self.framesCount = Math.max(framesCount, self.framesCount);
     },
-    setCurrentFrame(currentFrame: number) {
-      self.currentFrame = currentFrame;
-      self.batch.items.forEach((item) => {
-        item.setCurrentFrame(currentFrame);
-      });
-    },
     addItem(itemDefinition: Instance<typeof ItemDefinition>) {
+      const range = {
+        start: self.currentFrame.frame,
+        end: self.currentFrame.frame,
+      };
       const item = Item.create({
         name: nanoid(),
         definition: itemDefinition.id,
         fields: itemDefinition.fields.map((fieldDefinition) => ({
           kind: fieldDefinition.kind,
-          currentFrame: self.currentFrame,
+          currentFrame: self.currentFrame.id,
           definition: fieldDefinition.id,
         })),
-        currentFrame: self.currentFrame,
-        ranges: [{ start: self.currentFrame, end: self.currentFrame }],
+        currentFrame: self.currentFrame.id,
+        ranges: [range],
       });
 
       self.batch.items.push(item);

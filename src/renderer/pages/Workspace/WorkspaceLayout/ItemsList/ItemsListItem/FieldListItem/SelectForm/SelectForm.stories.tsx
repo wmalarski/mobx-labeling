@@ -2,6 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { types } from "mobx-state-tree";
 import { ComponentProps } from "react";
 import { SelectDefinition, SelectField } from "renderer/models";
+import { CurrentFrame } from "renderer/models/project/CurrentFrame";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { SelectForm } from "./SelectForm";
 
@@ -29,16 +30,18 @@ const Template: ComponentStory<typeof SelectFormStory> = SelectFormStory;
 const Model = types.model({
   definition: SelectDefinition,
   field: SelectField,
+  currentFrame: CurrentFrame,
 });
 
 const instance = Model.create({
+  currentFrame: { id: "id" },
   definition: {
     name: "Text",
     id: "id",
     kind: "Select",
   },
   field: {
-    currentFrame: 1,
+    currentFrame: "id",
     definition: "id",
     id: "1",
     kind: "Select",

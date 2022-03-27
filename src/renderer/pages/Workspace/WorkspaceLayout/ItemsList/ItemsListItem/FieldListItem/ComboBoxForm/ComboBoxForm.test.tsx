@@ -5,6 +5,7 @@ import userEvent from "@testing-library/user-event";
 import { SnapshotIn, types } from "mobx-state-tree";
 import { ComponentProps } from "react";
 import { ComboBoxDefinition, ComboBoxField } from "renderer/models";
+import { CurrentFrame } from "renderer/models/project/CurrentFrame";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import i18n from "renderer/utils/i18next";
 import { ComboBoxForm } from "./ComboBoxForm";
@@ -14,6 +15,7 @@ type Props = ComponentProps<typeof ComboBoxForm>;
 const Model = types.model({
   definition: ComboBoxDefinition,
   field: ComboBoxField,
+  currentFrame: CurrentFrame,
 });
 
 const getInstance = ({
@@ -24,6 +26,7 @@ const getInstance = ({
   field?: Partial<SnapshotIn<typeof ComboBoxField>>;
 } = {}) => {
   return Model.create({
+    currentFrame: { id: "id" },
     definition: {
       name: "ComboBox",
       change: "EveryFrame",
@@ -32,7 +35,7 @@ const getInstance = ({
       ...definition,
     },
     field: {
-      currentFrame: 1,
+      currentFrame: "id",
       definition: "id",
       id: "1",
       kind: "ComboBox",

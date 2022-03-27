@@ -4,6 +4,7 @@ import { render, screen } from "@testing-library/react";
 import { SnapshotIn, types } from "mobx-state-tree";
 import { ComponentProps } from "react";
 import { Field, FieldDefinition, Tool } from "renderer/models";
+import { CurrentFrame } from "renderer/models/project/CurrentFrame";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import i18n from "renderer/utils/i18next";
 import { FieldListItem } from "./FieldListItem";
@@ -14,6 +15,7 @@ const Model = types.model({
   definition: FieldDefinition,
   field: Field,
   tool: Tool,
+  currentFrame: CurrentFrame,
 });
 
 const getInstance = ({
@@ -23,7 +25,12 @@ const getInstance = ({
   definition: SnapshotIn<typeof FieldDefinition>;
   field: SnapshotIn<typeof Field>;
 }) => {
-  return Model.create({ tool: { kind: "Selector" }, definition, field });
+  return Model.create({
+    currentFrame: { id: "id" },
+    tool: { kind: "Selector" },
+    definition,
+    field,
+  });
 };
 
 const renderComponent = ({
@@ -33,7 +40,7 @@ const renderComponent = ({
   const instance = getInstance({
     definition: { name: "Box3d", id: "id", kind: "Box3d" },
     field: {
-      currentFrame: 1,
+      currentFrame: "id",
       definition: "id",
       id: "1",
       kind: "Box3d",

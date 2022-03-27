@@ -2,6 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { types } from "mobx-state-tree";
 import { ComponentProps } from "react";
 import { LineDefinition, LineField, Tool } from "renderer/models";
+import { CurrentFrame } from "renderer/models/project/CurrentFrame";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { LineForm } from "./LineForm";
 
@@ -30,9 +31,11 @@ const Model = types.model({
   definition: LineDefinition,
   field: LineField,
   tool: Tool,
+  currentFrame: CurrentFrame,
 });
 
 const instance = Model.create({
+  currentFrame: { id: "id" },
   tool: {
     kind: "Selector",
   },
@@ -42,7 +45,7 @@ const instance = Model.create({
     kind: "Line",
   },
   field: {
-    currentFrame: 1,
+    currentFrame: "id",
     definition: "id",
     id: "1",
     kind: "Line",

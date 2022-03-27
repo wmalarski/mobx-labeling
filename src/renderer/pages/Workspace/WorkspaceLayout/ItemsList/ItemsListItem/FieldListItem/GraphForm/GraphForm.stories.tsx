@@ -2,6 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { types } from "mobx-state-tree";
 import { ComponentProps } from "react";
 import { GraphDefinition, GraphField, Tool } from "renderer/models";
+import { CurrentFrame } from "renderer/models/project/CurrentFrame";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { GraphForm } from "./GraphForm";
 
@@ -30,9 +31,11 @@ const Model = types.model({
   definition: GraphDefinition,
   field: GraphField,
   tool: Tool,
+  currentFrame: CurrentFrame,
 });
 
 const instance = Model.create({
+  currentFrame: { id: "id" },
   tool: {
     kind: "Selector",
   },
@@ -42,7 +45,7 @@ const instance = Model.create({
     kind: "Graph",
   },
   field: {
-    currentFrame: 1,
+    currentFrame: "id",
     definition: "id",
     id: "1",
     kind: "Graph",

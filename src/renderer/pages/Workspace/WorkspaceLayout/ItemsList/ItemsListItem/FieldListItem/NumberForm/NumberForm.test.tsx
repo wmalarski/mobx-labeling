@@ -5,6 +5,7 @@ import userEvent from "@testing-library/user-event";
 import { SnapshotIn, types } from "mobx-state-tree";
 import { ComponentProps } from "react";
 import { NumberDefinition, NumberField } from "renderer/models";
+import { CurrentFrame } from "renderer/models/project/CurrentFrame";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import i18n from "renderer/utils/i18next";
 import { NumberForm } from "./NumberForm";
@@ -14,6 +15,7 @@ type Props = ComponentProps<typeof NumberForm>;
 const Model = types.model({
   definition: NumberDefinition,
   field: NumberField,
+  currentFrame: CurrentFrame,
 });
 
 const getInstance = ({
@@ -24,6 +26,7 @@ const getInstance = ({
   field?: Partial<SnapshotIn<typeof NumberField>>;
 } = {}) => {
   return Model.create({
+    currentFrame: { id: "id" },
     definition: {
       name: "Number",
       change: "EveryFrame",
@@ -32,7 +35,7 @@ const getInstance = ({
       ...definition,
     },
     field: {
-      currentFrame: 1,
+      currentFrame: "id",
       definition: "id",
       id: "1",
       kind: "Number",

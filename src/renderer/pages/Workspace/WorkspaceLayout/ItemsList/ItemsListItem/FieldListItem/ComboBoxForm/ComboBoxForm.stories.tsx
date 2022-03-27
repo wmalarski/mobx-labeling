@@ -2,6 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { types } from "mobx-state-tree";
 import { ComponentProps } from "react";
 import { ComboBoxDefinition, ComboBoxField } from "renderer/models";
+import { CurrentFrame } from "renderer/models/project/CurrentFrame";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { ComboBoxForm } from "./ComboBoxForm";
 
@@ -29,16 +30,18 @@ const Template: ComponentStory<typeof ComboBoxFormStory> = ComboBoxFormStory;
 const Model = types.model({
   definition: ComboBoxDefinition,
   field: ComboBoxField,
+  currentFrame: CurrentFrame,
 });
 
 const instance = Model.create({
+  currentFrame: { id: "id" },
   definition: {
     name: "ComboBox",
     id: "id",
     kind: "ComboBox",
   },
   field: {
-    currentFrame: 1,
+    currentFrame: "id",
     definition: "id",
     id: "1",
     kind: "ComboBox",

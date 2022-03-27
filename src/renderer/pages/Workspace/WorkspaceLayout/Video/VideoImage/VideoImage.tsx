@@ -15,7 +15,7 @@ type Props = {
 export const VideoImage = observer(
   ({ resource, workspaceStore, onClick }: Props): ReactElement => {
     const { path, fps = 24 } = resource;
-    const currentFrame = workspaceStore.currentFrame;
+    const currentFrame = workspaceStore.currentFrame.frame;
 
     const imageRef = useRef<Konva.Image | null>(null);
     const [size, setSize] = useState({ width: 50, height: 50 });

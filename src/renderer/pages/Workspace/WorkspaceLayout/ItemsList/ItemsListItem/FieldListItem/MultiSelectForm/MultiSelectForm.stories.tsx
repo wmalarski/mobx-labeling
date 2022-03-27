@@ -2,6 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { types } from "mobx-state-tree";
 import { ComponentProps } from "react";
 import { MultiSelectDefinition, MultiSelectField } from "renderer/models";
+import { CurrentFrame } from "renderer/models/project/CurrentFrame";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { MultiSelectForm } from "./MultiSelectForm";
 
@@ -30,16 +31,18 @@ const Template: ComponentStory<typeof MultiSelectFormStory> =
 const Model = types.model({
   definition: MultiSelectDefinition,
   field: MultiSelectField,
+  currentFrame: CurrentFrame,
 });
 
 const instance = Model.create({
+  currentFrame: { id: "id" },
   definition: {
     name: "Text",
     id: "id",
     kind: "MultiSelect",
   },
   field: {
-    currentFrame: 1,
+    currentFrame: "id",
     definition: "id",
     id: "1",
     kind: "MultiSelect",
