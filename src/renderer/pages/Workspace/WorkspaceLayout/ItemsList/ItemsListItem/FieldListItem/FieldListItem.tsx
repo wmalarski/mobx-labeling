@@ -1,8 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
-import { Field } from "renderer/models/project/Field";
-import { Tool } from "renderer/models/project/Tool";
+import { Field, Tool } from "renderer/models";
 import { Box3dForm } from "./Box3dForm/Box3dForm";
 import { CheckBoxForm } from "./CheckBoxForm/CheckBoxForm";
 import { ComboBoxForm } from "./ComboBoxForm/ComboBoxForm";

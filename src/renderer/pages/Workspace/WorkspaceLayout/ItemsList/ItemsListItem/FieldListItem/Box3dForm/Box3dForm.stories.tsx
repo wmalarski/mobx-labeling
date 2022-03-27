@@ -1,8 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { types } from "mobx-state-tree";
 import { ComponentProps } from "react";
-import { Box3dDefinition, Box3dField } from "renderer/models";
-import { Tool } from "renderer/models/project/Tool";
+import { Box3dDefinition, Box3dField, Tool } from "renderer/models";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { Box3dForm } from "./Box3dForm";
 

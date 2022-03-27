@@ -12,9 +12,9 @@ import {
   ProjectEntry,
   ProjectRoot,
   ProjectsList,
+  Resource,
   WorkspaceStore,
 } from "renderer/models";
-import { Resource } from "renderer/models/project/Resource";
 import {
   ElectronServices,
   IpcDefinitionsService,

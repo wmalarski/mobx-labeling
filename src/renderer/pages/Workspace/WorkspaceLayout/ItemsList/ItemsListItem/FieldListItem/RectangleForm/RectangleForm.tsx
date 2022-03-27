@@ -3,8 +3,7 @@ import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ChangeEvent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
-import { RectangleField } from "renderer/models";
-import { Tool } from "renderer/models/project/Tool";
+import { RectangleField, Tool } from "renderer/models";
 
 type Props = {
   field: Instance<typeof RectangleField>;

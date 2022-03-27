@@ -3,7 +3,7 @@ import { PlusIcon, RowsIcon } from "@radix-ui/react-icons";
 import { ReactElement, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-location";
-import { HomeStore } from "renderer/models/stores/HomeStore";
+import { HomeStore } from "renderer/models";
 import { Header } from "../../modules/Header/Header";
 import { routePaths } from "../../utils/routes";
 import { Recent } from "./Recent/Recent";

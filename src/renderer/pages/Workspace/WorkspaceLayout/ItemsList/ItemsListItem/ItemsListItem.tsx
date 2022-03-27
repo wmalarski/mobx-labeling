@@ -2,8 +2,7 @@ import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
-import { Item } from "renderer/models";
-import { Tool } from "renderer/models/project/Tool";
+import { Item, Tool } from "renderer/models";
 import { FieldListItem } from "./FieldListItem/FieldListItem";
 
 type Props = {

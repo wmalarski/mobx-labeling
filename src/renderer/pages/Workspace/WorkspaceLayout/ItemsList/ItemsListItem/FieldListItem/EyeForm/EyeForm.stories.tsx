@@ -1,8 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { types } from "mobx-state-tree";
 import { ComponentProps } from "react";
-import { EyeDefinition, EyeField } from "renderer/models";
-import { Tool } from "renderer/models/project/Tool";
+import { EyeDefinition, EyeField, Tool } from "renderer/models";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { EyeForm } from "./EyeForm";
 

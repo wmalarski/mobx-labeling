@@ -1,6 +1,6 @@
 import * as FlexLayout from "flexlayout-react";
 import { SnapshotOut } from "mobx-state-tree";
-import { Project } from "renderer/models/project/Project";
+import { Project } from "renderer/models";
 import i18n from "renderer/utils/i18next";
 
 export enum LayoutNodeKind {

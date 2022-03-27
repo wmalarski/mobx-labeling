@@ -1,8 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { types } from "mobx-state-tree";
 import { ComponentProps } from "react";
-import { LineDefinition, LineField } from "renderer/models";
-import { Tool } from "renderer/models/project/Tool";
+import { LineDefinition, LineField, Tool } from "renderer/models";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import { LineForm } from "./LineForm";
 

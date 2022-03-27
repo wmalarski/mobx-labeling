@@ -4,8 +4,7 @@ import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ChangeEvent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
-import { WorkspaceStore } from "renderer/models";
-import { ToolKind } from "renderer/models/project/Tool";
+import { ToolKind, WorkspaceStore } from "renderer/models";
 
 type Props = {
   workspaceStore: Instance<typeof WorkspaceStore>;
