@@ -42,9 +42,8 @@ describe("<ItemsList />", () => {
   it("should render list with item", async () => {
     expect.hasAssertions();
 
-    const workspaceStore = mockWorkspaceStore();
-    const itemDefinition = workspaceStore.project.definition.items[0];
-    workspaceStore.addItem(itemDefinition);
+    const workspaceStore = mockWorkspaceStore({ items: 1 });
+    const itemDefinition = workspaceStore.batch.items[0].definition;
     renderComponent({ workspaceStore });
 
     const header = i18n.t<string>("itemsList", { ns: "workspace" });

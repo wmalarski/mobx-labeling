@@ -24,7 +24,7 @@ export const SelectForm = observer(({ field }: Props): ReactElement => {
 
   return (
     <Radio.Group value={current.value} onChange={handleChange}>
-      <Grid.Container gap={1}>
+      <Grid.Container gap={1} margin={0.5}>
         {field.definition.options.map((option) => (
           <Grid key={option.text} xs={option.size}>
             <Radio value={option.text}>{option.text}</Radio>

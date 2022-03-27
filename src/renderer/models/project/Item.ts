@@ -13,6 +13,7 @@ export const Item = types
   .model("Item", {
     id: types.optional(types.identifier, nanoid),
     name: types.string,
+    blocked: types.optional(types.boolean, false),
     fields: types.array(Field),
     definition: types.reference(ItemDefinition),
     ranges: types.array(Range),
@@ -29,5 +30,11 @@ export const Item = types
   .actions((self) => ({
     setCurrentFrame(currentFrame: number) {
       self.currentFrame = currentFrame;
+    },
+    setName(name: string) {
+      self.name = name;
+    },
+    setBlocked(blocked: boolean) {
+      self.blocked = blocked;
     },
   }));

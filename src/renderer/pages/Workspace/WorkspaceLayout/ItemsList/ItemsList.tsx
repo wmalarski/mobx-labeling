@@ -1,10 +1,11 @@
-import { Description, Grid, Text } from "@geist-ui/core";
+import { Grid, Text } from "@geist-ui/core";
 import * as FlexLayout from "flexlayout-react";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { Fragment, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { WorkspaceStore } from "renderer/models";
+import { ItemHeader } from "./ItemHeader/ItemHeader";
 import { ItemsListItem } from "./ItemsListItem/ItemsListItem";
 
 type Props = {
@@ -23,10 +24,7 @@ export const ItemsList = observer(({ workspaceStore }: Props): ReactElement => {
       {workspaceStore.batch.items.map((item) => (
         <Fragment key={item.id}>
           <Grid xs={24} paddingLeft={1} paddingRight={1} paddingTop={1}>
-            <Description
-              title={item.definition.name}
-              content={<Text h6>{item.name}</Text>}
-            />
+            <ItemHeader item={item} workspaceStore={workspaceStore} />
           </Grid>
           <Grid xs={24} paddingLeft={1} paddingRight={1}>
             <ItemsListItem item={item} tool={workspaceStore.tool} />

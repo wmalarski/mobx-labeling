@@ -58,5 +58,11 @@
   "itemTableKey": "Name",
   "itemTableValue": "Value",
   "itemsList": "Items List",
-  "itemTableEmpty": "Empty list"
+  "itemTableEmpty": "Empty list",
+  "itemRemove": "Remove item",
+  "itemEditName": "Edit name",
+  "itemNameLabel": "Item name",
+  "itemNameAccept": "Save name",
+  "itemBlock": "Block item",
+  "itemUnblock": "Unblock item"
 }

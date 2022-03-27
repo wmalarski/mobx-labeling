@@ -55,6 +55,10 @@ export const WorkspaceStore = types
       self.batch.items.push(item);
       self.selectedItems.replace([item]);
     },
+    removeItem(item: Instance<typeof Item>) {
+      self.selectedItems.remove(item);
+      self.batch.items.remove(item);
+    },
   }));
 
 export type ProjectRoot = ReturnType<

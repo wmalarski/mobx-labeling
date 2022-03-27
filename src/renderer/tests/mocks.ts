@@ -202,10 +202,12 @@ export const mockProjectsList = ({
 
 export const mockWorkspaceStore = ({
   update,
+  items = 0,
 }: {
   update?: Partial<SnapshotIn<typeof WorkspaceStore>>;
+  items?: number;
 } = {}) => {
-  return WorkspaceStore.create({
+  const workspaceStore = WorkspaceStore.create({
     project: {
       batchSize: 100,
       definition: mockProjectDefinition(),
@@ -218,6 +220,16 @@ export const mockWorkspaceStore = ({
     },
     ...update,
   });
+  Array(items)
+    .fill(0)
+    .forEach(() => {
+      const length = workspaceStore.project.definition.items.length;
+      const index = Math.floor(Math.random() * length);
+      const definition = workspaceStore.project.definition.items[index];
+      workspaceStore.addItem(definition);
+    });
+
+  return workspaceStore;
 };
 
 export const mockLayoutNode = (): FlexLayout.TabNode => {
