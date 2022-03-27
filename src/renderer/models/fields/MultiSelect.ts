@@ -6,10 +6,10 @@ import { currentValue, currentValueKey } from "./utils";
 
 const defaultValues = ["Left Lane", "Right Lane"];
 const defaultOptions = [
-  { text: "Left Border", size: 3 },
-  { text: "Left Lane", size: 3 },
-  { text: "Right Lane", size: 3 },
-  { text: "Right Border", size: 3 },
+  { text: "Left Border", size: 6 },
+  { text: "Left Lane", size: 6 },
+  { text: "Right Lane", size: 6 },
+  { text: "Right Border", size: 6 },
 ];
 
 const kind = types.optional(types.literal("MultiSelect"), "MultiSelect");

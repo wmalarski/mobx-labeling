@@ -33,6 +33,7 @@ export const mockFieldDefinition = ({
   const kind = definitionKinds[random];
   return FieldDefinition.create({
     name: `Field${index} ${kind}`,
+    description: "Description",
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     kind: kind as any,
     ...update,
