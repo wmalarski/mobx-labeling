@@ -3,6 +3,7 @@ import { getSnapshot, Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { Field } from "renderer/models/project/Field";
+import { ComboBoxForm } from "./ComboBoxForm/ComboBoxForm";
 import { EyeForm } from "./EyeForm/EyeForm";
 import { GraphForm } from "./GraphForm/GraphForm";
 import { LineForm } from "./LineForm/LineForm";
@@ -22,6 +23,8 @@ export const FieldListItem = observer(({ field }: Props): ReactElement => {
   const { t } = useTranslation("workspace");
 
   switch (field.kind) {
+    case "ComboBox":
+      return <ComboBoxForm field={field} />;
     case "Eye":
       return <EyeForm field={field} />;
     case "Graph":
