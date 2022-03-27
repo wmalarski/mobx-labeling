@@ -24,6 +24,7 @@ export const TextForm = observer(({ field }: Props): ReactElement => {
 
   return (
     <Input
+      disabled={field.blocked}
       value={current.value}
       onChange={handleChange}
       aria-label={field.definition.name}

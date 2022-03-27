@@ -22,7 +22,7 @@ export const RectangleForm = observer(
 
     if (!current) {
       return (
-        <Button width="100%" onClick={handleDrawClick}>
+        <Button disabled={field.blocked} width="100%" onClick={handleDrawClick}>
           {t("rectangleDraw")}
         </Button>
       );
@@ -39,6 +39,7 @@ export const RectangleForm = observer(
         <Grid xs={24}>
           <Input
             width="100%"
+            disabled={field.blocked}
             htmlType="number"
             placeholder={t("rectangleTop")}
             label={t("rectangleTop")}
@@ -50,6 +51,7 @@ export const RectangleForm = observer(
         <Grid xs={24}>
           <Input
             width="100%"
+            disabled={field.blocked}
             htmlType="number"
             placeholder={t("rectangleLeft")}
             label={t("rectangleLeft")}
@@ -61,6 +63,7 @@ export const RectangleForm = observer(
         <Grid xs={24}>
           <Input
             width="100%"
+            disabled={field.blocked}
             htmlType="number"
             placeholder={t("rectangleBottom")}
             label={t("rectangleBottom")}
@@ -72,6 +75,7 @@ export const RectangleForm = observer(
         <Grid xs={24}>
           <Input
             width="100%"
+            disabled={field.blocked}
             htmlType="number"
             placeholder={t("rectangleRight")}
             label={t("rectangleRight")}

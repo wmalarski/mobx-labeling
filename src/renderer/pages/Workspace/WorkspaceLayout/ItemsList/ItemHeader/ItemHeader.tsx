@@ -38,6 +38,7 @@ export const ItemHeader = observer(
 
     const handleBlockClick = () => {
       item.setBlocked(!item.blocked);
+      setIsEditing(false);
     };
 
     return (
@@ -51,6 +52,7 @@ export const ItemHeader = observer(
                 <Input
                   value={name}
                   width="100%"
+                  disabled={item.blocked}
                   onChange={handleNameChange}
                   placeholder={t("itemNameLabel")}
                   label={t("itemNameLabel")}
@@ -65,6 +67,7 @@ export const ItemHeader = observer(
         <Grid>
           <Button
             auto
+            disabled={item.blocked}
             iconRight={<TrashIcon aria-label={t("itemRemove")} />}
             onClick={handleTrashClick}
           />
@@ -72,6 +75,7 @@ export const ItemHeader = observer(
         <Grid>
           <Button
             auto
+            disabled={item.blocked}
             iconRight={<Pencil1Icon aria-label={t("itemEditName")} />}
             onClick={handlePencilClick}
           />

@@ -25,6 +25,7 @@ export const ComboBoxForm = observer(({ field }: Props): ReactElement => {
   return (
     <Select
       width="100%"
+      disabled={field.blocked}
       placeholder={field.definition.name}
       aria-label={field.definition.name}
       value={current.value}

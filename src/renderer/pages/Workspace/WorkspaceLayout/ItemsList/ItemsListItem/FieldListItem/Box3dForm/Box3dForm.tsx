@@ -21,7 +21,7 @@ export const Box3dForm = observer(({ field, tool }: Props): ReactElement => {
 
   if (!current) {
     return (
-      <Button width="100%" onClick={handleDrawClick}>
+      <Button disabled={field.blocked} width="100%" onClick={handleDrawClick}>
         {t("box3dDraw")}
       </Button>
     );
@@ -59,6 +59,7 @@ export const Box3dForm = observer(({ field, tool }: Props): ReactElement => {
           <Grid xs={12}>
             <Input
               width="100%"
+              disabled={field.blocked}
               htmlType="number"
               placeholder={t("box3dX", { index })}
               label={t("box3dX", { index })}
@@ -70,6 +71,7 @@ export const Box3dForm = observer(({ field, tool }: Props): ReactElement => {
           <Grid xs={12}>
             <Input
               width="100%"
+              disabled={field.blocked}
               htmlType="number"
               placeholder={t("box3dY", { index })}
               label={t("box3dY", { index })}
@@ -82,6 +84,7 @@ export const Box3dForm = observer(({ field, tool }: Props): ReactElement => {
       ))}
       <Select
         width="100%"
+        disabled={field.blocked}
         placeholder={t("box3dPlaceholder")}
         aria-label={t("box3dPlaceholder")}
         value={current.sideType}
@@ -96,6 +99,7 @@ export const Box3dForm = observer(({ field, tool }: Props): ReactElement => {
           <Grid xs={12}>
             <Input
               width="100%"
+              disabled={field.blocked}
               htmlType="number"
               placeholder={t("box3dSideX", { index })}
               label={t("box3dSideX", { index })}
@@ -107,6 +111,7 @@ export const Box3dForm = observer(({ field, tool }: Props): ReactElement => {
           <Grid xs={12}>
             <Input
               width="100%"
+              disabled={field.blocked}
               htmlType="number"
               placeholder={t("box3dSideY", { index })}
               label={t("box3dSideY", { index })}

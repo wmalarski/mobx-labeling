@@ -21,7 +21,7 @@ export const EyeForm = observer(({ field, tool }: Props): ReactElement => {
 
   if (!current) {
     return (
-      <Button width="100%" onClick={handleDrawClick}>
+      <Button disabled={field.blocked} width="100%" onClick={handleDrawClick}>
         {t("eyeDraw")}
       </Button>
     );
@@ -44,6 +44,7 @@ export const EyeForm = observer(({ field, tool }: Props): ReactElement => {
           <Grid xs={12}>
             <Input
               width="100%"
+              disabled={field.blocked}
               htmlType="number"
               placeholder={t("eyeX", { index })}
               label={t("eyeX", { index })}
@@ -55,6 +56,7 @@ export const EyeForm = observer(({ field, tool }: Props): ReactElement => {
           <Grid xs={12}>
             <Input
               width="100%"
+              disabled={field.blocked}
               htmlType="number"
               placeholder={t("eyeY", { index })}
               label={t("eyeY", { index })}

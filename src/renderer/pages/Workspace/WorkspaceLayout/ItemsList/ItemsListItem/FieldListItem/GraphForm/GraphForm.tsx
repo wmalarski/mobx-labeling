@@ -22,7 +22,7 @@ export const GraphForm = observer(({ field, tool }: Props): ReactElement => {
 
   if (!current) {
     return (
-      <Button width="100%" onClick={handleDrawClick}>
+      <Button disabled={field.blocked} width="100%" onClick={handleDrawClick}>
         {t("graphDraw")}
       </Button>
     );
@@ -73,13 +73,16 @@ export const GraphForm = observer(({ field, tool }: Props): ReactElement => {
       <Grid xs={24} alignItems="center">
         <Text>{t("graphPoints")}</Text>
         <Spacer w={1} />
-        <Button onClick={handleAddPointClick}>{t("graphAddPoint")}</Button>
+        <Button disabled={field.blocked} onClick={handleAddPointClick}>
+          {t("graphAddPoint")}
+        </Button>
       </Grid>
       {current.points.map((pair, index) => (
         <Fragment key={index}>
           <Grid xs={20} sm={11}>
             <Input
               width="100%"
+              disabled={field.blocked}
               htmlType="number"
               placeholder={t("graphX", { index })}
               label={t("graphX", { index })}
@@ -91,6 +94,7 @@ export const GraphForm = observer(({ field, tool }: Props): ReactElement => {
           <Grid xs={20} sm={11}>
             <Input
               width="100%"
+              disabled={field.blocked}
               htmlType="number"
               placeholder={t("graphY", { index })}
               label={t("graphY", { index })}
@@ -102,6 +106,7 @@ export const GraphForm = observer(({ field, tool }: Props): ReactElement => {
           <Grid xs={4} sm={2}>
             <Button
               width="100%"
+              disabled={field.blocked}
               onClick={handleRemovePointClick(index)}
               iconRight={
                 <TrashIcon aria-label={t("graphRemovePoint", { index })} />
@@ -113,7 +118,9 @@ export const GraphForm = observer(({ field, tool }: Props): ReactElement => {
       <Grid xs={24} alignItems="center">
         <Text>{t("graphEdges")}</Text>
         <Spacer w={1} />
-        <Button onClick={handleAddEdgeClick}>{t("graphAddEdge")}</Button>
+        <Button disabled={field.blocked} onClick={handleAddEdgeClick}>
+          {t("graphAddEdge")}
+        </Button>
       </Grid>
       {current.edges.map((pair, index) => (
         <Fragment key={index}>
@@ -124,6 +131,7 @@ export const GraphForm = observer(({ field, tool }: Props): ReactElement => {
             <Spacer w={1} />
             <Select
               width="100%"
+              disabled={field.blocked}
               placeholder={t("graphFrom", { index })}
               aria-label={t("graphFrom", { index })}
               value={String(pair.from)}
@@ -143,6 +151,7 @@ export const GraphForm = observer(({ field, tool }: Props): ReactElement => {
             <Spacer w={1} />
             <Select
               width="100%"
+              disabled={field.blocked}
               placeholder={t("graphTo", { index })}
               aria-label={t("graphTo", { index })}
               value={String(pair.to)}
@@ -158,6 +167,7 @@ export const GraphForm = observer(({ field, tool }: Props): ReactElement => {
           <Grid xs={4} sm={2} alignItems="center">
             <Button
               width="100%"
+              disabled={field.blocked}
               onClick={handleRemoveEdgeClick(index)}
               iconRight={
                 <TrashIcon aria-label={t("graphRemoveEdge", { index })} />

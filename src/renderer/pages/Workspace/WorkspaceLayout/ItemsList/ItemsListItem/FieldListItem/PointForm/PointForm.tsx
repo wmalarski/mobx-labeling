@@ -21,7 +21,7 @@ export const PointForm = observer(({ field, tool }: Props): ReactElement => {
 
   if (!current) {
     return (
-      <Button width="100%" onClick={handleDrawClick}>
+      <Button disabled={field.blocked} width="100%" onClick={handleDrawClick}>
         {t("pointDraw")}
       </Button>
     );
@@ -38,6 +38,7 @@ export const PointForm = observer(({ field, tool }: Props): ReactElement => {
       <Grid xs={24}>
         <Input
           width="100%"
+          disabled={field.blocked}
           htmlType="number"
           placeholder={t("pointX")}
           label={t("pointX")}
@@ -49,6 +50,7 @@ export const PointForm = observer(({ field, tool }: Props): ReactElement => {
       <Grid xs={24}>
         <Input
           width="100%"
+          disabled={field.blocked}
           htmlType="number"
           placeholder={t("pointY")}
           label={t("pointY")}

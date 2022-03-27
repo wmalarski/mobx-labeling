@@ -30,11 +30,17 @@ export const Item = types
   .actions((self) => ({
     setCurrentFrame(currentFrame: number) {
       self.currentFrame = currentFrame;
+      self.fields.forEach((field) => {
+        field.setCurrentFrame(currentFrame);
+      });
     },
     setName(name: string) {
       self.name = name;
     },
     setBlocked(blocked: boolean) {
       self.blocked = blocked;
+      self.fields.forEach((field) => {
+        field.setBlocked(blocked);
+      });
     },
   }));

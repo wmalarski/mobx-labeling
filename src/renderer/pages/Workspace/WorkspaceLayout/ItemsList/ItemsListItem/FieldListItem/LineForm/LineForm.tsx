@@ -27,7 +27,7 @@ export const LineForm = observer(({ field, tool }: Props): ReactElement => {
 
   if (!current) {
     return (
-      <Button width="100%" onClick={handleDrawClick}>
+      <Button disabled={field.blocked} width="100%" onClick={handleDrawClick}>
         {t("lineDraw")}
       </Button>
     );
@@ -72,7 +72,7 @@ export const LineForm = observer(({ field, tool }: Props): ReactElement => {
       <Grid xs={24} alignItems="center">
         <Text>{t("linePoints")}</Text>
         <Spacer w={1} />
-        <Button onClick={handleAddClick(0)}>
+        <Button disabled={field.blocked} onClick={handleAddClick(0)}>
           {t("lineAdd", { index: 0 })}
         </Button>
       </Grid>
@@ -81,6 +81,7 @@ export const LineForm = observer(({ field, tool }: Props): ReactElement => {
           <Grid xs={12} md={8}>
             <Input
               width="100%"
+              disabled={field.blocked}
               htmlType="number"
               placeholder={t("lineX", { index })}
               label={t("lineX", { index })}
@@ -92,6 +93,7 @@ export const LineForm = observer(({ field, tool }: Props): ReactElement => {
           <Grid xs={12} md={8}>
             <Input
               width="100%"
+              disabled={field.blocked}
               htmlType="number"
               placeholder={t("lineY", { index })}
               label={t("lineY", { index })}
@@ -103,7 +105,7 @@ export const LineForm = observer(({ field, tool }: Props): ReactElement => {
           <Grid xs={6} md={2}>
             <Button
               width="100%"
-              disabled={!index}
+              disabled={field.blocked || !index}
               onClick={handleMoveUpClick(index)}
               iconRight={<ArrowUpIcon aria-label={t("lineUp", { index })} />}
             />
@@ -111,7 +113,7 @@ export const LineForm = observer(({ field, tool }: Props): ReactElement => {
           <Grid xs={6} md={2}>
             <Button
               width="100%"
-              disabled={index >= pairs.length - 1}
+              disabled={field.blocked || index >= pairs.length - 1}
               onClick={handleMoveDownClick(index)}
               iconRight={
                 <ArrowDownIcon aria-label={t("lineDown", { index })} />
@@ -121,6 +123,7 @@ export const LineForm = observer(({ field, tool }: Props): ReactElement => {
           <Grid xs={6} md={2}>
             <Button
               width="100%"
+              disabled={field.blocked}
               onClick={handleAddClick(index)}
               iconRight={<PlusIcon aria-label={t("lineAdd", { index })} />}
             />
@@ -128,6 +131,7 @@ export const LineForm = observer(({ field, tool }: Props): ReactElement => {
           <Grid xs={6} md={2}>
             <Button
               width="100%"
+              disabled={field.blocked}
               onClick={handleRemoveClick(index)}
               iconRight={<TrashIcon aria-label={t("lineRemove", { index })} />}
             />

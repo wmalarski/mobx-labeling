@@ -27,7 +27,7 @@ export const PolygonForm = observer(({ field, tool }: Props): ReactElement => {
 
   if (!current) {
     return (
-      <Button width="100%" onClick={handleDrawClick}>
+      <Button disabled={field.blocked} width="100%" onClick={handleDrawClick}>
         {t("polygonDraw")}
       </Button>
     );
@@ -72,7 +72,7 @@ export const PolygonForm = observer(({ field, tool }: Props): ReactElement => {
       <Grid xs={24} alignItems="center">
         <Text>{t("polygonPoints")}</Text>
         <Spacer w={1} />
-        <Button onClick={handleAddClick(0)}>
+        <Button disabled={field.blocked} onClick={handleAddClick(0)}>
           {t("polygonAdd", { index: 0 })}
         </Button>
       </Grid>
@@ -81,6 +81,7 @@ export const PolygonForm = observer(({ field, tool }: Props): ReactElement => {
           <Grid xs={12} md={8}>
             <Input
               width="100%"
+              disabled={field.blocked}
               htmlType="number"
               placeholder={t("polygonX", { index })}
               label={t("polygonX", { index })}
@@ -92,6 +93,7 @@ export const PolygonForm = observer(({ field, tool }: Props): ReactElement => {
           <Grid xs={12} md={8}>
             <Input
               width="100%"
+              disabled={field.blocked}
               htmlType="number"
               placeholder={t("polygonY", { index })}
               label={t("polygonY", { index })}
@@ -103,7 +105,7 @@ export const PolygonForm = observer(({ field, tool }: Props): ReactElement => {
           <Grid xs={6} md={2}>
             <Button
               width="100%"
-              disabled={!index}
+              disabled={field.blocked || !index}
               onClick={handleMoveUpClick(index)}
               iconRight={<ArrowUpIcon aria-label={t("polygonUp", { index })} />}
             />
@@ -111,7 +113,7 @@ export const PolygonForm = observer(({ field, tool }: Props): ReactElement => {
           <Grid xs={6} md={2}>
             <Button
               width="100%"
-              disabled={index >= pairs.length - 1}
+              disabled={field.blocked || index >= pairs.length - 1}
               onClick={handleMoveDownClick(index)}
               iconRight={
                 <ArrowDownIcon aria-label={t("polygonDown", { index })} />
@@ -121,6 +123,7 @@ export const PolygonForm = observer(({ field, tool }: Props): ReactElement => {
           <Grid xs={6} md={2}>
             <Button
               width="100%"
+              disabled={field.blocked}
               onClick={handleAddClick(index)}
               iconRight={<PlusIcon aria-label={t("polygonAdd", { index })} />}
             />
@@ -128,6 +131,7 @@ export const PolygonForm = observer(({ field, tool }: Props): ReactElement => {
           <Grid xs={6} md={2}>
             <Button
               width="100%"
+              disabled={field.blocked}
               onClick={handleRemoveClick(index)}
               iconRight={
                 <TrashIcon aria-label={t("polygonRemove", { index })} />

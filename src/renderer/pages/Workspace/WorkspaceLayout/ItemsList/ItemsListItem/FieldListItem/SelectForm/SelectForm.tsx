@@ -27,7 +27,9 @@ export const SelectForm = observer(({ field }: Props): ReactElement => {
       <Grid.Container gap={1} margin={0.5}>
         {field.definition.options.map((option) => (
           <Grid key={option.text} xs={option.size}>
-            <Radio value={option.text}>{option.text}</Radio>
+            <Radio disabled={field.blocked} value={option.text}>
+              {option.text}
+            </Radio>
           </Grid>
         ))}
       </Grid.Container>

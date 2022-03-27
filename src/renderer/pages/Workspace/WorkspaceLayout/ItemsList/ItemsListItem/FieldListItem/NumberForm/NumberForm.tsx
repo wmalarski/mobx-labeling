@@ -26,6 +26,7 @@ export const NumberForm = observer(({ field }: Props): ReactElement => {
   return (
     <Input
       value={String(current.value)}
+      disabled={field.blocked}
       htmlType="number"
       onChange={handleChange}
       aria-label={field.definition.name}
