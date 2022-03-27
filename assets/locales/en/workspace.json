@@ -37,5 +37,7 @@
   "graphFrom": "{{index}} From",
   "graphTo": "{{index}} To",
   "graphRemovePoint": "Remove point {{index}}",
-  "graphRemoveEdge": "Remove edge {{index}}"
+  "graphRemoveEdge": "Remove edge {{index}}",
+  "eyeX": "X{{index}}",
+  "eyeY": "Y{{index}}"
 }

@@ -10,7 +10,7 @@ import { Instance } from "mobx-state-tree";
 import { ChangeEvent, Fragment, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { PolygonField } from "renderer/models";
-import { toPairs } from "./PolygonForm.utils";
+import { toPairs } from "renderer/models/fields/utils";
 
 type Props = {
   field: Instance<typeof PolygonField>;

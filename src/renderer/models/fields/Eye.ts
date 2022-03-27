@@ -6,9 +6,15 @@ import { currentValue } from "./utils";
 
 const kind = types.optional(types.literal("Eye"), "Eye");
 
-export const EyeValue = types.model("EyeValue", {
-  values: types.array(types.number),
-});
+export const EyeValue = types
+  .model("EyeValue", {
+    values: types.array(types.number),
+  })
+  .actions((self) => ({
+    updateValue(index: number, value: number) {
+      self.values[index] = value;
+    },
+  }));
 
 export const EyeDefinition = types.compose(
   "EyeDefinition",
