@@ -56,5 +56,7 @@
   "box3dSideY": "Side Y{{index}}",
   "box3dDraw": "Draw box shape",
   "itemTableKey": "Name",
-  "itemTableValue": "Value"
+  "itemTableValue": "Value",
+  "itemsList": "Items List",
+  "itemTableEmpty": "Empty list"
 }
