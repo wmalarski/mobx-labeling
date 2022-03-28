@@ -1,13 +1,13 @@
 import * as FlexLayout from "flexlayout-react";
 import Konva from "konva";
+import { KonvaEventObject } from "konva/lib/Node";
 import { observer } from "mobx-react-lite";
 import { Instance, SnapshotOut } from "mobx-state-tree";
 import { ReactElement, useRef } from "react";
 import { Circle, Layer, Rect, Stage } from "react-konva";
-import { useStageZoom } from "renderer/hooks";
 import { Resource, ToolKind, WorkspaceStore } from "renderer/models";
 import * as Styles from "./Video.styles";
-import { useVideoResize } from "./Video.utils";
+import { useVideoResize, useZoom } from "./Video.utils";
 import { VideoImage } from "./VideoImage/VideoImage";
 
 type Props = {
@@ -24,12 +24,21 @@ export const Video = observer(
 
     useVideoResize({ stageRef, node });
 
-    const { handleWheel, stageScale, stageX, stageY } = useStageZoom({
-      scaleBy: 1.1,
-    });
+    const { stageScale, stageX, stageY, dispatch } = useZoom();
 
     const handleImageClick = () => {
       //
+    };
+
+    const handleWheel = (e: KonvaEventObject<WheelEvent>) => {
+      e.evt.preventDefault();
+
+      const stage = e.target.getStage();
+      const point = stage?.getPointerPosition();
+
+      if (!point) return;
+
+      dispatch({ type: e.evt.deltaY < 0 ? "zoomIn" : "zoomOut", point });
     };
 
     return (
