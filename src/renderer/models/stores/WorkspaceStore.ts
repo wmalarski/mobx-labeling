@@ -51,14 +51,21 @@ export const WorkspaceStore = types
         })),
         currentFrame: self.currentFrame.id,
         ranges: [range],
+        selected: true,
       });
 
+      self.batch.items.forEach((item) => {
+        item.setSelected(false);
+      });
       self.batch.items.push(item);
-      self.selectedItems.replace([item]);
     },
     removeItem(item: Instance<typeof Item>) {
-      self.selectedItems.remove(item);
       self.batch.items.remove(item);
+    },
+  }))
+  .views((self) => ({
+    get selectedItems() {
+      return self.selectedItems.filter((item) => item.selected);
     },
   }));
 

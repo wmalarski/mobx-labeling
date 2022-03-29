@@ -1,10 +1,14 @@
+import { Grid } from "@geist-ui/core";
 import * as FlexLayout from "flexlayout-react";
+import Konva from "konva";
 import { observer } from "mobx-react-lite";
-import { getSnapshot, Instance } from "mobx-state-tree";
-import { ReactElement } from "react";
-import { useTranslation } from "react-i18next";
+import { Instance } from "mobx-state-tree";
+import { ReactElement, useRef } from "react";
+import { Stage } from "react-konva";
 import { WorkspaceStore } from "renderer/models";
-import { useXZoom } from "./Timeline.utils";
+import { useNodeResize } from "renderer/utils/konva";
+import { ItemsLayer } from "./ItemsLayer/ItemsLayer";
+import { labelsWidth, useXZoom } from "./Timeline.utils";
 import { TimelineBar } from "./TimelineBar/TimelineBar";
 
 type Props = {
@@ -12,22 +16,32 @@ type Props = {
   node: FlexLayout.TabNode;
 };
 
-export const Timeline = observer(({ workspaceStore }: Props): ReactElement => {
-  const { t } = useTranslation("workspace");
+export const Timeline = observer(
+  ({ workspaceStore, node }: Props): ReactElement => {
+    const stageRef = useRef<Konva.Stage>(null);
 
-  const zoom = useXZoom();
+    const rect = node.getRect();
 
-  return (
-    <div>
-      <p>{t("Timeline")}</p>
-      <TimelineBar zoom={zoom} />
-      <pre>
-        {JSON.stringify(
-          getSnapshot(workspaceStore.project.definition),
-          null,
-          2
-        )}
-      </pre>
-    </div>
-  );
-});
+    useNodeResize({ node, stageRef });
+
+    const zoom = useXZoom();
+
+    return (
+      <Grid.Container>
+        <Grid xs={24}>
+          <TimelineBar zoom={zoom} />
+        </Grid>
+        <Grid xs={24}>
+          <Stage width={rect.width} height={rect.height}>
+            <ItemsLayer
+              workspaceStore={workspaceStore}
+              scaleX={zoom.scaleX}
+              stageX={zoom.stageX}
+              labelsWidth={labelsWidth}
+            />
+          </Stage>
+        </Grid>
+      </Grid.Container>
+    );
+  }
+);

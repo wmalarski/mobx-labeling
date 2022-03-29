@@ -19,6 +19,8 @@ export const Item = types
     definition: types.reference(ItemDefinition),
     ranges: types.array(Range),
     currentFrame: types.reference(CurrentFrame),
+    selected: types.optional(types.boolean, false),
+    toggled: types.optional(types.boolean, false),
   })
   .views((self) => ({
     info(): ItemInfo {
@@ -37,5 +39,11 @@ export const Item = types
       self.fields.forEach((field) => {
         field.setBlocked(blocked);
       });
+    },
+    setSelected(selected: boolean) {
+      self.selected = selected;
+    },
+    setToggled(toggled: boolean) {
+      self.toggled = toggled;
     },
   }));

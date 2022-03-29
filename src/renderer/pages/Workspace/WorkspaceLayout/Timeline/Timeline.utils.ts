@@ -1,6 +1,8 @@
 import { useReducer } from "react";
 import { optionalClamp } from "renderer/utils/geometry";
 
+export const labelsWidth = 160;
+
 export type UseXZoomState = {
   scaleX: number;
   stageX: number;

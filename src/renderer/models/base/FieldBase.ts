@@ -7,9 +7,13 @@ export const FieldBase = types
     id: types.optional(types.identifier, nanoid),
     currentFrame: types.reference(CurrentFrame),
     blocked: types.optional(types.boolean, false),
+    selected: types.optional(types.boolean, false),
   })
   .actions((self) => ({
     setBlocked(blocked: boolean) {
       self.blocked = blocked;
+    },
+    setSelected(selected: boolean) {
+      self.selected = selected;
     },
   }));

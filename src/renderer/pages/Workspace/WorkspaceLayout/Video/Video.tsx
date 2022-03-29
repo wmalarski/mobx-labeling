@@ -6,8 +6,9 @@ import { Instance, SnapshotOut } from "mobx-state-tree";
 import { ReactElement, useRef } from "react";
 import { Circle, Layer, Rect, Stage } from "react-konva";
 import { Resource, ToolKind, WorkspaceStore } from "renderer/models";
+import { useNodeResize } from "renderer/utils/konva";
 import * as Styles from "./Video.styles";
-import { useVideoResize, useZoom } from "./Video.utils";
+import { useZoom } from "./Video.utils";
 import { VideoImage } from "./VideoImage/VideoImage";
 
 type Props = {
@@ -22,7 +23,7 @@ export const Video = observer(
     const resource: SnapshotOut<typeof Resource> = node.getConfig();
     const rect = node.getRect();
 
-    useVideoResize({ stageRef, node });
+    useNodeResize({ stageRef, node });
 
     const { stageScale, stageX, stageY, dispatch } = useZoom();
 
