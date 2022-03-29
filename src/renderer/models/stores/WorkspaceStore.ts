@@ -14,7 +14,6 @@ export const WorkspaceStore = types
       return CurrentFrame.create();
     }),
     framesCount: types.optional(types.number, 1),
-    selectedItems: types.array(types.reference(Item)),
     tool: types.optional(Tool, () => ({
       kind: ToolKind.Drag,
       field: null,
@@ -65,7 +64,7 @@ export const WorkspaceStore = types
   }))
   .views((self) => ({
     get selectedItems() {
-      return self.selectedItems.filter((item) => item.selected);
+      return self.batch.items.filter((item) => item.selected);
     },
   }));
 

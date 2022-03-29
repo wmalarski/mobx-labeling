@@ -1,9 +1,8 @@
-import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
-import { useTranslation } from "react-i18next";
-import { Rect } from "react-konva";
+import { Rect, Text } from "react-konva";
 import { Item, WorkspaceStore } from "renderer/models";
+import { useTimelineConfig } from "../../../Timeline.utils";
 
 type Props = {
   item: Instance<typeof Item>;
@@ -11,18 +10,26 @@ type Props = {
   position: number;
 };
 
-export const ItemRow = observer(
-  ({ item, workspaceStore, position }: Props): ReactElement => {
-    const { t } = useTranslation("common");
-    return (
-      <Rect
-        key={block.from}
-        x={block.from}
-        y={row * rowHeight}
-        width={block.to + 1 - block.from}
-        height={rowHeight - 3}
-        fill={isSelected ? selectionColor : deselectionColor}
+export const ItemRow = ({ item, position }: Props): ReactElement => {
+  const { rowHeight, deselectionColor, selectionColor } = useTimelineConfig();
+
+  return (
+    <Rect
+      x={0}
+      y={position * rowHeight}
+      width={100}
+      height={rowHeight}
+      fill={item.selected ? selectionColor : deselectionColor}
+    >
+      <Text
+        x={0}
+        y={0}
+        text={item.definition.name}
+        fill="white"
+        fontSize={rowHeight / 2}
+        padding={2}
+        height={rowHeight}
       />
-    );
-  }
-);
+    </Rect>
+  );
+};

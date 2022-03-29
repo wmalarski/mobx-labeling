@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { createContext, useContext, useReducer } from "react";
 import { optionalClamp } from "renderer/utils/geometry";
 
 export const labelsWidth = 160;
@@ -72,4 +72,42 @@ export const useXZoom = (): UseXZoomResult => {
   const [state, dispatch] = useReducer(reducer, defaultXZoomState);
 
   return { dispatch, ...state };
+};
+
+type TimelineConfig = {
+  labelsWidth: number;
+  rowHeight: number;
+  selectionColor: string;
+  deselectionColor: string;
+};
+
+type TimelineContextValue =
+  | {
+      isInitialized: false;
+    }
+  | {
+      isInitialized: true;
+      config: TimelineConfig;
+    };
+
+export const TimelineContext = createContext<TimelineContextValue>({
+  isInitialized: false,
+});
+
+export const useTimelineConfig = (): TimelineConfig => {
+  const context = useContext(TimelineContext);
+  if (!context.isInitialized) {
+    throw new Error("TimelineContext not defined");
+  }
+  return context.config;
+};
+
+export const defaultTimelineContext: TimelineContextValue = {
+  isInitialized: true,
+  config: {
+    deselectionColor: "red",
+    labelsWidth: 150,
+    rowHeight: 40,
+    selectionColor: "blue",
+  },
 };

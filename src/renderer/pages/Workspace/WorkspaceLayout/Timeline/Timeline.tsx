@@ -8,7 +8,11 @@ import { Stage } from "react-konva";
 import { WorkspaceStore } from "renderer/models";
 import { useNodeResize } from "renderer/utils/konva";
 import { ItemsLayer } from "./ItemsLayer/ItemsLayer";
-import { labelsWidth, useXZoom } from "./Timeline.utils";
+import {
+  defaultTimelineContext,
+  TimelineContext,
+  useXZoom,
+} from "./Timeline.utils";
 import { TimelineBar } from "./TimelineBar/TimelineBar";
 
 type Props = {
@@ -26,19 +30,22 @@ export const Timeline = observer(
 
     const zoom = useXZoom();
 
+    console.log({ rect, zoom });
+
     return (
       <Grid.Container>
         <Grid xs={24}>
           <TimelineBar zoom={zoom} />
         </Grid>
-        <Grid xs={24}>
+        <Grid xs={24} style={{ backgroundColor: "white" }}>
           <Stage width={rect.width} height={rect.height}>
-            <ItemsLayer
-              workspaceStore={workspaceStore}
-              scaleX={zoom.scaleX}
-              stageX={zoom.stageX}
-              labelsWidth={labelsWidth}
-            />
+            <TimelineContext.Provider value={defaultTimelineContext}>
+              <ItemsLayer
+                workspaceStore={workspaceStore}
+                scaleX={zoom.scaleX}
+                stageX={zoom.stageX}
+              />
+            </TimelineContext.Provider>
           </Stage>
         </Grid>
       </Grid.Container>

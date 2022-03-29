@@ -1,4 +1,3 @@
-import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
 import { Item, WorkspaceStore } from "renderer/models";
@@ -11,24 +10,26 @@ type Props = {
   position: number;
 };
 
-export const ItemCollapsible = observer(
-  ({ item, workspaceStore, position }: Props): ReactElement => {
-    return (
-      <>
-        <ItemRow
-          item={item}
-          workspaceStore={workspaceStore}
-          position={position}
-        />
-        {item.toggled &&
-          item.fields.map((field, index) => (
-            <FieldRow
-              key={field.id}
-              field={field}
-              position={position + index + 1}
-            />
-          ))}
-      </>
-    );
-  }
-);
+export const ItemCollapsible = ({
+  item,
+  workspaceStore,
+  position,
+}: Props): ReactElement => {
+  return (
+    <>
+      <ItemRow
+        item={item}
+        workspaceStore={workspaceStore}
+        position={position}
+      />
+      {item.toggled &&
+        item.fields.map((field, index) => (
+          <FieldRow
+            key={field.id}
+            field={field}
+            position={position + index + 1}
+          />
+        ))}
+    </>
+  );
+};
