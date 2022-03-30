@@ -8,6 +8,7 @@ import { Stage } from "react-konva";
 import { WorkspaceStore } from "renderer/models";
 import { useNodeResize } from "renderer/utils/konva";
 import { ItemsLayer } from "./ItemsLayer/ItemsLayer";
+import { LabelsLayer } from "./LabelsLayer/LabelsLayer";
 import {
   defaultTimelineContext,
   TimelineContext,
@@ -45,6 +46,7 @@ export const Timeline = observer(
                 scaleX={zoom.scaleX}
                 stageX={zoom.stageX}
               />
+              <LabelsLayer workspaceStore={workspaceStore} />
             </TimelineContext.Provider>
           </Stage>
         </Grid>
