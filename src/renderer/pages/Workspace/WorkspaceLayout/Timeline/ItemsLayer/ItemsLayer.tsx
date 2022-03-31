@@ -3,7 +3,8 @@ import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
 import { Layer } from "react-konva";
 import { WorkspaceStore } from "renderer/models";
-import { getItemPositions, useTimelineConfig } from "../Timeline.utils";
+import { getItemPositions } from "../Timeline.utils";
+import { useTimelineConfig } from "../TimelineContext/TimelineContext";
 import { ItemCollapsible } from "./ItemCollapsible/ItemCollapsible";
 
 type Props = {

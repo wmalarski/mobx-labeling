@@ -9,11 +9,7 @@ type Props = {
   position: number;
 };
 
-export const ItemCollapsible = ({
-  item,
-  workspaceStore,
-  position,
-}: Props): ReactElement => {
+export const ItemCollapsible = ({ item, position }: Props): ReactElement => {
   return (
     <Rect
       x={0}

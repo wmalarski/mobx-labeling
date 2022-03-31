@@ -3,7 +3,8 @@ import { Instance } from "mobx-state-tree";
 import { Fragment, ReactElement } from "react";
 import { Layer } from "react-konva";
 import { WorkspaceStore } from "renderer/models";
-import { getItemPositions, useTimelineConfig } from "../Timeline.utils";
+import { getItemPositions } from "../Timeline.utils";
+import { useTimelineConfig } from "../TimelineContext/TimelineContext";
 import { ItemLabel } from "./ItemLabel/ItemLabel";
 
 type Props = {
@@ -17,7 +18,7 @@ export const LabelsLayer = observer(
     const items = getItemPositions(workspaceStore);
 
     return (
-      <Layer x={0} y={0} width={labelsWidth}>
+      <Layer x={0} y={0} width={labelsWidth} fill={"black"}>
         {items.map(({ item, position }) => (
           <Fragment key={item.id}>
             <ItemLabel

@@ -2,7 +2,7 @@ import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
 import { Rect, Text } from "react-konva";
 import { Field } from "renderer/models";
-import { useTimelineConfig } from "../../../Timeline.utils";
+import { useTimelineConfig } from "../../../TimelineContext/TimelineContext";
 
 type Props = {
   field: Instance<typeof Field>;

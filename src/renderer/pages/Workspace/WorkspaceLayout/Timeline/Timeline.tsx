@@ -1,4 +1,4 @@
-import { Grid } from "@geist-ui/core";
+import { Grid, useTheme } from "@geist-ui/core";
 import * as FlexLayout from "flexlayout-react";
 import Konva from "konva";
 import { observer } from "mobx-react-lite";
@@ -9,12 +9,9 @@ import { WorkspaceStore } from "renderer/models";
 import { useNodeResize } from "renderer/utils/konva";
 import { ItemsLayer } from "./ItemsLayer/ItemsLayer";
 import { LabelsLayer } from "./LabelsLayer/LabelsLayer";
-import {
-  defaultTimelineContext,
-  TimelineContext,
-  useXZoom,
-} from "./Timeline.utils";
+import { useXZoom } from "./Timeline.utils";
 import { TimelineBar } from "./TimelineBar/TimelineBar";
+import { TimelineContextProvider } from "./TimelineContext/TimelineContext";
 
 type Props = {
   workspaceStore: Instance<typeof WorkspaceStore>;
@@ -23,6 +20,8 @@ type Props = {
 
 export const Timeline = observer(
   ({ workspaceStore, node }: Props): ReactElement => {
+    const theme = useTheme();
+
     const stageRef = useRef<Konva.Stage>(null);
 
     const rect = node.getRect();
@@ -31,23 +30,21 @@ export const Timeline = observer(
 
     const zoom = useXZoom();
 
-    console.log({ rect, zoom });
-
     return (
       <Grid.Container>
         <Grid xs={24}>
           <TimelineBar zoom={zoom} />
         </Grid>
-        <Grid xs={24} style={{ backgroundColor: "white" }}>
+        <Grid xs={24}>
           <Stage width={rect.width} height={rect.height}>
-            <TimelineContext.Provider value={defaultTimelineContext}>
+            <TimelineContextProvider theme={theme}>
               <ItemsLayer
                 workspaceStore={workspaceStore}
                 scaleX={zoom.scaleX}
                 stageX={zoom.stageX}
               />
               <LabelsLayer workspaceStore={workspaceStore} />
-            </TimelineContext.Provider>
+            </TimelineContextProvider>
           </Stage>
         </Grid>
       </Grid.Container>
