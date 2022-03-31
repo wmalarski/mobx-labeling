@@ -1,4 +1,4 @@
-import { useObserver } from "mobx-react-lite";
+import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
 import { Layer } from "react-konva";
@@ -13,25 +13,23 @@ type Props = {
   scaleX: number;
 };
 
-export const ItemsLayer = ({
-  workspaceStore,
-  stageX,
-  scaleX,
-}: Props): ReactElement => {
-  const { labelsWidth } = useTimelineConfig();
+export const ItemsLayer = observer(
+  ({ workspaceStore, stageX, scaleX }: Props): ReactElement => {
+    const { labelsWidth } = useTimelineConfig();
 
-  const items = getItemPositions(workspaceStore);
+    const items = getItemPositions(workspaceStore);
 
-  return useObserver(() => (
-    <Layer x={labelsWidth + stageX} scaleX={scaleX}>
-      {items.map(({ item, position }) => (
-        <ItemCollapsible
-          key={item.id}
-          item={item}
-          position={position}
-          workspaceStore={workspaceStore}
-        />
-      ))}
-    </Layer>
-  ));
-};
+    return (
+      <Layer x={labelsWidth + stageX} scaleX={scaleX}>
+        {items.map(({ item, position }) => (
+          <ItemCollapsible
+            key={item.id}
+            item={item}
+            position={position}
+            workspaceStore={workspaceStore}
+          />
+        ))}
+      </Layer>
+    );
+  }
+);

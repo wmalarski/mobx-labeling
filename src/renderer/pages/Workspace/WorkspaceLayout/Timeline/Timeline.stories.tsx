@@ -37,5 +37,8 @@ Playground.args = {
   } as any,
   workspaceStore: mockWorkspaceStore({
     items: 4,
+    update: {
+      framesCount: 1250,
+    },
   }),
 };

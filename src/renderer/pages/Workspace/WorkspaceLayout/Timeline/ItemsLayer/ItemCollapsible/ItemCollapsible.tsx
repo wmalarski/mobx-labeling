@@ -1,7 +1,12 @@
+import Konva from "konva";
+import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
-import { ReactElement } from "react";
-import { Rect } from "react-konva";
+import { ReactElement, useEffect, useRef } from "react";
+import { Group, Rect } from "react-konva";
 import { Item, WorkspaceStore } from "renderer/models";
+import { useTimelineConfig } from "../../TimelineContext/TimelineContext";
+import { FieldRow } from "./FieldRow/FieldRow";
+import { ItemRow } from "./ItemRow/ItemRow";
 
 type Props = {
   item: Instance<typeof Item>;
@@ -9,30 +14,39 @@ type Props = {
   position: number;
 };
 
-export const ItemCollapsible = ({ item, position }: Props): ReactElement => {
-  return (
-    <Rect
-      x={0}
-      y={position * 40}
-      key={item.id}
-      width={40}
-      height={40}
-      fill="red"
-    />
-    // <>
-    //   <ItemRow
-    //     item={item}
-    //     workspaceStore={workspaceStore}
-    //     position={position}
-    //   />
-    //   {item.toggled &&
-    //     item.fields.map((field, index) => (
-    //       <FieldRow
-    //         key={field.id}
-    //         field={field}
-    //         position={position + index + 1}
-    //       />
-    //     ))}
-    // </>
-  );
-};
+export const ItemCollapsible = observer(
+  ({ item, position, workspaceStore }: Props): ReactElement => {
+    const { rowHeight, backgroundColor } = useTimelineConfig();
+
+    const initialHeight = useRef(position * rowHeight);
+    const groupRef = useRef<Konva.Group>(null);
+    const fillerRef = useRef<Konva.Rect>(null);
+
+    useEffect(() => {
+      const shift = item.toggled ? item.fields.length * rowHeight : 0;
+      fillerRef.current?.to({ y: rowHeight + shift });
+      groupRef.current?.to({ y: position * rowHeight });
+    }, [item.fields.length, item.toggled, position, rowHeight]);
+
+    return (
+      <Group ref={groupRef} x={0} y={initialHeight.current}>
+        {item.fields.map((field, index) => (
+          <FieldRow
+            key={field.id}
+            field={field}
+            position={index + 1}
+            workspaceStore={workspaceStore}
+          />
+        ))}
+        <Rect
+          ref={fillerRef}
+          y={rowHeight}
+          width={workspaceStore.framesCount}
+          height={item.fields.length * rowHeight}
+          fill={backgroundColor}
+        />
+        <ItemRow item={item} workspaceStore={workspaceStore} />
+      </Group>
+    );
+  }
+);

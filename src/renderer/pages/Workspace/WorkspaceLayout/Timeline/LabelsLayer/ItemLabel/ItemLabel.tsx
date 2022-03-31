@@ -28,7 +28,6 @@ export const ItemLabel = observer(
 
     const initialHeight = useRef(position * rowHeight);
     const groupRef = useRef<Konva.Group>(null);
-    const fieldsRef = useRef<Konva.Group>(null);
     const rectRef = useRef<Konva.Rect>(null);
     const arrowRef = useRef<Konva.Text>(null);
     const fillerRef = useRef<Konva.Rect>(null);
@@ -43,11 +42,8 @@ export const ItemLabel = observer(
 
     const handleClickArrow = (event: KonvaEventObject<MouseEvent>) => {
       event.cancelBubble = true;
-
       item.setToggled(!item.toggled);
       arrowRef.current?.to({ rotation: item.toggled ? 180 : 0 });
-      const position = item.toggled ? item.fields.length * rowHeight : 0;
-      fillerRef.current?.to({ y: rowHeight + position });
     };
 
     const handleClickGroup = (event: KonvaEventObject<MouseEvent>) => {
@@ -56,27 +52,21 @@ export const ItemLabel = observer(
     };
 
     useEffect(() => {
+      const shift = item.toggled ? item.fields.length * rowHeight : 0;
+      fillerRef.current?.to({ y: rowHeight + shift });
       groupRef.current?.to({ y: position * rowHeight });
-    }, [position, rowHeight]);
+    }, [item.fields.length, item.toggled, position, rowHeight]);
 
     return (
-      <Group
-        ref={groupRef}
-        x={0}
-        y={initialHeight.current}
-        height={rowHeight}
-        width={labelsWidth}
-      >
-        <Group ref={fieldsRef}>
-          {item.fields.map((field, index) => (
-            <FieldLabel
-              key={field.id}
-              field={field}
-              position={index + 1}
-              workspaceStore={workspaceStore}
-            />
-          ))}
-        </Group>
+      <Group ref={groupRef} x={0} y={initialHeight.current} width={labelsWidth}>
+        {item.fields.map((field, index) => (
+          <FieldLabel
+            key={field.id}
+            field={field}
+            position={index + 1}
+            workspaceStore={workspaceStore}
+          />
+        ))}
         <Rect
           ref={fillerRef}
           y={rowHeight}
