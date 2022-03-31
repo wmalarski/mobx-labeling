@@ -45,22 +45,18 @@ export const ItemLabel = observer(
       event.cancelBubble = true;
 
       item.setToggled(!item.toggled);
-      arrowRef.current?.to({
-        rotation: item.toggled ? 180 : 0,
-      });
-      fillerRef.current?.to({
-        y: rowHeight + (item.toggled ? item.fields.length * rowHeight : 0),
-      });
+      arrowRef.current?.to({ rotation: item.toggled ? 180 : 0 });
+      const position = item.toggled ? item.fields.length * rowHeight : 0;
+      fillerRef.current?.to({ y: rowHeight + position });
     };
 
-    const handleClickGroup = () => {
+    const handleClickGroup = (event: KonvaEventObject<MouseEvent>) => {
+      if (!event.evt.ctrlKey) workspaceStore.deselectAll();
       item.setSelected(!item.selected);
     };
 
     useEffect(() => {
-      groupRef.current?.to({
-        y: position * rowHeight,
-      });
+      groupRef.current?.to({ y: position * rowHeight });
     }, [position, rowHeight]);
 
     return (
@@ -121,6 +117,7 @@ export const ItemLabel = observer(
             text={item.name}
             fill={foregroundColor}
             width={labelsWidth - 15}
+            fontStyle={item.selected ? "bold" : "normal"}
             ellipsis
             wrap="none"
           />

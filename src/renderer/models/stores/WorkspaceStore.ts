@@ -61,6 +61,14 @@ export const WorkspaceStore = types
     removeItem(item: Instance<typeof Item>) {
       self.batch.items.remove(item);
     },
+    deselectAll() {
+      self.batch.items.forEach((item) => {
+        item.setSelected(false);
+        item.fields.forEach((field) => {
+          field.setSelected(false);
+        });
+      });
+    },
   }))
   .views((self) => ({
     get selectedItems() {

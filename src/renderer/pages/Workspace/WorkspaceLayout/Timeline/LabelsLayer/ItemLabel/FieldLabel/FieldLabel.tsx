@@ -1,4 +1,5 @@
 import Konva from "konva";
+import { KonvaEventObject } from "konva/lib/Node";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement, useRef } from "react";
@@ -13,7 +14,7 @@ type Props = {
 };
 
 export const FieldLabel = observer(
-  ({ field, position }: Props): ReactElement => {
+  ({ field, position, workspaceStore }: Props): ReactElement => {
     const {
       labelsWidth,
       rowHeight,
@@ -33,7 +34,8 @@ export const FieldLabel = observer(
       rectRef.current?.fill(field.selected ? selectionColor : deselectionColor);
     };
 
-    const handleClickGroup = () => {
+    const handleClickGroup = (event: KonvaEventObject<MouseEvent>) => {
+      if (!event.evt.ctrlKey) workspaceStore.deselectAll();
       field.setSelected(!field.selected);
     };
 
@@ -59,6 +61,7 @@ export const FieldLabel = observer(
           text={field.definition.name}
           fill={foregroundColor}
           width={labelsWidth - 15}
+          fontStyle={field.selected ? "bold" : "normal"}
           ellipsis
           wrap="none"
         />
