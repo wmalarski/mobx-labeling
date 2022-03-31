@@ -5,7 +5,7 @@ import { Layer } from "react-konva";
 import { WorkspaceStore } from "renderer/models";
 import { getItemPositions } from "../Timeline.utils";
 import { useTimelineConfig } from "../TimelineContext/TimelineContext";
-import { ItemLabel } from "./ItemLabel/ItemLabel";
+import { LabelCollapsible } from "./LabelCollapsible/LabelCollapsible";
 
 type Props = {
   workspaceStore: Instance<typeof WorkspaceStore>;
@@ -20,7 +20,7 @@ export const LabelsLayer = observer(
     return (
       <Layer x={0} y={0} width={labelsWidth}>
         {items.map(({ item, position }) => (
-          <ItemLabel
+          <LabelCollapsible
             key={item.id}
             item={item}
             position={position}
