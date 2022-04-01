@@ -1,8 +1,7 @@
-import Konva from "konva";
 import { KonvaEventObject } from "konva/lib/Node";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
-import { ReactElement, useRef } from "react";
+import { ReactElement } from "react";
 import { Group, Rect, Text } from "react-konva";
 import { Field, WorkspaceStore } from "renderer/models";
 import { useTimelineConfig } from "../../../TimelineContext/TimelineContext";
@@ -11,10 +10,11 @@ type Props = {
   workspaceStore: Instance<typeof WorkspaceStore>;
   field: Instance<typeof Field>;
   position: number;
+  width: number;
 };
 
 export const FieldLabel = observer(
-  ({ field, position, workspaceStore }: Props): ReactElement => {
+  ({ field, position, workspaceStore, width }: Props): ReactElement => {
     const {
       labelsWidth,
       rowHeight,
@@ -24,14 +24,12 @@ export const FieldLabel = observer(
       deselectionColor,
     } = useTimelineConfig();
 
-    const rectRef = useRef<Konva.Rect>(null);
-
     const handleMouseOverGroup = () => {
-      rectRef.current?.fill(field.selected ? selectionColor : hoverColor);
+      field.setHovered(true);
     };
 
     const handleMouseOutGroup = () => {
-      rectRef.current?.fill(field.selected ? selectionColor : deselectionColor);
+      field.setHovered(false);
     };
 
     const handleClickGroup = (event: KonvaEventObject<MouseEvent>) => {
@@ -41,19 +39,23 @@ export const FieldLabel = observer(
 
     return (
       <Group
-        x={0}
         y={position * rowHeight}
         height={rowHeight}
-        width={labelsWidth}
+        width={width}
         onMouseOver={handleMouseOverGroup}
         onMouseOut={handleMouseOutGroup}
         onClick={handleClickGroup}
       >
         <Rect
-          ref={rectRef}
-          width={labelsWidth}
+          width={width}
           height={rowHeight}
-          fill={field.selected ? selectionColor : deselectionColor}
+          fill={
+            field.selected
+              ? selectionColor
+              : field.hovered
+              ? hoverColor
+              : deselectionColor
+          }
         />
         <Text
           x={15}

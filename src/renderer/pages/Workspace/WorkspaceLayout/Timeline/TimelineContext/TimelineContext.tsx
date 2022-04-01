@@ -51,12 +51,12 @@ export const TimelineContextProvider = ({
     () => ({
       isInitialized: true,
       config: {
-        deselectionColor: theme.palette.accents_1,
         labelsWidth: 150,
         rowHeight: 40,
-        selectionColor: theme.palette.accents_3,
+        deselectionColor: theme.palette.background,
+        selectionColor: theme.palette.accents_2,
         backgroundColor: theme.palette.background,
-        hoverColor: theme.palette.accents_2,
+        hoverColor: theme.palette.accents_1,
         foregroundColor: theme.palette.foreground,
       },
     }),

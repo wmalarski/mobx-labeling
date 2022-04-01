@@ -38,12 +38,12 @@ export const Timeline = observer(
         <Grid xs={24}>
           <Stage width={rect.width} height={rect.height}>
             <TimelineContextProvider theme={theme}>
+              <LabelsLayer workspaceStore={workspaceStore} width={rect.width} />
               <ItemsLayer
                 workspaceStore={workspaceStore}
                 scaleX={zoom.scaleX}
                 stageX={zoom.stageX}
               />
-              <LabelsLayer workspaceStore={workspaceStore} />
             </TimelineContextProvider>
           </Stage>
         </Grid>

@@ -12,11 +12,12 @@ type Props = {
   workspaceStore: Instance<typeof WorkspaceStore>;
   item: Instance<typeof Item>;
   position: number;
+  width: number;
 };
 
 export const LabelCollapsible = observer(
-  ({ item, position, workspaceStore }: Props): ReactElement => {
-    const { labelsWidth, rowHeight, backgroundColor } = useTimelineConfig();
+  ({ item, position, workspaceStore, width }: Props): ReactElement => {
+    const { rowHeight, backgroundColor } = useTimelineConfig();
 
     const initialHeight = useRef(position * rowHeight);
     const groupRef = useRef<Konva.Group>(null);
@@ -29,23 +30,24 @@ export const LabelCollapsible = observer(
     }, [item.fields.length, item.toggled, position, rowHeight]);
 
     return (
-      <Group ref={groupRef} x={0} y={initialHeight.current} width={labelsWidth}>
+      <Group ref={groupRef} y={initialHeight.current} width={width}>
         {item.fields.map((field, index) => (
           <FieldLabel
             key={field.id}
             field={field}
             position={index + 1}
             workspaceStore={workspaceStore}
+            width={width}
           />
         ))}
         <Rect
           ref={fillerRef}
           y={rowHeight}
-          width={labelsWidth}
+          width={width}
           height={item.fields.length * rowHeight}
           fill={backgroundColor}
         />
-        <ItemLabel item={item} workspaceStore={workspaceStore} />
+        <ItemLabel item={item} workspaceStore={workspaceStore} width={width} />
       </Group>
     );
   }

@@ -31,7 +31,7 @@ Playground.args = {
     setEventListener: () => void 0,
     removeEventListener: () => void 0,
     getRect() {
-      return { width: 500, height: 500 };
+      return { width: 800, height: 500 };
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } as any,

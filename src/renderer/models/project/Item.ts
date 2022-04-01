@@ -21,6 +21,7 @@ export const Item = types
     currentFrame: types.reference(CurrentFrame),
     selected: types.optional(types.boolean, false),
     toggled: types.optional(types.boolean, false),
+    hovered: types.optional(types.boolean, false),
   })
   .views((self) => ({
     info(): ItemInfo {
@@ -45,5 +46,8 @@ export const Item = types
     },
     setToggled(toggled: boolean) {
       self.toggled = toggled;
+    },
+    setHovered(hovered: boolean) {
+      self.hovered = hovered;
     },
   }));

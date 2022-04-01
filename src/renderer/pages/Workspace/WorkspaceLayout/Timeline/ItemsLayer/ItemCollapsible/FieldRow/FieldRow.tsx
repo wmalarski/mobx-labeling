@@ -1,3 +1,4 @@
+import { KonvaEventObject } from "konva/lib/Node";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
@@ -13,22 +14,47 @@ type Props = {
 
 export const FieldRow = observer(
   ({ field, position, workspaceStore }: Props): ReactElement => {
-    const { rowHeight, selectionColor, deselectionColor } = useTimelineConfig();
+    const {
+      rowHeight,
+      selectionColor,
+      deselectionColor,
+      hoverColor,
+      foregroundColor,
+    } = useTimelineConfig();
+
+    const handleMouseOverGroup = () => {
+      field.setHovered(true);
+    };
+
+    const handleMouseOutGroup = () => {
+      field.setHovered(false);
+    };
+
+    const handleClickGroup = (event: KonvaEventObject<MouseEvent>) => {
+      if (!event.evt.ctrlKey) workspaceStore.deselectAll();
+      field.setSelected(!field.selected);
+    };
 
     return (
-      <Group x={0} y={position * rowHeight} height={rowHeight}>
+      <Group
+        y={position * rowHeight}
+        height={rowHeight}
+        onMouseOver={handleMouseOverGroup}
+        onMouseOut={handleMouseOutGroup}
+        onClick={handleClickGroup}
+      >
         <Rect
           width={workspaceStore.framesCount}
           height={rowHeight}
-          fill={field.selected ? selectionColor : deselectionColor}
-        ></Rect>
-        <Text
-          x={0}
-          y={0}
-          text={field.definition.name}
-          fill="white"
-          height={rowHeight}
+          fill={
+            field.selected
+              ? selectionColor
+              : field.hovered
+              ? hoverColor
+              : deselectionColor
+          }
         />
+        <Text text={field.definition.name} fill={foregroundColor} />
       </Group>
     );
   }

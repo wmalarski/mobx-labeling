@@ -8,6 +8,7 @@ export const FieldBase = types
     currentFrame: types.reference(CurrentFrame),
     blocked: types.optional(types.boolean, false),
     selected: types.optional(types.boolean, false),
+    hovered: types.optional(types.boolean, false),
   })
   .actions((self) => ({
     setBlocked(blocked: boolean) {
@@ -15,5 +16,8 @@ export const FieldBase = types
     },
     setSelected(selected: boolean) {
       self.selected = selected;
+    },
+    setHovered(hovered: boolean) {
+      self.hovered = hovered;
     },
   }));

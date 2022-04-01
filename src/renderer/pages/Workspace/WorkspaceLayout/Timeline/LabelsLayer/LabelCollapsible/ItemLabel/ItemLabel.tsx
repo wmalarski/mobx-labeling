@@ -10,10 +10,11 @@ import { useTimelineConfig } from "../../../TimelineContext/TimelineContext";
 type Props = {
   workspaceStore: Instance<typeof WorkspaceStore>;
   item: Instance<typeof Item>;
+  width: number;
 };
 
 export const ItemLabel = observer(
-  ({ item, workspaceStore }: Props): ReactElement => {
+  ({ item, workspaceStore, width }: Props): ReactElement => {
     const {
       labelsWidth,
       rowHeight,
@@ -23,26 +24,25 @@ export const ItemLabel = observer(
       foregroundColor,
     } = useTimelineConfig();
 
-    const rectRef = useRef<Konva.Rect>(null);
     const arrowRef = useRef<Konva.Text>(null);
 
     const handleMouseOverGroup = () => {
-      rectRef.current?.fill(item.selected ? selectionColor : hoverColor);
+      item.setHovered(true);
     };
 
     const handleMouseOutGroup = () => {
-      rectRef.current?.fill(item.selected ? selectionColor : deselectionColor);
+      item.setHovered(false);
+    };
+
+    const handleClickGroup = (event: KonvaEventObject<MouseEvent>) => {
+      if (!event.evt.ctrlKey) workspaceStore.deselectAll();
+      item.setSelected(!item.selected);
     };
 
     const handleClickArrow = (event: KonvaEventObject<MouseEvent>) => {
       event.cancelBubble = true;
       item.setToggled(!item.toggled);
       arrowRef.current?.to({ rotation: item.toggled ? 180 : 0 });
-    };
-
-    const handleClickGroup = (event: KonvaEventObject<MouseEvent>) => {
-      if (!event.evt.ctrlKey) workspaceStore.deselectAll();
-      item.setSelected(!item.selected);
     };
 
     return (
@@ -52,10 +52,15 @@ export const ItemLabel = observer(
         onClick={handleClickGroup}
       >
         <Rect
-          ref={rectRef}
-          width={labelsWidth}
+          width={width}
           height={rowHeight}
-          fill={item.selected ? selectionColor : deselectionColor}
+          fill={
+            item.selected
+              ? selectionColor
+              : item.hovered
+              ? hoverColor
+              : deselectionColor
+          }
         />
         <Text
           ref={arrowRef}
