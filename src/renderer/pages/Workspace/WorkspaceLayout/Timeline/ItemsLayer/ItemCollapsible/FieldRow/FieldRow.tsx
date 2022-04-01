@@ -14,13 +14,7 @@ type Props = {
 
 export const FieldRow = observer(
   ({ field, position, workspaceStore }: Props): ReactElement => {
-    const {
-      rowHeight,
-      selectionColor,
-      deselectionColor,
-      hoverColor,
-      foregroundColor,
-    } = useTimelineConfig();
+    const config = useTimelineConfig();
 
     const handleMouseOverGroup = () => {
       field.setHovered(true);
@@ -37,24 +31,24 @@ export const FieldRow = observer(
 
     return (
       <Group
-        y={position * rowHeight}
-        height={rowHeight}
+        y={position * config.rowHeight}
+        height={config.rowHeight}
         onMouseOver={handleMouseOverGroup}
         onMouseOut={handleMouseOutGroup}
         onClick={handleClickGroup}
       >
         <Rect
           width={workspaceStore.framesCount}
-          height={rowHeight}
+          height={config.rowHeight}
           fill={
             field.selected
-              ? selectionColor
+              ? config.selectionColor
               : field.hovered
-              ? hoverColor
-              : deselectionColor
+              ? config.hoverColor
+              : config.deselectionColor
           }
         />
-        <Text text={field.definition.name} fill={foregroundColor} />
+        <Text text={field.definition.name} fill={config.foregroundColor} />
       </Group>
     );
   }

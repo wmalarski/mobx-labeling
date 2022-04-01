@@ -15,14 +15,7 @@ type Props = {
 
 export const FieldLabel = observer(
   ({ field, position, workspaceStore, width }: Props): ReactElement => {
-    const {
-      labelsWidth,
-      rowHeight,
-      foregroundColor,
-      selectionColor,
-      hoverColor,
-      deselectionColor,
-    } = useTimelineConfig();
+    const config = useTimelineConfig();
 
     const handleMouseOverGroup = () => {
       field.setHovered(true);
@@ -39,8 +32,8 @@ export const FieldLabel = observer(
 
     return (
       <Group
-        y={position * rowHeight}
-        height={rowHeight}
+        y={position * config.rowHeight}
+        height={config.rowHeight}
         width={width}
         onMouseOver={handleMouseOverGroup}
         onMouseOut={handleMouseOutGroup}
@@ -48,21 +41,21 @@ export const FieldLabel = observer(
       >
         <Rect
           width={width}
-          height={rowHeight}
+          height={config.rowHeight}
           fill={
             field.selected
-              ? selectionColor
+              ? config.selectionColor
               : field.hovered
-              ? hoverColor
-              : deselectionColor
+              ? config.hoverColor
+              : config.deselectionColor
           }
         />
         <Text
           x={15}
-          y={rowHeight / 2 - 8}
+          y={config.rowHeight / 2 - 8}
           text={field.definition.name}
-          fill={foregroundColor}
-          width={labelsWidth - 15}
+          fill={config.foregroundColor}
+          width={config.labelsWidth - 15}
           fontStyle={field.selected ? "bold" : "normal"}
           ellipsis
           wrap="none"

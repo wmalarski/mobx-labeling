@@ -15,12 +15,12 @@ type Props = {
 
 export const ItemsLayer = observer(
   ({ workspaceStore, stageX, scaleX }: Props): ReactElement => {
-    const { labelsWidth } = useTimelineConfig();
+    const config = useTimelineConfig();
 
     const items = getItemPositions(workspaceStore);
 
     return (
-      <Layer x={labelsWidth + stageX} scaleX={scaleX}>
+      <Layer x={config.labelsWidth + stageX} scaleX={scaleX}>
         {items.map(({ item, position }) => (
           <ItemCollapsible
             key={item.id}

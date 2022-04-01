@@ -13,13 +13,7 @@ type Props = {
 
 export const ItemRow = observer(
   ({ item, workspaceStore }: Props): ReactElement => {
-    const {
-      rowHeight,
-      deselectionColor,
-      selectionColor,
-      foregroundColor,
-      hoverColor,
-    } = useTimelineConfig();
+    const config = useTimelineConfig();
 
     const handleMouseOverGroup = () => {
       item.setHovered(true);
@@ -42,16 +36,20 @@ export const ItemRow = observer(
       >
         <Rect
           width={workspaceStore.framesCount}
-          height={rowHeight}
+          height={config.rowHeight}
           fill={
             item.selected
-              ? selectionColor
+              ? config.selectionColor
               : item.hovered
-              ? hoverColor
-              : deselectionColor
+              ? config.hoverColor
+              : config.deselectionColor
           }
         />
-        <Text text={item.name} height={rowHeight} fill={foregroundColor} />
+        <Text
+          text={item.name}
+          height={config.rowHeight}
+          fill={config.foregroundColor}
+        />
       </Group>
     );
   }

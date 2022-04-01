@@ -15,14 +15,7 @@ type Props = {
 
 export const ItemLabel = observer(
   ({ item, workspaceStore, width }: Props): ReactElement => {
-    const {
-      labelsWidth,
-      rowHeight,
-      deselectionColor,
-      selectionColor,
-      hoverColor,
-      foregroundColor,
-    } = useTimelineConfig();
+    const config = useTimelineConfig();
 
     const arrowRef = useRef<Konva.Text>(null);
 
@@ -53,37 +46,37 @@ export const ItemLabel = observer(
       >
         <Rect
           width={width}
-          height={rowHeight}
+          height={config.rowHeight}
           fill={
             item.selected
-              ? selectionColor
+              ? config.selectionColor
               : item.hovered
-              ? hoverColor
-              : deselectionColor
+              ? config.hoverColor
+              : config.deselectionColor
           }
         />
         <Text
           ref={arrowRef}
           text="▼"
           x={5}
-          y={rowHeight / 2}
+          y={config.rowHeight / 2}
           offsetX={6}
           offsetY={5}
-          fill={foregroundColor}
+          fill={config.foregroundColor}
         />
         <Rect
           x={0}
           y={0}
           width={15}
-          height={rowHeight}
+          height={config.rowHeight}
           onClick={handleClickArrow}
         />
         <Text
           x={15}
-          y={rowHeight / 2 - 8}
+          y={config.rowHeight / 2 - 8}
           text={item.name}
-          fill={foregroundColor}
-          width={labelsWidth - 15}
+          fill={config.foregroundColor}
+          width={config.labelsWidth - 15}
           fontStyle={item.selected ? "bold" : "normal"}
           ellipsis
           wrap="none"

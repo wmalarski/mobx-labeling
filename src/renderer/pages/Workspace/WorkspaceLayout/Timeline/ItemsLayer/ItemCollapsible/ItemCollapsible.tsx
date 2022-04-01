@@ -16,17 +16,17 @@ type Props = {
 
 export const ItemCollapsible = observer(
   ({ item, position, workspaceStore }: Props): ReactElement => {
-    const { rowHeight, backgroundColor } = useTimelineConfig();
+    const config = useTimelineConfig();
 
-    const initialHeight = useRef(position * rowHeight);
+    const initialHeight = useRef(position * config.rowHeight);
     const groupRef = useRef<Konva.Group>(null);
     const fillerRef = useRef<Konva.Rect>(null);
 
     useEffect(() => {
-      const shift = item.toggled ? item.fields.length * rowHeight : 0;
-      fillerRef.current?.to({ y: rowHeight + shift });
-      groupRef.current?.to({ y: position * rowHeight });
-    }, [item.fields.length, item.toggled, position, rowHeight]);
+      const shift = item.toggled ? item.fields.length * config.rowHeight : 0;
+      fillerRef.current?.to({ y: config.rowHeight + shift });
+      groupRef.current?.to({ y: position * config.rowHeight });
+    }, [item.fields.length, item.toggled, position, config.rowHeight]);
 
     return (
       <Group ref={groupRef} x={0} y={initialHeight.current}>
@@ -40,10 +40,10 @@ export const ItemCollapsible = observer(
         ))}
         <Rect
           ref={fillerRef}
-          y={rowHeight}
+          y={config.rowHeight}
           width={workspaceStore.framesCount}
-          height={item.fields.length * rowHeight}
-          fill={backgroundColor}
+          height={item.fields.length * config.rowHeight}
+          fill={config.backgroundColor}
         />
         <ItemRow item={item} workspaceStore={workspaceStore} />
       </Group>
