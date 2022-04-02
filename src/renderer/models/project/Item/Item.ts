@@ -1,9 +1,9 @@
 import { getSnapshot, SnapshotOut, types } from "mobx-state-tree";
 import { nanoid } from "nanoid";
-import { ItemDefinition } from "../definition/ItemDefinition/ItemDefinition";
-import { CurrentFrame } from "./CurrentFrame";
-import { Field } from "./Field";
-import { Range } from "./Range";
+import { ItemDefinition } from "../../definition/ItemDefinition/ItemDefinition";
+import { CurrentFrame } from "../CurrentFrame";
+import { Field } from "../Field";
+import { Range } from "../Range";
 
 export type ItemInfo = {
   id: string;
@@ -49,5 +49,22 @@ export const Item = types
     },
     setHovered(hovered: boolean) {
       self.hovered = hovered;
+    },
+    addCurrentFrame() {
+      const frame = self.currentFrame.frame;
+      const left = self.ranges.find((range) => range.end + 1 === frame);
+      const right = self.ranges.find((range) => range.start - 1 === frame);
+
+      if (right && left) {
+        left.setEnd(right.end);
+        self.ranges.remove(right);
+      } else if (right) {
+        right.setStart(frame);
+      } else if (left) {
+        left.setEnd(frame);
+      } else {
+        const range = Range.create({ start: frame, end: frame });
+        self.ranges.push(range);
+      }
     },
   }));

@@ -1,5 +1,5 @@
 import { types } from "mobx-state-tree";
-import { Item, ItemInfo } from "./Item";
+import { Item, ItemInfo } from "./Item/Item";
 
 export const Batch = types
   .model("Batch", {

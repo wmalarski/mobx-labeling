@@ -15,6 +15,7 @@ type TimelineConfig = {
   backgroundColor: string;
   hoverColor: string;
   foregroundColor: string;
+  rangeColor: string;
 };
 
 type TimelineContextValue =
@@ -58,6 +59,7 @@ export const TimelineContextProvider = ({
         backgroundColor: theme.palette.background,
         hoverColor: theme.palette.accents_1,
         foregroundColor: theme.palette.foreground,
+        rangeColor: theme.palette.secondary,
       },
     }),
     [theme.palette]

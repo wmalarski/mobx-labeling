@@ -45,6 +45,15 @@ export const ItemRow = observer(
               : config.deselectionColor
           }
         />
+        {item.ranges.map((range) => (
+          <Rect
+            key={range.start}
+            x={range.start}
+            height={config.rowHeight}
+            width={range.end - range.start}
+            fill={config.rangeColor}
+          />
+        ))}
         <Text
           text={item.name}
           height={config.rowHeight}

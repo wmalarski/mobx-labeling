@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 import { ItemDefinition } from "../definition/ItemDefinition/ItemDefinition";
 import { Batch } from "../project/Batch";
 import { CurrentFrame } from "../project/CurrentFrame";
-import { Item } from "../project/Item";
+import { Item } from "../project/Item/Item";
 import { Project } from "../project/Project";
 import { Tool, ToolKind } from "../project/Tool";
 

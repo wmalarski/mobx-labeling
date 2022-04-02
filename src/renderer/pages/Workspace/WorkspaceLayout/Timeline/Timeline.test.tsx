@@ -14,8 +14,14 @@ const renderComponent = ({
   ...props
 }: PropsWithTestWrapper<Partial<Props>> = {}) => {
   const defaultProps: Props = {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    node: {} as any,
+    node: {
+      setEventListener: () => void 0,
+      removeEventListener: () => void 0,
+      getRect() {
+        return { width: 800, height: 500 };
+      },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any,
     workspaceStore: mockWorkspaceStore(),
   };
 

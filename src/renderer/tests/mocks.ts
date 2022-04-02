@@ -203,11 +203,14 @@ export const mockProjectsList = ({
 export const mockWorkspaceStore = ({
   update,
   items = 0,
+  framesCount = 1000,
 }: {
   update?: Partial<SnapshotIn<typeof WorkspaceStore>>;
   items?: number;
+  framesCount?: number;
 } = {}) => {
   const workspaceStore = WorkspaceStore.create({
+    framesCount,
     project: {
       batchSize: 100,
       definition: mockProjectDefinition(),
@@ -227,9 +230,33 @@ export const mockWorkspaceStore = ({
       const index = Math.floor(Math.random() * length);
       const definition = workspaceStore.project.definition.items[index];
       workspaceStore.addItem(definition);
+      const item = workspaceStore.batch.items.at(-1);
+
+      Array(framesCount)
+        .fill(0)
+        .forEach(() => {
+          const frame = Math.floor(Math.random() * framesCount);
+          item?.currentFrame.setFrame(frame);
+          item?.addCurrentFrame();
+        });
     });
 
   return workspaceStore;
+};
+
+export const mockItem = ({
+  update,
+  framesCount,
+}: {
+  update?: Partial<SnapshotIn<typeof WorkspaceStore>>;
+  framesCount?: number;
+} = {}) => {
+  const workspaceStore = mockWorkspaceStore({
+    items: 1,
+    framesCount,
+    update,
+  });
+  return workspaceStore.batch.items[0];
 };
 
 export const mockLayoutNode = (): FlexLayout.TabNode => {
