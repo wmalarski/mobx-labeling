@@ -4,7 +4,7 @@ import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
 import { Group, Rect, Text } from "react-konva";
 import { Field, WorkspaceStore } from "renderer/models";
-import { useTimelineConfig } from "../../../TimelineContext/TimelineContext";
+import { useTimelineConfig } from "../../TimelineContext/TimelineContext";
 
 type Props = {
   workspaceStore: Instance<typeof WorkspaceStore>;
