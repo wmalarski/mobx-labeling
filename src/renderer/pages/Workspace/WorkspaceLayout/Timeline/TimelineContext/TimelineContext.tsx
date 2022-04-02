@@ -44,6 +44,8 @@ type Props = {
   children: ReactNode;
 };
 
+export const TimelineLabelsWidth = 160;
+
 export const TimelineContextProvider = ({
   theme,
   children,
@@ -52,8 +54,8 @@ export const TimelineContextProvider = ({
     () => ({
       isInitialized: true,
       config: {
-        labelsWidth: 150,
         rowHeight: 40,
+        labelsWidth: TimelineLabelsWidth,
         deselectionColor: theme.palette.background,
         selectionColor: theme.palette.accents_2,
         backgroundColor: theme.palette.background,

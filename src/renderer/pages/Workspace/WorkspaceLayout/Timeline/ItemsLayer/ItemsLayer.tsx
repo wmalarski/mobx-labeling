@@ -1,26 +1,42 @@
+import Konva from "konva";
+import { KonvaEventObject } from "konva/lib/Node";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
 import { Layer } from "react-konva";
 import { WorkspaceStore } from "renderer/models";
-import { getItemPositions } from "../Timeline.utils";
+import { getItemPositions, UseXZoomResult } from "../Timeline.utils";
 import { useTimelineConfig } from "../TimelineContext/TimelineContext";
 import { ItemCollapsible } from "./ItemCollapsible/ItemCollapsible";
 
 type Props = {
   workspaceStore: Instance<typeof WorkspaceStore>;
-  stageX: number;
-  scaleX: number;
+  zoom: UseXZoomResult;
 };
 
 export const ItemsLayer = observer(
-  ({ workspaceStore, stageX, scaleX }: Props): ReactElement => {
+  ({ workspaceStore, zoom }: Props): ReactElement => {
     const config = useTimelineConfig();
 
     const items = getItemPositions(workspaceStore);
 
+    const dragBoundFunc = (pos: Konva.Vector2d): Konva.Vector2d => {
+      return { y: 0, x: pos.x };
+    };
+
+    const handleDragEnd = (event: KonvaEventObject<DragEvent>) => {
+      const x = event.target.x() - config.labelsWidth;
+      zoom.dispatch({ type: "move", x });
+    };
+
     return (
-      <Layer x={config.labelsWidth + stageX} scaleX={scaleX}>
+      <Layer
+        x={config.labelsWidth + zoom.stageX}
+        scaleX={zoom.scaleX}
+        draggable
+        dragBoundFunc={dragBoundFunc}
+        onDragEnd={handleDragEnd}
+      >
         {items.map(({ item, position }) => (
           <ItemCollapsible
             key={item.id}

@@ -10,8 +10,8 @@ export const TimelineBar = ({ zoom }: Props): ReactElement => {
   const { t } = useTranslation("common");
   return (
     <div>
-      <p>{t("TimelineBar")}</p>
-      <div>{zoom.scaleX}</div>
+      <span>{t("TimelineBar")}</span>
+      <pre>{JSON.stringify({ ...zoom, dispatch: null })}</pre>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import { Grid, useTheme } from "@geist-ui/core";
 import * as FlexLayout from "flexlayout-react";
 import Konva from "konva";
+import { KonvaEventObject } from "konva/lib/Node";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement, useRef } from "react";
@@ -11,7 +12,10 @@ import { ItemsLayer } from "./ItemsLayer/ItemsLayer";
 import { LabelsLayer } from "./LabelsLayer/LabelsLayer";
 import { useXZoom } from "./Timeline.utils";
 import { TimelineBar } from "./TimelineBar/TimelineBar";
-import { TimelineContextProvider } from "./TimelineContext/TimelineContext";
+import {
+  TimelineContextProvider,
+  TimelineLabelsWidth,
+} from "./TimelineContext/TimelineContext";
 
 type Props = {
   workspaceStore: Instance<typeof WorkspaceStore>;
@@ -30,20 +34,30 @@ export const Timeline = observer(
 
     const zoom = useXZoom();
 
+    const handleWheel = (e: KonvaEventObject<WheelEvent>) => {
+      e.evt.preventDefault();
+
+      const stage = e.target.getStage();
+      const point = stage?.getPointerPosition();
+
+      if (!point) return;
+
+      zoom.dispatch({
+        type: e.evt.deltaY < 0 ? "zoomIn" : "zoomOut",
+        x: point.x - TimelineLabelsWidth,
+      });
+    };
+
     return (
       <Grid.Container>
         <Grid xs={24}>
           <TimelineBar zoom={zoom} />
         </Grid>
         <Grid xs={24}>
-          <Stage width={rect.width} height={rect.height}>
+          <Stage width={rect.width} height={rect.height} onWheel={handleWheel}>
             <TimelineContextProvider theme={theme}>
               <LabelsLayer workspaceStore={workspaceStore} width={rect.width} />
-              <ItemsLayer
-                workspaceStore={workspaceStore}
-                scaleX={zoom.scaleX}
-                stageX={zoom.stageX}
-              />
+              <ItemsLayer workspaceStore={workspaceStore} zoom={zoom} />
             </TimelineContextProvider>
           </Stage>
         </Grid>

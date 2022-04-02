@@ -29,13 +29,17 @@ type UseXZoomAction =
       type: "set";
       scale: number;
       x: number;
+    }
+  | {
+      type: "move";
+      x: number;
     };
 
 export type UseXZoomResult = UseXZoomState & {
   dispatch: (action: UseXZoomAction) => void;
 };
 
-const getNewXZoomState = (
+export const getNewXZoomState = (
   newScaleX: number,
   x: number,
   state: UseXZoomState
@@ -67,6 +71,9 @@ const reducer = (
       return getNewXZoomState(state.scaleX + state.step, action.x, state);
     case "set":
       return getNewXZoomState(action.scale, action.x, state);
+    case "move": {
+      return { ...state, stageX: action.x };
+    }
   }
 };
 
