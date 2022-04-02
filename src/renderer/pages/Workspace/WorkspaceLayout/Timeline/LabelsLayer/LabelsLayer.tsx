@@ -8,22 +8,20 @@ import { LabelCollapsible } from "./LabelCollapsible/LabelCollapsible";
 
 type Props = {
   workspaceStore: Instance<typeof WorkspaceStore>;
-  width: number;
 };
 
 export const LabelsLayer = observer(
-  ({ workspaceStore, width }: Props): ReactElement => {
+  ({ workspaceStore }: Props): ReactElement => {
     const items = getItemPositions(workspaceStore);
 
     return (
-      <Layer width={width}>
+      <Layer>
         {items.map(({ item, position }) => (
           <LabelCollapsible
             key={item.id}
             item={item}
             position={position}
             workspaceStore={workspaceStore}
-            width={width}
           />
         ))}
       </Layer>

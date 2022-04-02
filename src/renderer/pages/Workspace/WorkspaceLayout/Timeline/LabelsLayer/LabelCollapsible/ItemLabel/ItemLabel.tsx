@@ -10,11 +10,10 @@ import { useTimelineConfig } from "../../../TimelineContext/TimelineContext";
 type Props = {
   workspaceStore: Instance<typeof WorkspaceStore>;
   item: Instance<typeof Item>;
-  width: number;
 };
 
 export const ItemLabel = observer(
-  ({ item, workspaceStore, width }: Props): ReactElement => {
+  ({ item, workspaceStore }: Props): ReactElement => {
     const config = useTimelineConfig();
 
     const arrowRef = useRef<Konva.Text>(null);
@@ -45,7 +44,7 @@ export const ItemLabel = observer(
         onClick={handleClickGroup}
       >
         <Rect
-          width={width}
+          width={config.labelsWidth}
           height={config.rowHeight}
           fill={
             item.selected

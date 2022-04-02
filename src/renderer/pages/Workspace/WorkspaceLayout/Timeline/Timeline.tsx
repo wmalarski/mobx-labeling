@@ -56,7 +56,7 @@ export const Timeline = observer(
         <Grid xs={24}>
           <Stage width={rect.width} height={rect.height} onWheel={handleWheel}>
             <TimelineContextProvider theme={theme}>
-              <LabelsLayer workspaceStore={workspaceStore} width={rect.width} />
+              <LabelsLayer workspaceStore={workspaceStore} />
               <ItemsLayer workspaceStore={workspaceStore} zoom={zoom} />
             </TimelineContextProvider>
           </Stage>

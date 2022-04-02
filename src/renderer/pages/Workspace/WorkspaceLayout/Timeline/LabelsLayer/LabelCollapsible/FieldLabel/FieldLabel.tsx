@@ -10,11 +10,10 @@ type Props = {
   workspaceStore: Instance<typeof WorkspaceStore>;
   field: Instance<typeof Field>;
   position: number;
-  width: number;
 };
 
 export const FieldLabel = observer(
-  ({ field, position, workspaceStore, width }: Props): ReactElement => {
+  ({ field, position, workspaceStore }: Props): ReactElement => {
     const config = useTimelineConfig();
 
     const handleMouseOverGroup = () => {
@@ -34,13 +33,13 @@ export const FieldLabel = observer(
       <Group
         y={position * config.rowHeight}
         height={config.rowHeight}
-        width={width}
+        width={config.labelsWidth}
         onMouseOver={handleMouseOverGroup}
         onMouseOut={handleMouseOutGroup}
         onClick={handleClickGroup}
       >
         <Rect
-          width={width}
+          width={config.labelsWidth}
           height={config.rowHeight}
           fill={
             field.selected

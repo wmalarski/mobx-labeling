@@ -2,7 +2,7 @@ import Konva from "konva";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement, useEffect, useRef } from "react";
-import { Group, Rect } from "react-konva";
+import { Group } from "react-konva";
 import { Item, WorkspaceStore } from "renderer/models";
 import { useTimelineConfig } from "../../TimelineContext/TimelineContext";
 import { FieldRow } from "./FieldRow/FieldRow";
@@ -20,11 +20,8 @@ export const ItemCollapsible = observer(
 
     const initialHeight = useRef(position * config.rowHeight);
     const groupRef = useRef<Konva.Group>(null);
-    const fillerRef = useRef<Konva.Rect>(null);
 
     useEffect(() => {
-      const shift = item.toggled ? item.fields.length * config.rowHeight : 0;
-      fillerRef.current?.to({ y: config.rowHeight + shift });
       groupRef.current?.to({ y: position * config.rowHeight });
     }, [item.fields.length, item.toggled, position, config.rowHeight]);
 
@@ -38,13 +35,6 @@ export const ItemCollapsible = observer(
             workspaceStore={workspaceStore}
           />
         ))}
-        <Rect
-          ref={fillerRef}
-          y={config.rowHeight}
-          width={workspaceStore.framesCount}
-          height={item.fields.length * config.rowHeight}
-          fill={config.backgroundColor}
-        />
         <ItemRow item={item} workspaceStore={workspaceStore} />
       </Group>
     );
