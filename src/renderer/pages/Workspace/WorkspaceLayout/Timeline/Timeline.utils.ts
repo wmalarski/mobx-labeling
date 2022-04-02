@@ -3,8 +3,6 @@ import { useReducer } from "react";
 import { Item, WorkspaceStore } from "renderer/models";
 import { optionalClamp } from "renderer/utils/geometry";
 
-export const labelsWidth = 160;
-
 export type UseXZoomState = {
   scaleX: number;
   stageX: number;
@@ -103,4 +101,10 @@ export const getItemPositions = (
 
     return [...prev, { item, position, size }];
   }, []);
+};
+
+export const getRowCount = (positions: ItemPosition[]): number => {
+  const last = positions.at(-1);
+  if (!last) return 0;
+  return last.position + last.size;
 };

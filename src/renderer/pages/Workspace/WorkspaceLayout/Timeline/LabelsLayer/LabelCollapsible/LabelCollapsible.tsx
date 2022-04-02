@@ -1,7 +1,6 @@
-import Konva from "konva";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
-import { ReactElement, useEffect, useRef } from "react";
+import { ReactElement } from "react";
 import { Group } from "react-konva";
 import { Item, WorkspaceStore } from "renderer/models";
 import { useTimelineConfig } from "../../TimelineContext/TimelineContext";
@@ -18,15 +17,8 @@ export const LabelCollapsible = observer(
   ({ item, position, workspaceStore }: Props): ReactElement => {
     const config = useTimelineConfig();
 
-    const initialHeight = useRef(position * config.rowHeight);
-    const groupRef = useRef<Konva.Group>(null);
-
-    useEffect(() => {
-      groupRef.current?.to({ y: position * config.rowHeight });
-    }, [item.fields.length, item.toggled, position, config.rowHeight]);
-
     return (
-      <Group ref={groupRef} y={initialHeight.current}>
+      <Group y={position * config.rowHeight}>
         {item.fields.map((field, index) => (
           <FieldLabel
             key={field.id}

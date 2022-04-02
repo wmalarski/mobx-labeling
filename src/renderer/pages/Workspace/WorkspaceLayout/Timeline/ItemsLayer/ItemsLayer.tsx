@@ -5,20 +5,19 @@ import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
 import { Layer } from "react-konva";
 import { WorkspaceStore } from "renderer/models";
-import { getItemPositions, UseXZoomResult } from "../Timeline.utils";
+import { ItemPosition, UseXZoomResult } from "../Timeline.utils";
 import { useTimelineConfig } from "../TimelineContext/TimelineContext";
 import { ItemCollapsible } from "./ItemCollapsible/ItemCollapsible";
 
 type Props = {
   workspaceStore: Instance<typeof WorkspaceStore>;
   zoom: UseXZoomResult;
+  items: ItemPosition[];
 };
 
 export const ItemsLayer = observer(
-  ({ workspaceStore, zoom }: Props): ReactElement => {
+  ({ workspaceStore, zoom, items }: Props): ReactElement => {
     const config = useTimelineConfig();
-
-    const items = getItemPositions(workspaceStore);
 
     const dragBoundFunc = (pos: Konva.Vector2d): Konva.Vector2d => {
       return { y: 0, x: pos.x };

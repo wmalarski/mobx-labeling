@@ -37,11 +37,16 @@ export const ItemLabel = observer(
       arrowRef.current?.to({ rotation: item.toggled ? 180 : 0 });
     };
 
+    const handleDblClick = () => {
+      item.setToggled(!item.toggled);
+    };
+
     return (
       <Group
         onMouseOver={handleMouseOverGroup}
         onMouseOut={handleMouseOutGroup}
         onClick={handleClickGroup}
+        onDblClick={handleDblClick}
       >
         <Rect
           width={config.labelsWidth}

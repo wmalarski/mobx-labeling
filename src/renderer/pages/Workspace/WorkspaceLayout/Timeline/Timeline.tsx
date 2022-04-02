@@ -10,11 +10,12 @@ import { WorkspaceStore } from "renderer/models";
 import { useNodeResize } from "renderer/utils/konva";
 import { ItemsLayer } from "./ItemsLayer/ItemsLayer";
 import { LabelsLayer } from "./LabelsLayer/LabelsLayer";
-import { useXZoom } from "./Timeline.utils";
+import { getItemPositions, getRowCount, useXZoom } from "./Timeline.utils";
 import { TimelineBar } from "./TimelineBar/TimelineBar";
 import {
   TimelineContextProvider,
   TimelineLabelsWidth,
+  TimelineRowHeight,
 } from "./TimelineContext/TimelineContext";
 
 type Props = {
@@ -33,6 +34,9 @@ export const Timeline = observer(
     useNodeResize({ node, stageRef });
 
     const zoom = useXZoom();
+
+    const items = getItemPositions(workspaceStore);
+    const count = getRowCount(items);
 
     const handleWheel = (e: KonvaEventObject<WheelEvent>) => {
       e.evt.preventDefault();
@@ -54,10 +58,19 @@ export const Timeline = observer(
           <TimelineBar zoom={zoom} />
         </Grid>
         <Grid xs={24}>
-          <Stage width={rect.width} height={rect.height} onWheel={handleWheel}>
+          <Stage
+            ref={stageRef}
+            width={rect.width}
+            height={count * TimelineRowHeight}
+            onWheel={handleWheel}
+          >
             <TimelineContextProvider theme={theme}>
-              <LabelsLayer workspaceStore={workspaceStore} />
-              <ItemsLayer workspaceStore={workspaceStore} zoom={zoom} />
+              <ItemsLayer
+                workspaceStore={workspaceStore}
+                zoom={zoom}
+                items={items}
+              />
+              <LabelsLayer workspaceStore={workspaceStore} items={items} />
             </TimelineContextProvider>
           </Stage>
         </Grid>

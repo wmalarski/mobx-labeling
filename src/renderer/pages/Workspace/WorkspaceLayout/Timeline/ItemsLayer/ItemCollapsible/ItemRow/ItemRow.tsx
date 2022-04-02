@@ -28,11 +28,16 @@ export const ItemRow = observer(
       item.setSelected(!item.selected);
     };
 
+    const handleDblClick = () => {
+      item.setToggled(!item.toggled);
+    };
+
     return (
       <Group
         onMouseOver={handleMouseOverGroup}
         onMouseOut={handleMouseOutGroup}
         onClick={handleClickGroup}
+        onDblClick={handleDblClick}
       >
         <Rect
           width={workspaceStore.framesCount}

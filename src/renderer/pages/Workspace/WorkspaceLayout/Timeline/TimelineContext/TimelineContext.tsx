@@ -45,6 +45,7 @@ type Props = {
 };
 
 export const TimelineLabelsWidth = 160;
+export const TimelineRowHeight = 40;
 
 export const TimelineContextProvider = ({
   theme,
@@ -54,7 +55,7 @@ export const TimelineContextProvider = ({
     () => ({
       isInitialized: true,
       config: {
-        rowHeight: 40,
+        rowHeight: TimelineRowHeight,
         labelsWidth: TimelineLabelsWidth,
         deselectionColor: theme.palette.background,
         selectionColor: theme.palette.accents_2,
