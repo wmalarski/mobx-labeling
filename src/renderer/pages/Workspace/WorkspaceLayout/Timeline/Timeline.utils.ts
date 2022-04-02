@@ -1,5 +1,5 @@
 import { Instance } from "mobx-state-tree";
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { Item, WorkspaceStore } from "renderer/models";
 import { optionalClamp } from "renderer/utils/geometry";
 
@@ -9,6 +9,7 @@ export type UseXZoomState = {
   step: number;
   min: number;
   max: number;
+  width: number;
 };
 
 type UseXZoomAction =
@@ -31,7 +32,17 @@ type UseXZoomAction =
   | {
       type: "move";
       x: number;
+    }
+  | {
+      type: "setMin";
+      min: number;
+      width: number;
     };
+
+type UseXZoomOptions = {
+  width: number;
+  framesCount: number;
+};
 
 export type UseXZoomResult = UseXZoomState & {
   dispatch: (action: UseXZoomAction) => void;
@@ -45,7 +56,12 @@ export const getNewXZoomState = (
   const clamped = optionalClamp(newScaleX, state.min, state.max);
   const mouseX = x / state.scaleX - state.stageX / state.scaleX;
   const newStageX = -(mouseX - x / clamped) * clamped;
-  return { ...state, scaleX: clamped, stageX: newStageX };
+  const limit = state.width * (1 - clamped / state.min);
+  return {
+    ...state,
+    scaleX: clamped,
+    stageX: Math.max(Math.min(newStageX, 0), limit),
+  };
 };
 
 const defaultXZoomState: UseXZoomState = {
@@ -54,6 +70,7 @@ const defaultXZoomState: UseXZoomState = {
   max: 5,
   min: 0.1,
   step: 0.1,
+  width: 1,
 };
 
 const reducer = (
@@ -69,14 +86,27 @@ const reducer = (
       return getNewXZoomState(state.scaleX + state.step, action.x, state);
     case "set":
       return getNewXZoomState(action.scale, action.x, state);
-    case "move": {
+    case "move":
       return { ...state, stageX: action.x };
-    }
+    case "setMin":
+      return { ...state, min: action.min, width: action.width };
   }
 };
 
-export const useXZoom = (): UseXZoomResult => {
-  const [state, dispatch] = useReducer(reducer, defaultXZoomState);
+export const useXZoom = ({
+  width,
+  framesCount,
+}: UseXZoomOptions): UseXZoomResult => {
+  const min = width / framesCount;
+  const [state, dispatch] = useReducer(reducer, {
+    ...defaultXZoomState,
+    min,
+    width,
+  });
+
+  useEffect(() => {
+    dispatch({ type: "setMin", min, width });
+  }, [min, width]);
 
   return { dispatch, ...state };
 };

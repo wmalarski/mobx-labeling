@@ -14,14 +14,18 @@ type Props = {
   workspaceStore: Instance<typeof WorkspaceStore>;
   zoom: UseXZoomResult;
   items: ItemPosition[];
+  width: number;
 };
 
 export const ItemsLayer = observer(
-  ({ workspaceStore, zoom, items }: Props): ReactElement => {
+  ({ workspaceStore, zoom, items, width }: Props): ReactElement => {
     const config = useTimelineConfig();
 
     const dragBoundFunc = (pos: Konva.Vector2d): Konva.Vector2d => {
-      return { y: 0, x: pos.x };
+      const maxLimit = width - zoom.scaleX * workspaceStore.framesCount;
+      const afterMin = Math.min(pos.x, config.labelsWidth);
+      const afterMax = Math.max(afterMin, maxLimit);
+      return { y: 0, x: afterMax };
     };
 
     const handleDragEnd = (event: KonvaEventObject<DragEvent>) => {

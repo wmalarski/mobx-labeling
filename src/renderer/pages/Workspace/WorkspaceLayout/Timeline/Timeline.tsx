@@ -33,7 +33,10 @@ export const Timeline = observer(
 
     useNodeResize({ node, stageRef });
 
-    const zoom = useXZoom();
+    const zoom = useXZoom({
+      width: rect.width - TimelineLabelsWidth,
+      framesCount: workspaceStore.framesCount,
+    });
 
     const items = getItemPositions(workspaceStore);
     const count = getRowCount(items);
@@ -69,6 +72,7 @@ export const Timeline = observer(
                 workspaceStore={workspaceStore}
                 zoom={zoom}
                 items={items}
+                width={rect.width}
               />
               <LabelsLayer workspaceStore={workspaceStore} items={items} />
             </TimelineContextProvider>
