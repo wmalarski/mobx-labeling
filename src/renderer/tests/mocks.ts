@@ -203,14 +203,13 @@ export const mockProjectsList = ({
 export const mockWorkspaceStore = ({
   update,
   items = 0,
-  framesCount = 1000,
+  fillFrames = 100,
 }: {
   update?: Partial<SnapshotIn<typeof WorkspaceStore>>;
   items?: number;
-  framesCount?: number;
+  fillFrames?: number;
 } = {}) => {
   const workspaceStore = WorkspaceStore.create({
-    framesCount,
     project: {
       batchSize: 100,
       definition: mockProjectDefinition(),
@@ -223,6 +222,7 @@ export const mockWorkspaceStore = ({
     },
     ...update,
   });
+
   Array(items)
     .fill(0)
     .forEach(() => {
@@ -232,10 +232,10 @@ export const mockWorkspaceStore = ({
       workspaceStore.addItem(definition);
       const item = workspaceStore.batch.items.at(-1);
 
-      Array(framesCount)
+      Array(fillFrames)
         .fill(0)
         .forEach(() => {
-          const frame = Math.floor(Math.random() * framesCount);
+          const frame = Math.floor(Math.random() * workspaceStore.framesCount);
           item?.currentFrame.setFrame(frame);
           item?.addCurrentFrame();
         });
@@ -246,14 +246,14 @@ export const mockWorkspaceStore = ({
 
 export const mockItem = ({
   update,
-  framesCount,
+  fillFrames,
 }: {
   update?: Partial<SnapshotIn<typeof WorkspaceStore>>;
-  framesCount?: number;
+  fillFrames?: number;
 } = {}) => {
   const workspaceStore = mockWorkspaceStore({
     items: 1,
-    framesCount,
+    fillFrames,
     update,
   });
   return workspaceStore.batch.items[0];

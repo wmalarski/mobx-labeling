@@ -2,7 +2,7 @@ import { KonvaEventObject } from "konva/lib/Node";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
-import { Group, Rect, Text } from "react-konva";
+import { Group, Rect } from "react-konva";
 import { Item, WorkspaceStore } from "renderer/models";
 import { useTimelineConfig } from "../../../TimelineContext/TimelineContext";
 
@@ -54,11 +54,6 @@ export const ItemRow = observer(
             fill={config.rangeColor}
           />
         ))}
-        <Text
-          text={item.name}
-          height={config.rowHeight}
-          fill={config.foregroundColor}
-        />
       </Group>
     );
   }

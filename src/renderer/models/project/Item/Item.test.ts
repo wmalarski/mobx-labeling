@@ -7,7 +7,7 @@ describe("<Item />", () => {
   it("should add independent frames", async () => {
     expect.hasAssertions();
 
-    const item = mockItem({ framesCount: 0 });
+    const item = mockItem({ fillFrames: 0 });
 
     expect(getSnapshot(item?.ranges)).toStrictEqual([{ start: 0, end: 0 }]);
 
@@ -23,7 +23,7 @@ describe("<Item />", () => {
   it("should add frame from left", async () => {
     expect.hasAssertions();
 
-    const item = mockItem({ framesCount: 0 });
+    const item = mockItem({ fillFrames: 0 });
 
     expect(getSnapshot(item?.ranges)).toStrictEqual([{ start: 0, end: 0 }]);
 
@@ -36,7 +36,7 @@ describe("<Item />", () => {
   it("should add frame from right", async () => {
     expect.hasAssertions();
 
-    const item = mockItem({ framesCount: 0 });
+    const item = mockItem({ fillFrames: 0 });
 
     expect(getSnapshot(item?.ranges)).toStrictEqual([{ start: 0, end: 0 }]);
 
@@ -49,7 +49,7 @@ describe("<Item />", () => {
   it("should merge two ranges", async () => {
     expect.hasAssertions();
 
-    const item = mockItem({ framesCount: 0 });
+    const item = mockItem({ fillFrames: 0 });
 
     expect(getSnapshot(item?.ranges)).toStrictEqual([{ start: 0, end: 0 }]);
 
@@ -62,6 +62,36 @@ describe("<Item />", () => {
     ]);
 
     item.currentFrame.setFrame(1);
+    item.addCurrentFrame();
+
+    expect(getSnapshot(item?.ranges)).toStrictEqual([{ start: 0, end: 2 }]);
+  });
+
+  it("should not add existing frame", async () => {
+    expect.hasAssertions();
+
+    const item = mockItem({ fillFrames: 0 });
+
+    expect(getSnapshot(item?.ranges)).toStrictEqual([{ start: 0, end: 0 }]);
+
+    item.currentFrame.setFrame(1);
+    item.addCurrentFrame();
+    item.currentFrame.setFrame(2);
+    item.addCurrentFrame();
+
+    expect(getSnapshot(item?.ranges)).toStrictEqual([{ start: 0, end: 2 }]);
+
+    item.currentFrame.setFrame(0);
+    item.addCurrentFrame();
+
+    expect(getSnapshot(item?.ranges)).toStrictEqual([{ start: 0, end: 2 }]);
+
+    item.currentFrame.setFrame(1);
+    item.addCurrentFrame();
+
+    expect(getSnapshot(item?.ranges)).toStrictEqual([{ start: 0, end: 2 }]);
+
+    item.currentFrame.setFrame(2);
     item.addCurrentFrame();
 
     expect(getSnapshot(item?.ranges)).toStrictEqual([{ start: 0, end: 2 }]);

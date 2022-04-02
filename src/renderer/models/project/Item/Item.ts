@@ -52,9 +52,14 @@ export const Item = types
     },
     addCurrentFrame() {
       const frame = self.currentFrame.frame;
+
+      const inside = self.ranges.some((range) => {
+        return range.start <= frame && frame <= range.end;
+      });
+      if (inside) return;
+
       const left = self.ranges.find((range) => range.end + 1 === frame);
       const right = self.ranges.find((range) => range.start - 1 === frame);
-
       if (right && left) {
         left.setEnd(right.end);
         self.ranges.remove(right);
