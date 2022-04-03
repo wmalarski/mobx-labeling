@@ -30,13 +30,13 @@ export const GraphForm = observer(({ field, tool }: Props): ReactElement => {
 
   const handleXChange =
     (pairIndex: number) => (event: ChangeEvent<HTMLInputElement>) => {
-      const value = Number(event.target.value);
+      const value = event.target.valueAsNumber;
       current.updateX(pairIndex, value);
     };
 
   const handleYChange =
     (pairIndex: number) => (event: ChangeEvent<HTMLInputElement>) => {
-      const value = Number(event.target.value);
+      const value = event.target.valueAsNumber;
       current.updateY(pairIndex, value);
     };
 

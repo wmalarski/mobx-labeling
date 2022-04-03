@@ -56,7 +56,7 @@ export const MultiSelectEditor = observer(
     const handleSizeChange =
       (option: Instance<typeof MultiSelectDefinitionOption>) =>
       (event: ChangeEvent<HTMLInputElement>) => {
-        option.setSize(Number(event.target.value));
+        option.setSize(event.target.valueAsNumber);
       };
 
     return (

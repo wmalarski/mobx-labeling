@@ -14,19 +14,19 @@ export const NumberEditor = observer(
     const { t } = useTranslation("definition");
 
     const handleMinChange = (event: ChangeEvent<HTMLInputElement>) => {
-      fieldDefinition.setMin(Number(event.target.value));
+      fieldDefinition.setMin(event.target.valueAsNumber);
     };
 
     const handleMaxChange = (event: ChangeEvent<HTMLInputElement>) => {
-      fieldDefinition.setMax(Number(event.target.value));
+      fieldDefinition.setMax(event.target.valueAsNumber);
     };
 
     const handleStepChange = (event: ChangeEvent<HTMLInputElement>) => {
-      fieldDefinition.setStep(Number(event.target.value));
+      fieldDefinition.setStep(event.target.valueAsNumber);
     };
 
     const handleDefaultChange = (event: ChangeEvent<HTMLInputElement>) => {
-      fieldDefinition.setDefault(Number(event.target.value));
+      fieldDefinition.setDefault(event.target.valueAsNumber);
     };
 
     return (

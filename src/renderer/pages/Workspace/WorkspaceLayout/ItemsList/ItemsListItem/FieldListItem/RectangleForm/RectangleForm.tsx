@@ -30,7 +30,7 @@ export const RectangleForm = observer(
 
     const handleChange =
       (index: number) => (event: ChangeEvent<HTMLInputElement>) => {
-        const value = Number(event.target.value);
+        const value = event.target.valueAsNumber;
         current.updateValue(index, value);
       };
 

@@ -34,7 +34,7 @@ export const Box3dForm = observer(({ field, tool }: Props): ReactElement => {
   const handleFrontChange =
     (pairIndex: number, position: number) =>
     (event: ChangeEvent<HTMLInputElement>) => {
-      const value = Number(event.target.value);
+      const value = event.target.valueAsNumber;
       const index = pairIndex * 2 + position;
       current.updateFront(index, value);
     };
@@ -47,7 +47,7 @@ export const Box3dForm = observer(({ field, tool }: Props): ReactElement => {
   const handleSideChange =
     (pairIndex: number, position: number) =>
     (event: ChangeEvent<HTMLInputElement>) => {
-      const value = Number(event.target.value);
+      const value = event.target.valueAsNumber;
       const index = pairIndex * 2 + position;
       current.updateSide(index, value);
     };

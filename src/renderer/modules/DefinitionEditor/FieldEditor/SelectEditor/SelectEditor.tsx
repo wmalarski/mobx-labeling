@@ -53,7 +53,7 @@ export const SelectEditor = observer(
     const handleSizeChange =
       (option: Instance<typeof SelectDefinitionOption>) =>
       (event: ChangeEvent<HTMLInputElement>) => {
-        option.setSize(Number(event.target.value));
+        option.setSize(event.target.valueAsNumber);
       };
 
     return (

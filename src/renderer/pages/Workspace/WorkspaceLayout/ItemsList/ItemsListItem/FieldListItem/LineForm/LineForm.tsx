@@ -38,7 +38,7 @@ export const LineForm = observer(({ field, tool }: Props): ReactElement => {
   const handleChange =
     (pairIndex: number, position: number) =>
     (event: ChangeEvent<HTMLInputElement>) => {
-      const value = Number(event.target.value);
+      const value = event.target.valueAsNumber;
       const index = pairIndex * 2 + position;
       current.updateValue(index, value);
     };

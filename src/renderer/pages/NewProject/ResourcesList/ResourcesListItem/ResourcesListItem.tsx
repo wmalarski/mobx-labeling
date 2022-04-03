@@ -16,11 +16,13 @@ export const ResourcesListItem = observer(
     const { t } = useTranslation("project");
 
     const handleFpsChange = (event: ChangeEvent<HTMLInputElement>) => {
-      resource.setFps(Number(event.target.value.split(".")[0]));
+      const fps = Number(event.target.valueAsNumber.toFixed(0));
+      resource.setFps(fps);
     };
 
     const handleFrameShiftChange = (event: ChangeEvent<HTMLInputElement>) => {
-      resource.setFrameShift(Number(event.target.value.split(".")[0]));
+      const shift = Number(event.target.valueAsNumber.toFixed(0));
+      resource.setFrameShift(shift);
     };
 
     return (

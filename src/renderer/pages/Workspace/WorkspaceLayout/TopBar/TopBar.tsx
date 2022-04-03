@@ -14,7 +14,7 @@ export const TopBar = observer(({ workspaceStore }: Props): ReactElement => {
   const { t } = useTranslation("workspace");
 
   const handleCurrentFrameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const currentFrame = Number(event.target.value);
+    const currentFrame = event.target.valueAsNumber;
     workspaceStore.currentFrame.setFrame(currentFrame);
   };
 

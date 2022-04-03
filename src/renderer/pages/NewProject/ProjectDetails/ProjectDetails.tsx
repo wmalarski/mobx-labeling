@@ -51,7 +51,8 @@ export const ProjectDetails = observer(
     };
 
     const handleBatchSizeChange = (event: ChangeEvent<HTMLInputElement>) => {
-      newProjectStore.setBatchSize(Number(event.target.value.split(".")[0]));
+      const size = Number(event.target.valueAsNumber.toFixed(0));
+      newProjectStore.setBatchSize(size);
     };
 
     return (
