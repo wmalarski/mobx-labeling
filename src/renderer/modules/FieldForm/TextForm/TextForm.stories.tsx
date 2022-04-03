@@ -1,52 +1,58 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { types } from "mobx-state-tree";
 import { ComponentProps } from "react";
-import { ComboBoxDefinition, ComboBoxField } from "renderer/models";
+import { TextDefinition, TextField } from "renderer/models";
 import { CurrentFrame } from "renderer/models/project/CurrentFrame";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
-import { ComboBoxForm } from "./ComboBoxForm";
+import { TextForm } from "./TextForm";
 
 export default {
-  title:
-    "pages/Workspace/WorkspaceLayout/ItemsList/ItemsListItem/FieldListItem/ComboBoxForm",
-  component: ComboBoxForm,
-} as ComponentMeta<typeof ComboBoxForm>;
+  title: "modules/FieldForm/TextForm",
+  component: TextForm,
+} as ComponentMeta<typeof TextForm>;
 
-type Props = ComponentProps<typeof ComboBoxForm>;
+type Props = ComponentProps<typeof TextForm>;
 
-const ComboBoxFormStory = ({
+const TextFormStory = ({
   wrapperProps,
   ...props
 }: PropsWithTestWrapper<Props>) => {
   return (
     <TestWrapper {...wrapperProps}>
-      <ComboBoxForm {...props} />
+      <TextForm {...props} />
     </TestWrapper>
   );
 };
 
-const Template: ComponentStory<typeof ComboBoxFormStory> = ComboBoxFormStory;
+const Template: ComponentStory<typeof TextFormStory> = TextFormStory;
 
 const Model = types.model({
+  definition: TextDefinition,
+  field: TextField,
   currentFrame: CurrentFrame,
-  definition: ComboBoxDefinition,
-  field: ComboBoxField,
 });
 
 const instance = Model.create({
-  currentFrame: { id: "id" },
   definition: {
+    change: "EveryFrame",
+    default: "Hello",
+    description: "Description",
     id: "id",
-    kind: "ComboBox",
-    name: "ComboBox",
+    kind: "Text",
+    name: "Text",
   },
   field: {
     currentFrame: "id",
     definition: "id",
     id: "1",
-    kind: "ComboBox",
+    kind: "Text",
+    values: { "0": { value: "hello" } },
   },
+  currentFrame: { id: "id" },
 });
 
 export const Playground = Template.bind({});
-Playground.args = { wrapperProps: {}, field: instance.field };
+Playground.args = {
+  wrapperProps: {},
+  field: instance.field,
+};

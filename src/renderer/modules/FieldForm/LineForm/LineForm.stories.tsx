@@ -1,37 +1,36 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { types } from "mobx-state-tree";
 import { ComponentProps } from "react";
-import { GraphDefinition, GraphField, Tool } from "renderer/models";
+import { LineDefinition, LineField, Tool } from "renderer/models";
 import { CurrentFrame } from "renderer/models/project/CurrentFrame";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
-import { GraphForm } from "./GraphForm";
+import { LineForm } from "./LineForm";
 
 export default {
-  title:
-    "pages/Workspace/WorkspaceLayout/ItemsList/ItemsListItem/FieldListItem/GraphForm",
-  component: GraphForm,
-} as ComponentMeta<typeof GraphForm>;
+  title: "modules/FieldForm/LineForm",
+  component: LineForm,
+} as ComponentMeta<typeof LineForm>;
 
-type Props = ComponentProps<typeof GraphForm>;
+type Props = ComponentProps<typeof LineForm>;
 
-const GraphFormStory = ({
+const LineFormStory = ({
   wrapperProps,
   ...props
 }: PropsWithTestWrapper<Props>) => {
   return (
     <TestWrapper {...wrapperProps}>
-      <GraphForm {...props} />
+      <LineForm {...props} />
     </TestWrapper>
   );
 };
 
-const Template: ComponentStory<typeof GraphFormStory> = GraphFormStory;
+const Template: ComponentStory<typeof LineFormStory> = LineFormStory;
 
 const Model = types.model({
-  currentFrame: CurrentFrame,
-  definition: GraphDefinition,
-  field: GraphField,
+  definition: LineDefinition,
+  field: LineField,
   tool: Tool,
+  currentFrame: CurrentFrame,
 });
 
 const instance = Model.create({
@@ -41,23 +40,15 @@ const instance = Model.create({
   },
   definition: {
     id: "id",
-    kind: "Graph",
-    name: "Graph",
+    kind: "Line",
+    name: "Line",
   },
   field: {
     currentFrame: "id",
     definition: "id",
     id: "1",
-    kind: "Graph",
-    values: {
-      "0": {
-        edges: [{ from: 0, to: 1 }],
-        points: [
-          { x: 0, y: 0 },
-          { x: 10, y: 100 },
-        ],
-      },
-    },
+    kind: "Line",
+    values: { "0": { values: [0, 0, 100, 100] } },
   },
 });
 

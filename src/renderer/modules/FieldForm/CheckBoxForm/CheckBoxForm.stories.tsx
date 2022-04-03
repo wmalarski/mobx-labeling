@@ -1,61 +1,51 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { types } from "mobx-state-tree";
 import { ComponentProps } from "react";
-import { PointDefinition, PointField, Tool } from "renderer/models";
+import { CheckBoxDefinition, CheckBoxField } from "renderer/models";
 import { CurrentFrame } from "renderer/models/project/CurrentFrame";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
-import { PointForm } from "./PointForm";
+import { CheckBoxForm } from "./CheckBoxForm";
 
 export default {
-  title:
-    "pages/Workspace/WorkspaceLayout/ItemsList/ItemsListItem/FieldListItem/PointForm",
-  component: PointForm,
-} as ComponentMeta<typeof PointForm>;
+  title: "modules/FieldForm/CheckBoxForm",
+  component: CheckBoxForm,
+} as ComponentMeta<typeof CheckBoxForm>;
 
-type Props = ComponentProps<typeof PointForm>;
+type Props = ComponentProps<typeof CheckBoxForm>;
 
-const PointFormStory = ({
+const CheckBoxFormStory = ({
   wrapperProps,
   ...props
 }: PropsWithTestWrapper<Props>) => {
   return (
     <TestWrapper {...wrapperProps}>
-      <PointForm {...props} />
+      <CheckBoxForm {...props} />
     </TestWrapper>
   );
 };
 
-const Template: ComponentStory<typeof PointFormStory> = PointFormStory;
+const Template: ComponentStory<typeof CheckBoxFormStory> = CheckBoxFormStory;
 
 const Model = types.model({
   currentFrame: CurrentFrame,
-  definition: PointDefinition,
-  field: PointField,
-  tool: Tool,
+  definition: CheckBoxDefinition,
+  field: CheckBoxField,
 });
 
 const instance = Model.create({
   currentFrame: { id: "id" },
-  tool: {
-    kind: "Selector",
-  },
   definition: {
     id: "id",
-    kind: "Point",
-    name: "Point",
+    kind: "CheckBox",
+    name: "CheckBox",
   },
   field: {
     currentFrame: "id",
     definition: "id",
     id: "1",
-    kind: "Point",
-    values: { "0": { value: [0, 0] } },
+    kind: "CheckBox",
   },
 });
 
 export const Playground = Template.bind({});
-Playground.args = {
-  field: instance.field,
-  tool: instance.tool,
-  wrapperProps: {},
-};
+Playground.args = { wrapperProps: {}, field: instance.field };

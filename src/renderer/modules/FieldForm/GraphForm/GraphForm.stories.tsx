@@ -1,36 +1,35 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { types } from "mobx-state-tree";
 import { ComponentProps } from "react";
-import { PolygonDefinition, PolygonField, Tool } from "renderer/models";
+import { GraphDefinition, GraphField, Tool } from "renderer/models";
 import { CurrentFrame } from "renderer/models/project/CurrentFrame";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
-import { PolygonForm } from "./PolygonForm";
+import { GraphForm } from "./GraphForm";
 
 export default {
-  title:
-    "pages/Workspace/WorkspaceLayout/ItemsList/ItemsListItem/FieldListItem/PolygonForm",
-  component: PolygonForm,
-} as ComponentMeta<typeof PolygonForm>;
+  title: "modules/FieldForm/GraphForm",
+  component: GraphForm,
+} as ComponentMeta<typeof GraphForm>;
 
-type Props = ComponentProps<typeof PolygonForm>;
+type Props = ComponentProps<typeof GraphForm>;
 
-const PolygonFormStory = ({
+const GraphFormStory = ({
   wrapperProps,
   ...props
 }: PropsWithTestWrapper<Props>) => {
   return (
     <TestWrapper {...wrapperProps}>
-      <PolygonForm {...props} />
+      <GraphForm {...props} />
     </TestWrapper>
   );
 };
 
-const Template: ComponentStory<typeof PolygonFormStory> = PolygonFormStory;
+const Template: ComponentStory<typeof GraphFormStory> = GraphFormStory;
 
 const Model = types.model({
   currentFrame: CurrentFrame,
-  definition: PolygonDefinition,
-  field: PolygonField,
+  definition: GraphDefinition,
+  field: GraphField,
   tool: Tool,
 });
 
@@ -41,15 +40,23 @@ const instance = Model.create({
   },
   definition: {
     id: "id",
-    kind: "Polygon",
-    name: "Polygon",
+    kind: "Graph",
+    name: "Graph",
   },
   field: {
     currentFrame: "id",
     definition: "id",
     id: "1",
-    kind: "Polygon",
-    values: { "0": { values: [0, 0, 100, 100] } },
+    kind: "Graph",
+    values: {
+      "0": {
+        edges: [{ from: 0, to: 1 }],
+        points: [
+          { x: 0, y: 0 },
+          { x: 10, y: 100 },
+        ],
+      },
+    },
   },
 });
 

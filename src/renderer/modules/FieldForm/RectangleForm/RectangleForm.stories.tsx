@@ -1,37 +1,36 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { types } from "mobx-state-tree";
 import { ComponentProps } from "react";
-import { Box3dDefinition, Box3dField, Tool } from "renderer/models";
+import { RectangleDefinition, RectangleField, Tool } from "renderer/models";
 import { CurrentFrame } from "renderer/models/project/CurrentFrame";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
-import { Box3dForm } from "./Box3dForm";
+import { RectangleForm } from "./RectangleForm";
 
 export default {
-  title:
-    "pages/Workspace/WorkspaceLayout/ItemsList/ItemsListItem/FieldListItem/Box3dForm",
-  component: Box3dForm,
-} as ComponentMeta<typeof Box3dForm>;
+  title: "modules/FieldForm/RectangleForm",
+  component: RectangleForm,
+} as ComponentMeta<typeof RectangleForm>;
 
-type Props = ComponentProps<typeof Box3dForm>;
+type Props = ComponentProps<typeof RectangleForm>;
 
-const Box3dFormStory = ({
+const RectangleFormStory = ({
   wrapperProps,
   ...props
 }: PropsWithTestWrapper<Props>) => {
   return (
     <TestWrapper {...wrapperProps}>
-      <Box3dForm {...props} />
+      <RectangleForm {...props} />
     </TestWrapper>
   );
 };
 
-const Template: ComponentStory<typeof Box3dFormStory> = Box3dFormStory;
+const Template: ComponentStory<typeof RectangleFormStory> = RectangleFormStory;
 
 const Model = types.model({
-  currentFrame: CurrentFrame,
-  definition: Box3dDefinition,
-  field: Box3dField,
+  definition: RectangleDefinition,
+  field: RectangleField,
   tool: Tool,
+  currentFrame: CurrentFrame,
 });
 
 const instance = Model.create({
@@ -41,26 +40,21 @@ const instance = Model.create({
   },
   definition: {
     id: "id",
-    kind: "Box3d",
-    name: "Box3d",
+    kind: "Rectangle",
+    name: "Rectangle",
   },
   field: {
     currentFrame: "id",
     definition: "id",
     id: "1",
-    kind: "Box3d",
-    values: {
-      "0": {
-        front: [0, 0, 0, 100, 100, 100, 100, 0],
-        sideType: "None",
-      },
-    },
+    kind: "Rectangle",
+    values: { "0": { value: [0, 0, 100, 100] } },
   },
 });
 
 export const Playground = Template.bind({});
 Playground.args = {
-  wrapperProps: {},
   field: instance.field,
   tool: instance.tool,
+  wrapperProps: {},
 };

@@ -1,51 +1,50 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { types } from "mobx-state-tree";
 import { ComponentProps } from "react";
-import { SelectDefinition, SelectField } from "renderer/models";
+import { MultiSelectDefinition, MultiSelectField } from "renderer/models";
 import { CurrentFrame } from "renderer/models/project/CurrentFrame";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
-import { SelectForm } from "./SelectForm";
+import { MultiSelectForm } from "./MultiSelectForm";
 
 export default {
-  title:
-    "pages/Workspace/WorkspaceLayout/ItemsList/ItemsListItem/FieldListItem/SelectForm",
-  component: SelectForm,
-} as ComponentMeta<typeof SelectForm>;
+  title: "modules/FieldForm/MultiSelectForm",
+  component: MultiSelectForm,
+} as ComponentMeta<typeof MultiSelectForm>;
 
-type Props = ComponentProps<typeof SelectForm>;
+type Props = ComponentProps<typeof MultiSelectForm>;
 
-const SelectFormStory = ({
+const MultiSelectFormStory = ({
   wrapperProps,
   ...props
 }: PropsWithTestWrapper<Props>) => {
   return (
     <TestWrapper {...wrapperProps}>
-      <SelectForm {...props} />
+      <MultiSelectForm {...props} />
     </TestWrapper>
   );
 };
 
-const Template: ComponentStory<typeof SelectFormStory> = SelectFormStory;
+const Template: ComponentStory<typeof MultiSelectFormStory> =
+  MultiSelectFormStory;
 
 const Model = types.model({
   currentFrame: CurrentFrame,
-  definition: SelectDefinition,
-  field: SelectField,
+  definition: MultiSelectDefinition,
+  field: MultiSelectField,
 });
 
 const instance = Model.create({
   currentFrame: { id: "id" },
   definition: {
     id: "id",
-    kind: "Select",
+    kind: "MultiSelect",
     name: "Text",
   },
   field: {
     currentFrame: "id",
     definition: "id",
     id: "1",
-    kind: "Select",
-    values: { "0": { value: "Sunny" } },
+    kind: "MultiSelect",
   },
 });
 

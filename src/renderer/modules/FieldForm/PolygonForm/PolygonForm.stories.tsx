@@ -1,37 +1,36 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { types } from "mobx-state-tree";
 import { ComponentProps } from "react";
-import { LineDefinition, LineField, Tool } from "renderer/models";
+import { PolygonDefinition, PolygonField, Tool } from "renderer/models";
 import { CurrentFrame } from "renderer/models/project/CurrentFrame";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
-import { LineForm } from "./LineForm";
+import { PolygonForm } from "./PolygonForm";
 
 export default {
-  title:
-    "pages/Workspace/WorkspaceLayout/ItemsList/ItemsListItem/FieldListItem/LineForm",
-  component: LineForm,
-} as ComponentMeta<typeof LineForm>;
+  title: "modules/FieldForm/PolygonForm",
+  component: PolygonForm,
+} as ComponentMeta<typeof PolygonForm>;
 
-type Props = ComponentProps<typeof LineForm>;
+type Props = ComponentProps<typeof PolygonForm>;
 
-const LineFormStory = ({
+const PolygonFormStory = ({
   wrapperProps,
   ...props
 }: PropsWithTestWrapper<Props>) => {
   return (
     <TestWrapper {...wrapperProps}>
-      <LineForm {...props} />
+      <PolygonForm {...props} />
     </TestWrapper>
   );
 };
 
-const Template: ComponentStory<typeof LineFormStory> = LineFormStory;
+const Template: ComponentStory<typeof PolygonFormStory> = PolygonFormStory;
 
 const Model = types.model({
-  definition: LineDefinition,
-  field: LineField,
-  tool: Tool,
   currentFrame: CurrentFrame,
+  definition: PolygonDefinition,
+  field: PolygonField,
+  tool: Tool,
 });
 
 const instance = Model.create({
@@ -41,14 +40,14 @@ const instance = Model.create({
   },
   definition: {
     id: "id",
-    kind: "Line",
-    name: "Line",
+    kind: "Polygon",
+    name: "Polygon",
   },
   field: {
     currentFrame: "id",
     definition: "id",
     id: "1",
-    kind: "Line",
+    kind: "Polygon",
     values: { "0": { values: [0, 0, 100, 100] } },
   },
 });

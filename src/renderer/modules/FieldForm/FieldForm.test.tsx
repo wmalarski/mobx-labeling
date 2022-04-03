@@ -7,9 +7,9 @@ import { Field, FieldDefinition, Tool } from "renderer/models";
 import { CurrentFrame } from "renderer/models/project/CurrentFrame";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
 import i18n from "renderer/utils/i18next";
-import { FieldListItem } from "./FieldListItem";
+import { FieldForm } from "./FieldForm";
 
-type Props = ComponentProps<typeof FieldListItem>;
+type Props = ComponentProps<typeof FieldForm>;
 
 const Model = types.model({
   currentFrame: CurrentFrame,
@@ -59,12 +59,12 @@ const renderComponent = ({
 
   return render(
     <TestWrapper {...wrapperProps}>
-      <FieldListItem {...defaultProps} {...props} />
+      <FieldForm {...defaultProps} {...props} />
     </TestWrapper>
   );
 };
 
-describe("<FieldListItem />", () => {
+describe("<FieldForm />", () => {
   it("should render Box3d", async () => {
     expect.hasAssertions();
 

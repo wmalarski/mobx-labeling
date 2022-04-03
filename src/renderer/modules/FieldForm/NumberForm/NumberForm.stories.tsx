@@ -1,51 +1,50 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { types } from "mobx-state-tree";
 import { ComponentProps } from "react";
-import { MultiSelectDefinition, MultiSelectField } from "renderer/models";
+import { NumberDefinition, NumberField } from "renderer/models";
 import { CurrentFrame } from "renderer/models/project/CurrentFrame";
 import { PropsWithTestWrapper, TestWrapper } from "renderer/tests/Wrapper";
-import { MultiSelectForm } from "./MultiSelectForm";
+import { NumberForm } from "./NumberForm";
 
 export default {
-  title:
-    "pages/Workspace/WorkspaceLayout/ItemsList/ItemsListItem/FieldListItem/MultiSelectForm",
-  component: MultiSelectForm,
-} as ComponentMeta<typeof MultiSelectForm>;
+  title: "modules/FieldForm/NumberForm",
+  component: NumberForm,
+} as ComponentMeta<typeof NumberForm>;
 
-type Props = ComponentProps<typeof MultiSelectForm>;
+type Props = ComponentProps<typeof NumberForm>;
 
-const MultiSelectFormStory = ({
+const NumberFormStory = ({
   wrapperProps,
   ...props
 }: PropsWithTestWrapper<Props>) => {
   return (
     <TestWrapper {...wrapperProps}>
-      <MultiSelectForm {...props} />
+      <NumberForm {...props} />
     </TestWrapper>
   );
 };
 
-const Template: ComponentStory<typeof MultiSelectFormStory> =
-  MultiSelectFormStory;
+const Template: ComponentStory<typeof NumberFormStory> = NumberFormStory;
 
 const Model = types.model({
   currentFrame: CurrentFrame,
-  definition: MultiSelectDefinition,
-  field: MultiSelectField,
+  definition: NumberDefinition,
+  field: NumberField,
 });
 
 const instance = Model.create({
   currentFrame: { id: "id" },
   definition: {
     id: "id",
-    kind: "MultiSelect",
-    name: "Text",
+    kind: "Number",
+    name: "Number",
   },
   field: {
     currentFrame: "id",
     definition: "id",
     id: "1",
-    kind: "MultiSelect",
+    kind: "Number",
+    values: { "0": { value: 1 } },
   },
 });
 
