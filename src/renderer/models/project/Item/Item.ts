@@ -1,9 +1,9 @@
 import { getSnapshot, SnapshotOut, types } from "mobx-state-tree";
 import { nanoid } from "nanoid";
+import { Range } from "../../common/Range";
 import { ItemDefinition } from "../../definition/ItemDefinition/ItemDefinition";
 import { CurrentFrame } from "../CurrentFrame";
 import { Field } from "../Field";
-import { Range } from "../Range";
 
 export type ItemInfo = {
   id: string;

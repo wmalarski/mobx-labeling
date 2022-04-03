@@ -9,13 +9,15 @@ type FieldModel<V> = {
   };
 };
 
+export const SingletonKey = "All";
+
 export const currentValueKey = <V>(self: FieldModel<V>): string => {
   switch (self.definition.change) {
     case "EveryFrame":
     case "FrameChanges":
       return String(self.currentFrame.frame);
     case "Singleton":
-      return "All";
+      return SingletonKey;
   }
 };
 
