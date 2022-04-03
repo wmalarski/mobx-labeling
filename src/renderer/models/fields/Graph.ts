@@ -1,8 +1,8 @@
-import { types } from "mobx-state-tree";
+import { SnapshotIn, types } from "mobx-state-tree";
 import { nanoid } from "nanoid";
 import { FieldBase } from "../base/FieldBase";
 import { ShapeDefinitionBase } from "../base/ShapeDefinitionBase";
-import { currentValue } from "./utils";
+import { currentValue, currentValueKey } from "./utils";
 
 const kind = types.optional(types.literal("Graph"), "Graph");
 
@@ -57,6 +57,12 @@ export const GraphField = types
       values: types.optional(types.map(GraphValue), {}),
     })
   )
+  .actions((self) => ({
+    setCurrent(value: SnapshotIn<typeof GraphValue>) {
+      const key = currentValueKey(self);
+      self.values.set(key, GraphValue.create(value));
+    },
+  }))
   .views((self) => ({
     get current() {
       return currentValue(self);

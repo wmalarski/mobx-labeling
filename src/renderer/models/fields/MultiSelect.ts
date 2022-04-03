@@ -77,6 +77,10 @@ export const MultiSelectField = types
     },
   }))
   .actions((self) => ({
+    setCurrent(value: SnapshotIn<typeof MultiSelectValue>) {
+      const key = currentValueKey(self);
+      self.values.set(key, MultiSelectValue.create(value));
+    },
     afterCreate() {
       if (self.values.size > 0) return;
       self.values.set(currentValueKey(self), {

@@ -77,6 +77,10 @@ export const SelectField = types
     },
   }))
   .actions((self) => ({
+    setCurrent(value: SnapshotIn<typeof SelectValue>) {
+      const key = currentValueKey(self);
+      self.values.set(key, SelectValue.create(value));
+    },
     afterCreate() {
       if (self.values.size > 0) return;
       self.values.set(currentValueKey(self), {

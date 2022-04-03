@@ -1,8 +1,8 @@
-import { types } from "mobx-state-tree";
+import { SnapshotIn, types } from "mobx-state-tree";
 import { nanoid } from "nanoid";
 import { FieldBase } from "../base/FieldBase";
 import { ShapeDefinitionBase } from "../base/ShapeDefinitionBase";
-import { currentValue } from "./utils";
+import { currentValue, currentValueKey } from "./utils";
 
 const kind = types.optional(types.literal("Rectangle"), "Rectangle");
 
@@ -35,6 +35,12 @@ export const RectangleField = types
       values: types.optional(types.map(RectangleValue), {}),
     })
   )
+  .actions((self) => ({
+    setCurrent(value: SnapshotIn<typeof RectangleValue>) {
+      const key = currentValueKey(self);
+      self.values.set(key, RectangleValue.create(value));
+    },
+  }))
   .views((self) => ({
     get current() {
       return currentValue(self);

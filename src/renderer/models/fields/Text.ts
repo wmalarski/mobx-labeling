@@ -1,4 +1,4 @@
-import { types } from "mobx-state-tree";
+import { SnapshotIn, types } from "mobx-state-tree";
 import { nanoid } from "nanoid";
 import { FieldBase } from "../base/FieldBase";
 import { FieldDefinitionBase } from "../base/FieldDefinitionBase";
@@ -48,6 +48,10 @@ export const TextField = types
     },
   }))
   .actions((self) => ({
+    setCurrent(value: SnapshotIn<typeof TextValue>) {
+      const key = currentValueKey(self);
+      self.values.set(key, TextValue.create(value));
+    },
     afterCreate() {
       if (self.values.size > 0) return;
       self.values.set(currentValueKey(self), {

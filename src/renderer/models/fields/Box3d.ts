@@ -1,8 +1,8 @@
-import { Instance, types } from "mobx-state-tree";
+import { Instance, SnapshotIn, types } from "mobx-state-tree";
 import { nanoid } from "nanoid";
 import { FieldBase } from "../base/FieldBase";
 import { ShapeDefinitionBase } from "../base/ShapeDefinitionBase";
-import { currentValue } from "./utils";
+import { currentValue, currentValueKey } from "./utils";
 
 const kind = types.optional(types.literal("Box3d"), "Box3d");
 
@@ -50,6 +50,12 @@ export const Box3dField = types
       values: types.optional(types.map(Box3dValue), {}),
     })
   )
+  .actions((self) => ({
+    setCurrent(value: SnapshotIn<typeof Box3dValue>) {
+      const key = currentValueKey(self);
+      self.values.set(key, Box3dValue.create(value));
+    },
+  }))
   .views((self) => ({
     get current() {
       return currentValue(self);

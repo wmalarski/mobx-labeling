@@ -1,4 +1,4 @@
-import { types } from "mobx-state-tree";
+import { SnapshotIn, types } from "mobx-state-tree";
 import { nanoid } from "nanoid";
 import { FieldBase } from "../base/FieldBase";
 import { FieldDefinitionBase } from "../base/FieldDefinitionBase";
@@ -48,6 +48,10 @@ export const CheckBoxField = types
     },
   }))
   .actions((self) => ({
+    setCurrent(value: SnapshotIn<typeof CheckBoxValue>) {
+      const key = currentValueKey(self);
+      self.values.set(key, CheckBoxValue.create(value));
+    },
     afterCreate() {
       if (self.values.size > 0) return;
       self.values.set(currentValueKey(self), {

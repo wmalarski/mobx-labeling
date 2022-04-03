@@ -1,8 +1,8 @@
-import { types } from "mobx-state-tree";
+import { SnapshotIn, types } from "mobx-state-tree";
 import { nanoid } from "nanoid";
 import { FieldBase } from "../base/FieldBase";
 import { ShapeDefinitionBase } from "../base/ShapeDefinitionBase";
-import { currentValue } from "./utils";
+import { currentValue, currentValueKey } from "./utils";
 
 const kind = types.optional(types.literal("Line"), "Line");
 
@@ -41,6 +41,12 @@ export const LineField = types
       values: types.optional(types.map(LineValue), {}),
     })
   )
+  .actions((self) => ({
+    setCurrent(value: SnapshotIn<typeof LineValue>) {
+      const key = currentValueKey(self);
+      self.values.set(key, LineValue.create(value));
+    },
+  }))
   .views((self) => ({
     get current() {
       return currentValue(self);
