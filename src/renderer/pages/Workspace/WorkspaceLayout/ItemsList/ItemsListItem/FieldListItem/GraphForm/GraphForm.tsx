@@ -81,36 +81,36 @@ export const GraphForm = observer(({ field, tool }: Props): ReactElement => {
         <Fragment key={index}>
           <Grid xs={20} sm={11}>
             <Input
-              width="100%"
+              aria-label={t("graphX", { index })}
               disabled={field.blocked}
               htmlType="number"
-              placeholder={t("graphX", { index })}
               label={t("graphX", { index })}
-              aria-label={t("graphX", { index })}
-              value={String(pair.x)}
               onChange={handleXChange(index)}
+              placeholder={t("graphX", { index })}
+              value={String(pair.x)}
+              width="100%"
             />
           </Grid>
           <Grid xs={20} sm={11}>
             <Input
-              width="100%"
+              aria-label={t("graphY", { index })}
               disabled={field.blocked}
               htmlType="number"
-              placeholder={t("graphY", { index })}
               label={t("graphY", { index })}
-              aria-label={t("graphY", { index })}
-              value={String(pair.y)}
               onChange={handleYChange(index)}
+              placeholder={t("graphY", { index })}
+              value={String(pair.y)}
+              width="100%"
             />
           </Grid>
           <Grid xs={4} sm={2}>
             <Button
-              width="100%"
               disabled={field.blocked}
-              onClick={handleRemovePointClick(index)}
               iconRight={
                 <TrashIcon aria-label={t("graphRemovePoint", { index })} />
               }
+              onClick={handleRemovePointClick(index)}
+              width="100%"
             />
           </Grid>
         </Fragment>
@@ -130,12 +130,12 @@ export const GraphForm = observer(({ field, tool }: Props): ReactElement => {
             </Text>
             <Spacer w={1} />
             <Select
-              width="100%"
-              disabled={field.blocked}
-              placeholder={t("graphFrom", { index })}
               aria-label={t("graphFrom", { index })}
-              value={String(pair.from)}
+              disabled={field.blocked}
               onChange={handleFromChange(index)}
+              placeholder={t("graphFrom", { index })}
+              value={String(pair.from)}
+              width="100%"
             >
               {current.points.map((_, index) => (
                 <Select.Option key={index} value={String(index)}>
@@ -150,12 +150,12 @@ export const GraphForm = observer(({ field, tool }: Props): ReactElement => {
             </Text>
             <Spacer w={1} />
             <Select
-              width="100%"
-              disabled={field.blocked}
-              placeholder={t("graphTo", { index })}
               aria-label={t("graphTo", { index })}
-              value={String(pair.to)}
+              disabled={field.blocked}
               onChange={handleToChange(index)}
+              placeholder={t("graphTo", { index })}
+              value={String(pair.to)}
+              width="100%"
             >
               {current.points.map((_, index) => (
                 <Select.Option key={index} value={String(index)}>
@@ -166,12 +166,12 @@ export const GraphForm = observer(({ field, tool }: Props): ReactElement => {
           </Grid>
           <Grid xs={4} sm={2} alignItems="center">
             <Button
-              width="100%"
               disabled={field.blocked}
-              onClick={handleRemoveEdgeClick(index)}
               iconRight={
                 <TrashIcon aria-label={t("graphRemoveEdge", { index })} />
               }
+              onClick={handleRemoveEdgeClick(index)}
+              width="100%"
             />
           </Grid>
         </Fragment>

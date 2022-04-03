@@ -28,10 +28,10 @@ const EyeFormStory = ({
 const Template: ComponentStory<typeof EyeFormStory> = EyeFormStory;
 
 const Model = types.model({
+  currentFrame: CurrentFrame,
   definition: EyeDefinition,
   field: EyeField,
   tool: Tool,
-  currentFrame: CurrentFrame,
 });
 
 const instance = Model.create({
@@ -40,9 +40,9 @@ const instance = Model.create({
     kind: "Selector",
   },
   definition: {
-    name: "Eye",
     id: "id",
     kind: "Eye",
+    name: "Eye",
   },
   field: {
     currentFrame: "id",
@@ -55,7 +55,7 @@ const instance = Model.create({
 
 export const Playground = Template.bind({});
 Playground.args = {
-  wrapperProps: {},
   field: instance.field,
   tool: instance.tool,
+  wrapperProps: {},
 };

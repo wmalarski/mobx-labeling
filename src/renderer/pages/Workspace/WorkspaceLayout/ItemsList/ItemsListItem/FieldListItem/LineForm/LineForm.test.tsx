@@ -32,9 +32,9 @@ const getInstance = ({
       kind: "Selector",
     },
     definition: {
-      name: "Line",
       id: "id",
       kind: "Line",
+      name: "Line",
       ...definition,
     },
     field: {

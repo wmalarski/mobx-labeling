@@ -8,17 +8,17 @@ import { ItemDefinition, ProjectDefinition } from "renderer/models";
 
 type Props = {
   itemDefinition: Instance<typeof ItemDefinition>;
-  projectDefinition: Instance<typeof ProjectDefinition>;
-  onSelectedItemChange: (itemId: string | null) => void;
   onSelectedFieldChange: (fieldId: string | null) => void;
+  onSelectedItemChange: (itemId: string | null) => void;
+  projectDefinition: Instance<typeof ProjectDefinition>;
 };
 
 export const ItemForm = observer(
   ({
     itemDefinition,
-    projectDefinition,
-    onSelectedItemChange,
     onSelectedFieldChange,
+    onSelectedItemChange,
+    projectDefinition,
   }: Props): ReactElement => {
     const { t } = useTranslation("definition");
 
@@ -58,8 +58,8 @@ export const ItemForm = observer(
               <Button
                 auto
                 color="primary"
-                onClick={handlePlusClick}
                 icon={<PlusIcon />}
+                onClick={handlePlusClick}
               >
                 {t("addNewField")}
               </Button>
@@ -68,8 +68,8 @@ export const ItemForm = observer(
               <Button
                 auto
                 color="secondary"
-                onClick={handleCopyClick}
                 icon={<CopyIcon />}
+                onClick={handleCopyClick}
               >
                 {t("copyItem")}
               </Button>
@@ -78,8 +78,8 @@ export const ItemForm = observer(
               <Button
                 auto
                 color="error"
-                onClick={handleRemoveClick}
                 icon={<TrashIcon />}
+                onClick={handleRemoveClick}
               >
                 {t("removeItem")}
               </Button>
@@ -88,22 +88,22 @@ export const ItemForm = observer(
         </Grid>
         <Grid xs={24}>
           <Input
-            width="100%"
-            value={itemDefinition.name}
+            aria-label={t("namePlaceholder")}
+            label={t("namePlaceholder")}
             onChange={handleNameChange}
             placeholder={t("namePlaceholder")}
-            label={t("namePlaceholder")}
-            aria-label={t("namePlaceholder")}
+            value={itemDefinition.name}
+            width="100%"
           />
         </Grid>
         <Grid xs={24}>
           <Input
-            width="100%"
-            value={itemDefinition.description}
+            aria-label={t("descriptionPlaceholder")}
+            label={t("descriptionPlaceholder")}
             onChange={handleDescriptionChange}
             placeholder={t("descriptionPlaceholder")}
-            label={t("descriptionPlaceholder")}
-            aria-label={t("descriptionPlaceholder")}
+            value={itemDefinition.description}
+            width="100%"
           />
         </Grid>
       </Grid.Container>

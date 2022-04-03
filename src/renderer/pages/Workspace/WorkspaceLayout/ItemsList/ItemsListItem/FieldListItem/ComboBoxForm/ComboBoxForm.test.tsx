@@ -13,9 +13,9 @@ import { ComboBoxForm } from "./ComboBoxForm";
 type Props = ComponentProps<typeof ComboBoxForm>;
 
 const Model = types.model({
+  currentFrame: CurrentFrame,
   definition: ComboBoxDefinition,
   field: ComboBoxField,
-  currentFrame: CurrentFrame,
 });
 
 const getInstance = ({
@@ -28,10 +28,10 @@ const getInstance = ({
   return Model.create({
     currentFrame: { id: "id" },
     definition: {
-      name: "ComboBox",
       change: "EveryFrame",
       id: "id",
       kind: "ComboBox",
+      name: "ComboBox",
       ...definition,
     },
     field: {

@@ -3,17 +3,19 @@ import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import { ReactElement } from "react";
 import { Group, Rect, Text } from "react-konva";
-import { Field, WorkspaceStore } from "renderer/models";
+import { Field, Item, WorkspaceStore } from "renderer/models";
 import { useTimelineConfig } from "../../TimelineContext/TimelineContext";
+import { getFieldRanges } from "./FieldRow.utils";
 
 type Props = {
   field: Instance<typeof Field>;
+  item: Instance<typeof Item>;
   position: number;
   workspaceStore: Instance<typeof WorkspaceStore>;
 };
 
 export const FieldRow = observer(
-  ({ field, position, workspaceStore }: Props): ReactElement => {
+  ({ field, item, position, workspaceStore }: Props): ReactElement => {
     const config = useTimelineConfig();
 
     const handleMouseOverGroup = () => {
@@ -29,17 +31,21 @@ export const FieldRow = observer(
       field.setSelected(!field.selected);
     };
 
+    const ranges = getFieldRanges({
+      framesCount: workspaceStore.framesCount,
+      field,
+      item,
+    });
+
     return (
       <Group
-        y={position * config.rowHeight}
         height={config.rowHeight}
-        onMouseOver={handleMouseOverGroup}
-        onMouseOut={handleMouseOutGroup}
         onClick={handleClickGroup}
+        onMouseOut={handleMouseOutGroup}
+        onMouseOver={handleMouseOverGroup}
+        y={position * config.rowHeight}
       >
         <Rect
-          width={workspaceStore.framesCount}
-          height={config.rowHeight}
           fill={
             field.selected
               ? config.selectionColor
@@ -47,6 +53,8 @@ export const FieldRow = observer(
               ? config.hoverColor
               : config.deselectionColor
           }
+          height={config.rowHeight}
+          width={workspaceStore.framesCount}
         />
         <Text text={field.definition.name} fill={config.foregroundColor} />
       </Group>

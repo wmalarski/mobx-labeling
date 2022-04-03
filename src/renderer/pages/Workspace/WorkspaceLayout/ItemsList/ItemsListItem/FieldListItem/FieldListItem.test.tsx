@@ -12,10 +12,10 @@ import { FieldListItem } from "./FieldListItem";
 type Props = ComponentProps<typeof FieldListItem>;
 
 const Model = types.model({
+  currentFrame: CurrentFrame,
   definition: FieldDefinition,
   field: Field,
   tool: Tool,
-  currentFrame: CurrentFrame,
 });
 
 const getInstance = ({
@@ -27,9 +27,9 @@ const getInstance = ({
 }) => {
   return Model.create({
     currentFrame: { id: "id" },
-    tool: { kind: "Selector" },
     definition,
     field,
+    tool: { kind: "Selector" },
   });
 };
 

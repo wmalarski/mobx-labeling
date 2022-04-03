@@ -26,13 +26,13 @@ const Template: ComponentStory<typeof ColorEditorStory> = ColorEditorStory;
 
 export const Playground = Template.bind({});
 Playground.args = {
-  wrapperProps: {},
   fieldDefinition: LineDefinition.create({
-    name: "Shape field",
     change: "EveryFrame",
     color: "hsl(0, 100%, 50%)",
     description: "s",
     id: "3",
     kind: "Line",
+    name: "Shape field",
   }),
+  wrapperProps: {},
 };

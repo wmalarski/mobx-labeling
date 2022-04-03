@@ -19,12 +19,12 @@ import {
 } from "./TimelineContext/TimelineContext";
 
 type Props = {
-  workspaceStore: Instance<typeof WorkspaceStore>;
   node: FlexLayout.TabNode;
+  workspaceStore: Instance<typeof WorkspaceStore>;
 };
 
 export const Timeline = observer(
-  ({ workspaceStore, node }: Props): ReactElement => {
+  ({ node, workspaceStore }: Props): ReactElement => {
     const theme = useTheme();
 
     const stageRef = useRef<Konva.Stage>(null);
@@ -62,17 +62,17 @@ export const Timeline = observer(
         </Grid>
         <Grid xs={24}>
           <Stage
-            ref={stageRef}
-            width={rect.width}
             height={count * TimelineRowHeight}
             onWheel={handleWheel}
+            ref={stageRef}
+            width={rect.width}
           >
             <TimelineContextProvider theme={theme}>
               <ItemsLayer
-                workspaceStore={workspaceStore}
-                zoom={zoom}
                 items={items}
                 width={rect.width}
+                workspaceStore={workspaceStore}
+                zoom={zoom}
               />
               <LabelsLayer workspaceStore={workspaceStore} items={items} />
             </TimelineContextProvider>

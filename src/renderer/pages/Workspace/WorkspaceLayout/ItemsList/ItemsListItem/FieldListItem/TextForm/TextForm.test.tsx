@@ -13,9 +13,9 @@ import { TextForm } from "./TextForm";
 type Props = ComponentProps<typeof TextForm>;
 
 const Model = types.model({
+  currentFrame: CurrentFrame,
   definition: TextDefinition,
   field: TextField,
-  currentFrame: CurrentFrame,
 });
 
 const getInstance = ({
@@ -28,12 +28,12 @@ const getInstance = ({
   return Model.create({
     currentFrame: { id: "id" },
     definition: {
-      name: "Text",
       change: "EveryFrame",
       default: "Hello",
       description: "Description",
       id: "id",
       kind: "Text",
+      name: "Text",
       ...definition,
     },
     field: {

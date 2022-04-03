@@ -59,23 +59,18 @@ export const ProjectDetails = observer(
       <Grid.Container gap={0.5}>
         <Grid xs={24}>
           <Input
-            width="100%"
-            label={t("namePlaceholder")}
-            placeholder={t("namePlaceholder")}
             aria-label={t("namePlaceholder")}
-            value={newProjectStore.name}
+            label={t("namePlaceholder")}
             onChange={handleNameChange}
+            placeholder={t("namePlaceholder")}
+            value={newProjectStore.name}
+            width="100%"
           />
         </Grid>
         <Grid xs={24}>
           <AutoComplete
-            width="100%"
-            disableFreeSolo
             aria-label={t("selectDefinitionLabel")}
-            placeholder={t("selectDefinitionLabel")}
-            value={newProjectStore.definitions.query}
-            onSearch={handleInputChange}
-            onSelect={handleSelectionChange}
+            disableFreeSolo
             options={newProjectStore.definitions.definitions.map(
               (definition) => ({
                 key: definition.id,
@@ -83,31 +78,36 @@ export const ProjectDetails = observer(
                 value: definition.name,
               })
             )}
+            onSearch={handleInputChange}
+            onSelect={handleSelectionChange}
+            placeholder={t("selectDefinitionLabel")}
+            value={newProjectStore.definitions.query}
+            width="100%"
           />
         </Grid>
         <Grid xs={24}>
           <Input
-            width="100%"
-            label={t("locationLabel")}
-            placeholder={t("locationLabel")}
             aria-label={t("locationLabel")}
-            onChange={handlePathChange}
-            value={newProjectStore.projectPath}
             iconClickable
-            onIconClick={handleSaveClick}
             iconRight={<Pencil1Icon aria-label={t("browseLocation")} />}
+            label={t("locationLabel")}
+            onChange={handlePathChange}
+            onIconClick={handleSaveClick}
+            placeholder={t("locationLabel")}
+            value={newProjectStore.projectPath}
+            width="100%"
           />
         </Grid>
         <Grid xs={24}>
           <Input
-            width="100%"
-            step={1}
-            min={10}
-            label={t("batchSizePlaceholder")}
-            placeholder={t("batchSizePlaceholder")}
             aria-label={t("batchSizePlaceholder")}
-            value={String(newProjectStore.batchSize)}
+            label={t("batchSizePlaceholder")}
+            min={10}
             onChange={handleBatchSizeChange}
+            placeholder={t("batchSizePlaceholder")}
+            step={1}
+            value={String(newProjectStore.batchSize)}
+            width="100%"
           />
         </Grid>
       </Grid.Container>

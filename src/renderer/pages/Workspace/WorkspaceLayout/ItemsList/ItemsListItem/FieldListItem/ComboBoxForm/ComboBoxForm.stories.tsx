@@ -28,17 +28,17 @@ const ComboBoxFormStory = ({
 const Template: ComponentStory<typeof ComboBoxFormStory> = ComboBoxFormStory;
 
 const Model = types.model({
+  currentFrame: CurrentFrame,
   definition: ComboBoxDefinition,
   field: ComboBoxField,
-  currentFrame: CurrentFrame,
 });
 
 const instance = Model.create({
   currentFrame: { id: "id" },
   definition: {
-    name: "ComboBox",
     id: "id",
     kind: "ComboBox",
+    name: "ComboBox",
   },
   field: {
     currentFrame: "id",

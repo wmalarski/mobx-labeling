@@ -6,8 +6,8 @@ import { useTranslation } from "react-i18next";
 import { WorkspaceStore } from "renderer/models";
 
 type Props = {
-  workspaceStore: Instance<typeof WorkspaceStore>;
   node: FlexLayout.TabNode;
+  workspaceStore: Instance<typeof WorkspaceStore>;
 };
 
 export const Comments = observer(({ workspaceStore }: Props): ReactElement => {

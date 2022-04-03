@@ -24,13 +24,13 @@ export const TextForm = observer(({ field }: Props): ReactElement => {
 
   return (
     <Input
-      disabled={field.blocked}
-      value={current.value}
-      onChange={handleChange}
       aria-label={field.definition.name}
-      placeholder={field.definition.name}
-      width="100%"
       clearable
+      disabled={field.blocked}
+      onChange={handleChange}
+      placeholder={field.definition.name}
+      value={current.value}
+      width="100%"
     />
   );
 });

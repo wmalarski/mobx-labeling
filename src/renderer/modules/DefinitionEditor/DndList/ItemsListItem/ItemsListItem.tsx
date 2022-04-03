@@ -24,8 +24,8 @@ export const ItemsListItem = observer(
 
     return (
       <Card
-        onClick={onItemClick}
         hoverable
+        onClick={onItemClick}
         style={{
           position: "relative",
           width: "100%",
@@ -50,9 +50,9 @@ export const ItemsListItem = observer(
           >
             {itemDefinition.fields.map((fieldDefinition, index) => (
               <DndDraggable
-                key={fieldDefinition.id}
                 draggableId={fieldDefinition.id}
                 index={index}
+                key={fieldDefinition.id}
               >
                 <FieldListItem
                   fieldDefinition={fieldDefinition}

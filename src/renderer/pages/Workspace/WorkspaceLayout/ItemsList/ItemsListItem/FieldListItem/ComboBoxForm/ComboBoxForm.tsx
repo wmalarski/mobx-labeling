@@ -24,12 +24,12 @@ export const ComboBoxForm = observer(({ field }: Props): ReactElement => {
 
   return (
     <Select
-      width="100%"
-      disabled={field.blocked}
-      placeholder={field.definition.name}
       aria-label={field.definition.name}
-      value={current.value}
+      disabled={field.blocked}
       onChange={handleFromChange}
+      placeholder={field.definition.name}
+      value={current.value}
+      width="100%"
     >
       {field.definition.options.map((option) => (
         <Select.Option key={option} value={option}>

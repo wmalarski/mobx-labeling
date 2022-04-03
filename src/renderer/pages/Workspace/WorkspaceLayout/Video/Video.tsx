@@ -12,8 +12,8 @@ import { useZoom } from "./Video.utils";
 import { VideoImage } from "./VideoImage/VideoImage";
 
 type Props = {
-  workspaceStore: Instance<typeof WorkspaceStore>;
   node: FlexLayout.TabNode;
+  workspaceStore: Instance<typeof WorkspaceStore>;
 };
 
 export const Video = observer(
@@ -45,12 +45,12 @@ export const Video = observer(
     return (
       <Styles.Container>
         <Stage
-          ref={stageRef}
-          width={rect.width}
           height={rect.height}
           onWheel={handleWheel}
+          ref={stageRef}
           scaleX={stageScale}
           scaleY={stageScale}
+          width={rect.width}
           x={stageX}
           y={stageY}
         >

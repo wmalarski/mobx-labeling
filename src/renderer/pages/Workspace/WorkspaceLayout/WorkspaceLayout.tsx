@@ -50,9 +50,9 @@ export const WorkspaceLayout = observer(
           <SideBar workspaceStore={workspaceStore} />
           <Styles.Column>
             <FlexLayout.Layout
-              onModelChange={setModel}
-              model={model}
               factory={factory}
+              model={model}
+              onModelChange={setModel}
             />
           </Styles.Column>
         </Styles.Row>

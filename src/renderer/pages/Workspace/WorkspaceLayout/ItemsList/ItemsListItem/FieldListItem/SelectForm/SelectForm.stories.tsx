@@ -28,17 +28,17 @@ const SelectFormStory = ({
 const Template: ComponentStory<typeof SelectFormStory> = SelectFormStory;
 
 const Model = types.model({
+  currentFrame: CurrentFrame,
   definition: SelectDefinition,
   field: SelectField,
-  currentFrame: CurrentFrame,
 });
 
 const instance = Model.create({
   currentFrame: { id: "id" },
   definition: {
-    name: "Text",
     id: "id",
     kind: "Select",
+    name: "Text",
   },
   field: {
     currentFrame: "id",

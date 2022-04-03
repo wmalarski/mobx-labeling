@@ -1,22 +1,22 @@
 export type DefinitionSnapshot = {
-  id: string;
-  name: string;
-  description: string;
-  updatedAt: number;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
+  description: string;
+  id: string;
+  name: string;
+  updatedAt: number;
 };
 
 export type Resource = {
-  id: string;
-  path: string;
   fps: number;
   frameShift: number;
+  id: string;
+  path: string;
 };
 
 export type Range = {
-  start: number;
   end: number;
+  start: number;
 };
 
 export type Item = {
@@ -30,29 +30,29 @@ export type BatchInfo = {
 };
 
 export type Batch = {
-  id: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
+  id: string;
 };
 
 export type ProjectInfo = {
+  definition: string;
   id: string;
   name: string;
   projectPath: string;
   updatedAt: number;
-  definition: string;
 };
 
 export type ProjectRoot = {
+  batches: BatchInfo[];
+  batchSize: number;
+  definition: DefinitionSnapshot;
   id: string;
+  items: Item[];
   name: string;
   projectPath: string;
-  updatedAt: number;
-  batchSize: number;
   resources: Resource[];
-  items: Item[];
-  batches: BatchInfo[];
-  definition: DefinitionSnapshot;
+  updatedAt: number;
 };
 
 export enum IpcRendererChannel {
@@ -70,9 +70,9 @@ export enum IpcRendererChannel {
 }
 
 export type PaginationArgs = {
-  start: number;
   limit: number;
   query?: string;
+  start: number;
 };
 
 export type PaginationResult<TData> = {

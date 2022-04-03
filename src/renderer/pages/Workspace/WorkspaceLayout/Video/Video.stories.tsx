@@ -33,7 +33,7 @@ const Template: ComponentStory<typeof VideoStory> = VideoStory;
 
 export const Playground = Template.bind({});
 Playground.args = {
-  wrapperProps: {},
-  workspaceStore: mockWorkspaceStore(),
   node: mockLayoutNode(),
+  workspaceStore: mockWorkspaceStore(),
+  wrapperProps: {},
 };

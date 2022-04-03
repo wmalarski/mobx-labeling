@@ -12,12 +12,12 @@ import { useTranslation } from "react-i18next";
 import { Item, WorkspaceStore } from "renderer/models";
 
 type Props = {
-  workspaceStore: Instance<typeof WorkspaceStore>;
   item: Instance<typeof Item>;
+  workspaceStore: Instance<typeof WorkspaceStore>;
 };
 
 export const ItemHeader = observer(
-  ({ workspaceStore, item }: Props): ReactElement => {
+  ({ item, workspaceStore }: Props): ReactElement => {
     const { t } = useTranslation("workspace");
 
     const [isEditing, setIsEditing] = useState(false);
@@ -45,23 +45,23 @@ export const ItemHeader = observer(
       <Grid.Container gap={1}>
         <Grid xs={24}>
           <Description
-            title={item.definition.name}
-            width="100%"
             content={
               isEditing ? (
                 <Input
-                  value={name}
-                  width="100%"
+                  aria-label={t("itemNameLabel")}
                   disabled={item.blocked}
+                  label={t("itemNameLabel")}
                   onChange={handleNameChange}
                   placeholder={t("itemNameLabel")}
-                  label={t("itemNameLabel")}
-                  aria-label={t("itemNameLabel")}
+                  value={name}
+                  width="100%"
                 />
               ) : (
                 <Text h6>{item.name}</Text>
               )
             }
+            title={item.definition.name}
+            width="100%"
           />
         </Grid>
         <Grid>

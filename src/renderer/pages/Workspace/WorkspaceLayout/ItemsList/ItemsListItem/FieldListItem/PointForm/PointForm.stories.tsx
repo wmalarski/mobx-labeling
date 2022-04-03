@@ -28,10 +28,10 @@ const PointFormStory = ({
 const Template: ComponentStory<typeof PointFormStory> = PointFormStory;
 
 const Model = types.model({
+  currentFrame: CurrentFrame,
   definition: PointDefinition,
   field: PointField,
   tool: Tool,
-  currentFrame: CurrentFrame,
 });
 
 const instance = Model.create({
@@ -40,9 +40,9 @@ const instance = Model.create({
     kind: "Selector",
   },
   definition: {
-    name: "Point",
     id: "id",
     kind: "Point",
+    name: "Point",
   },
   field: {
     currentFrame: "id",
@@ -55,7 +55,7 @@ const instance = Model.create({
 
 export const Playground = Template.bind({});
 Playground.args = {
-  wrapperProps: {},
   field: instance.field,
   tool: instance.tool,
+  wrapperProps: {},
 };

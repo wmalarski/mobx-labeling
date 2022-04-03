@@ -33,15 +33,15 @@ export const TopBar = observer(({ workspaceStore }: Props): ReactElement => {
       <Grid>
         <ButtonGroup>
           <Button
-            auto
             aria-label={t("cursorButton")}
+            auto
             iconRight={<CursorArrowIcon />}
             onClick={handleCursorClick}
             type={toolKind === ToolKind.Selector ? "success-light" : "default"}
           />
           <Button
-            auto
             aria-label={t("dragButton")}
+            auto
             iconRight={<HandIcon />}
             onClick={handleDragClick}
             type={toolKind === ToolKind.Drag ? "success" : "default"}
@@ -50,14 +50,14 @@ export const TopBar = observer(({ workspaceStore }: Props): ReactElement => {
       </Grid>
       <Grid>
         <Input
-          label={t("currentFrameLabel")}
           aria-label={t("currentFrameLabel")}
-          value={String(workspaceStore.currentFrame.frame)}
-          min={0}
-          max={workspaceStore.framesCount - 1}
-          step={1}
           htmlType="number"
+          label={t("currentFrameLabel")}
+          max={workspaceStore.framesCount - 1}
+          min={0}
           onChange={handleCurrentFrameChange}
+          step={1}
+          value={String(workspaceStore.currentFrame.frame)}
         />
       </Grid>
     </Grid.Container>

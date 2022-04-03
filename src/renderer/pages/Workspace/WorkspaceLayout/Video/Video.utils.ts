@@ -2,10 +2,10 @@ import { useReducer } from "react";
 import { Point2D } from "renderer/utils/geometry";
 
 type UseZoomState = {
+  scaleBy: number;
   stageScale: number;
   stageX: number;
   stageY: number;
-  scaleBy: number;
 };
 
 export type UseZoomResult = UseZoomState & {

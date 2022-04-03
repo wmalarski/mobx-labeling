@@ -36,46 +36,46 @@ export const NumberEditor = observer(
         </Grid>
         <Grid xs={24}>
           <Input
-            htmlType="number"
-            width="100%"
             aria-label={t("numberMin")}
+            htmlType="number"
             label={t("numberMin")}
+            onChange={handleMinChange}
             placeholder={t("numberMin")}
             value={String(fieldDefinition.min)}
-            onChange={handleMinChange}
+            width="100%"
           />
         </Grid>
         <Grid xs={24}>
           <Input
-            htmlType="number"
-            width="100%"
             aria-label={t("numberMax")}
+            htmlType="number"
             label={t("numberMax")}
+            onChange={handleMaxChange}
             placeholder={t("numberMax")}
             value={String(fieldDefinition.max)}
-            onChange={handleMaxChange}
+            width="100%"
           />
         </Grid>
         <Grid xs={24}>
           <Input
-            htmlType="number"
-            width="100%"
             aria-label={t("numberStep")}
+            htmlType="number"
             label={t("numberStep")}
+            onChange={handleStepChange}
             placeholder={t("numberStep")}
             value={String(fieldDefinition.step)}
-            onChange={handleStepChange}
+            width="100%"
           />
         </Grid>
         <Grid xs={24}>
           <Input
-            htmlType="number"
-            width="100%"
             aria-label={t("numberDefault")}
+            htmlType="number"
             label={t("numberDefault")}
+            onChange={handleDefaultChange}
             placeholder={t("numberDefault")}
             value={String(fieldDefinition.default)}
-            onChange={handleDefaultChange}
+            width="100%"
           />
         </Grid>
       </Grid.Container>

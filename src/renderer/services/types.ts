@@ -15,9 +15,9 @@ import {
 } from "renderer/models";
 
 type PaginationArgs = {
-  start: number;
   limit: number;
   query?: string;
+  start: number;
 };
 
 type PaginationResult<TData> = {

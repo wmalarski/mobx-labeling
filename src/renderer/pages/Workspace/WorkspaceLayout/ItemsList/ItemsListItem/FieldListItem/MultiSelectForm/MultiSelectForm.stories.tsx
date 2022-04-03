@@ -29,17 +29,17 @@ const Template: ComponentStory<typeof MultiSelectFormStory> =
   MultiSelectFormStory;
 
 const Model = types.model({
+  currentFrame: CurrentFrame,
   definition: MultiSelectDefinition,
   field: MultiSelectField,
-  currentFrame: CurrentFrame,
 });
 
 const instance = Model.create({
   currentFrame: { id: "id" },
   definition: {
-    name: "Text",
     id: "id",
     kind: "MultiSelect",
+    name: "Text",
   },
   field: {
     currentFrame: "id",

@@ -27,8 +27,8 @@ const Template: ComponentStory<typeof ComboBoxEditorStory> =
 
 export const Playground = Template.bind({});
 Playground.args = {
-  wrapperProps: {},
   fieldDefinition: ComboBoxDefinition.create({
     name: "Field123",
   }),
+  wrapperProps: {},
 };

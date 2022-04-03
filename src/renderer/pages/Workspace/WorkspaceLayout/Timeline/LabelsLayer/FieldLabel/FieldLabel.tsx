@@ -7,9 +7,9 @@ import { Field, WorkspaceStore } from "renderer/models";
 import { useTimelineConfig } from "../../TimelineContext/TimelineContext";
 
 type Props = {
-  workspaceStore: Instance<typeof WorkspaceStore>;
   field: Instance<typeof Field>;
   position: number;
+  workspaceStore: Instance<typeof WorkspaceStore>;
 };
 
 export const FieldLabel = observer(
@@ -31,16 +31,14 @@ export const FieldLabel = observer(
 
     return (
       <Group
-        y={position * config.rowHeight}
         height={config.rowHeight}
-        width={config.labelsWidth}
-        onMouseOver={handleMouseOverGroup}
-        onMouseOut={handleMouseOutGroup}
         onClick={handleClickGroup}
+        onMouseOut={handleMouseOutGroup}
+        onMouseOver={handleMouseOverGroup}
+        width={config.labelsWidth}
+        y={position * config.rowHeight}
       >
         <Rect
-          width={config.labelsWidth}
-          height={config.rowHeight}
           fill={
             field.selected
               ? config.selectionColor
@@ -48,16 +46,18 @@ export const FieldLabel = observer(
               ? config.hoverColor
               : config.deselectionColor
           }
+          height={config.rowHeight}
+          width={config.labelsWidth}
         />
         <Text
+          ellipsis
+          fill={config.foregroundColor}
+          fontStyle={field.selected ? "bold" : "normal"}
+          text={field.definition.name}
+          width={config.labelsWidth - 15}
+          wrap="none"
           x={15}
           y={config.rowHeight / 2 - 8}
-          text={field.definition.name}
-          fill={config.foregroundColor}
-          width={config.labelsWidth - 15}
-          fontStyle={field.selected ? "bold" : "normal"}
-          ellipsis
-          wrap="none"
         />
       </Group>
     );

@@ -32,6 +32,6 @@ const Template: ComponentStory<typeof FieldPlaceholderStory> =
 
 export const Playground = Template.bind({});
 Playground.args = {
-  wrapperProps: {},
   itemDefinition: mockItemDefinition({ update: { name: "123" } }),
+  wrapperProps: {},
 };

@@ -28,9 +28,9 @@ export const FieldListItem = observer(
         onClick={handleClick}
         data-testid="field-item"
         style={{
-          position: "relative",
           backgroundColor: theme.palette.background,
           margin: theme.layout.gapQuarter,
+          position: "relative",
         }}
       >
         <Card.Content>

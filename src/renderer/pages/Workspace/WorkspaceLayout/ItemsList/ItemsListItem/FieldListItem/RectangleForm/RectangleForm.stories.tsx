@@ -40,9 +40,9 @@ const instance = Model.create({
     kind: "Selector",
   },
   definition: {
-    name: "Rectangle",
     id: "id",
     kind: "Rectangle",
+    name: "Rectangle",
   },
   field: {
     currentFrame: "id",
@@ -55,7 +55,7 @@ const instance = Model.create({
 
 export const Playground = Template.bind({});
 Playground.args = {
-  wrapperProps: {},
   field: instance.field,
   tool: instance.tool,
+  wrapperProps: {},
 };

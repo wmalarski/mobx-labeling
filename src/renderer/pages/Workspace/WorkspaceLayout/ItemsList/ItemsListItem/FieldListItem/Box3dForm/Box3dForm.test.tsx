@@ -13,10 +13,10 @@ import { Box3dForm } from "./Box3dForm";
 type Props = ComponentProps<typeof Box3dForm>;
 
 const Model = types.model({
+  currentFrame: CurrentFrame,
   definition: Box3dDefinition,
   field: Box3dField,
   tool: Tool,
-  currentFrame: CurrentFrame,
 });
 
 const getInstance = ({
@@ -32,9 +32,9 @@ const getInstance = ({
       kind: "Selector",
     },
     definition: {
-      name: "Box3d",
       id: "id",
       kind: "Box3d",
+      name: "Box3d",
       ...definition,
     },
     field: {

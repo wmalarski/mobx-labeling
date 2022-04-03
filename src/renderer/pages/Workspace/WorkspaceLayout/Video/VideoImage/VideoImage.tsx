@@ -7,9 +7,9 @@ import { Image } from "react-konva";
 import { Resource, WorkspaceStore } from "renderer/models";
 
 type Props = {
-  workspaceStore: Instance<typeof WorkspaceStore>;
-  resource: SnapshotOut<typeof Resource>;
   onClick: (event: KonvaEventObject<MouseEvent>) => void;
+  resource: SnapshotOut<typeof Resource>;
+  workspaceStore: Instance<typeof WorkspaceStore>;
 };
 
 export const VideoImage = observer(
@@ -64,13 +64,11 @@ export const VideoImage = observer(
 
     return (
       <Image
-        ref={imageRef}
-        image={videoElement}
-        x={0}
-        y={0}
-        width={size.width}
         height={size.height}
+        image={videoElement}
         onClick={onClick}
+        ref={imageRef}
+        width={size.width}
       />
     );
   }

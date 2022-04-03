@@ -13,9 +13,9 @@ import { SelectForm } from "./SelectForm";
 type Props = ComponentProps<typeof SelectForm>;
 
 const Model = types.model({
+  currentFrame: CurrentFrame,
   definition: SelectDefinition,
   field: SelectField,
-  currentFrame: CurrentFrame,
 });
 
 const getInstance = ({
@@ -28,10 +28,10 @@ const getInstance = ({
   return Model.create({
     currentFrame: { id: "id" },
     definition: {
-      name: "Text",
       change: "EveryFrame",
       id: "id",
       kind: "Select",
+      name: "Text",
       ...definition,
     },
     field: {

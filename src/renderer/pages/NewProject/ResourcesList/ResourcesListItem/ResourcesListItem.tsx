@@ -7,12 +7,12 @@ import { useTranslation } from "react-i18next";
 import { Resource } from "renderer/models";
 
 type Props = {
-  resource: Instance<typeof Resource>;
   onRemoveClick: () => void;
+  resource: Instance<typeof Resource>;
 };
 
 export const ResourcesListItem = observer(
-  ({ resource, onRemoveClick }: Props): ReactElement => {
+  ({ onRemoveClick, resource }: Props): ReactElement => {
     const { t } = useTranslation("project");
 
     const handleFpsChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -35,35 +35,35 @@ export const ResourcesListItem = observer(
             <Button
               auto
               color="error"
-              onClick={onRemoveClick}
               icon={<TrashIcon />}
+              onClick={onRemoveClick}
             >
               {t("resourceRemove")}
             </Button>
           </Grid>
           <Grid xs={24}>
             <Input
-              width="100%"
-              step={1}
-              min={1}
+              aria-label={t("resourceFpsLabel")}
               htmlType="number"
               label={t("resourceFpsLabel")}
-              placeholder={t("resourceFpsLabel")}
-              aria-label={t("resourceFpsLabel")}
-              value={String(resource.fps)}
+              min={1}
               onChange={handleFpsChange}
+              placeholder={t("resourceFpsLabel")}
+              step={1}
+              value={String(resource.fps)}
+              width="100%"
             />
           </Grid>
           <Grid xs={24}>
             <Input
-              width="100%"
-              step={1}
+              aria-label={t("resourceFrameShiftLabel")}
               htmlType="number"
               label={t("resourceFrameShiftLabel")}
-              placeholder={t("resourceFrameShiftLabel")}
-              aria-label={t("resourceFrameShiftLabel")}
-              value={String(resource.frameShift)}
               onChange={handleFrameShiftChange}
+              placeholder={t("resourceFrameShiftLabel")}
+              step={1}
+              value={String(resource.frameShift)}
+              width="100%"
             />
           </Grid>
         </Grid.Container>

@@ -9,8 +9,8 @@ import { ItemHeader } from "./ItemHeader/ItemHeader";
 import { ItemsListItem } from "./ItemsListItem/ItemsListItem";
 
 type Props = {
-  workspaceStore: Instance<typeof WorkspaceStore>;
   node: FlexLayout.TabNode;
+  workspaceStore: Instance<typeof WorkspaceStore>;
 };
 
 export const ItemsList = observer(({ workspaceStore }: Props): ReactElement => {

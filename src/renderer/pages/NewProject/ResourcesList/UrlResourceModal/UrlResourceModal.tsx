@@ -40,12 +40,12 @@ export const UrlResourceModal = ({ newProjectStore }: Props): ReactElement => {
         <Modal.Subtitle>{t("addURLSubtitle")}</Modal.Subtitle>
         <Modal.Content>
           <Input
-            width="100%"
-            label={t("pathLabel")}
-            placeholder={t("pathLabel")}
             aria-label={t("pathLabel")}
-            value={path}
+            label={t("pathLabel")}
             onChange={handlePathChange}
+            placeholder={t("pathLabel")}
+            value={path}
+            width="100%"
           />
         </Modal.Content>
         <Modal.Action passive onClick={bindings.onClose}>

@@ -13,10 +13,10 @@ import { PolygonForm } from "./PolygonForm";
 type Props = ComponentProps<typeof PolygonForm>;
 
 const Model = types.model({
+  currentFrame: CurrentFrame,
   definition: PolygonDefinition,
   field: PolygonField,
   tool: Tool,
-  currentFrame: CurrentFrame,
 });
 
 const getInstance = ({
@@ -32,9 +32,9 @@ const getInstance = ({
       kind: "Selector",
     },
     definition: {
-      name: "Polygon",
       id: "id",
       kind: "Polygon",
+      name: "Polygon",
       ...definition,
     },
     field: {
@@ -121,8 +121,8 @@ describe("<PolygonForm />", () => {
     renderComponent({ field: instance.field });
 
     const label = i18n.t<string>("polygonRemove", {
-      ns: "workspace",
       index: 0,
+      ns: "workspace",
     });
     const button = await screen.findByLabelText(label);
     userEvent.click(button);

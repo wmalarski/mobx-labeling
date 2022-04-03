@@ -43,26 +43,26 @@ export const EyeForm = observer(({ field, tool }: Props): ReactElement => {
         <Fragment key={index}>
           <Grid xs={12}>
             <Input
-              width="100%"
+              aria-label={t("eyeX", { index })}
               disabled={field.blocked}
               htmlType="number"
-              placeholder={t("eyeX", { index })}
               label={t("eyeX", { index })}
-              aria-label={t("eyeX", { index })}
-              value={String(pair[0])}
               onChange={handleChange(index, 0)}
+              placeholder={t("eyeX", { index })}
+              value={String(pair[0])}
+              width="100%"
             />
           </Grid>
           <Grid xs={12}>
             <Input
-              width="100%"
+              aria-label={t("eyeY", { index })}
               disabled={field.blocked}
               htmlType="number"
-              placeholder={t("eyeY", { index })}
               label={t("eyeY", { index })}
-              aria-label={t("eyeY", { index })}
-              value={String(pair[1])}
               onChange={handleChange(index, 1)}
+              placeholder={t("eyeY", { index })}
+              value={String(pair[1])}
+              width="100%"
             />
           </Grid>
         </Fragment>

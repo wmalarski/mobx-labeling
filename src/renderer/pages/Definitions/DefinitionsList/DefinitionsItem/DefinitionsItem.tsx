@@ -36,10 +36,10 @@ export const DefinitionsItem = observer(
       });
     };
 
-    const leftXs = 12;
-    const rightXs = 12;
     const leftSm = 6;
+    const leftXs = 12;
     const rightSm = 18;
+    const rightXs = 12;
 
     return (
       <Card width="100%">
@@ -80,8 +80,8 @@ export const DefinitionsItem = observer(
           <Grid>
             <Button
               color="primary"
-              onClick={handleNewProjectClick}
               icon={<CubeIcon />}
+              onClick={handleNewProjectClick}
             >
               {t("useDefinition")}
             </Button>
@@ -89,8 +89,8 @@ export const DefinitionsItem = observer(
           <Grid>
             <Button
               color="secondary"
-              onClick={handleEditClick}
               icon={<Pencil1Icon />}
+              onClick={handleEditClick}
             >
               {t("editDefinition")}
             </Button>

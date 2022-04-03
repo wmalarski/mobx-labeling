@@ -13,10 +13,10 @@ import { PointForm } from "./PointForm";
 type Props = ComponentProps<typeof PointForm>;
 
 const Model = types.model({
+  currentFrame: CurrentFrame,
   definition: PointDefinition,
   field: PointField,
   tool: Tool,
-  currentFrame: CurrentFrame,
 });
 
 const getInstance = ({

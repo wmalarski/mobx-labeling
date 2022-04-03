@@ -27,8 +27,8 @@ export const RecentItem = observer(({ projectEntry }: Props): ReactElement => {
 
   const handleEditClick = () => {
     navigate({
-      to: routePaths.workspace,
       search: { project: projectEntry.projectPath },
+      to: routePaths.workspace,
     });
   };
 
@@ -72,8 +72,8 @@ export const RecentItem = observer(({ projectEntry }: Props): ReactElement => {
         <Grid xs={24}>
           <Button
             color="secondary"
-            onClick={handleEditClick}
             icon={<CubeIcon />}
+            onClick={handleEditClick}
           >
             {t("openProject")}
           </Button>

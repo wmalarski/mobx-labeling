@@ -31,13 +31,13 @@ export const DefinitionsList = observer(
       <Grid.Container gap={1} justify="space-between" alignItems="center">
         <Grid xs={24}>
           <Input
-            width="100%"
-            clearable
-            value={definitionsList.query}
-            onChange={handleQueryChange}
-            label={t("searchPlaceholder")}
-            placeholder={t("searchPlaceholder")}
             aria-label={t("searchPlaceholder")}
+            clearable
+            label={t("searchPlaceholder")}
+            onChange={handleQueryChange}
+            placeholder={t("searchPlaceholder")}
+            value={definitionsList.query}
+            width="100%"
           />
         </Grid>
         {definitionsList.definitions.map((definitionEntry) => (
@@ -58,8 +58,8 @@ export const DefinitionsList = observer(
         <Grid xs={24} justify="center">
           <Pagination
             count={definitionsList.totalPages}
-            page={definitionsList.page + 1}
             onChange={handlePageChange}
+            page={definitionsList.page + 1}
           />
         </Grid>
       </Grid.Container>

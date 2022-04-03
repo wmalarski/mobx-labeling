@@ -8,14 +8,14 @@ import {
 } from "react";
 
 type TimelineConfig = {
+  backgroundColor: string;
+  deselectionColor: string;
+  foregroundColor: string;
+  hoverColor: string;
   labelsWidth: number;
+  rangeColor: string;
   rowHeight: number;
   selectionColor: string;
-  deselectionColor: string;
-  backgroundColor: string;
-  hoverColor: string;
-  foregroundColor: string;
-  rangeColor: string;
 };
 
 type TimelineContextValue =
@@ -40,8 +40,8 @@ export const useTimelineConfig = (): TimelineConfig => {
 };
 
 type Props = {
-  theme: GeistUIThemes;
   children: ReactNode;
+  theme: GeistUIThemes;
 };
 
 export const TimelineLabelsWidth = 160;
@@ -55,14 +55,14 @@ export const TimelineContextProvider = ({
     () => ({
       isInitialized: true,
       config: {
-        rowHeight: TimelineRowHeight,
-        labelsWidth: TimelineLabelsWidth,
-        deselectionColor: theme.palette.background,
-        selectionColor: theme.palette.accents_2,
         backgroundColor: theme.palette.background,
-        hoverColor: theme.palette.accents_1,
+        deselectionColor: theme.palette.background,
         foregroundColor: theme.palette.foreground,
+        hoverColor: theme.palette.accents_1,
+        labelsWidth: TimelineLabelsWidth,
         rangeColor: theme.palette.secondary,
+        rowHeight: TimelineRowHeight,
+        selectionColor: theme.palette.accents_2,
       },
     }),
     [theme.palette]

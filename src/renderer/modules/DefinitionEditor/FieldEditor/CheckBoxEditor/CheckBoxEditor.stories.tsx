@@ -27,13 +27,13 @@ const Template: ComponentStory<typeof CheckBoxEditorStory> =
 
 export const Playground = Template.bind({});
 Playground.args = {
-  wrapperProps: {},
   fieldDefinition: CheckBoxDefinition.create({
-    name: "Checkbox",
     change: "EveryFrame",
     default: true,
     description: "Very descriptive",
     id: "elo123",
     kind: "CheckBox",
+    name: "Checkbox",
   }),
+  wrapperProps: {},
 };

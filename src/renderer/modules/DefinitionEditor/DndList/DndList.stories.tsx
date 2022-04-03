@@ -34,6 +34,6 @@ const Template: ComponentStory<typeof DndListStory> = DndListStory;
 
 export const Playground = Template.bind({});
 Playground.args = {
-  wrapperProps: {},
   projectDefinition: mockProjectDefinition(),
+  wrapperProps: {},
 };

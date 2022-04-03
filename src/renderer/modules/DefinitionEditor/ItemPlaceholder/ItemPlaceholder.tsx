@@ -5,13 +5,13 @@ import { useTranslation } from "react-i18next";
 import { ProjectDefinition } from "renderer/models";
 
 type Props = {
-  projectDefinition: Instance<typeof ProjectDefinition>;
   onSelectedItemChange: (itemId: string | null) => void;
+  projectDefinition: Instance<typeof ProjectDefinition>;
 };
 
 export const ItemPlaceholder = ({
-  projectDefinition,
   onSelectedItemChange,
+  projectDefinition,
 }: Props): ReactElement => {
   const { t } = useTranslation("definition");
 

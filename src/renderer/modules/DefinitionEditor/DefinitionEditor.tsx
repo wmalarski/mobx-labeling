@@ -34,9 +34,9 @@ export const DefinitionEditor = observer(
         </Grid>
         <Grid xs={24} sm={9} md={6}>
           <DndList
-            projectDefinition={projectDefinition}
-            onSelectedItemChange={setItemId}
             onSelectedFieldChange={setFieldId}
+            onSelectedItemChange={setItemId}
+            projectDefinition={projectDefinition}
           />
         </Grid>
         <Grid xs={24} sm={15} md={18} direction="column">
@@ -45,10 +45,10 @@ export const DefinitionEditor = observer(
               <>
                 <Grid xs={24}>
                   <ItemForm
-                    onSelectedItemChange={setItemId}
                     itemDefinition={itemDefinition}
-                    projectDefinition={projectDefinition}
                     onSelectedFieldChange={setFieldId}
+                    onSelectedItemChange={setItemId}
+                    projectDefinition={projectDefinition}
                   />
                 </Grid>
                 {fieldDefinition && (

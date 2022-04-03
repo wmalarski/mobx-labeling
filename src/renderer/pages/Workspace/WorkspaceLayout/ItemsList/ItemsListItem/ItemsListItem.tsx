@@ -36,13 +36,13 @@ export const ItemsListItem = observer(({ item, tool }: Props): ReactElement => {
   return (
     <Table hover={false} data={data}>
       <Table.Column
-        prop="definition"
         label={t("itemTableKey")}
+        prop="definition"
         render={renderKey}
       />
       <Table.Column
-        prop="field"
         label={t("itemTableValue")}
+        prop="field"
         render={renderValue}
       />
     </Table>

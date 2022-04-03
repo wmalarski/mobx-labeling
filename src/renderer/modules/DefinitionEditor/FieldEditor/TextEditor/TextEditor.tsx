@@ -24,12 +24,12 @@ export const TextEditor = observer(
         </Grid>
         <Grid xs={24}>
           <Input
-            width="100%"
             aria-label={t("textDefault")}
             label={t("textDefault")}
+            onChange={handleDefaultChange}
             placeholder={t("textDefault")}
             value={fieldDefinition.default}
-            onChange={handleDefaultChange}
+            width="100%"
           />
         </Grid>
       </Grid.Container>

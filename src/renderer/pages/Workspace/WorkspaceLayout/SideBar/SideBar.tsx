@@ -18,8 +18,8 @@ export const SideBar = observer(({ workspaceStore }: Props): ReactElement => {
     <ButtonGroup vertical>
       {workspaceStore.project.definition.items.map((itemDefinition) => (
         <Button
-          key={itemDefinition.id}
           auto
+          key={itemDefinition.id}
           onClick={handleAddItemClick(itemDefinition)}
         >
           {itemDefinition.name}

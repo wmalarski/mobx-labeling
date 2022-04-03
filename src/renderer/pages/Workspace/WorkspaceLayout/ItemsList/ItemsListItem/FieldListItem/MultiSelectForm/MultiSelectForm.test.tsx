@@ -13,9 +13,9 @@ import { MultiSelectForm } from "./MultiSelectForm";
 type Props = ComponentProps<typeof MultiSelectForm>;
 
 const Model = types.model({
+  currentFrame: CurrentFrame,
   definition: MultiSelectDefinition,
   field: MultiSelectField,
-  currentFrame: CurrentFrame,
 });
 
 const getInstance = ({
@@ -28,10 +28,10 @@ const getInstance = ({
   return Model.create({
     currentFrame: { id: "id" },
     definition: {
-      name: "MultiSelect",
       change: "EveryFrame",
       id: "id",
       kind: "MultiSelect",
+      name: "MultiSelect",
       ...definition,
     },
     field: {

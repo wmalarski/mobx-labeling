@@ -66,8 +66,8 @@ export const MultiSelectEditor = observer(
         </Grid>
         <Grid xs={24}>
           <Checkbox.Group
-            value={fieldDefinition.default}
             onChange={handleDefaultChange}
+            value={fieldDefinition.default}
           >
             <Grid.Container gap={0.5}>
               {fieldDefinition.options.map((option) => (
@@ -79,23 +79,23 @@ export const MultiSelectEditor = observer(
                   </Grid>
                   <Grid xs={15} sm={12} md={9}>
                     <Input
-                      width="100%"
-                      min={1}
-                      htmlType="number"
-                      max={24}
-                      step={1}
-                      placeholder={t("multiSelectSize")}
                       aria-label={t("multiSelectSize")}
+                      htmlType="number"
                       label={t("multiSelectSize")}
-                      value={String(option.size)}
+                      max={24}
+                      min={1}
                       onChange={handleSizeChange(option)}
+                      placeholder={t("multiSelectSize")}
+                      step={1}
+                      value={String(option.size)}
+                      width="100%"
                     />
                     <Spacer w={1} />
                     <Button
                       auto
                       color="error"
-                      onClick={handleRemoveClick(option)}
                       icon={<TrashIcon />}
+                      onClick={handleRemoveClick(option)}
                     >
                       {t("multiSelectRemoveOption")}
                     </Button>
@@ -107,21 +107,21 @@ export const MultiSelectEditor = observer(
         </Grid>
         <Grid xs={24}>
           <Input
-            width="100%"
-            value={newOption}
+            aria-label={t("multiSelectInput")}
+            label={t("multiSelectInput")}
             onChange={handleInputChange}
             onKeyDown={handleInputKeyDown}
             placeholder={t("multiSelectInput")}
-            label={t("multiSelectInput")}
-            aria-label={t("multiSelectInput")}
+            value={newOption}
+            width="100%"
           />
           <Spacer w={1} />
           <Button
             auto
             color="secondary"
-            onClick={handleAddClick}
             disabled={!isValid}
             icon={<PlusIcon />}
+            onClick={handleAddClick}
           >
             {t("multiSelectAddOption")}
           </Button>

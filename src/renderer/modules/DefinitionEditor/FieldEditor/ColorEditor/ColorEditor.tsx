@@ -22,11 +22,11 @@ export const ColorEditor = observer(
         <Grid xs={24}>
           <ColorSlider
             channel="hue"
-            value={fieldDefinition.color}
+            label={t("colorSliderLabel")}
             onChange={(color) => {
               fieldDefinition.setColor(color.toString("hsl"));
             }}
-            label={t("colorSliderLabel")}
+            value={fieldDefinition.color}
           />
         </Grid>
       </Grid.Container>

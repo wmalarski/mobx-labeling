@@ -35,12 +35,12 @@ const Model = types.model({
 
 const instance = Model.create({
   definition: {
-    name: "Text",
     change: "EveryFrame",
     default: "Hello",
     description: "Description",
     id: "id",
     kind: "Text",
+    name: "Text",
   },
   field: {
     currentFrame: "id",

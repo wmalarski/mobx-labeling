@@ -28,17 +28,17 @@ const CheckBoxFormStory = ({
 const Template: ComponentStory<typeof CheckBoxFormStory> = CheckBoxFormStory;
 
 const Model = types.model({
+  currentFrame: CurrentFrame,
   definition: CheckBoxDefinition,
   field: CheckBoxField,
-  currentFrame: CurrentFrame,
 });
 
 const instance = Model.create({
   currentFrame: { id: "id" },
   definition: {
-    name: "CheckBox",
     id: "id",
     kind: "CheckBox",
+    name: "CheckBox",
   },
   field: {
     currentFrame: "id",

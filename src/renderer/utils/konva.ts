@@ -3,8 +3,8 @@ import Konva from "konva";
 import { RefObject, useEffect } from "react";
 
 type UseNodeResizeArgs = {
-  stageRef: RefObject<Konva.Stage>;
   node: FlexLayout.TabNode;
+  stageRef: RefObject<Konva.Stage>;
 };
 
 export const useNodeResize = ({ stageRef, node }: UseNodeResizeArgs): void => {

@@ -19,8 +19,8 @@ const renderComponent = ({
 }: PropsWithTestWrapper<Partial<Props>> = {}) => {
   const defaultProps: Props = {
     itemDefinition: mockItemDefinition({ update: { name: "1" } }),
-    onSelectedItemChange: () => void 0,
     onSelectedFieldChange: () => void 0,
+    onSelectedItemChange: () => void 0,
     projectDefinition: mockProjectDefinition(),
   };
 
@@ -91,8 +91,8 @@ describe("<ItemForm />", () => {
 
     renderComponent({
       itemDefinition,
-      projectDefinition,
       onSelectedItemChange,
+      projectDefinition,
     });
 
     const removeText = i18n.t<string>("removeItem", { ns: "definition" });
@@ -118,8 +118,8 @@ describe("<ItemForm />", () => {
 
     renderComponent({
       itemDefinition,
-      projectDefinition,
       onSelectedItemChange,
+      projectDefinition,
     });
 
     const copyText = i18n.t<string>("copyItem", { ns: "definition" });

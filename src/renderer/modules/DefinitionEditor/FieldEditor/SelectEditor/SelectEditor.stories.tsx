@@ -26,8 +26,8 @@ const Template: ComponentStory<typeof SelectEditorStory> = SelectEditorStory;
 
 export const Playground = Template.bind({});
 Playground.args = {
-  wrapperProps: {},
   fieldDefinition: SelectDefinition.create({
     name: "Name123",
   }),
+  wrapperProps: {},
 };

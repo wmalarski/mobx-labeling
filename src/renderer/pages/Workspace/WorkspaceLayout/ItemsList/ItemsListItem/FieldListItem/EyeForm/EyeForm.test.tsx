@@ -13,10 +13,10 @@ import { EyeForm } from "./EyeForm";
 type Props = ComponentProps<typeof EyeForm>;
 
 const Model = types.model({
+  currentFrame: CurrentFrame,
   definition: EyeDefinition,
   field: EyeField,
   tool: Tool,
-  currentFrame: CurrentFrame,
 });
 
 const getInstance = ({
@@ -32,9 +32,9 @@ const getInstance = ({
       kind: "Selector",
     },
     definition: {
-      name: "Eye",
       id: "id",
       kind: "Eye",
+      name: "Eye",
       ...definition,
     },
     field: {

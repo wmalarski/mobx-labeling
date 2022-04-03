@@ -58,37 +58,37 @@ export const Box3dForm = observer(({ field, tool }: Props): ReactElement => {
         <Fragment key={index}>
           <Grid xs={12}>
             <Input
-              width="100%"
+              aria-label={t("box3dX", { index })}
               disabled={field.blocked}
               htmlType="number"
-              placeholder={t("box3dX", { index })}
               label={t("box3dX", { index })}
-              aria-label={t("box3dX", { index })}
-              value={String(pair[0])}
               onChange={handleFrontChange(index, 0)}
+              placeholder={t("box3dX", { index })}
+              value={String(pair[0])}
+              width="100%"
             />
           </Grid>
           <Grid xs={12}>
             <Input
-              width="100%"
+              aria-label={t("box3dY", { index })}
               disabled={field.blocked}
               htmlType="number"
-              placeholder={t("box3dY", { index })}
               label={t("box3dY", { index })}
-              aria-label={t("box3dY", { index })}
-              value={String(pair[1])}
               onChange={handleFrontChange(index, 1)}
+              placeholder={t("box3dY", { index })}
+              value={String(pair[1])}
+              width="100%"
             />
           </Grid>
         </Fragment>
       ))}
       <Select
-        width="100%"
-        disabled={field.blocked}
-        placeholder={t("box3dPlaceholder")}
         aria-label={t("box3dPlaceholder")}
-        value={current.sideType}
+        disabled={field.blocked}
         onChange={handleTypeChange}
+        placeholder={t("box3dPlaceholder")}
+        value={current.sideType}
+        width="100%"
       >
         <Select.Option value="Right">{t("box3dRight")}</Select.Option>
         <Select.Option value="Left">{t("box3dLeft")}</Select.Option>
@@ -98,26 +98,26 @@ export const Box3dForm = observer(({ field, tool }: Props): ReactElement => {
         <Fragment key={index}>
           <Grid xs={12}>
             <Input
-              width="100%"
+              aria-label={t("box3dSideX", { index })}
               disabled={field.blocked}
               htmlType="number"
-              placeholder={t("box3dSideX", { index })}
               label={t("box3dSideX", { index })}
-              aria-label={t("box3dSideX", { index })}
-              value={String(pair[0])}
               onChange={handleSideChange(index, 0)}
+              placeholder={t("box3dSideX", { index })}
+              value={String(pair[0])}
+              width="100%"
             />
           </Grid>
           <Grid xs={12}>
             <Input
-              width="100%"
+              aria-label={t("box3dSideY", { index })}
               disabled={field.blocked}
               htmlType="number"
-              placeholder={t("box3dSideY", { index })}
               label={t("box3dSideY", { index })}
-              aria-label={t("box3dSideY", { index })}
-              value={String(pair[1])}
               onChange={handleSideChange(index, 1)}
+              placeholder={t("box3dSideY", { index })}
+              value={String(pair[1])}
+              width="100%"
             />
           </Grid>
         </Fragment>

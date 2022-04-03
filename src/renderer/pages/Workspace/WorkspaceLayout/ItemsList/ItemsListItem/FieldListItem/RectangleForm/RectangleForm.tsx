@@ -38,50 +38,50 @@ export const RectangleForm = observer(
       <Grid.Container gap={1}>
         <Grid xs={24}>
           <Input
-            width="100%"
-            disabled={field.blocked}
-            htmlType="number"
-            placeholder={t("rectangleTop")}
-            label={t("rectangleTop")}
             aria-label={t("rectangleTop")}
-            value={String(current.value[0])}
+            disabled={field.blocked}
+            htmlType="number"
+            label={t("rectangleTop")}
             onChange={handleChange(0)}
+            placeholder={t("rectangleTop")}
+            value={String(current.value[0])}
+            width="100%"
           />
         </Grid>
         <Grid xs={24}>
           <Input
-            width="100%"
-            disabled={field.blocked}
-            htmlType="number"
-            placeholder={t("rectangleLeft")}
-            label={t("rectangleLeft")}
             aria-label={t("rectangleLeft")}
-            value={String(current.value[1])}
+            disabled={field.blocked}
+            htmlType="number"
+            label={t("rectangleLeft")}
             onChange={handleChange(1)}
+            placeholder={t("rectangleLeft")}
+            value={String(current.value[1])}
+            width="100%"
           />
         </Grid>
         <Grid xs={24}>
           <Input
-            width="100%"
-            disabled={field.blocked}
-            htmlType="number"
-            placeholder={t("rectangleBottom")}
-            label={t("rectangleBottom")}
             aria-label={t("rectangleBottom")}
-            value={String(current.value[2])}
+            disabled={field.blocked}
+            htmlType="number"
+            label={t("rectangleBottom")}
             onChange={handleChange(2)}
+            placeholder={t("rectangleBottom")}
+            value={String(current.value[2])}
+            width="100%"
           />
         </Grid>
         <Grid xs={24}>
           <Input
-            width="100%"
+            aria-label={t("rectangleRight")}
             disabled={field.blocked}
             htmlType="number"
-            placeholder={t("rectangleRight")}
             label={t("rectangleRight")}
-            aria-label={t("rectangleRight")}
-            value={String(current.value[3])}
             onChange={handleChange(3)}
+            placeholder={t("rectangleRight")}
+            value={String(current.value[3])}
+            width="100%"
           />
         </Grid>
       </Grid.Container>

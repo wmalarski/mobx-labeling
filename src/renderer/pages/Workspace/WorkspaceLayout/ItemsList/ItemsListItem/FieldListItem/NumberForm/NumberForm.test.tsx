@@ -13,9 +13,9 @@ import { NumberForm } from "./NumberForm";
 type Props = ComponentProps<typeof NumberForm>;
 
 const Model = types.model({
+  currentFrame: CurrentFrame,
   definition: NumberDefinition,
   field: NumberField,
-  currentFrame: CurrentFrame,
 });
 
 const getInstance = ({
@@ -28,10 +28,10 @@ const getInstance = ({
   return Model.create({
     currentFrame: { id: "id" },
     definition: {
-      name: "Number",
       change: "EveryFrame",
-      kind: "Number",
       id: "id",
+      kind: "Number",
+      name: "Number",
       ...definition,
     },
     field: {

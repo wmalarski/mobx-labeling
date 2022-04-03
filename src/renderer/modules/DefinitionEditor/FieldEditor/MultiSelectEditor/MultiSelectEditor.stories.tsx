@@ -27,8 +27,8 @@ const Template: ComponentStory<typeof MultiSelectEditorStory> =
 
 export const Playground = Template.bind({});
 Playground.args = {
-  wrapperProps: {},
   fieldDefinition: MultiSelectDefinition.create({
     name: "Name123",
   }),
+  wrapperProps: {},
 };

@@ -1,15 +1,16 @@
 import { getSnapshot, Instance } from "mobx-state-tree";
-import { Field, SingletonKey } from "renderer/models";
+import { Field, Item, SingletonKey } from "renderer/models";
 
 export type FieldRange = {
-  start: number;
   end: number;
   label: string;
+  start: number;
 };
 
 type GetFieldRangesOptions = {
   field: Instance<typeof Field>;
   framesCount: number;
+  item: Instance<typeof Item>;
 };
 
 export const getFieldRanges = ({

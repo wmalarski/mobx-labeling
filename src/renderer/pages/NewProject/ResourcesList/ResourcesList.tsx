@@ -52,8 +52,8 @@ export const ResourcesList = observer(
         {newProjectStore.resources.map((resource) => (
           <Grid xs={24} key={resource.id}>
             <ResourcesListItem
-              resource={resource}
               onRemoveClick={handleRemoveClick(resource)}
+              resource={resource}
             />
           </Grid>
         ))}

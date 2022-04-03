@@ -8,8 +8,8 @@ import { Item, WorkspaceStore } from "renderer/models";
 import { useTimelineConfig } from "../../TimelineContext/TimelineContext";
 
 type Props = {
-  workspaceStore: Instance<typeof WorkspaceStore>;
   item: Instance<typeof Item>;
+  workspaceStore: Instance<typeof WorkspaceStore>;
 };
 
 export const ItemLabel = observer(
@@ -43,14 +43,12 @@ export const ItemLabel = observer(
 
     return (
       <Group
-        onMouseOver={handleMouseOverGroup}
-        onMouseOut={handleMouseOutGroup}
         onClick={handleClickGroup}
         onDblClick={handleDblClick}
+        onMouseOut={handleMouseOutGroup}
+        onMouseOver={handleMouseOverGroup}
       >
         <Rect
-          width={config.labelsWidth}
-          height={config.rowHeight}
           fill={
             item.selected
               ? config.selectionColor
@@ -58,32 +56,28 @@ export const ItemLabel = observer(
               ? config.hoverColor
               : config.deselectionColor
           }
+          height={config.rowHeight}
+          width={config.labelsWidth}
         />
         <Text
+          fill={config.foregroundColor}
+          offsetX={6}
+          offsetY={5}
           ref={arrowRef}
           text="▼"
           x={5}
           y={config.rowHeight / 2}
-          offsetX={6}
-          offsetY={5}
-          fill={config.foregroundColor}
         />
-        <Rect
-          x={0}
-          y={0}
-          width={15}
-          height={config.rowHeight}
-          onClick={handleClickArrow}
-        />
+        <Rect height={config.rowHeight} onClick={handleClickArrow} width={15} />
         <Text
+          ellipsis
+          fill={config.foregroundColor}
+          fontStyle={item.selected ? "bold" : "normal"}
+          text={item.name}
+          width={config.labelsWidth - 15}
+          wrap="none"
           x={15}
           y={config.rowHeight / 2 - 8}
-          text={item.name}
-          fill={config.foregroundColor}
-          width={config.labelsWidth - 15}
-          fontStyle={item.selected ? "bold" : "normal"}
-          ellipsis
-          wrap="none"
         />
       </Group>
     );

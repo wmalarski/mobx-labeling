@@ -28,17 +28,17 @@ const NumberFormStory = ({
 const Template: ComponentStory<typeof NumberFormStory> = NumberFormStory;
 
 const Model = types.model({
+  currentFrame: CurrentFrame,
   definition: NumberDefinition,
   field: NumberField,
-  currentFrame: CurrentFrame,
 });
 
 const instance = Model.create({
   currentFrame: { id: "id" },
   definition: {
-    name: "Number",
     id: "id",
     kind: "Number",
+    name: "Number",
   },
   field: {
     currentFrame: "id",

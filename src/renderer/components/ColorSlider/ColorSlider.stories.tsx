@@ -25,7 +25,7 @@ const Template: ComponentStory<typeof ColorSliderStory> = ColorSliderStory;
 
 export const Playground = Template.bind({});
 Playground.args = {
-  wrapperProps: {},
-  defaultValue: "hsl(0, 100%, 50%)",
   channel: "hue",
+  defaultValue: "hsl(0, 100%, 50%)",
+  wrapperProps: {},
 };

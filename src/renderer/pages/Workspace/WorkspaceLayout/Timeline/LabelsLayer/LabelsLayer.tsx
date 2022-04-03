@@ -9,8 +9,8 @@ import { FieldLabel } from "./FieldLabel/FieldLabel";
 import { ItemLabel } from "./ItemLabel/ItemLabel";
 
 type Props = {
-  workspaceStore: Instance<typeof WorkspaceStore>;
   items: ItemPosition[];
+  workspaceStore: Instance<typeof WorkspaceStore>;
 };
 
 export const LabelsLayer = observer(
@@ -23,8 +23,8 @@ export const LabelsLayer = observer(
           <Group key={item.id} y={position * config.rowHeight}>
             {item.fields.map((field, index) => (
               <FieldLabel
-                key={field.id}
                 field={field}
+                key={field.id}
                 position={index + 1}
                 workspaceStore={workspaceStore}
               />

@@ -22,19 +22,19 @@ const Model = types.model({
 const getInstance = () => {
   const definition = mockItemDefinition({});
   return Model.create({
+    currentFrame: { id: "id" },
     definition,
     item: {
-      definition: definition.id,
-      name: "Name",
       currentFrame: "id",
+      definition: definition.id,
       fields: definition.fields.map((fieldDefinition) => ({
         kind: fieldDefinition.kind,
         currentFrame: "id",
         definition: fieldDefinition.id,
       })),
+      name: "Name",
     },
     tool: { kind: "Selector" },
-    currentFrame: { id: "id" },
   });
 };
 

@@ -34,14 +34,12 @@ export const ItemRow = observer(
 
     return (
       <Group
-        onMouseOver={handleMouseOverGroup}
-        onMouseOut={handleMouseOutGroup}
         onClick={handleClickGroup}
         onDblClick={handleDblClick}
+        onMouseOut={handleMouseOutGroup}
+        onMouseOver={handleMouseOverGroup}
       >
         <Rect
-          width={workspaceStore.framesCount}
-          height={config.rowHeight}
           fill={
             item.selected
               ? config.selectionColor
@@ -49,14 +47,16 @@ export const ItemRow = observer(
               ? config.hoverColor
               : config.deselectionColor
           }
+          height={config.rowHeight}
+          width={workspaceStore.framesCount}
         />
         {item.ranges.map((range) => (
           <Rect
-            key={range.start}
-            x={range.start}
-            height={config.rowHeight}
-            width={range.end - range.start}
             fill={config.rangeColor}
+            height={config.rowHeight}
+            key={range.start}
+            width={range.end - range.start}
+            x={range.start}
           />
         ))}
       </Group>

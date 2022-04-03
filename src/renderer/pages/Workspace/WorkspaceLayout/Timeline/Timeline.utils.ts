@@ -4,11 +4,11 @@ import { Item, WorkspaceStore } from "renderer/models";
 import { optionalClamp } from "renderer/utils/geometry";
 
 export type UseXZoomState = {
+  max: number;
+  min: number;
   scaleX: number;
   stageX: number;
   step: number;
-  min: number;
-  max: number;
   width: number;
 };
 
@@ -40,8 +40,8 @@ type UseXZoomAction =
     };
 
 type UseXZoomOptions = {
-  width: number;
   framesCount: number;
+  width: number;
 };
 
 export type UseXZoomResult = UseXZoomState & {
@@ -113,8 +113,8 @@ export const useXZoom = ({
 
 export type ItemPosition = {
   item: Instance<typeof Item>;
-  size: number;
   position: number;
+  size: number;
 };
 
 export const getItemPositions = (

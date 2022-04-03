@@ -48,8 +48,8 @@ export const ComboBoxEditor = observer(
         </Grid>
         <Grid xs={24}>
           <Radio.Group
-            value={fieldDefinition.default}
             onChange={handleDefaultChange}
+            value={fieldDefinition.default}
           >
             <Grid.Container gap={0.5}>
               {fieldDefinition.options.map((option) => (
@@ -60,8 +60,8 @@ export const ComboBoxEditor = observer(
                   <Button
                     auto
                     color="error"
-                    onClick={handleRemoveClick(option)}
                     icon={<TrashIcon />}
+                    onClick={handleRemoveClick(option)}
                   >
                     {t("comboBoxRemoveOption")}
                   </Button>
@@ -72,21 +72,21 @@ export const ComboBoxEditor = observer(
         </Grid>
         <Grid xs={24}>
           <Input
-            width="100%"
-            value={newOption}
+            aria-label={t("comboBoxOptionPlaceholder")}
+            label={t("comboBoxOptionPlaceholder")}
             onChange={handleInputChange}
             onKeyDown={handleInputKeyDown}
             placeholder={t("comboBoxOptionPlaceholder")}
-            label={t("comboBoxOptionPlaceholder")}
-            aria-label={t("comboBoxOptionPlaceholder")}
+            value={newOption}
+            width="100%"
           />
           <Spacer w={1} />
           <Button
             auto
-            onClick={handleAddClick}
             color="secondary"
             disabled={!isValid}
             icon={<PlusIcon />}
+            onClick={handleAddClick}
           >
             {t("comboBoAddOption")}
           </Button>

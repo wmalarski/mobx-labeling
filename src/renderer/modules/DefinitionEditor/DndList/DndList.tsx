@@ -9,16 +9,16 @@ import { DefinitionNodeKind, ProjectDefinition } from "renderer/models";
 import { ItemsListItem } from "./ItemsListItem/ItemsListItem";
 
 type Props = {
-  projectDefinition: Instance<typeof ProjectDefinition>;
-  onSelectedItemChange: (itemId: string) => void;
   onSelectedFieldChange: (fieldId: string) => void;
+  onSelectedItemChange: (itemId: string) => void;
+  projectDefinition: Instance<typeof ProjectDefinition>;
 };
 
 export const DndList = observer(
   ({
-    projectDefinition,
     onSelectedFieldChange,
     onSelectedItemChange,
+    projectDefinition,
   }: Props): ReactElement => {
     const { t } = useTranslation("definition");
 
@@ -46,9 +46,9 @@ export const DndList = observer(
             >
               {projectDefinition.items.map((itemDefinition, index) => (
                 <DndDraggable
-                  key={itemDefinition.id}
                   draggableId={itemDefinition.id}
                   index={index}
+                  key={itemDefinition.id}
                 >
                   <ItemsListItem
                     itemDefinition={itemDefinition}

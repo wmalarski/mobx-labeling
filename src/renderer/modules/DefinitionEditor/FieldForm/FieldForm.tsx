@@ -13,15 +13,15 @@ import {
 } from "renderer/models";
 
 type Props = {
-  itemDefinition: Instance<typeof ItemDefinition>;
   fieldDefinition: Instance<typeof FieldDefinition>;
+  itemDefinition: Instance<typeof ItemDefinition>;
   onSelectedFieldChange: (fieldId: string | null) => void;
 };
 
 export const FieldForm = observer(
   ({
-    itemDefinition,
     fieldDefinition,
+    itemDefinition,
     onSelectedFieldChange,
   }: Props): ReactElement => {
     const { t } = useTranslation("definition");
@@ -66,8 +66,8 @@ export const FieldForm = observer(
               <Button
                 auto
                 color="secondary"
-                onClick={handleCopyClick}
                 icon={<CopyIcon />}
+                onClick={handleCopyClick}
               >
                 {t("copyField")}
               </Button>
@@ -76,8 +76,8 @@ export const FieldForm = observer(
               <Button
                 auto
                 color="error"
-                onClick={handleRemoveClick}
                 icon={<TrashIcon />}
+                onClick={handleRemoveClick}
               >
                 {t("removeField")}
               </Button>
@@ -86,31 +86,31 @@ export const FieldForm = observer(
         </Grid>
         <Grid xs={24}>
           <Input
-            width="100%"
-            value={fieldDefinition.name}
-            onChange={handleNameChange}
-            label={t("namePlaceholder")}
-            placeholder={t("namePlaceholder")}
             aria-label={t("namePlaceholder")}
+            label={t("namePlaceholder")}
+            onChange={handleNameChange}
+            placeholder={t("namePlaceholder")}
+            value={fieldDefinition.name}
+            width="100%"
           />
         </Grid>
         <Grid xs={24}>
           <Input
-            width="100%"
-            value={fieldDefinition.description}
-            onChange={handleDescriptionChange}
-            label={t("descriptionPlaceholder")}
-            placeholder={t("descriptionPlaceholder")}
             aria-label={t("descriptionPlaceholder")}
+            label={t("descriptionPlaceholder")}
+            onChange={handleDescriptionChange}
+            placeholder={t("descriptionPlaceholder")}
+            value={fieldDefinition.description}
+            width="100%"
           />
         </Grid>
         <Grid xs={24}>
           <Select
-            width="100%"
             aria-label={t("kindLabel")}
+            onChange={handleKindChange}
             placeholder={t("kindPlaceholder")}
             value={fieldDefinition.kind}
-            onChange={handleKindChange}
+            width="100%"
           >
             {definitionKinds.map((kind) => (
               <Select.Option key={kind} value={kind}>
@@ -121,9 +121,9 @@ export const FieldForm = observer(
         </Grid>
         <Grid xs={24}>
           <Radio.Group
-            value={fieldDefinition.change}
             onChange={handleGroupChange}
             useRow
+            value={fieldDefinition.change}
           >
             <Radio value="EveryFrame">
               {t("everyFrameKey")}

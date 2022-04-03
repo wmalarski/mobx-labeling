@@ -25,9 +25,9 @@ export const CheckBoxForm = observer(({ field }: Props): ReactElement => {
 
   return (
     <Toggle
-      disabled={field.blocked}
       aria-label={field.definition.name}
       checked={current.value}
+      disabled={field.blocked}
       onChange={handleFromChange}
     />
   );

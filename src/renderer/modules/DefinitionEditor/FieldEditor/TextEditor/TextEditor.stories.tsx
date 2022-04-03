@@ -26,6 +26,6 @@ const Template: ComponentStory<typeof TextEditorStory> = TextEditorStory;
 
 export const Playground = Template.bind({});
 Playground.args = {
-  wrapperProps: {},
   fieldDefinition: TextDefinition.create({ name: "Name123" }),
+  wrapperProps: {},
 };

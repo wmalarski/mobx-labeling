@@ -13,9 +13,9 @@ import { CheckBoxForm } from "./CheckBoxForm";
 type Props = ComponentProps<typeof CheckBoxForm>;
 
 const Model = types.model({
+  currentFrame: CurrentFrame,
   definition: CheckBoxDefinition,
   field: CheckBoxField,
-  currentFrame: CurrentFrame,
 });
 
 const getInstance = ({
@@ -28,10 +28,10 @@ const getInstance = ({
   return Model.create({
     currentFrame: { id: "id" },
     definition: {
-      name: "CheckBox",
       change: "EveryFrame",
       id: "id",
       kind: "CheckBox",
+      name: "CheckBox",
       ...definition,
     },
     field: {

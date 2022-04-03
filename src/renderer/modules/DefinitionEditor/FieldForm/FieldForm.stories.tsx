@@ -36,11 +36,11 @@ const fieldDefinition = CheckBoxDefinition.create({
 
 export const Playground = Template.bind({});
 Playground.args = {
-  wrapperProps: {},
+  fieldDefinition,
   itemDefinition: mockItemDefinition({
     update: {
       fields: [fieldDefinition],
     },
   }),
-  fieldDefinition,
+  wrapperProps: {},
 };

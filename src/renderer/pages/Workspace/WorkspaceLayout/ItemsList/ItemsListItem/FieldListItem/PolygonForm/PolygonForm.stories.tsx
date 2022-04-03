@@ -28,10 +28,10 @@ const PolygonFormStory = ({
 const Template: ComponentStory<typeof PolygonFormStory> = PolygonFormStory;
 
 const Model = types.model({
+  currentFrame: CurrentFrame,
   definition: PolygonDefinition,
   field: PolygonField,
   tool: Tool,
-  currentFrame: CurrentFrame,
 });
 
 const instance = Model.create({
@@ -40,9 +40,9 @@ const instance = Model.create({
     kind: "Selector",
   },
   definition: {
-    name: "Polygon",
     id: "id",
     kind: "Polygon",
+    name: "Polygon",
   },
   field: {
     currentFrame: "id",
@@ -55,7 +55,7 @@ const instance = Model.create({
 
 export const Playground = Template.bind({});
 Playground.args = {
-  wrapperProps: {},
   field: instance.field,
   tool: instance.tool,
+  wrapperProps: {},
 };

@@ -28,10 +28,10 @@ const Box3dFormStory = ({
 const Template: ComponentStory<typeof Box3dFormStory> = Box3dFormStory;
 
 const Model = types.model({
+  currentFrame: CurrentFrame,
   definition: Box3dDefinition,
   field: Box3dField,
   tool: Tool,
-  currentFrame: CurrentFrame,
 });
 
 const instance = Model.create({
@@ -40,9 +40,9 @@ const instance = Model.create({
     kind: "Selector",
   },
   definition: {
-    name: "Box3d",
     id: "id",
     kind: "Box3d",
+    name: "Box3d",
   },
   field: {
     currentFrame: "id",

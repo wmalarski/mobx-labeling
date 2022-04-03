@@ -80,60 +80,60 @@ export const LineForm = observer(({ field, tool }: Props): ReactElement => {
         <Fragment key={index}>
           <Grid xs={12} md={8}>
             <Input
-              width="100%"
+              aria-label={t("lineX", { index })}
               disabled={field.blocked}
               htmlType="number"
-              placeholder={t("lineX", { index })}
               label={t("lineX", { index })}
-              aria-label={t("lineX", { index })}
-              value={String(pair[0])}
               onChange={handleChange(index, 0)}
+              placeholder={t("lineX", { index })}
+              value={String(pair[0])}
+              width="100%"
             />
           </Grid>
           <Grid xs={12} md={8}>
             <Input
-              width="100%"
+              aria-label={t("lineY", { index })}
               disabled={field.blocked}
               htmlType="number"
-              placeholder={t("lineY", { index })}
               label={t("lineY", { index })}
-              aria-label={t("lineY", { index })}
-              value={String(pair[1])}
               onChange={handleChange(index, 1)}
+              placeholder={t("lineY", { index })}
+              value={String(pair[1])}
+              width="100%"
             />
           </Grid>
           <Grid xs={6} md={2}>
             <Button
-              width="100%"
               disabled={field.blocked || !index}
-              onClick={handleMoveUpClick(index)}
               iconRight={<ArrowUpIcon aria-label={t("lineUp", { index })} />}
+              onClick={handleMoveUpClick(index)}
+              width="100%"
             />
           </Grid>
           <Grid xs={6} md={2}>
             <Button
-              width="100%"
               disabled={field.blocked || index >= pairs.length - 1}
-              onClick={handleMoveDownClick(index)}
               iconRight={
                 <ArrowDownIcon aria-label={t("lineDown", { index })} />
               }
+              onClick={handleMoveDownClick(index)}
+              width="100%"
             />
           </Grid>
           <Grid xs={6} md={2}>
             <Button
-              width="100%"
               disabled={field.blocked}
-              onClick={handleAddClick(index)}
               iconRight={<PlusIcon aria-label={t("lineAdd", { index })} />}
+              onClick={handleAddClick(index)}
+              width="100%"
             />
           </Grid>
           <Grid xs={6} md={2}>
             <Button
-              width="100%"
               disabled={field.blocked}
-              onClick={handleRemoveClick(index)}
               iconRight={<TrashIcon aria-label={t("lineRemove", { index })} />}
+              onClick={handleRemoveClick(index)}
+              width="100%"
             />
           </Grid>
         </Fragment>

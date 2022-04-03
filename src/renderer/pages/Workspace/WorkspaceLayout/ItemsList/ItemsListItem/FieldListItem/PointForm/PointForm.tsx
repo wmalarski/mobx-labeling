@@ -37,26 +37,26 @@ export const PointForm = observer(({ field, tool }: Props): ReactElement => {
     <Grid.Container gap={1}>
       <Grid xs={24}>
         <Input
-          width="100%"
+          aria-label={t("pointX")}
           disabled={field.blocked}
           htmlType="number"
-          placeholder={t("pointX")}
           label={t("pointX")}
-          aria-label={t("pointX")}
-          value={String(current.value[0])}
           onChange={handleChange(0)}
+          placeholder={t("pointX")}
+          value={String(current.value[0])}
+          width="100%"
         />
       </Grid>
       <Grid xs={24}>
         <Input
-          width="100%"
+          aria-label={t("pointY")}
           disabled={field.blocked}
           htmlType="number"
-          placeholder={t("pointY")}
           label={t("pointY")}
-          aria-label={t("pointY")}
-          value={String(current.value[1])}
           onChange={handleChange(1)}
+          placeholder={t("pointY")}
+          value={String(current.value[1])}
+          width="100%"
         />
       </Grid>
     </Grid.Container>

@@ -26,8 +26,8 @@ const Template: ComponentStory<typeof NumberEditorStory> = NumberEditorStory;
 
 export const Playground = Template.bind({});
 Playground.args = {
-  wrapperProps: {},
   fieldDefinition: NumberDefinition.create({
     name: "Name123",
   }),
+  wrapperProps: {},
 };

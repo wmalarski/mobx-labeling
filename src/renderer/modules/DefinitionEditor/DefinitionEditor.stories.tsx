@@ -27,6 +27,6 @@ const Template: ComponentStory<typeof DefinitionEditorStory> =
 
 export const Playground = Template.bind({});
 Playground.args = {
-  wrapperProps: {},
   definitionStore: mockDefinitionStore(),
+  wrapperProps: {},
 };

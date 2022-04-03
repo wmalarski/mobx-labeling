@@ -25,13 +25,13 @@ export const Recent = observer(({ projectsList }: Props): ReactElement => {
     <Grid.Container gap={1}>
       <Grid xs={24}>
         <Input
-          width="100%"
-          clearable
-          value={projectsList.query}
-          onChange={handleQueryChange}
-          label={t("searchPlaceholder")}
-          placeholder={t("searchPlaceholder")}
           aria-label={t("searchPlaceholder")}
+          clearable
+          label={t("searchPlaceholder")}
+          onChange={handleQueryChange}
+          placeholder={t("searchPlaceholder")}
+          value={projectsList.query}
+          width="100%"
         />
       </Grid>
       {projectsList.projects.map((projectEntry) => (
@@ -49,8 +49,8 @@ export const Recent = observer(({ projectsList }: Props): ReactElement => {
       <Grid xs={24} justify="center">
         <Pagination
           count={projectsList.totalPages}
-          page={projectsList.page + 1}
           onChange={handlePageChange}
+          page={projectsList.page + 1}
         />
       </Grid>
     </Grid.Container>

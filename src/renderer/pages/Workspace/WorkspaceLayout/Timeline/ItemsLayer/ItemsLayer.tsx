@@ -11,10 +11,10 @@ import { FieldRow } from "./FieldRow/FieldRow";
 import { ItemRow } from "./ItemRow/ItemRow";
 
 type Props = {
-  workspaceStore: Instance<typeof WorkspaceStore>;
-  zoom: UseXZoomResult;
   items: ItemPosition[];
   width: number;
+  workspaceStore: Instance<typeof WorkspaceStore>;
+  zoom: UseXZoomResult;
 };
 
 export const ItemsLayer = observer(
@@ -35,18 +35,19 @@ export const ItemsLayer = observer(
 
     return (
       <Layer
-        x={config.labelsWidth + zoom.stageX}
-        scaleX={zoom.scaleX}
-        draggable
         dragBoundFunc={dragBoundFunc}
+        draggable
         onDragEnd={handleDragEnd}
+        scaleX={zoom.scaleX}
+        x={config.labelsWidth + zoom.stageX}
       >
         {items.map(({ item, position }) => (
           <Group key={item.id} y={position * config.rowHeight}>
             {item.fields.map((field, index) => (
               <FieldRow
-                key={field.id}
                 field={field}
+                item={item}
+                key={field.id}
                 position={index + 1}
                 workspaceStore={workspaceStore}
               />

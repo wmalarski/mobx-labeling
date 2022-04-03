@@ -25,17 +25,17 @@ export const NumberForm = observer(({ field }: Props): ReactElement => {
 
   return (
     <Input
-      value={String(current.value)}
+      aria-label={field.definition.name}
+      clearable
       disabled={field.blocked}
       htmlType="number"
+      max={field.definition.max}
+      min={field.definition.min}
       onChange={handleChange}
-      aria-label={field.definition.name}
       placeholder={field.definition.name}
       step={field.definition.step}
-      min={field.definition.min}
-      max={field.definition.max}
+      value={String(current.value)}
       width="100%"
-      clearable
     />
   );
 });

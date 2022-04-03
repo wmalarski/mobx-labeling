@@ -62,9 +62,9 @@ export const DefinitionForm = observer(
             <Grid>
               <Button
                 auto
-                onClick={handlePlusClick}
                 color="primary"
                 icon={<PlusIcon />}
+                onClick={handlePlusClick}
               >
                 {t("addNewItem")}
               </Button>
@@ -73,8 +73,8 @@ export const DefinitionForm = observer(
               <Button
                 auto
                 color="primary"
-                onClick={handleSaveClick}
                 icon={<Pencil1Icon />}
+                onClick={handleSaveClick}
               >
                 {definitionStore.state === "pending" ? (
                   <Loading color="white" />
@@ -87,8 +87,8 @@ export const DefinitionForm = observer(
               <Button
                 auto
                 color="secondary"
-                onClick={handleBoBackClick}
                 icon={<RowsIcon />}
+                onClick={handleBoBackClick}
               >
                 {t("definitionsList")}
               </Button>
@@ -97,22 +97,22 @@ export const DefinitionForm = observer(
         </Grid>
         <Grid xs={24}>
           <Input
-            width="100%"
-            value={projectDefinition.name}
+            aria-label={t("namePlaceholder")}
+            label={t("namePlaceholder")}
             onChange={handleNameChange}
             placeholder={t("namePlaceholder")}
-            label={t("namePlaceholder")}
-            aria-label={t("namePlaceholder")}
+            value={projectDefinition.name}
+            width="100%"
           />
         </Grid>
         <Grid xs={24}>
           <Input
-            width="100%"
-            value={projectDefinition.description}
+            aria-label={t("descriptionPlaceholder")}
+            label={t("descriptionPlaceholder")}
             onChange={handleDescriptionChange}
             placeholder={t("descriptionPlaceholder")}
-            label={t("descriptionPlaceholder")}
-            aria-label={t("descriptionPlaceholder")}
+            value={projectDefinition.description}
+            width="100%"
           />
         </Grid>
       </Grid.Container>

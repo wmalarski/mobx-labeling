@@ -29,7 +29,7 @@ const Template: ComponentStory<typeof ItemFormStory> = ItemFormStory;
 
 export const Playground = Template.bind({});
 Playground.args = {
-  wrapperProps: {},
   itemDefinition: mockItemDefinition({ update: { name: "123" } }),
   projectDefinition: mockProjectDefinition(),
+  wrapperProps: {},
 };
