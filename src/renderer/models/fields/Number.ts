@@ -1,4 +1,4 @@
-import { SnapshotIn, types } from "mobx-state-tree";
+import { Instance, SnapshotIn, types } from "mobx-state-tree";
 import { nanoid } from "nanoid";
 import { FieldBase } from "../base/FieldBase";
 import { FieldDefinitionBase } from "../base/FieldDefinitionBase";
@@ -71,3 +71,10 @@ export const NumberField = types
       });
     },
   }));
+
+export const isEqualNumber = (
+  first: Instance<typeof NumberValue>,
+  second: Instance<typeof NumberValue>
+): boolean => {
+  return first.value === second.value;
+};

@@ -88,3 +88,13 @@ export const MultiSelectField = types
       });
     },
   }));
+
+export const isEqualMultiSelect = (
+  first: Instance<typeof MultiSelectValue>,
+  second: Instance<typeof MultiSelectValue>
+): boolean => {
+  return (
+    first.values.length === second.values.length &&
+    first.values.every((value, index) => value === second.values[index])
+  );
+};

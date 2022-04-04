@@ -1,4 +1,4 @@
-import { SnapshotIn, types } from "mobx-state-tree";
+import { Instance, SnapshotIn, types } from "mobx-state-tree";
 import { nanoid } from "nanoid";
 import { FieldBase } from "../base/FieldBase";
 import { ShapeDefinitionBase } from "../base/ShapeDefinitionBase";
@@ -52,3 +52,13 @@ export const LineField = types
       return currentValue(self);
     },
   }));
+
+export const isEqualLine = (
+  first: Instance<typeof LineValue>,
+  second: Instance<typeof LineValue>
+): boolean => {
+  return (
+    first.values.length === second.values.length &&
+    first.values.every((value, index) => value === second.values[index])
+  );
+};

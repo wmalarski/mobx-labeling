@@ -1,4 +1,4 @@
-import { SnapshotIn, types } from "mobx-state-tree";
+import { Instance, SnapshotIn, types } from "mobx-state-tree";
 import { nanoid } from "nanoid";
 import { FieldBase } from "../base/FieldBase";
 import { FieldDefinitionBase } from "../base/FieldDefinitionBase";
@@ -69,3 +69,10 @@ export const ComboBoxField = types
       });
     },
   }));
+
+export const isEqualComboBox = (
+  first: Instance<typeof ComboBoxValue>,
+  second: Instance<typeof ComboBoxValue>
+): boolean => {
+  return first.value === second.value;
+};

@@ -1,4 +1,4 @@
-import { SnapshotIn, types } from "mobx-state-tree";
+import { Instance, SnapshotIn, types } from "mobx-state-tree";
 import { nanoid } from "nanoid";
 import { FieldBase } from "../base/FieldBase";
 import { FieldDefinitionBase } from "../base/FieldDefinitionBase";
@@ -59,3 +59,10 @@ export const CheckBoxField = types
       });
     },
   }));
+
+export const isEqualCheckBox = (
+  first: Instance<typeof CheckBoxValue>,
+  second: Instance<typeof CheckBoxValue>
+): boolean => {
+  return first.value === second.value;
+};

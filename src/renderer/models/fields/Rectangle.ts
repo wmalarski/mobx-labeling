@@ -1,4 +1,4 @@
-import { SnapshotIn, types } from "mobx-state-tree";
+import { Instance, SnapshotIn, types } from "mobx-state-tree";
 import { nanoid } from "nanoid";
 import { FieldBase } from "../base/FieldBase";
 import { ShapeDefinitionBase } from "../base/ShapeDefinitionBase";
@@ -46,3 +46,13 @@ export const RectangleField = types
       return currentValue(self);
     },
   }));
+
+export const isEqualRectangle = (
+  first: Instance<typeof RectangleValue>,
+  second: Instance<typeof RectangleValue>
+): boolean => {
+  return (
+    first.value.length === second.value.length &&
+    first.value.every((value, index) => value === second.value[index])
+  );
+};

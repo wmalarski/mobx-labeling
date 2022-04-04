@@ -1,5 +1,5 @@
-import { types } from "mobx-state-tree";
-import { Box3dField } from "../fields/Box3d";
+import { Instance, types } from "mobx-state-tree";
+import { Box3dField, isEqualBox3d } from "../fields/Box3d";
 import { CheckBoxField } from "../fields/CheckBox";
 import { ComboBoxField } from "../fields/ComboBox";
 import { EyeField } from "../fields/Eye";
@@ -33,3 +33,24 @@ const Field2 = types.union(
 );
 
 export const Field = types.union(Field1, Field2);
+
+export const isEqual = (
+  first: Instance<typeof Field>,
+  second: Instance<typeof Field>,
+  frame: number
+): boolean => {
+  if (first.kind !== second.kind) return false;
+
+  const key = String(frame);
+
+  switch (first.kind) {
+    case "Box3d": {
+      const firstValue = first.values.get(key);
+      const secondValue = second.values.get(key);
+
+      return isEqualBox3d(first);
+    }
+  }
+
+  return false;
+};

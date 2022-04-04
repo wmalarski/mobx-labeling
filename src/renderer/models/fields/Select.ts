@@ -88,3 +88,10 @@ export const SelectField = types
       });
     },
   }));
+
+export const isEqualSelect = (
+  first: Instance<typeof SelectValue>,
+  second: Instance<typeof SelectValue>
+): boolean => {
+  return first.value === second.value;
+};

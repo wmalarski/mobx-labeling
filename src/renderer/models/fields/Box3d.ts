@@ -61,3 +61,16 @@ export const Box3dField = types
       return currentValue(self);
     },
   }));
+
+export const isEqualBox3d = (
+  first: Instance<typeof Box3dValue>,
+  second: Instance<typeof Box3dValue>
+): boolean => {
+  return (
+    first.sideType === second.sideType &&
+    first.front.length === second.front.length &&
+    first.side.length === second.side.length &&
+    first.front.every((value, index) => value === second.front[index]) &&
+    first.side.every((value, index) => value === second.side[index])
+  );
+};

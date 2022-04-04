@@ -1,4 +1,4 @@
-import { SnapshotIn, types } from "mobx-state-tree";
+import { Instance, SnapshotIn, types } from "mobx-state-tree";
 import { nanoid } from "nanoid";
 import { FieldBase } from "../base/FieldBase";
 import { ShapeDefinitionBase } from "../base/ShapeDefinitionBase";
@@ -68,3 +68,15 @@ export const GraphField = types
       return currentValue(self);
     },
   }));
+
+export const isEqualGraph = (
+  first: Instance<typeof GraphValue>,
+  second: Instance<typeof GraphValue>
+): boolean => {
+  return (
+    first.edges.length === second.edges.length &&
+    first.points.length === second.points.length &&
+    first.edges.every((value, index) => value === second.edges[index]) &&
+    first.points.every((value, index) => value === second.points[index])
+  );
+};
